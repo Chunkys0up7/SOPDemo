@@ -1,0 +1,54 @@
+{
+  "project": {
+    "name": "SOP Ecosystem POC",
+    "version": "1.0.0",
+    "description": "Proof of concept for graph-based, modular SOP management"
+  },
+  "directories": {
+    "components": "sop-components",
+    "built": "dist/sops",
+    "visualizations": "dist/visualizations",
+    "graph": "graph",
+    "templates": "templates"
+  },
+  "validation": {
+    "strictMode": false,
+    "requiredSOPFields": [
+      "title",
+      "version",
+      "status",
+      "owner"
+    ],
+    "requiredComponentFields": [
+      "id",
+      "type",
+      "version",
+      "title"
+    ]
+  },
+  "versioning": {
+    "format": "semantic",
+    "autoIncrement": false
+  },
+  "build": {
+    "outputFormat": "markdown",
+    "includeMetadata": true,
+    "generateTableOfContents": true,
+    "processIncludes": true
+  },
+  "visualization": {
+    "defaultFormat": "mermaid",
+    "enableInteractive": true,
+    "colorScheme": {
+      "sop": "#e1f5ff",
+      "organism": "#f3e5f5",
+      "molecule": "#e8f5e9",
+      "atom": "#fff3e0"
+    }
+  },
+  "impactAnalysis": {
+    "maxDepth": 10,
+    "exportResults": true,
+    "includeWeakDependencies": true
+  }
+}

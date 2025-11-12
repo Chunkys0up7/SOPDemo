@@ -1,0 +1,182 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-11-12",
+    "description": "Graph representation of SOP ecosystem with nodes (SOPs, components) and edges (relationships, dependencies)"
+  },
+  "nodes": {
+    "sop-001": {
+      "id": "sop-001",
+      "type": "sop",
+      "title": "User Onboarding Process",
+      "version": "1.2.0",
+      "status": "active",
+      "owner": "HR Department",
+      "components": [
+        "atom-welcome-message",
+        "molecule-account-setup",
+        "organism-first-day-workflow"
+      ],
+      "metadata": {
+        "lastReviewed": "2025-10-15",
+        "approver": "Jane Smith"
+      }
+    },
+    "sop-002": {
+      "id": "sop-002",
+      "type": "sop",
+      "title": "IT System Access Provisioning",
+      "version": "2.0.1",
+      "status": "active",
+      "owner": "IT Department",
+      "components": [
+        "atom-access-request-form",
+        "molecule-credential-creation",
+        "organism-system-access-workflow"
+      ],
+      "metadata": {
+        "lastReviewed": "2025-11-01",
+        "approver": "John Doe"
+      }
+    },
+    "sop-003": {
+      "id": "sop-003",
+      "type": "sop",
+      "title": "Security Training Completion",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Security Department",
+      "components": [
+        "atom-training-modules"
+      ],
+      "metadata": {
+        "lastReviewed": "2025-09-20",
+        "approver": "Alice Johnson"
+      }
+    },
+    "sop-004": {
+      "id": "sop-004",
+      "type": "sop",
+      "title": "Equipment Requisition",
+      "version": "1.1.0",
+      "status": "active",
+      "owner": "Operations",
+      "components": [
+        "atom-equipment-form",
+        "molecule-approval-chain"
+      ],
+      "metadata": {
+        "lastReviewed": "2025-10-30",
+        "approver": "Bob Williams"
+      }
+    },
+    "atom-welcome-message": {
+      "id": "atom-welcome-message",
+      "type": "atom",
+      "title": "Welcome Message Template",
+      "version": "1.0.0",
+      "reusableIn": ["sop-001"]
+    },
+    "atom-access-request-form": {
+      "id": "atom-access-request-form",
+      "type": "atom",
+      "title": "System Access Request Form",
+      "version": "2.1.0",
+      "reusableIn": ["sop-002", "sop-004"]
+    },
+    "atom-training-modules": {
+      "id": "atom-training-modules",
+      "type": "atom",
+      "title": "Security Training Module List",
+      "version": "1.0.0",
+      "reusableIn": ["sop-003"]
+    },
+    "atom-equipment-form": {
+      "id": "atom-equipment-form",
+      "type": "atom",
+      "title": "Equipment Request Form",
+      "version": "1.0.0",
+      "reusableIn": ["sop-004"]
+    },
+    "molecule-account-setup": {
+      "id": "molecule-account-setup",
+      "type": "molecule",
+      "title": "User Account Setup Process",
+      "version": "1.5.0",
+      "composedOf": ["atom-access-request-form"],
+      "reusableIn": ["sop-001"]
+    },
+    "molecule-credential-creation": {
+      "id": "molecule-credential-creation",
+      "type": "molecule",
+      "title": "Credential Creation Procedure",
+      "version": "2.0.0",
+      "composedOf": ["atom-access-request-form"],
+      "reusableIn": ["sop-002"]
+    },
+    "organism-first-day-workflow": {
+      "id": "organism-first-day-workflow",
+      "type": "organism",
+      "title": "First Day Complete Workflow",
+      "version": "1.0.0",
+      "composedOf": ["atom-welcome-message", "molecule-account-setup"],
+      "reusableIn": ["sop-001"]
+    }
+  },
+  "edges": [
+    {
+      "id": "edge-001",
+      "source": "sop-001",
+      "target": "sop-002",
+      "type": "depends-on",
+      "description": "User onboarding requires IT system access",
+      "strength": "strong",
+      "metadata": {
+        "reason": "Cannot complete onboarding without system access"
+      }
+    },
+    {
+      "id": "edge-002",
+      "source": "sop-001",
+      "target": "sop-003",
+      "type": "depends-on",
+      "description": "User onboarding requires security training",
+      "strength": "strong",
+      "metadata": {
+        "reason": "Compliance requirement for all new hires"
+      }
+    },
+    {
+      "id": "edge-003",
+      "source": "sop-002",
+      "target": "sop-004",
+      "type": "related-to",
+      "description": "IT access provisioning may trigger equipment requisition",
+      "strength": "weak",
+      "metadata": {
+        "reason": "Some roles require specialized equipment"
+      }
+    },
+    {
+      "id": "edge-004",
+      "source": "atom-access-request-form",
+      "target": "molecule-account-setup",
+      "type": "component-of",
+      "description": "Access request form is part of account setup"
+    },
+    {
+      "id": "edge-005",
+      "source": "atom-access-request-form",
+      "target": "molecule-credential-creation",
+      "type": "component-of",
+      "description": "Access request form is part of credential creation"
+    },
+    {
+      "id": "edge-006",
+      "source": "molecule-account-setup",
+      "target": "organism-first-day-workflow",
+      "type": "component-of",
+      "description": "Account setup is part of first day workflow"
+    }
+  ]
+}

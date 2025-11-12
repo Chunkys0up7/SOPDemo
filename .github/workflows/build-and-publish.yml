@@ -1,0 +1,148 @@
+name: Build and Publish SOPs
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validate SOP Structure
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run validation
+        run: npm run validate
+
+      - name: Upload validation report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation-report
+          path: dist/validation-report.json
+
+  build:
+    name: Build SOPs
+    runs-on: ubuntu-latest
+    needs: validate
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build SOPs
+        run: npm run build
+
+      - name: Generate visualizations
+        run: |
+          npm run visualize -- --format=mermaid
+          npm run visualize -- --format=html
+          npm run visualize -- --format=dot
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: built-sops
+          path: |
+            dist/sops/
+            dist/visualizations/
+            dist/build-report.json
+
+      - name: Upload to GitHub Pages (optional)
+        if: github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/
+
+  test-impact-analysis:
+    name: Test Impact Analysis
+    runs-on: ubuntu-latest
+    needs: validate
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run impact analysis on key components
+        run: |
+          echo "Testing impact analysis for atom-access-request-form"
+          npm run impact -- atom-access-request-form
+
+      - name: Upload impact analysis reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: impact-analysis
+          path: dist/impact-analysis/
+
+  comment-pr:
+    name: Comment on PR with Build Results
+    runs-on: ubuntu-latest
+    needs: [build, test-impact-analysis]
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: Download build report
+        uses: actions/download-artifact@v4
+        with:
+          name: built-sops
+
+      - name: Comment PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = JSON.parse(fs.readFileSync('build-report.json', 'utf8'));
+
+            const comment = `## 📊 SOP Build Report
+
+            ✅ **Build Status**: ${report.successful > 0 ? 'Success' : 'Failed'}
+
+            ### Summary
+            - **Total SOPs**: ${report.totalSOPs}
+            - **Successful**: ${report.successful}
+            - **Failed**: ${report.failed}
+
+            ### Built SOPs
+            ${report.results.map(r => `- ${r.sopId}: ${r.status}`).join('\n')}
+
+            *Generated on ${report.buildDate}*
+            `;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });

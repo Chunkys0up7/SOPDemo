@@ -1,0 +1,29 @@
+{
+  "name": "sop-ecosystem-poc",
+  "version": "1.0.0",
+  "description": "Proof of concept for a graph-based, modular SOP management system using docs-as-code methodology",
+  "main": "tools/build.js",
+  "type": "module",
+  "scripts": {
+    "build": "node tools/build.js",
+    "validate": "node tools/validate.js",
+    "impact": "node tools/impact-analysis.js",
+    "visualize": "node tools/visualize.js",
+    "serve": "node tools/serve.js",
+    "test": "node --test tests/*.test.js"
+  },
+  "keywords": [
+    "sop",
+    "documentation",
+    "docs-as-code",
+    "graph-database",
+    "modular-documentation"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "marked": "^11.1.0",
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {}
+}
