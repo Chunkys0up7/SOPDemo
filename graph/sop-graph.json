@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "version": "1.0.0",
+    "version": "2.0.0",
     "lastUpdated": "2025-11-12",
-    "description": "Graph representation of SOP ecosystem with nodes (SOPs, components) and edges (relationships, dependencies)"
+    "description": "Expanded graph with test data demonstrating complex dependencies and scalability"
   },
   "nodes": {
     "sop-001": {
@@ -70,12 +70,62 @@
         "approver": "Bob Williams"
       }
     },
+    "sop-005": {
+      "id": "sop-005",
+      "type": "sop",
+      "title": "Comprehensive HR Onboarding",
+      "version": "2.0.0",
+      "status": "active",
+      "owner": "HR Department",
+      "components": [
+        "organism-complete-hr-onboarding",
+        "molecule-benefits-enrollment",
+        "molecule-compliance-training"
+      ],
+      "metadata": {
+        "lastReviewed": "2025-11-01",
+        "approver": "Jane Smith"
+      }
+    },
+    "sop-006": {
+      "id": "sop-006",
+      "type": "sop",
+      "title": "Legal Compliance and Documentation",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Legal Department",
+      "components": [
+        "atom-confidentiality-agreement",
+        "molecule-compliance-training"
+      ],
+      "metadata": {
+        "lastReviewed": "2025-09-15",
+        "approver": "Sarah Legal"
+      }
+    },
+    "sop-007": {
+      "id": "sop-007",
+      "type": "sop",
+      "title": "Employee Expense Reimbursement",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Finance Department",
+      "components": [
+        "atom-expense-report-form",
+        "molecule-expense-submission",
+        "molecule-approval-chain"
+      ],
+      "metadata": {
+        "lastReviewed": "2025-10-15",
+        "approver": "Michael Finance"
+      }
+    },
     "atom-welcome-message": {
       "id": "atom-welcome-message",
       "type": "atom",
       "title": "Welcome Message Template",
       "version": "1.0.0",
-      "reusableIn": ["sop-001"]
+      "reusableIn": ["sop-001", "sop-005"]
     },
     "atom-access-request-form": {
       "id": "atom-access-request-form",
@@ -96,7 +146,42 @@
       "type": "atom",
       "title": "Equipment Request Form",
       "version": "1.0.0",
-      "reusableIn": ["sop-004"]
+      "reusableIn": ["sop-004", "sop-007"]
+    },
+    "atom-confidentiality-agreement": {
+      "id": "atom-confidentiality-agreement",
+      "type": "atom",
+      "title": "Confidentiality and NDA Agreement",
+      "version": "1.0.0",
+      "reusableIn": ["sop-005", "sop-006"]
+    },
+    "atom-emergency-contact": {
+      "id": "atom-emergency-contact",
+      "type": "atom",
+      "title": "Emergency Contact Information Form",
+      "version": "1.0.0",
+      "reusableIn": ["sop-005"]
+    },
+    "atom-benefits-overview": {
+      "id": "atom-benefits-overview",
+      "type": "atom",
+      "title": "Employee Benefits Overview",
+      "version": "1.0.0",
+      "reusableIn": ["sop-005"]
+    },
+    "atom-office-tour-checklist": {
+      "id": "atom-office-tour-checklist",
+      "type": "atom",
+      "title": "Office Tour Checklist",
+      "version": "1.0.0",
+      "reusableIn": ["sop-001"]
+    },
+    "atom-expense-report-form": {
+      "id": "atom-expense-report-form",
+      "type": "atom",
+      "title": "Expense Report Submission Form",
+      "version": "1.2.0",
+      "reusableIn": ["sop-007"]
     },
     "molecule-account-setup": {
       "id": "molecule-account-setup",
@@ -104,7 +189,7 @@
       "title": "User Account Setup Process",
       "version": "1.5.0",
       "composedOf": ["atom-access-request-form"],
-      "reusableIn": ["sop-001"]
+      "reusableIn": ["sop-001", "sop-002"]
     },
     "molecule-credential-creation": {
       "id": "molecule-credential-creation",
@@ -114,6 +199,38 @@
       "composedOf": ["atom-access-request-form"],
       "reusableIn": ["sop-002"]
     },
+    "molecule-approval-chain": {
+      "id": "molecule-approval-chain",
+      "type": "molecule",
+      "title": "Multi-Level Approval Process",
+      "version": "1.0.0",
+      "composedOf": [],
+      "reusableIn": ["sop-004", "sop-007"]
+    },
+    "molecule-benefits-enrollment": {
+      "id": "molecule-benefits-enrollment",
+      "type": "molecule",
+      "title": "Benefits Enrollment Procedure",
+      "version": "1.0.0",
+      "composedOf": ["atom-benefits-overview"],
+      "reusableIn": ["sop-005"]
+    },
+    "molecule-compliance-training": {
+      "id": "molecule-compliance-training",
+      "type": "molecule",
+      "title": "Compliance Training Completion",
+      "version": "1.1.0",
+      "composedOf": ["atom-confidentiality-agreement"],
+      "reusableIn": ["sop-005", "sop-006"]
+    },
+    "molecule-expense-submission": {
+      "id": "molecule-expense-submission",
+      "type": "molecule",
+      "title": "Expense Report Submission Workflow",
+      "version": "1.0.0",
+      "composedOf": ["atom-expense-report-form", "molecule-approval-chain"],
+      "reusableIn": ["sop-007"]
+    },
     "organism-first-day-workflow": {
       "id": "organism-first-day-workflow",
       "type": "organism",
@@ -121,6 +238,22 @@
       "version": "1.0.0",
       "composedOf": ["atom-welcome-message", "molecule-account-setup"],
       "reusableIn": ["sop-001"]
+    },
+    "organism-system-access-workflow": {
+      "id": "organism-system-access-workflow",
+      "type": "organism",
+      "title": "Complete System Access Provisioning Workflow",
+      "version": "1.0.0",
+      "composedOf": ["atom-access-request-form", "molecule-credential-creation", "molecule-approval-chain"],
+      "reusableIn": ["sop-002"]
+    },
+    "organism-complete-hr-onboarding": {
+      "id": "organism-complete-hr-onboarding",
+      "type": "organism",
+      "title": "Complete HR Onboarding Workflow",
+      "version": "2.0.0",
+      "composedOf": ["atom-emergency-contact", "atom-benefits-overview", "atom-confidentiality-agreement", "molecule-benefits-enrollment", "molecule-compliance-training"],
+      "reusableIn": ["sop-005"]
     }
   },
   "edges": [
@@ -177,6 +310,92 @@
       "target": "organism-first-day-workflow",
       "type": "component-of",
       "description": "Account setup is part of first day workflow"
+    },
+    {
+      "id": "edge-007",
+      "source": "sop-005",
+      "target": "sop-002",
+      "type": "depends-on",
+      "description": "Comprehensive HR onboarding requires IT system provisioning",
+      "strength": "strong",
+      "metadata": {
+        "reason": "New hires need system access during week 1"
+      }
+    },
+    {
+      "id": "edge-008",
+      "source": "sop-005",
+      "target": "sop-006",
+      "type": "depends-on",
+      "description": "HR onboarding requires legal compliance completion",
+      "strength": "strong",
+      "metadata": {
+        "reason": "Legal compliance must be completed in first week"
+      }
+    },
+    {
+      "id": "edge-009",
+      "source": "sop-005",
+      "target": "sop-001",
+      "type": "related-to",
+      "description": "Comprehensive HR onboarding includes user onboarding elements",
+      "strength": "normal",
+      "metadata": {
+        "reason": "SOP-005 is expanded version of SOP-001"
+      }
+    },
+    {
+      "id": "edge-010",
+      "source": "sop-007",
+      "target": "sop-004",
+      "type": "related-to",
+      "description": "Expense reimbursement uses same approval chain as equipment requisition",
+      "strength": "weak",
+      "metadata": {
+        "reason": "Both use molecule-approval-chain"
+      }
+    },
+    {
+      "id": "edge-011",
+      "source": "atom-confidentiality-agreement",
+      "target": "molecule-compliance-training",
+      "type": "component-of",
+      "description": "Confidentiality agreement is part of compliance training"
+    },
+    {
+      "id": "edge-012",
+      "source": "atom-benefits-overview",
+      "target": "molecule-benefits-enrollment",
+      "type": "component-of",
+      "description": "Benefits overview is part of enrollment procedure"
+    },
+    {
+      "id": "edge-013",
+      "source": "molecule-compliance-training",
+      "target": "organism-complete-hr-onboarding",
+      "type": "component-of",
+      "description": "Compliance training is part of complete HR onboarding"
+    },
+    {
+      "id": "edge-014",
+      "source": "molecule-benefits-enrollment",
+      "target": "organism-complete-hr-onboarding",
+      "type": "component-of",
+      "description": "Benefits enrollment is part of complete HR onboarding"
+    },
+    {
+      "id": "edge-015",
+      "source": "atom-expense-report-form",
+      "target": "molecule-expense-submission",
+      "type": "component-of",
+      "description": "Expense form is part of submission workflow"
+    },
+    {
+      "id": "edge-016",
+      "source": "molecule-approval-chain",
+      "target": "molecule-expense-submission",
+      "type": "component-of",
+      "description": "Approval chain is part of expense submission"
     }
   ]
 }
