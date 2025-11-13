@@ -97,8 +97,8 @@ class SOPValidator {
           const filePath = path.join(componentDir, file);
           const content = await fs.readFile(filePath, 'utf8');
 
-          // Extract frontmatter
-          const frontmatterMatch = content.match(/^---\n([\s\S]+?)\n---/);
+          // Extract frontmatter (handle both Unix \n and Windows \r\n line endings)
+          const frontmatterMatch = content.match(/^---\r?\n([\s\S]+?)\r?\n---/);
           if (frontmatterMatch) {
             const frontmatter = this.parseFrontmatter(frontmatterMatch[1]);
 
@@ -128,7 +128,8 @@ class SOPValidator {
 
   parseFrontmatter(yaml) {
     const result = {};
-    const lines = yaml.split('\n');
+    // Handle both Unix \n and Windows \r\n line endings
+    const lines = yaml.split(/\r?\n/);
 
     for (const line of lines) {
       const match = line.match(/^(\w+):\s*(.+)$/);
