@@ -326,6 +326,7 @@ async function generateIndexPage() {
       <div class="button-grid">
         <a href="/public/upload.html" class="button">📤 Upload SOP</a>
         <a href="/public/status-dashboard.html" class="button">📊 Status Dashboard</a>
+        <a href="/public/sop-dependencies.html" class="button">🔗 Dependency View</a>
         <a href="/dist/visualizations/sop-graph.html" class="button">🔷 Interactive Graph</a>
         <a href="/graph/sop-graph.json" class="button">🗂️ Raw Graph Data</a>
         <a href="/dist/build-report.json" class="button">📈 Build Report</a>
