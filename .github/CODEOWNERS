@@ -1,0 +1,173 @@
+# Pursuit Bank SOP System - Code Owners
+#
+# This file defines who should review changes to SOPs and system components.
+# When a PR is created that modifies files matching these patterns,
+# the specified users/teams will automatically be requested as reviewers.
+#
+# Format: path-pattern @github-username @github-team
+#
+# More info: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# =============================================================================
+# DEFAULT OWNERS
+# =============================================================================
+
+# Default owners for all files (fallback if no specific match)
+* @sop-admin-team
+
+# =============================================================================
+# MORTGAGE FINANCE SOPs
+# =============================================================================
+
+# All mortgage SOPs require review from underwriting and compliance
+/sops/mortgage/ @underwriting-team @compliance-team
+
+# Specific SOP ownership by process area
+
+# Loan Processing
+/sops/mortgage/sop-mf-001*.md @loan-processing-manager @processors-team
+
+# Automated Underwriting System (AUS)
+/sops/mortgage/sop-mf-002*.md @underwriting-manager @aus-specialists
+
+# FHA Underwriting
+/sops/mortgage/sop-mf-003*.md @underwriting-manager @fha-specialist @compliance-officer
+
+# Clear to Close / Quality Control
+/sops/mortgage/sop-mf-004*.md @closing-manager @qc-team
+
+# Wire Transfer Security & Fraud
+/sops/mortgage/sop-mf-005*.md @treasury-manager @fraud-prevention-team @cfo
+
+# Income Documentation
+/sops/mortgage/*income*.md @underwriting-manager @processors-team
+
+# Appraisal/Valuation
+/sops/mortgage/*appraisal*.md @underwriting-manager @valuation-team
+
+# TRID Compliance
+/sops/mortgage/*trid*.md @compliance-officer @closing-manager
+
+# Fraud Detection & Prevention
+/sops/mortgage/*fraud*.md @fraud-prevention-team @security-team
+
+# =============================================================================
+# DOCUMENTATION & TEMPLATES
+# =============================================================================
+
+# Root documentation files
+/*.md @technical-writer @sop-admin-team
+
+# Documentation strategy and guides
+/DOCS_AS_CODE_IMPROVEMENTS.md @sop-admin-team @devops-team
+/USE_CASE_GUIDE.md @technical-writer @product-owner
+/MORTGAGE_DEMO_GUIDE.md @technical-writer @underwriting-manager
+
+# SOP templates
+/templates/ @technical-writer @sop-admin-team
+
+# =============================================================================
+# SYSTEM & INFRASTRUCTURE
+# =============================================================================
+
+# Build and automation tools
+/tools/ @devops-team @sop-admin-team
+/tools/build.js @devops-team
+/tools/validate.js @devops-team @qa-team
+/tools/impact-analysis.js @devops-team @sop-admin-team
+
+# CI/CD workflows
+/.github/workflows/ @devops-team @sop-admin-team
+
+# GitHub configuration
+/.github/CODEOWNERS @sop-admin-team
+/.github/PULL_REQUEST_TEMPLATE.md @sop-admin-team
+/.github/ISSUE_TEMPLATE/ @sop-admin-team
+
+# Package dependencies
+/package.json @devops-team
+/package-lock.json @devops-team
+
+# =============================================================================
+# FRONTEND & UI
+# =============================================================================
+
+# Public web interface
+/public/ @frontend-team @ux-team
+
+# Brand assets (require marketing approval)
+/public/assets/branding/ @marketing-team @brand-manager
+
+# Dashboard and analytics
+/public/dashboard.html @frontend-team @product-owner
+/public/mortgage-analytics.html @frontend-team @data-team
+
+# SOP viewer and search
+/public/sop-viewer.html @frontend-team @sop-admin-team
+/public/sop-search.html @frontend-team @sop-admin-team
+
+# Training system
+/public/sop-training.html @frontend-team @training-team
+
+# Brand style guide
+/public/brand-guide.html @frontend-team @brand-manager @marketing-team
+
+# =============================================================================
+# CONFIGURATION
+# =============================================================================
+
+# Git configuration
+/.gitignore @devops-team
+
+# SOP system configuration
+/config/ @sop-admin-team @devops-team
+
+# =============================================================================
+# COMPLIANCE & REGULATORY
+# =============================================================================
+
+# Any file with "compliance" in the path requires compliance review
+**/*compliance*.md @compliance-officer @legal-team
+
+# Regulatory framework documents
+**/*regulatory*.md @compliance-officer @legal-team
+
+# Audit-related content
+**/*audit*.md @compliance-officer @internal-audit
+
+# =============================================================================
+# SPECIAL REVIEWS
+# =============================================================================
+
+# High-risk/high-value transaction SOPs (wire transfers, large loans)
+/sops/mortgage/*wire*.md @treasury-manager @cfo @security-team
+/sops/mortgage/*jumbo*.md @underwriting-manager @senior-underwriter @compliance-officer
+
+# Security-sensitive SOPs
+/sops/mortgage/*security*.md @security-team @compliance-officer
+/sops/mortgage/*identity*.md @security-team @fraud-prevention-team
+
+# Customer-facing process changes
+/sops/mortgage/*customer*.md @customer-experience-team @compliance-officer
+
+# =============================================================================
+# NOTES FOR CODE OWNERS
+# =============================================================================
+#
+# Responsibilities:
+# - Review assigned PRs within 48 hours
+# - Verify technical accuracy and completeness
+# - Check compliance requirements
+# - Validate training impact assessment
+# - Ensure proper version increment and changelog
+#
+# Approval Requirements:
+# - At least one approval from each required owner
+# - Compliance officer approval for compliance-impacted changes
+# - CFO approval for financial/treasury SOPs over $100K threshold
+#
+# Escalation:
+# - If blocked or need expedited review: @sop-admin-team
+# - For compliance questions: @compliance-officer
+# - For technical issues: @devops-team
+#

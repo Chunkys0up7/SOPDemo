@@ -1,0 +1,163 @@
+name: 📝 SOP Update Request
+description: Request an update to an existing SOP
+title: "[SOP Update] "
+labels: ["sop-update", "needs-triage"]
+assignees:
+  - sop-admin-team
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## SOP Update Request
+        Use this template to request changes to an existing Standard Operating Procedure.
+
+  - type: dropdown
+    id: sop-id
+    attributes:
+      label: SOP ID
+      description: Which SOP needs updating?
+      options:
+        - sop-mf-001 (Conventional Loan Processing)
+        - sop-mf-002 (AUS Processing)
+        - sop-mf-003 (FHA Underwriting)
+        - sop-mf-004 (Clear to Close)
+        - sop-mf-005 (Wire Transfer Security)
+        - Other (specify in description)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: change-type
+    attributes:
+      label: Type of Change
+      description: What type of update is needed?
+      options:
+        - Regulatory update required
+        - Process improvement
+        - Error correction
+        - Clarification needed
+        - New procedure addition
+        - Deprecation
+        - Compliance update
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description of Needed Change
+      description: Clearly describe what needs to change and why
+      placeholder: |
+        Example: HUD updated MIP rates effective 2025-12-01 per Mortgagee Letter ML 2025-14.
+        SOP-MF-003 Section 5.2 needs updated rate tables showing:
+        - Upfront MIP: 1.75% (no change)
+        - Annual MIP for >95% LTV: 0.55% (changed from 0.50%)
+        - Annual MIP for ≤95% LTV: 0.50% (changed from 0.45%)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: urgency
+    attributes:
+      label: Urgency
+      description: How urgent is this update?
+      options:
+        - Low (Nice to have, no deadline)
+        - Medium (Needed within 30 days)
+        - High (Needed within 7 days)
+        - Critical (Regulatory deadline / Active compliance issue)
+    validations:
+      required: true
+
+  - type: input
+    id: deadline
+    attributes:
+      label: Deadline (if applicable)
+      description: When must this be completed?
+      placeholder: "YYYY-MM-DD"
+
+  - type: textarea
+    id: compliance-impact
+    attributes:
+      label: Compliance/Regulatory Impact
+      description: Is this driven by a regulatory change or compliance requirement?
+      placeholder: |
+        - Regulatory body: HUD/FHA
+        - Reference: Mortgagee Letter ML 2025-14
+        - Effective date: 2025-12-01
+        - Link: https://www.hud.gov/...
+        - Compliance risk if not updated: High (incorrect premium calculations)
+
+  - type: textarea
+    id: affected-stakeholders
+    attributes:
+      label: Affected Stakeholders
+      description: Who needs to be aware of this change?
+      placeholder: |
+        - Underwriting team (20 underwriters)
+        - Loan processors (15 processors)
+        - Closing team (8 closers)
+        - Compliance officer
+        - Training coordinator
+        - IT team (system configuration changes needed)
+
+  - type: checkboxes
+    id: training-needed
+    attributes:
+      label: Training Required?
+      description: Will this change require training updates?
+      options:
+        - label: Training materials will need updates
+        - label: New training module required
+        - label: Staff notification sufficient
+        - label: No training impact
+
+  - type: checkboxes
+    id: system-changes
+    attributes:
+      label: System Changes Required?
+      description: Are there related system/technology changes needed?
+      options:
+        - label: LOS (Loan Origination System) updates needed
+        - label: Pricing engine configuration
+        - label: Form template updates
+        - label: Report changes
+        - label: No system changes
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Any other relevant information, attachments, or links
+      placeholder: |
+        - Link to regulatory announcement
+        - Screenshots or examples
+        - Related changes in other SOPs
+        - Historical context
+
+  - type: dropdown
+    id: requestor-role
+    attributes:
+      label: Your Role
+      description: What is your role? (Helps us route appropriately)
+      options:
+        - Loan Processor
+        - Underwriter
+        - Closer
+        - Compliance Officer
+        - Manager
+        - Training Coordinator
+        - IT/Systems
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: requestor-contact
+    attributes:
+      label: Contact Email
+      description: How can we reach you for follow-up questions?
+      placeholder: "your.email@pursuitbank.com"
+    validations:
+      required: true
