@@ -436,6 +436,301 @@
         padding: 20px;
       }
     }
+
+    /* Edit Mode Styles */
+    .edit-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .edit-modal.active {
+      display: flex;
+    }
+
+    .edit-container {
+      background: white;
+      border-radius: 12px;
+      width: 95%;
+      max-width: 1400px;
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .edit-header {
+      padding: 20px 24px;
+      border-bottom: 2px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-light);
+      border-radius: 12px 12px 0 0;
+    }
+
+    .edit-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .edit-subtitle {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-top: 4px;
+    }
+
+    .edit-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .edit-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr 350px;
+      gap: 0;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .editor-panel, .preview-panel, .impact-panel {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .editor-panel {
+      border-right: 1px solid var(--border-color);
+    }
+
+    .preview-panel {
+      border-right: 1px solid var(--border-color);
+      background: #fafafa;
+    }
+
+    .impact-panel {
+      background: #fffaf0;
+    }
+
+    .panel-header {
+      padding: 12px 16px;
+      background: white;
+      border-bottom: 1px solid var(--border-color);
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text-dark);
+    }
+
+    .panel-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+    }
+
+    /* Markdown Toolbar */
+    .markdown-toolbar {
+      display: flex;
+      gap: 4px;
+      padding: 8px 12px;
+      background: var(--bg-light);
+      border-bottom: 1px solid var(--border-color);
+      flex-wrap: wrap;
+    }
+
+    .toolbar-btn {
+      background: white;
+      border: 1px solid var(--border-color);
+      padding: 6px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-dark);
+      transition: all 0.2s;
+    }
+
+    .toolbar-btn:hover {
+      background: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
+    }
+
+    .toolbar-separator {
+      width: 1px;
+      background: var(--border-color);
+      margin: 0 4px;
+    }
+
+    /* Editor Textarea */
+    .markdown-editor {
+      width: 100%;
+      height: 100%;
+      border: none;
+      padding: 16px;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      resize: none;
+      outline: none;
+      background: white;
+    }
+
+    /* Preview Content */
+    .preview-content {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+    }
+
+    .preview-content h1 {
+      font-size: 24px;
+      margin-bottom: 12px;
+      color: var(--text-dark);
+    }
+
+    .preview-content h2 {
+      font-size: 20px;
+      margin-top: 24px;
+      margin-bottom: 10px;
+      color: var(--text-dark);
+    }
+
+    .preview-content h3 {
+      font-size: 16px;
+      margin-top: 20px;
+      margin-bottom: 8px;
+      color: var(--text-dark);
+    }
+
+    .preview-content p {
+      margin-bottom: 12px;
+      color: var(--text-dark);
+    }
+
+    .preview-content ul, .preview-content ol {
+      margin-bottom: 12px;
+      padding-left: 24px;
+    }
+
+    .preview-content li {
+      margin-bottom: 6px;
+    }
+
+    .preview-content code {
+      background: #f1f5f9;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Monaco', 'Menlo', monospace;
+      font-size: 13px;
+    }
+
+    .preview-content a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    .preview-content a:hover {
+      text-decoration: underline;
+    }
+
+    /* Impact Analysis */
+    .impact-warning {
+      background: #fff5f5;
+      border-left: 4px solid var(--danger-color);
+      padding: 12px;
+      margin-bottom: 16px;
+      border-radius: 4px;
+    }
+
+    .impact-info {
+      background: #f0f9ff;
+      border-left: 4px solid var(--primary-color);
+      padding: 12px;
+      margin-bottom: 16px;
+      border-radius: 4px;
+    }
+
+    .impact-title {
+      font-weight: 600;
+      font-size: 13px;
+      margin-bottom: 8px;
+      color: var(--text-dark);
+    }
+
+    .impact-list {
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .impact-item {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .impact-item:last-child {
+      border-bottom: none;
+    }
+
+    .impact-sop {
+      font-weight: 600;
+      color: var(--text-dark);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .impact-section {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-left: 12px;
+    }
+
+    .risk-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+
+    .risk-high {
+      background: #fed7d7;
+      color: #742a2a;
+    }
+
+    .risk-medium {
+      background: #feebc8;
+      color: #7c2d12;
+    }
+
+    .risk-low {
+      background: #c6f6d5;
+      color: #22543d;
+    }
+
+    /* Auto-save indicator */
+    .autosave-indicator {
+      font-size: 12px;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .autosave-indicator.saving {
+      color: var(--warning-color);
+    }
+
+    .autosave-indicator.saved {
+      color: var(--success-color);
+    }
   </style>
 </head>
 <body>
@@ -836,6 +1131,72 @@
     </div>
   </div>
 
+  <!-- Edit Mode Modal -->
+  <div class="edit-modal" id="editModal">
+    <div class="edit-container">
+      <div class="edit-header">
+        <div>
+          <div class="edit-title" id="editTitle">Edit Section</div>
+          <div class="edit-subtitle" id="editSubtitle">Invoice Processing - Section: Overview</div>
+        </div>
+        <div class="edit-actions">
+          <div class="autosave-indicator" id="autosaveIndicator">
+            <span>●</span>
+            <span id="autosaveText">All changes saved</span>
+          </div>
+          <button class="btn btn-secondary" onclick="cancelEdit()">Cancel</button>
+          <button class="btn btn-primary" onclick="saveEdit()">💾 Save Changes</button>
+        </div>
+      </div>
+
+      <div class="edit-body">
+        <!-- Editor Panel -->
+        <div class="editor-panel">
+          <div class="panel-header">✏️ Markdown Editor</div>
+          <div class="markdown-toolbar">
+            <button class="toolbar-btn" onclick="insertMarkdown('# ', '')" title="Heading 1">H1</button>
+            <button class="toolbar-btn" onclick="insertMarkdown('## ', '')" title="Heading 2">H2</button>
+            <button class="toolbar-btn" onclick="insertMarkdown('### ', '')" title="Heading 3">H3</button>
+            <div class="toolbar-separator"></div>
+            <button class="toolbar-btn" onclick="insertMarkdown('**', '**')" title="Bold"><strong>B</strong></button>
+            <button class="toolbar-btn" onclick="insertMarkdown('_', '_')" title="Italic"><em>I</em></button>
+            <button class="toolbar-btn" onclick="insertMarkdown('`', '`')" title="Code">Code</button>
+            <div class="toolbar-separator"></div>
+            <button class="toolbar-btn" onclick="insertMarkdown('- ', '')" title="Bullet List">• List</button>
+            <button class="toolbar-btn" onclick="insertMarkdown('1. ', '')" title="Numbered List">1. List</button>
+            <div class="toolbar-separator"></div>
+            <button class="toolbar-btn" onclick="insertMarkdown('[', '](url)')" title="Link">🔗 Link</button>
+            <button class="toolbar-btn" onclick="insertMarkdown('{{include: ', '}}')" title="Include Component">📦 Include</button>
+          </div>
+          <textarea class="markdown-editor" id="markdownEditor" placeholder="Write your content in markdown..."></textarea>
+        </div>
+
+        <!-- Preview Panel -->
+        <div class="preview-panel">
+          <div class="panel-header">👁️ Live Preview</div>
+          <div class="panel-content">
+            <div class="preview-content" id="previewContent">
+              <p style="color: #a0aec0;">Preview will appear here as you type...</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Impact Analysis Panel -->
+        <div class="impact-panel">
+          <div class="panel-header">⚡ Impact Analysis</div>
+          <div class="panel-content" id="impactContent">
+            <div class="impact-info">
+              <div class="impact-title">✅ Change Impact</div>
+              <div class="impact-list">
+                <p>Analyzing dependencies...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     // Load global navigation
     fetch('/public/components/global-nav.html')
@@ -878,16 +1239,379 @@
       });
     });
 
+    // Edit Mode State
+    let currentEditSection = null;
+    let originalContent = '';
+    let autosaveTimer = null;
+    let isDirty = false;
+
+    // Mock section content database
+    const sectionContent = {
+      'overview': `## Overview
+
+This SOP defines the end-to-end process for processing invoices in the accounting system, from receipt to payment authorization.
+
+**Purpose:** Ensure all invoices are processed accurately, efficiently, and in compliance with financial controls.
+
+**Scope:** Applies to all invoices for goods and services received by the organization.`,
+
+      'prerequisites': `## Prerequisites
+
+Before initiating invoice processing, ensure the following are in place:
+
+- **Access Requirements:**
+  - ERP system credentials (see {{include: sop-002}} for access provisioning)
+  - Accounts Payable module permissions
+
+- **Required Training:**
+  - Finance onboarding ({{include: sop-003}})
+  - Invoice processing certification
+
+- **Tools & Systems:**
+  - ERP system (SAP/Oracle)
+  - Invoice scanning software
+  - Approval workflow system`,
+
+      'procedure-steps': `## Procedure Steps
+
+### Step 1: Invoice Receipt & Validation
+1. Receive invoice via email or physical mail
+2. Verify invoice contains:
+   - Valid PO number
+   - Correct vendor information
+   - Itemized charges
+   - Proper tax calculations
+3. Scan physical invoices into digital system
+
+### Step 2: Three-Way Match
+1. Match invoice to:
+   - Purchase Order (PO)
+   - Receiving report
+   - Contract terms (if applicable)
+2. Verify quantities and prices match
+3. Flag discrepancies for resolution
+
+### Step 3: Approval Routing
+1. Route to department manager for approval
+2. Route to Finance Controller if >$10,000
+3. Route to CFO if >$50,000
+4. Track approval status in workflow system
+
+### Step 4: Payment Processing
+1. Schedule payment according to terms
+2. Process payment via ACH or check
+3. Record transaction in general ledger
+4. Send payment confirmation to vendor`,
+
+      'quality-checks': `## Quality Checks
+
+Perform the following checks before finalizing:
+
+- [ ] All invoice fields populated correctly
+- [ ] Three-way match completed successfully
+- [ ] Approvals obtained from authorized personnel
+- [ ] Tax calculations verified
+- [ ] Duplicate invoice check performed
+- [ ] Vendor payment details confirmed`,
+
+      'troubleshooting': `## Troubleshooting
+
+### Invoice Doesn't Match PO
+- Verify PO number is correct
+- Check for partial deliveries
+- Contact purchasing department
+- May require PO amendment
+
+### Missing Approval
+- Check approval workflow status
+- Send reminder to approver
+- Escalate to manager if >3 days overdue
+
+### System Access Issues
+- Verify credentials are current
+- Check role permissions
+- Contact IT helpdesk
+- Reference {{include: sop-002}} for access requests`,
+
+      'references': `## References
+
+### Related SOPs
+- [SOP-002: IT System Access Provisioning](/public/sop-viewer.html?id=sop-002)
+- [SOP-003: Security Training Completion](/public/sop-viewer.html?id=sop-003)
+- [SOP-004: Equipment Requisition](/public/sop-viewer.html?id=sop-004) (for approval chain reference)
+
+### External Documentation
+- [Finance Policy Manual - Section 4.2: Accounts Payable](#)
+- [SOX Compliance Guide - Invoice Controls](#)`
+    };
+
     // Edit section
     function editSection(sectionId) {
-      alert(`Opening editor for section: ${sectionId}\n\nIn production, this would:\n• Load section content into markdown editor\n• Show preview panel\n• Display impact analysis\n• Enable save/cancel actions`);
-      // In production, would transition to edit mode
+      currentEditSection = sectionId;
+
+      // Get content for this section
+      const content = sectionContent[sectionId] || `## ${sectionId}\n\nSection content would be loaded here...`;
+      originalContent = content;
+
+      // Update modal title
+      document.getElementById('editTitle').textContent = 'Edit Section';
+      document.getElementById('editSubtitle').textContent = `Invoice Processing - Section: ${formatSectionName(sectionId)}`;
+
+      // Load content into editor
+      document.getElementById('markdownEditor').value = content;
+
+      // Generate initial preview
+      updatePreview();
+
+      // Run impact analysis
+      analyzeImpact();
+
+      // Show modal
+      document.getElementById('editModal').classList.add('active');
+
+      // Reset dirty flag
+      isDirty = false;
+      updateAutosaveIndicator('saved');
+
+      // Focus editor
+      setTimeout(() => {
+        document.getElementById('markdownEditor').focus();
+      }, 100);
     }
 
-    // Enter edit mode
+    // Enter edit mode (for full SOP editing)
     function enterEditMode() {
-      alert('Entering edit mode for entire SOP\n\nIn production, this would:\n• Enable inline editing for all sections\n• Show save/cancel actions\n• Enable impact preview\n• Track changes');
+      editSection('overview'); // Start with first section
+      document.getElementById('editTitle').textContent = 'Edit Entire SOP';
     }
+
+    // Format section name for display
+    function formatSectionName(sectionId) {
+      return sectionId
+        .split('-')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+    }
+
+    // Update live preview
+    function updatePreview() {
+      const markdown = document.getElementById('markdownEditor').value;
+      const preview = document.getElementById('previewContent');
+
+      // Simple markdown to HTML conversion (basic implementation)
+      let html = markdown
+        // Headers
+        .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+        .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+        .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+        // Bold
+        .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>')
+        // Italic
+        .replace(/_(.*?)_/gim, '<em>$1</em>')
+        // Code
+        .replace(/`(.*?)`/gim, '<code>$1</code>')
+        // Links
+        .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2">$1</a>')
+        // Lists
+        .replace(/^\- (.*$)/gim, '<li>$1</li>')
+        .replace(/^(\d+)\. (.*$)/gim, '<li>$2</li>')
+        // Paragraphs
+        .split('\n\n')
+        .map(para => para.trim() && !para.startsWith('<') ? `<p>${para}</p>` : para)
+        .join('\n');
+
+      // Wrap lists
+      html = html.replace(/(<li>.*<\/li>\n?)+/gim, match => {
+        return markdown.includes('- ') ? `<ul>${match}</ul>` : `<ol>${match}</ol>`;
+      });
+
+      preview.innerHTML = html;
+    }
+
+    // Analyze impact of changes
+    function analyzeImpact() {
+      const impactContainer = document.getElementById('impactContent');
+
+      // Mock impact analysis based on current section
+      const impacts = {
+        'overview': {
+          risk: 'low',
+          affected: [
+            { sop: 'SOP-005: Comprehensive HR Onboarding', section: 'finance-setup', type: 'reference' }
+          ]
+        },
+        'prerequisites': {
+          risk: 'high',
+          affected: [
+            { sop: 'SOP-002: IT System Access', section: 'required-by', type: 'strong' },
+            { sop: 'SOP-003: Security Training', section: 'required-by', type: 'strong' },
+            { sop: 'SOP-005: HR Onboarding', section: 'prerequisites', type: 'medium' }
+          ]
+        },
+        'procedure-steps': {
+          risk: 'high',
+          affected: [
+            { sop: 'SOP-007: Expense Reimbursement', section: 'approval-process', type: 'strong' },
+            { sop: 'SOP-005: HR Onboarding', section: 'finance-procedures', type: 'medium' }
+          ]
+        },
+        'default': {
+          risk: 'low',
+          affected: []
+        }
+      };
+
+      const impact = impacts[currentEditSection] || impacts.default;
+
+      let html = '';
+
+      if (impact.affected.length === 0) {
+        html = `
+          <div class="impact-info">
+            <div class="impact-title">✅ Low Impact Change</div>
+            <div class="impact-list">
+              <p>No direct dependencies detected. This change is safe to make.</p>
+            </div>
+          </div>
+        `;
+      } else {
+        const riskColor = impact.risk === 'high' ? 'danger' : impact.risk === 'medium' ? 'warning' : 'success';
+        html = `
+          <div class="impact-${impact.risk === 'high' ? 'warning' : 'info'}">
+            <div class="impact-title">⚠️ ${impact.affected.length} SOPs will be affected</div>
+            <div class="impact-list">
+              ${impact.affected.map(item => `
+                <div class="impact-item">
+                  <span class="impact-sop">${item.sop} <span class="risk-badge risk-${impact.risk}">${impact.risk.toUpperCase()}</span></span>
+                  <span class="impact-section">→ Section: ${item.section}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="impact-info" style="margin-top: 16px;">
+            <div class="impact-title">📋 Recommended Actions</div>
+            <div class="impact-list">
+              <p>• Review dependent SOPs after saving<br>
+              • Notify owners of affected SOPs<br>
+              • Run validation tests<br>
+              • Update related documentation</p>
+            </div>
+          </div>
+        `;
+      }
+
+      impactContainer.innerHTML = html;
+    }
+
+    // Editor input handler
+    document.getElementById('markdownEditor')?.addEventListener('input', function() {
+      isDirty = true;
+      updateAutosaveIndicator('saving');
+      updatePreview();
+
+      // Debounce autosave
+      clearTimeout(autosaveTimer);
+      autosaveTimer = setTimeout(() => {
+        autosave();
+      }, 2000);
+    });
+
+    // Autosave function
+    function autosave() {
+      // In production, this would save to backend
+      console.log('Autosaving changes...');
+      updateAutosaveIndicator('saved');
+      isDirty = false;
+    }
+
+    // Update autosave indicator
+    function updateAutosaveIndicator(status) {
+      const indicator = document.getElementById('autosaveIndicator');
+      const text = document.getElementById('autosaveText');
+
+      indicator.className = 'autosave-indicator';
+
+      if (status === 'saving') {
+        indicator.classList.add('saving');
+        text.textContent = 'Saving...';
+      } else if (status === 'saved') {
+        indicator.classList.add('saved');
+        text.textContent = 'All changes saved';
+      }
+    }
+
+    // Insert markdown formatting
+    function insertMarkdown(before, after) {
+      const editor = document.getElementById('markdownEditor');
+      const start = editor.selectionStart;
+      const end = editor.selectionEnd;
+      const selectedText = editor.value.substring(start, end);
+      const replacement = before + selectedText + after;
+
+      editor.value = editor.value.substring(0, start) + replacement + editor.value.substring(end);
+
+      // Set cursor position
+      const newCursorPos = start + before.length + selectedText.length;
+      editor.setSelectionRange(newCursorPos, newCursorPos);
+      editor.focus();
+
+      // Trigger update
+      editor.dispatchEvent(new Event('input'));
+    }
+
+    // Save edit
+    function saveEdit() {
+      const content = document.getElementById('markdownEditor').value;
+
+      // In production, this would:
+      // 1. Save to backend
+      // 2. Update graph database
+      // 3. Trigger dependency updates
+      // 4. Create version history entry
+      // 5. Notify affected SOP owners
+
+      console.log('Saving section:', currentEditSection);
+      console.log('New content:', content);
+
+      // Update the section content in memory
+      sectionContent[currentEditSection] = content;
+
+      // Show success message
+      alert(`✅ Changes saved successfully!\n\n• Section "${formatSectionName(currentEditSection)}" updated\n• ${document.getElementById('impactContent').textContent.includes('0 SOPs') ? 'No' : 'Affected'} SOPs will be notified\n• Version history updated`);
+
+      // Close modal
+      closeEditModal();
+
+      // In production, reload the page content to show changes
+      // location.reload();
+    }
+
+    // Cancel edit
+    function cancelEdit() {
+      if (isDirty) {
+        if (!confirm('You have unsaved changes. Are you sure you want to cancel?')) {
+          return;
+        }
+      }
+
+      closeEditModal();
+    }
+
+    // Close edit modal
+    function closeEditModal() {
+      document.getElementById('editModal').classList.remove('active');
+      currentEditSection = null;
+      isDirty = false;
+      clearTimeout(autosaveTimer);
+    }
+
+    // Close modal on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && document.getElementById('editModal').classList.contains('active')) {
+        cancelEdit();
+      }
+    });
 
     // Show dependencies
     function showDependencies() {
