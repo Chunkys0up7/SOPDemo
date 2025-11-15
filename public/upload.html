@@ -13,8 +13,13 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: #f7fafc;
       min-height: 100vh;
+    }
+
+    .page-wrapper {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: calc(100vh - 65px);
       padding: 20px;
     }
 
@@ -285,7 +290,20 @@
   </style>
 </head>
 <body>
-  <div class="container">
+  <!-- Global Navigation -->
+  <script>
+    // Load global navigation component
+    fetch('/public/components/global-nav.html')
+      .then(response => response.text())
+      .then(html => {
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = html;
+        document.body.insertBefore(tempDiv.firstChild, document.body.firstChild);
+      });
+  </script>
+
+  <div class="page-wrapper">
+    <div class="container">
     <header>
       <h1>📤 Upload SOP</h1>
       <p class="subtitle">Add new documentation or update existing SOPs</p>
@@ -639,5 +657,6 @@
     // Initialize with 'new' mode selected
     setMode('new');
   </script>
+  </div> <!-- /page-wrapper -->
 </body>
 </html>
