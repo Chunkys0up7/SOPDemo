@@ -731,6 +731,266 @@
     .autosave-indicator.saved {
       color: var(--success-color);
     }
+
+    /* Version History Modal */
+    .version-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .version-modal.active {
+      display: flex;
+    }
+
+    .version-container {
+      background: white;
+      border-radius: 12px;
+      width: 95%;
+      max-width: 1200px;
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .version-header {
+      padding: 20px 24px;
+      border-bottom: 2px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-light);
+      border-radius: 12px 12px 0 0;
+    }
+
+    .version-body {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 0;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .version-list-panel {
+      border-right: 1px solid var(--border-color);
+      overflow-y: auto;
+      background: white;
+    }
+
+    .version-item {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-color);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .version-item:hover {
+      background: var(--bg-light);
+    }
+
+    .version-item.active {
+      background: #eef2ff;
+      border-left: 4px solid var(--primary-color);
+    }
+
+    .version-number {
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+    }
+
+    .version-date {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-bottom: 8px;
+    }
+
+    .version-author {
+      font-size: 13px;
+      color: var(--text-dark);
+    }
+
+    .version-changes {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-top: 4px;
+    }
+
+    .current-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      background: var(--success-color);
+      color: white;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+
+    .version-diff-panel {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .diff-toolbar {
+      padding: 16px 20px;
+      background: white;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .diff-mode-toggle {
+      display: flex;
+      gap: 8px;
+    }
+
+    .diff-mode-btn {
+      padding: 6px 12px;
+      border: 1px solid var(--border-color);
+      background: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .diff-mode-btn.active {
+      background: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
+    }
+
+    .diff-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      background: #fafafa;
+    }
+
+    .diff-view {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .diff-view.side-by-side {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .diff-view.unified {
+      display: block;
+    }
+
+    .diff-column {
+      border-right: 1px solid var(--border-color);
+    }
+
+    .diff-column:last-child {
+      border-right: none;
+    }
+
+    .diff-column-header {
+      padding: 12px 16px;
+      background: var(--bg-light);
+      border-bottom: 2px solid var(--border-color);
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text-dark);
+    }
+
+    .diff-line {
+      padding: 4px 16px;
+      font-family: 'Monaco', 'Menlo', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .diff-line-number {
+      display: inline-block;
+      width: 40px;
+      color: var(--text-light);
+      user-select: none;
+      margin-right: 16px;
+    }
+
+    .diff-line.added {
+      background: #e6ffec;
+      border-left: 3px solid var(--success-color);
+    }
+
+    .diff-line.removed {
+      background: #ffebe9;
+      border-left: 3px solid var(--danger-color);
+    }
+
+    .diff-line.unchanged {
+      background: white;
+    }
+
+    .diff-section-header {
+      padding: 12px 16px;
+      background: #f8f9fa;
+      border-left: 4px solid var(--primary-color);
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-top: 8px;
+    }
+
+    .version-metadata {
+      background: #fffaf0;
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      border-left: 4px solid var(--warning-color);
+    }
+
+    .metadata-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .metadata-label {
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .metadata-value {
+      color: var(--text-light);
+    }
+
+    .restore-btn {
+      padding: 8px 16px;
+      background: var(--warning-color);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .restore-btn:hover {
+      background: #dd6b20;
+      transform: translateY(-1px);
+    }
   </style>
 </head>
 <body>
@@ -1197,6 +1457,72 @@
     </div>
   </div>
 
+  <!-- Version History Modal -->
+  <div class="version-modal" id="versionModal">
+    <div class="version-container">
+      <div class="version-header">
+        <div>
+          <div class="edit-title">📜 Version History</div>
+          <div class="edit-subtitle">Invoice Processing - Complete version timeline</div>
+        </div>
+        <div class="edit-actions">
+          <button class="btn btn-secondary" onclick="closeVersionModal()">Close</button>
+        </div>
+      </div>
+
+      <div class="version-body">
+        <!-- Version List Sidebar -->
+        <div class="version-list-panel" id="versionList">
+          <!-- Versions will be rendered here -->
+        </div>
+
+        <!-- Diff Viewer Panel -->
+        <div class="version-diff-panel">
+          <div class="diff-toolbar">
+            <div class="diff-mode-toggle">
+              <button class="diff-mode-btn active" data-mode="side-by-side" onclick="changeDiffMode('side-by-side')">
+                Side by Side
+              </button>
+              <button class="diff-mode-btn" data-mode="unified" onclick="changeDiffMode('unified')">
+                Unified
+              </button>
+            </div>
+            <button class="restore-btn" id="restoreBtn" onclick="restoreVersion()">
+              ↺ Restore This Version
+            </button>
+          </div>
+
+          <div class="diff-content" id="diffContent">
+            <div class="version-metadata">
+              <div class="metadata-row">
+                <span class="metadata-label">Version:</span>
+                <span class="metadata-value" id="selectedVersion">Select a version</span>
+              </div>
+              <div class="metadata-row">
+                <span class="metadata-label">Author:</span>
+                <span class="metadata-value" id="versionAuthor">-</span>
+              </div>
+              <div class="metadata-row">
+                <span class="metadata-label">Date:</span>
+                <span class="metadata-value" id="versionDate">-</span>
+              </div>
+              <div class="metadata-row">
+                <span class="metadata-label">Change Summary:</span>
+                <span class="metadata-value" id="versionSummary">-</span>
+              </div>
+            </div>
+
+            <div id="diffViewer">
+              <p style="text-align: center; color: #a0aec0; padding: 40px;">
+                Select a version from the list to view changes
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     // Load global navigation
     fetch('/public/components/global-nav.html')
@@ -1618,10 +1944,313 @@ Perform the following checks before finalizing:
       window.location.href = '/public/sop-dependencies.html';
     }
 
+    // Version History State
+    let selectedVersionId = null;
+    let currentDiffMode = 'side-by-side';
+
+    // Mock version history database
+    const versionHistory = [
+      {
+        id: 'v1.2.0',
+        version: 'v1.2.0',
+        date: '2025-11-01',
+        author: 'Sarah Chen (Finance Manager)',
+        summary: 'Updated approval thresholds and added expense category validation',
+        changes: '+12 lines, -8 lines',
+        isCurrent: true,
+        content: {
+          'procedure-steps': `### Step 3: Approval Routing
+1. Route to department manager for approval
+2. Route to Finance Controller if >$10,000 (updated from $5,000)
+3. Route to CFO if >$50,000
+4. Track approval status in workflow system
+5. Validate expense categories against approved list`
+        }
+      },
+      {
+        id: 'v1.1.0',
+        version: 'v1.1.0',
+        date: '2025-08-15',
+        author: 'Mike Johnson (IT Operations)',
+        summary: 'Added three-way match requirement and automated validation',
+        changes: '+18 lines, -3 lines',
+        isCurrent: false,
+        content: {
+          'procedure-steps': `### Step 3: Approval Routing
+1. Route to department manager for approval
+2. Route to Finance Controller if >$5,000
+3. Route to CFO if >$50,000
+4. Track approval status in workflow system`
+        }
+      },
+      {
+        id: 'v1.0.0',
+        version: 'v1.0.0',
+        date: '2024-01-15',
+        author: 'Alice Smith (Process Owner)',
+        summary: 'Initial SOP documentation - baseline invoice processing workflow',
+        changes: 'Initial version',
+        isCurrent: false,
+        content: {
+          'procedure-steps': `### Step 3: Approval Routing
+1. Route to department manager for approval
+2. Route to Finance if >$5,000
+3. Track approval status manually`
+        }
+      }
+    ];
+
     // Show version history
     function showVersionHistory() {
-      alert('Version History would show:\n\n• v1.2.0 (current) - 2025-11-01\n• v1.1.0 - 2025-08-15\n• v1.0.0 - 2024-01-15\n\nWith diff view comparing versions');
+      // Render version list
+      renderVersionList();
+
+      // Show modal
+      document.getElementById('versionModal').classList.add('active');
+
+      // Select current version by default
+      selectVersion('v1.2.0');
     }
+
+    // Render version list
+    function renderVersionList() {
+      const container = document.getElementById('versionList');
+
+      container.innerHTML = versionHistory.map(v => `
+        <div class="version-item ${v.id === selectedVersionId ? 'active' : ''}"
+             onclick="selectVersion('${v.id}')">
+          <div class="version-number">
+            ${v.version}
+            ${v.isCurrent ? '<span class="current-badge">CURRENT</span>' : ''}
+          </div>
+          <div class="version-date">${v.date}</div>
+          <div class="version-author">👤 ${v.author}</div>
+          <div class="version-changes">📊 ${v.changes}</div>
+        </div>
+      `).join('');
+    }
+
+    // Select version and show diff
+    function selectVersion(versionId) {
+      selectedVersionId = versionId;
+
+      // Update active state in list
+      renderVersionList();
+
+      // Get version data
+      const version = versionHistory.find(v => v.id === versionId);
+      const previousVersionIndex = versionHistory.findIndex(v => v.id === versionId) + 1;
+      const previousVersion = previousVersionIndex < versionHistory.length
+        ? versionHistory[previousVersionIndex]
+        : null;
+
+      // Update metadata
+      document.getElementById('selectedVersion').textContent = version.version;
+      document.getElementById('versionAuthor').textContent = version.author;
+      document.getElementById('versionDate').textContent = version.date;
+      document.getElementById('versionSummary').textContent = version.summary;
+
+      // Enable/disable restore button
+      const restoreBtn = document.getElementById('restoreBtn');
+      if (version.isCurrent) {
+        restoreBtn.disabled = true;
+        restoreBtn.style.opacity = '0.5';
+        restoreBtn.style.cursor = 'not-allowed';
+      } else {
+        restoreBtn.disabled = false;
+        restoreBtn.style.opacity = '1';
+        restoreBtn.style.cursor = 'pointer';
+      }
+
+      // Generate diff
+      if (previousVersion) {
+        showDiff(version, previousVersion);
+      } else {
+        // First version - show content only
+        showFirstVersion(version);
+      }
+    }
+
+    // Show diff between versions
+    function showDiff(newVersion, oldVersion) {
+      const diffViewer = document.getElementById('diffViewer');
+
+      // For simplicity, showing mock diff for one section
+      const newContent = newVersion.content['procedure-steps'];
+      const oldContent = oldVersion.content['procedure-steps'];
+
+      // Simple line-by-line diff (in production, use a proper diff library)
+      const newLines = newContent.split('\n');
+      const oldLines = oldContent.split('\n');
+
+      if (currentDiffMode === 'side-by-side') {
+        diffViewer.innerHTML = `
+          <div class="diff-view side-by-side">
+            <div class="diff-column">
+              <div class="diff-column-header">${oldVersion.version} (Previous)</div>
+              ${renderDiffColumn(oldLines, 'old')}
+            </div>
+            <div class="diff-column">
+              <div class="diff-column-header">${newVersion.version} (Selected)</div>
+              ${renderDiffColumn(newLines, 'new')}
+            </div>
+          </div>
+        `;
+      } else {
+        // Unified diff
+        diffViewer.innerHTML = `
+          <div class="diff-view unified">
+            <div class="diff-section-header">Section: Procedure Steps - Approval Routing</div>
+            ${renderUnifiedDiff(oldLines, newLines)}
+          </div>
+        `;
+      }
+    }
+
+    // Render diff column for side-by-side view
+    function renderDiffColumn(lines, type) {
+      // Mock diff highlighting (in production, use proper diff algorithm)
+      const highlightedLines = lines.map((line, idx) => {
+        let className = 'unchanged';
+
+        // Simple heuristic: if line contains "updated", "$10,000", or "Validate", it's changed
+        if (type === 'new' && (line.includes('$10,000') || line.includes('updated') || line.includes('Validate'))) {
+          className = 'added';
+        } else if (type === 'old' && line.includes('$5,000') && !line.includes('if >$5,000')) {
+          className = 'removed';
+        }
+
+        return `
+          <div class="diff-line ${className}">
+            <span class="diff-line-number">${idx + 1}</span>
+            ${escapeHtml(line)}
+          </div>
+        `;
+      });
+
+      return highlightedLines.join('');
+    }
+
+    // Render unified diff
+    function renderUnifiedDiff(oldLines, newLines) {
+      // Mock unified diff (showing both removed and added lines)
+      let html = '';
+
+      oldLines.forEach((line, idx) => {
+        const newLine = newLines[idx];
+
+        if (line !== newLine) {
+          if (line) {
+            html += `
+              <div class="diff-line removed">
+                <span class="diff-line-number">-${idx + 1}</span>
+                ${escapeHtml(line)}
+              </div>
+            `;
+          }
+          if (newLine) {
+            html += `
+              <div class="diff-line added">
+                <span class="diff-line-number">+${idx + 1}</span>
+                ${escapeHtml(newLine)}
+              </div>
+            `;
+          }
+        } else if (line) {
+          html += `
+            <div class="diff-line unchanged">
+              <span class="diff-line-number">${idx + 1}</span>
+              ${escapeHtml(line)}
+            </div>
+          `;
+        }
+      });
+
+      // Add any new lines that don't have old counterparts
+      for (let i = oldLines.length; i < newLines.length; i++) {
+        html += `
+          <div class="diff-line added">
+            <span class="diff-line-number">+${i + 1}</span>
+            ${escapeHtml(newLines[i])}
+          </div>
+        `;
+      }
+
+      return html;
+    }
+
+    // Show first version (no previous version to compare)
+    function showFirstVersion(version) {
+      const diffViewer = document.getElementById('diffViewer');
+      const content = version.content['procedure-steps'];
+
+      diffViewer.innerHTML = `
+        <div class="impact-info">
+          <div class="impact-title">📄 Initial Version</div>
+          <div class="impact-list">
+            <p>This is the first version of this SOP. No previous version to compare.</p>
+          </div>
+        </div>
+        <div class="diff-view unified">
+          <div class="diff-section-header">Section: Procedure Steps - Approval Routing</div>
+          ${content.split('\n').map((line, idx) => `
+            <div class="diff-line added">
+              <span class="diff-line-number">${idx + 1}</span>
+              ${escapeHtml(line)}
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    // Change diff mode
+    function changeDiffMode(mode) {
+      currentDiffMode = mode;
+
+      // Update active button
+      document.querySelectorAll('.diff-mode-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.querySelector(`[data-mode="${mode}"]`).classList.add('active');
+
+      // Re-render diff with new mode
+      if (selectedVersionId) {
+        selectVersion(selectedVersionId);
+      }
+    }
+
+    // Restore version
+    function restoreVersion() {
+      const version = versionHistory.find(v => v.id === selectedVersionId);
+
+      if (confirm(`Restore ${version.version}?\n\nThis will:\n• Create a new version (v1.3.0) based on ${version.version}\n• Preserve current version in history\n• Notify all stakeholders\n• Update dependencies\n\nAre you sure?`)) {
+        alert(`✅ Version ${version.version} restored!\n\nNew version v1.3.0 created.\nAll dependent SOPs have been notified.`);
+        closeVersionModal();
+
+        // In production, would reload with new version
+        // location.reload();
+      }
+    }
+
+    // Close version modal
+    function closeVersionModal() {
+      document.getElementById('versionModal').classList.remove('active');
+      selectedVersionId = null;
+    }
+
+    // Escape HTML for safe display
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // Close version modal on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && document.getElementById('versionModal').classList.contains('active')) {
+        closeVersionModal();
+      }
+    });
 
     // Show comments
     function showComments() {
