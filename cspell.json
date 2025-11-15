@@ -1,0 +1,53 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "Pursuit",
+    "SOP",
+    "SOPs",
+    "frontmatter",
+    "datetime",
+    "github",
+    "workflow",
+    "workflows",
+    "checklist",
+    "checklists",
+    "dropdown",
+    "onclick",
+    "mouseenter",
+    "mouseleave"
+  ],
+  "dictionaries": [
+    "en_US",
+    "companies",
+    "softwareTerms",
+    "mortgage-finance"
+  ],
+  "dictionaryDefinitions": [
+    {
+      "name": "mortgage-finance",
+      "path": "./dictionaries/mortgage-finance.txt",
+      "addWords": true
+    }
+  ],
+  "ignorePaths": [
+    "node_modules/**",
+    "dist/**",
+    "build/**",
+    ".git/**",
+    "*.log",
+    "package-lock.json",
+    ".husky/**",
+    "coverage/**"
+  ],
+  "ignoreRegExpList": [
+    "/\\{\\{include:.*?\\}\\}/g",
+    "/https?:\\/\\/[^\\s]+/g",
+    "/```[\\s\\S]*?```/g",
+    "/`[^`]+`/g",
+    "/<[^>]+>/g"
+  ],
+  "allowCompoundWords": true,
+  "caseSensitive": false,
+  "minWordLength": 4
+}
