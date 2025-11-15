@@ -1,0 +1,691 @@
+{
+  "metadata": {
+    "version": "3.0.0",
+    "lastUpdated": "2025-11-15",
+    "description": "Mortgage Finance Department - Complete SOP ecosystem for residential mortgage lending operations",
+    "organization": "Apex Mortgage Company",
+    "department": "Finance & Operations",
+    "totalLoansProcessed": 12847,
+    "avgProcessingTime": "18 days",
+    "complianceScore": 98.7
+  },
+  "nodes": {
+    "sop-mf-001": {
+      "id": "sop-mf-001",
+      "type": "sop",
+      "title": "Conventional Loan Processing Workflow",
+      "version": "4.2.0",
+      "status": "active",
+      "owner": "Loan Processing Team",
+      "category": "Loan Origination",
+      "department": "Finance",
+      "components": [
+        "atom-1003-application-review",
+        "molecule-income-verification",
+        "molecule-credit-analysis",
+        "organism-initial-disclosure-package"
+      ],
+      "metadata": {
+        "lastReviewed": "2025-11-01",
+        "nextReview": "2026-02-01",
+        "approver": "Sarah Martinez (VP, Loan Operations)",
+        "complianceFrameworks": ["TRID", "RESPA", "Fannie Mae Guidelines"],
+        "avgUsesPerMonth": 847,
+        "criticality": "high",
+        "dependencies": 8
+      }
+    },
+    "sop-mf-002": {
+      "id": "sop-mf-002",
+      "type": "sop",
+      "title": "Automated Underwriting System (AUS) Processing",
+      "version": "3.1.5",
+      "status": "active",
+      "owner": "Underwriting Department",
+      "category": "Underwriting",
+      "department": "Finance",
+      "components": [
+        "atom-du-findings-interpretation",
+        "atom-lpa-results-analysis",
+        "molecule-aus-resubmission-protocol",
+        "organism-condition-management-workflow"
+      ],
+      "metadata": {
+        "lastReviewed": "2025-10-28",
+        "nextReview": "2026-01-28",
+        "approver": "Michael Chen (Chief Underwriter)",
+        "complianceFrameworks": ["Desktop Underwriter", "Loan Product Advisor", "GSE Guidelines"],
+        "avgUsesPerMonth": 1243,
+        "criticality": "critical",
+        "dependencies": 6
+      }
+    },
+    "sop-mf-003": {
+      "id": "sop-mf-003",
+      "type": "sop",
+      "title": "FHA Loan Underwriting Standards",
+      "version": "5.0.2",
+      "status": "active",
+      "owner": "Government Loan Department",
+      "category": "Underwriting",
+      "department": "Finance",
+      "components": [
+        "atom-fha-case-number-assignment",
+        "molecule-fha-appraisal-requirements",
+        "molecule-fha-debt-ratio-calculation",
+        "organism-fha-approval-workflow"
+      ],
+      "metadata": {
+        "lastReviewed": "2025-11-05",
+        "nextReview": "2026-02-05",
+        "approver": "Lisa Rodriguez (FHA Department Head)",
+        "complianceFrameworks": ["FHA Handbook 4000.1", "HUD Requirements"],
+        "avgUsesPerMonth": 456,
+        "criticality": "high",
+        "dependencies": 7
+      }
+    },
+    "sop-mf-004": {
+      "id": "sop-mf-004",
+      "type": "sop",
+      "title": "Clear to Close (CTC) Verification Process",
+      "version": "2.8.0",
+      "status": "active",
+      "owner": "Closing Department",
+      "category": "Pre-Closing",
+      "department": "Finance",
+      "components": [
+        "atom-final-condition-verification",
+        "molecule-closing-disclosure-preparation",
+        "molecule-funding-approval-checklist",
+        "organism-ctc-quality-gate"
+      ],
+      "metadata": {
+        "lastReviewed": "2025-10-20",
+        "nextReview": "2026-01-20",
+        "approver": "Jennifer Williams (Closing Manager)",
+        "complianceFrameworks": ["TRID", "CFPB Guidelines"],
+        "avgUsesPerMonth": 923,
+        "criticality": "critical",
+        "dependencies": 9
+      }
+    },
+    "sop-mf-005": {
+      "id": "sop-mf-005",
+      "type": "sop",
+      "title": "Wire Transfer and Funding Authorization",
+      "version": "3.3.1",
+      "status": "active",
+      "owner": "Funding Department",
+      "category": "Closing & Funding",
+      "department": "Finance",
+      "components": [
+        "atom-wire-amount-calculation",
+        "molecule-dual-approval-protocol",
+        "molecule-fraud-prevention-checks",
+        "organism-same-day-funding-workflow"
+      ],
+      "metadata": {
+        "lastReviewed": "2025-11-10",
+        "nextReview": "2026-02-10",
+        "approver": "David Park (CFO)",
+        "complianceFrameworks": ["OFAC", "BSA/AML", "Wire Fraud Prevention"],
+        "avgUsesPerMonth": 891,
+        "criticality": "critical",
+        "dependencies": 5
+      }
+    },
+    "sop-mf-006": {
+      "id": "sop-mf-006",
+      "type": "sop",
+      "title": "Post-Closing Quality Control Audit",
+      "version": "4.0.0",
+      "status": "active",
+      "owner": "QC Department",
+      "category": "Quality Control",
+      "department": "Finance",
+      "components": [
+        "atom-loan-file-sampling",
+        "molecule-critical-defect-identification",
+        "molecule-qc-scorecard",
+        "organism-remediation-workflow"
+      ],
+      "metadata": {
+        "lastReviewed": "2025-10-15",
+        "nextReview": "2026-01-15",
+        "approver": "Amanda Foster (QC Director)",
+        "complianceFrameworks": ["Fannie Mae QC Standards", "Freddie Mac QC Requirements"],
+        "avgUsesPerMonth": 312,
+        "criticality": "high",
+        "dependencies": 11
+      }
+    },
+    "sop-mf-007": {
+      "id": "sop-mf-007",
+      "type": "sop",
+      "title": "Investor Delivery and Shipping Procedures",
+      "version": "2.5.3",
+      "status": "active",
+      "owner": "Secondary Market Team",
+      "category": "Post-Closing",
+      "department": "Finance",
+      "components": [
+        "atom-loan-eligibility-verification",
+        "molecule-document-custodian-package",
+        "molecule-investor-submission-portal",
+        "organism-purchase-advice-reconciliation"
+      ],
+      "metadata": {
+        "lastReviewed": "2025-11-08",
+        "nextReview": "2026-02-08",
+        "approver": "Robert Kim (Secondary Market Director)",
+        "complianceFrameworks": ["Fannie Mae Selling Guide", "Freddie Mac Selling Guide"],
+        "avgUsesPerMonth": 734,
+        "criticality": "high",
+        "dependencies": 6
+      }
+    },
+    "sop-mf-008": {
+      "id": "sop-mf-008",
+      "type": "sop",
+      "title": "Income Documentation and Verification Standards",
+      "version": "3.7.2",
+      "status": "active",
+      "owner": "Processing Department",
+      "category": "Documentation",
+      "department": "Finance",
+      "components": [
+        "atom-paystub-analysis",
+        "atom-w2-verification",
+        "molecule-self-employed-income-calc",
+        "molecule-voe-verification",
+        "organism-income-documentation-matrix"
+      ],
+      "metadata": {
+        "lastReviewed": "2025-10-25",
+        "nextReview": "2026-01-25",
+        "approver": "Sarah Martinez (VP, Loan Operations)",
+        "complianceFrameworks": ["ATR/QM Rules", "Fannie Mae Income Calculation"],
+        "avgUsesPerMonth": 1156,
+        "criticality": "critical",
+        "dependencies": 4
+      }
+    },
+    "sop-mf-009": {
+      "id": "sop-mf-009",
+      "type": "sop",
+      "title": "Appraisal Review and Collateral Evaluation",
+      "version": "2.9.0",
+      "status": "active",
+      "owner": "Collateral Department",
+      "category": "Underwriting",
+      "department": "Finance",
+      "components": [
+        "atom-ucdp-submission",
+        "molecule-appraisal-quality-check",
+        "molecule-value-reconciliation",
+        "organism-appraisal-waiver-eligibility"
+      ],
+      "metadata": {
+        "lastReviewed": "2025-11-02",
+        "nextReview": "2026-02-02",
+        "approver": "Michael Chen (Chief Underwriter)",
+        "complianceFrameworks": ["USPAP", "Fannie Mae Collateral Standards"],
+        "avgUsesPerMonth": 678,
+        "criticality": "high",
+        "dependencies": 5
+      }
+    },
+    "sop-mf-010": {
+      "id": "sop-mf-010",
+      "type": "sop",
+      "title": "TRID Compliance and Disclosure Timing",
+      "version": "4.1.0",
+      "status": "active",
+      "owner": "Compliance Department",
+      "category": "Regulatory Compliance",
+      "department": "Finance",
+      "components": [
+        "atom-loan-estimate-preparation",
+        "atom-closing-disclosure-timing",
+        "molecule-changed-circumstance-protocol",
+        "molecule-tolerance-cure-calculation",
+        "organism-3-day-waiting-period-tracking"
+      ],
+      "metadata": {
+        "lastReviewed": "2025-10-30",
+        "nextReview": "2026-01-30",
+        "approver": "Patricia Anderson (Chief Compliance Officer)",
+        "complianceFrameworks": ["TRID", "CFPB Regulation Z"],
+        "avgUsesPerMonth": 1034,
+        "criticality": "critical",
+        "dependencies": 8
+      }
+    },
+    "sop-mf-011": {
+      "id": "sop-mf-011",
+      "type": "sop",
+      "title": "Exception Approval and Escalation Matrix",
+      "version": "2.2.0",
+      "status": "active",
+      "owner": "Risk Management",
+      "category": "Risk & Exceptions",
+      "department": "Finance",
+      "components": [
+        "atom-exception-request-form",
+        "molecule-authority-matrix",
+        "molecule-exception-documentation",
+        "organism-executive-approval-workflow"
+      ],
+      "metadata": {
+        "lastReviewed": "2025-10-18",
+        "nextReview": "2026-01-18",
+        "approver": "David Park (CFO)",
+        "complianceFrameworks": ["Internal Risk Policy", "Investor Overlays"],
+        "avgUsesPerMonth": 234,
+        "criticality": "high",
+        "dependencies": 7
+      }
+    },
+    "sop-mf-012": {
+      "id": "sop-mf-012",
+      "type": "sop",
+      "title": "Fraud Detection and Reporting Procedures",
+      "version": "3.0.5",
+      "status": "active",
+      "owner": "Fraud Prevention Team",
+      "category": "Risk & Compliance",
+      "department": "Finance",
+      "components": [
+        "atom-red-flag-indicators",
+        "molecule-fraud-investigation-protocol",
+        "molecule-sar-filing-requirements",
+        "organism-fraud-alert-workflow"
+      ],
+      "metadata": {
+        "lastReviewed": "2025-11-12",
+        "nextReview": "2026-02-12",
+        "approver": "Patricia Anderson (Chief Compliance Officer)",
+        "complianceFrameworks": ["BSA/AML", "SAR Reporting", "OFAC"],
+        "avgUsesPerMonth": 87,
+        "criticality": "critical",
+        "dependencies": 3
+      }
+    },
+    "sop-mf-013": {
+      "id": "sop-mf-013",
+      "type": "sop",
+      "title": "Jumbo Loan Underwriting Guidelines",
+      "version": "2.4.1",
+      "status": "active",
+      "owner": "Jumbo Loan Department",
+      "category": "Underwriting",
+      "department": "Finance",
+      "components": [
+        "atom-jumbo-loan-criteria",
+        "molecule-reserve-requirements",
+        "molecule-jumbo-credit-score-matrix",
+        "organism-portfolio-underwriting-workflow"
+      ],
+      "metadata": {
+        "lastReviewed": "2025-10-22",
+        "nextReview": "2026-01-22",
+        "approver": "Michael Chen (Chief Underwriter)",
+        "complianceFrameworks": ["Portfolio Guidelines", "QM Rules"],
+        "avgUsesPerMonth": 189,
+        "criticality": "high",
+        "dependencies": 6
+      }
+    },
+    "sop-mf-014": {
+      "id": "sop-mf-014",
+      "type": "sop",
+      "title": "Subordination and Lien Position Verification",
+      "version": "1.8.0",
+      "status": "active",
+      "owner": "Title Department",
+      "category": "Pre-Closing",
+      "department": "Finance",
+      "components": [
+        "atom-title-search-review",
+        "molecule-lien-priority-verification",
+        "molecule-subordination-agreement",
+        "organism-title-clearance-workflow"
+      ],
+      "metadata": {
+        "lastReviewed": "2025-10-12",
+        "nextReview": "2026-01-12",
+        "approver": "Jennifer Williams (Closing Manager)",
+        "complianceFrameworks": ["Title Insurance Standards", "Investor Requirements"],
+        "avgUsesPerMonth": 456,
+        "criticality": "high",
+        "dependencies": 4
+      }
+    },
+    "sop-mf-015": {
+      "id": "sop-mf-015",
+      "type": "sop",
+      "title": "Loan Modification and Forbearance Processing",
+      "version": "2.1.3",
+      "status": "active",
+      "owner": "Servicing Department",
+      "category": "Portfolio Management",
+      "department": "Finance",
+      "components": [
+        "atom-hardship-verification",
+        "molecule-modification-calculation",
+        "molecule-trial-payment-plan",
+        "organism-permanent-modification-approval"
+      ],
+      "metadata": {
+        "lastReviewed": "2025-11-07",
+        "nextReview": "2026-02-07",
+        "approver": "Robert Kim (Secondary Market Director)",
+        "complianceFrameworks": ["CFPB Servicing Rules", "Investor Modification Programs"],
+        "avgUsesPerMonth": 145,
+        "criticality": "medium",
+        "dependencies": 5
+      }
+    }
+  },
+  "edges": [
+    {
+      "from": "sop-mf-001",
+      "to": "sop-mf-008",
+      "type": "requires",
+      "strength": "strong",
+      "description": "Loan processing requires income documentation verification",
+      "sectionMapping": {
+        "initial-review": "income-documentation-matrix",
+        "document-checklist": "verification-methods"
+      }
+    },
+    {
+      "from": "sop-mf-001",
+      "to": "sop-mf-009",
+      "type": "requires",
+      "strength": "strong",
+      "description": "Loan processing requires appraisal ordering and review",
+      "sectionMapping": {
+        "collateral-evaluation": "appraisal-quality-check"
+      }
+    },
+    {
+      "from": "sop-mf-001",
+      "to": "sop-mf-010",
+      "type": "requires",
+      "strength": "critical",
+      "description": "All loans must follow TRID disclosure timing",
+      "sectionMapping": {
+        "initial-disclosures": "loan-estimate-preparation",
+        "application-date": "3-day-waiting-period-tracking"
+      }
+    },
+    {
+      "from": "sop-mf-002",
+      "to": "sop-mf-008",
+      "type": "depends-on",
+      "strength": "strong",
+      "description": "AUS requires verified income documentation",
+      "sectionMapping": {
+        "dus-submission": "income-calculation",
+        "findings-analysis": "documentation-requirements"
+      }
+    },
+    {
+      "from": "sop-mf-002",
+      "to": "sop-mf-009",
+      "type": "depends-on",
+      "strength": "strong",
+      "description": "AUS findings require appraisal review",
+      "sectionMapping": {
+        "property-eligibility": "collateral-evaluation"
+      }
+    },
+    {
+      "from": "sop-mf-003",
+      "to": "sop-mf-009",
+      "type": "requires",
+      "strength": "critical",
+      "description": "FHA loans have specific appraisal requirements",
+      "sectionMapping": {
+        "fha-appraisal": "fha-appraisal-requirements",
+        "property-standards": "appraisal-quality-check"
+      }
+    },
+    {
+      "from": "sop-mf-003",
+      "to": "sop-mf-010",
+      "type": "requires",
+      "strength": "critical",
+      "description": "FHA loans must comply with TRID",
+      "sectionMapping": {
+        "disclosure-requirements": "trid-compliance"
+      }
+    },
+    {
+      "from": "sop-mf-004",
+      "to": "sop-mf-002",
+      "type": "depends-on",
+      "strength": "critical",
+      "description": "CTC verification requires cleared AUS conditions",
+      "sectionMapping": {
+        "condition-clearance": "condition-management-workflow"
+      }
+    },
+    {
+      "from": "sop-mf-004",
+      "to": "sop-mf-010",
+      "type": "requires",
+      "strength": "critical",
+      "description": "CTC must verify TRID timing compliance",
+      "sectionMapping": {
+        "closing-disclosure": "closing-disclosure-timing",
+        "3-day-rule": "3-day-waiting-period-tracking"
+      }
+    },
+    {
+      "from": "sop-mf-004",
+      "to": "sop-mf-014",
+      "type": "requires",
+      "strength": "strong",
+      "description": "CTC requires clear title and lien verification",
+      "sectionMapping": {
+        "title-verification": "title-clearance-workflow"
+      }
+    },
+    {
+      "from": "sop-mf-005",
+      "to": "sop-mf-004",
+      "type": "depends-on",
+      "strength": "critical",
+      "description": "Funding requires CTC approval",
+      "sectionMapping": {
+        "funding-authorization": "ctc-quality-gate"
+      }
+    },
+    {
+      "from": "sop-mf-005",
+      "to": "sop-mf-012",
+      "type": "requires",
+      "strength": "critical",
+      "description": "Wire transfers require fraud prevention checks",
+      "sectionMapping": {
+        "wire-verification": "fraud-prevention-checks",
+        "dual-approval": "fraud-investigation-protocol"
+      }
+    },
+    {
+      "from": "sop-mf-006",
+      "to": "sop-mf-001",
+      "type": "audits",
+      "strength": "medium",
+      "description": "QC audits loan processing procedures",
+      "sectionMapping": {
+        "loan-file-review": "document-checklist"
+      }
+    },
+    {
+      "from": "sop-mf-006",
+      "to": "sop-mf-002",
+      "type": "audits",
+      "strength": "strong",
+      "description": "QC reviews AUS findings and conditions",
+      "sectionMapping": {
+        "underwriting-review": "aus-findings"
+      }
+    },
+    {
+      "from": "sop-mf-006",
+      "to": "sop-mf-010",
+      "type": "audits",
+      "strength": "critical",
+      "description": "QC verifies TRID compliance on all loans",
+      "sectionMapping": {
+        "compliance-audit": "trid-timing-verification"
+      }
+    },
+    {
+      "from": "sop-mf-007",
+      "to": "sop-mf-006",
+      "type": "depends-on",
+      "strength": "strong",
+      "description": "Investor delivery requires QC approval",
+      "sectionMapping": {
+        "delivery-eligibility": "qc-scorecard"
+      }
+    },
+    {
+      "from": "sop-mf-007",
+      "to": "sop-mf-005",
+      "type": "references",
+      "strength": "medium",
+      "description": "Investor delivery references funding documentation",
+      "sectionMapping": {
+        "purchase-advice": "funding-confirmation"
+      }
+    },
+    {
+      "from": "sop-mf-011",
+      "to": "sop-mf-002",
+      "type": "applies-to",
+      "strength": "strong",
+      "description": "Exception approvals for underwriting deviations",
+      "sectionMapping": {
+        "underwriting-exceptions": "exception-documentation"
+      }
+    },
+    {
+      "from": "sop-mf-011",
+      "to": "sop-mf-013",
+      "type": "applies-to",
+      "strength": "strong",
+      "description": "Jumbo loans often require exception approvals",
+      "sectionMapping": {
+        "jumbo-exceptions": "executive-approval-workflow"
+      }
+    },
+    {
+      "from": "sop-mf-013",
+      "to": "sop-mf-008",
+      "type": "requires",
+      "strength": "strong",
+      "description": "Jumbo loans have enhanced income verification",
+      "sectionMapping": {
+        "jumbo-income-requirements": "income-documentation-matrix"
+      }
+    },
+    {
+      "from": "sop-mf-013",
+      "to": "sop-mf-009",
+      "type": "requires",
+      "strength": "strong",
+      "description": "Jumbo loans require enhanced appraisal review",
+      "sectionMapping": {
+        "jumbo-collateral": "value-reconciliation"
+      }
+    },
+    {
+      "from": "sop-mf-015",
+      "to": "sop-mf-011",
+      "type": "requires",
+      "strength": "medium",
+      "description": "Loan modifications may require exception approvals",
+      "sectionMapping": {
+        "modification-approval": "exception-request-form"
+      }
+    }
+  ],
+  "analytics": {
+    "userAdoption": {
+      "totalUsers": 156,
+      "activeUsers": 142,
+      "adoptionRate": 91.0,
+      "avgSessionsPerUser": 23.4,
+      "avgTimeInSystem": "34 minutes/day"
+    },
+    "topSOPs": [
+      {"id": "sop-mf-008", "title": "Income Documentation", "uses": 1156, "trend": "+12%"},
+      {"id": "sop-mf-002", "title": "AUS Processing", "uses": 1243, "trend": "+8%"},
+      {"id": "sop-mf-010", "title": "TRID Compliance", "uses": 1034, "trend": "+15%"},
+      {"id": "sop-mf-004", "title": "Clear to Close", "uses": 923, "trend": "+6%"},
+      {"id": "sop-mf-005", "title": "Wire Transfer", "uses": 891, "trend": "+4%"}
+    ],
+    "departmentBreakdown": {
+      "Loan Processing": 42,
+      "Underwriting": 38,
+      "Closing": 28,
+      "QC": 12,
+      "Secondary Market": 18,
+      "Compliance": 14,
+      "Fraud Prevention": 6
+    },
+    "updateVelocity": {
+      "last30Days": 47,
+      "avgTimeToUpdate": "2.3 hours",
+      "updateSuccessRate": 98.9
+    }
+  },
+  "userPersonas": [
+    {
+      "name": "Maria Gonzalez",
+      "role": "Loan Processor",
+      "experience": "3 years",
+      "sopUsage": {
+        "primary": ["sop-mf-001", "sop-mf-008", "sop-mf-010"],
+        "frequency": "15-20 times/day",
+        "favoriteFeature": "Quick reference guides"
+      }
+    },
+    {
+      "name": "James Thompson",
+      "role": "Senior Underwriter",
+      "experience": "8 years",
+      "sopUsage": {
+        "primary": ["sop-mf-002", "sop-mf-003", "sop-mf-013"],
+        "frequency": "10-15 times/day",
+        "favoriteFeature": "Version history and diff comparison"
+      }
+    },
+    {
+      "name": "Emily Watson",
+      "role": "Closing Coordinator",
+      "experience": "5 years",
+      "sopUsage": {
+        "primary": ["sop-mf-004", "sop-mf-005", "sop-mf-014"],
+        "frequency": "12-18 times/day",
+        "favoriteFeature": "Dependency tracking"
+      }
+    },
+    {
+      "name": "Robert Lee",
+      "role": "QC Analyst",
+      "experience": "6 years",
+      "sopUsage": {
+        "primary": ["sop-mf-006", "sop-mf-010"],
+        "frequency": "8-12 times/day",
+        "favoriteFeature": "Cross-reference linking"
+      }
+    }
+  ]
+}
