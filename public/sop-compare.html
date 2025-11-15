@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compare SOPs - SOP System</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1800px;
+      margin: 0 auto;
+    }
+
+    .header {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+
+    .header h1 {
+      color: #2d3748;
+      font-size: 28px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .comparison-controls {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .control-group {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .control-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #4a5568;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .control-group select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 15px;
+      background: white;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .control-group select:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    .control-actions {
+      display: flex;
+      gap: 12px;
+      align-items: flex-end;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: #667eea;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #5568d3;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: #e2e8f0;
+      color: #4a5568;
+    }
+
+    .btn-secondary:hover {
+      background: #cbd5e0;
+    }
+
+    .comparison-mode {
+      display: flex;
+      gap: 8px;
+      padding: 4px;
+      background: #f7fafc;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .mode-btn {
+      flex: 1;
+      padding: 10px 20px;
+      border: none;
+      background: transparent;
+      color: #4a5568;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .mode-btn.active {
+      background: white;
+      color: #667eea;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .comparison-options {
+      display: flex;
+      gap: 20px;
+      padding: 16px;
+      background: #f7fafc;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .option-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .option-checkbox input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .option-checkbox label {
+      font-size: 14px;
+      color: #4a5568;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .comparison-view {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .view-header {
+      display: grid;
+      grid-template-columns: repeat(var(--columns, 2), 1fr);
+      gap: 2px;
+      background: #e2e8f0;
+    }
+
+    .column-header {
+      background: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .column-header h2 {
+      font-size: 18px;
+      color: #2d3748;
+      margin-bottom: 8px;
+    }
+
+    .column-header .version {
+      font-size: 13px;
+      color: #718096;
+      font-weight: 600;
+    }
+
+    .column-header .meta {
+      font-size: 12px;
+      color: #a0aec0;
+      margin-top: 4px;
+    }
+
+    .view-content {
+      display: grid;
+      grid-template-columns: repeat(var(--columns, 2), 1fr);
+      gap: 2px;
+      background: #e2e8f0;
+      max-height: calc(100vh - 400px);
+      overflow-y: auto;
+    }
+
+    .column-content {
+      background: white;
+      padding: 30px;
+      overflow-y: auto;
+      max-height: calc(100vh - 400px);
+    }
+
+    .column-content.sync-scroll {
+      overflow-y: hidden;
+    }
+
+    .metadata-comparison {
+      margin-bottom: 30px;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .metadata-comparison table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .metadata-comparison th {
+      background: #f7fafc;
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 700;
+      color: #4a5568;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .metadata-comparison td {
+      padding: 12px 16px;
+      font-size: 14px;
+      color: #2d3748;
+      border-bottom: 1px solid #f7fafc;
+    }
+
+    .metadata-comparison tr:last-child td {
+      border-bottom: none;
+    }
+
+    .diff-indicator {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+
+    .diff-indicator.same {
+      background: #48bb78;
+    }
+
+    .diff-indicator.different {
+      background: #f56565;
+    }
+
+    .sop-section {
+      margin-bottom: 32px;
+    }
+
+    .sop-section h3 {
+      font-size: 20px;
+      color: #2d3748;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .sop-section h4 {
+      font-size: 16px;
+      color: #4a5568;
+      margin: 20px 0 12px 0;
+    }
+
+    .sop-section p {
+      font-size: 14px;
+      color: #4a5568;
+      line-height: 1.8;
+      margin-bottom: 12px;
+    }
+
+    .sop-section ul {
+      margin: 12px 0 12px 20px;
+    }
+
+    .sop-section li {
+      font-size: 14px;
+      color: #4a5568;
+      line-height: 1.8;
+      margin-bottom: 8px;
+    }
+
+    .highlight-diff {
+      background: #fef5e7;
+      padding: 2px 6px;
+      border-radius: 3px;
+      border-left: 3px solid #f59e0b;
+    }
+
+    .highlight-added {
+      background: #d1fae5;
+      padding: 2px 6px;
+      border-radius: 3px;
+      border-left: 3px solid #10b981;
+    }
+
+    .highlight-removed {
+      background: #fee2e2;
+      padding: 2px 6px;
+      border-radius: 3px;
+      border-left: 3px solid #ef4444;
+      text-decoration: line-through;
+      opacity: 0.7;
+    }
+
+    .stats-summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: #f7fafc;
+      padding: 16px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .stat-card .value {
+      font-size: 28px;
+      font-weight: 700;
+      color: #2d3748;
+      margin-bottom: 4px;
+    }
+
+    .stat-card .label {
+      font-size: 12px;
+      color: #718096;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 100px 30px;
+      color: #a0aec0;
+    }
+
+    .empty-state-icon {
+      font-size: 64px;
+      margin-bottom: 20px;
+    }
+
+    .empty-state h3 {
+      font-size: 20px;
+      color: #4a5568;
+      margin-bottom: 8px;
+    }
+
+    .empty-state p {
+      font-size: 14px;
+    }
+
+    @media (max-width: 1200px) {
+      .view-header, .view-content {
+        grid-template-columns: 1fr;
+      }
+
+      .comparison-controls {
+        flex-direction: column;
+      }
+
+      .control-group {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1>⚖️ Compare SOPs</h1>
+
+      <!-- Comparison Controls -->
+      <div class="comparison-controls">
+        <div class="control-group">
+          <label>SOP 1 (Left)</label>
+          <select id="sop1Select" onchange="loadComparison()">
+            <option value="">Select SOP...</option>
+            <option value="sop-mf-001">SOP-MF-001: Conventional Loan Processing</option>
+            <option value="sop-mf-002" selected>SOP-MF-002: AUS Processing</option>
+            <option value="sop-mf-003">SOP-MF-003: FHA Underwriting Standards</option>
+            <option value="sop-mf-004">SOP-MF-004: Clear to Close Verification</option>
+            <option value="sop-mf-005">SOP-MF-005: Wire Transfer Security</option>
+            <option value="sop-mf-008">SOP-MF-008: Income Documentation</option>
+            <option value="sop-mf-010">SOP-MF-010: TRID Compliance</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label>SOP 2 (Right)</label>
+          <select id="sop2Select" onchange="loadComparison()">
+            <option value="">Select SOP...</option>
+            <option value="sop-mf-001">SOP-MF-001: Conventional Loan Processing</option>
+            <option value="sop-mf-002">SOP-MF-002: AUS Processing</option>
+            <option value="sop-mf-003" selected>SOP-MF-003: FHA Underwriting Standards</option>
+            <option value="sop-mf-004">SOP-MF-004: Clear to Close Verification</option>
+            <option value="sop-mf-005">SOP-MF-005: Wire Transfer Security</option>
+            <option value="sop-mf-008">SOP-MF-008: Income Documentation</option>
+            <option value="sop-mf-010">SOP-MF-010: TRID Compliance</option>
+          </select>
+        </div>
+
+        <div class="control-actions">
+          <button class="btn btn-primary" onclick="loadComparison()">
+            ⚖️ Compare
+          </button>
+          <button class="btn btn-secondary" onclick="exportComparison()">
+            📊 Export
+          </button>
+          <button class="btn btn-secondary" onclick="swapSOPs()">
+            🔄 Swap
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comparison Mode Selector -->
+    <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px;">
+      <div class="comparison-mode">
+        <button class="mode-btn active" onclick="switchMode('side-by-side')">
+          📄 Side-by-Side
+        </button>
+        <button class="mode-btn" onclick="switchMode('version-compare')">
+          🕐 Version Compare
+        </button>
+        <button class="mode-btn" onclick="switchMode('metadata-only')">
+          📊 Metadata Only
+        </button>
+      </div>
+
+      <div class="comparison-options">
+        <div class="option-checkbox">
+          <input type="checkbox" id="syncScroll" checked onchange="toggleSyncScroll()">
+          <label for="syncScroll">Synchronized Scrolling</label>
+        </div>
+        <div class="option-checkbox">
+          <input type="checkbox" id="highlightDiff" checked onchange="loadComparison()">
+          <label for="highlightDiff">Highlight Differences</label>
+        </div>
+        <div class="option-checkbox">
+          <input type="checkbox" id="showMetadata" checked onchange="loadComparison()">
+          <label for="showMetadata">Show Metadata Comparison</label>
+        </div>
+        <div class="option-checkbox">
+          <input type="checkbox" id="showStats" checked onchange="loadComparison()">
+          <label for="showStats">Show Statistics</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comparison View -->
+    <div class="comparison-view" id="comparisonView">
+      <div class="empty-state">
+        <div class="empty-state-icon">⚖️</div>
+        <h3>Select Two SOPs to Compare</h3>
+        <p>Use the dropdowns above to choose SOPs for side-by-side comparison</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentMode = 'side-by-side';
+    let syncScrollEnabled = true;
+
+    // Mock SOP data
+    const sopData = {
+      'sop-mf-002': {
+        id: 'sop-mf-002',
+        title: 'Automated Underwriting System (AUS) Processing',
+        version: '3.1.5',
+        status: 'active',
+        owner: 'Underwriting Department',
+        category: 'Underwriting',
+        lastReviewed: '2025-10-28',
+        approver: 'Michael Chen',
+        sections: {
+          overview: {
+            title: 'Overview',
+            content: 'This SOP defines the standardized process for submitting loan files to Automated Underwriting Systems (AUS), interpreting findings, and managing underwriting conditions for conventional conforming loans.'
+          },
+          prerequisites: {
+            title: 'Prerequisites',
+            content: 'Before submitting to AUS, verify: Complete 1003 Application, Income documentation (W2s, paystubs, tax returns), Asset documentation, Credit report (merged tri-bureau, <90 days old), Appraisal or property valuation'
+          },
+          procedure: {
+            title: 'Procedure Steps',
+            content: 'Step 1: Pre-Submission File Review. Step 2: Desktop Underwriter (DU) Submission. Step 3: Loan Product Advisor (LPA) Submission. Step 4: Interpret AUS Findings. Step 5: Document AUS Results. Step 6: AUS Resubmission Protocol. Step 7: Condition Management.'
+          }
+        },
+        stats: {
+          wordCount: 4523,
+          sectionCount: 7,
+          dependencies: 6,
+          avgUse: 1243
+        }
+      },
+      'sop-mf-003': {
+        id: 'sop-mf-003',
+        title: 'FHA Underwriting Standards and Guidelines',
+        version: '2.4.1',
+        status: 'active',
+        owner: 'Underwriting Department',
+        category: 'Underwriting',
+        lastReviewed: '2025-09-15',
+        approver: 'Michael Chen',
+        sections: {
+          overview: {
+            title: 'Overview',
+            content: 'This SOP establishes comprehensive guidelines for underwriting Federal Housing Administration (FHA) insured mortgage loans. FHA loans offer flexible qualification standards with minimum down payment of 3.5%.'
+          },
+          prerequisites: {
+            title: 'Prerequisites',
+            content: 'Before processing FHA loan, verify: FHA case number assigned via FHA Connection, Borrower meets minimum credit score (580 for 3.5% down, 500-579 for 10% down), Property meets HUD minimum property standards, Approved FHA lender credentials'
+          },
+          procedure: {
+            title: 'Procedure Steps',
+            content: 'Step 1: FHA Case Number Assignment. Step 2: Credit and Income Qualification. Step 3: Property Eligibility and Appraisal. Step 4: Underwriting Decision. Step 5: Mortgage Insurance Premium (MIP) Calculation. Step 6: FHA Endorsement Process.'
+          }
+        },
+        stats: {
+          wordCount: 3876,
+          sectionCount: 6,
+          dependencies: 5,
+          avgUse: 892
+        }
+      },
+      'sop-mf-001': {
+        id: 'sop-mf-001',
+        title: 'Conventional Loan Processing Workflow',
+        version: '4.2.0',
+        status: 'active',
+        owner: 'Processing Department',
+        category: 'Loan Origination',
+        lastReviewed: '2025-11-01',
+        approver: 'Sarah Johnson',
+        sections: {
+          overview: {
+            title: 'Overview',
+            content: 'Standardized end-to-end workflow for processing conventional conforming mortgage loans from initial application through final closing.'
+          },
+          prerequisites: {
+            title: 'Prerequisites',
+            content: 'Complete loan application (1003), Initial disclosures delivered within 3 days, Credit authorization signed, Property address confirmed, Loan purpose and amount verified'
+          },
+          procedure: {
+            title: 'Procedure Steps',
+            content: 'Step 1: Initial Application Review. Step 2: Documentation Collection. Step 3: Credit and Income Verification. Step 4: Appraisal Order. Step 5: Underwriting Submission. Step 6: Condition Clearance. Step 7: Clear to Close.'
+          }
+        },
+        stats: {
+          wordCount: 5234,
+          sectionCount: 7,
+          dependencies: 8,
+          avgUse: 847
+        }
+      }
+    };
+
+    function switchMode(mode) {
+      currentMode = mode;
+
+      // Update button states
+      document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      // Reload comparison with new mode
+      loadComparison();
+    }
+
+    function swapSOPs() {
+      const sop1 = document.getElementById('sop1Select');
+      const sop2 = document.getElementById('sop2Select');
+
+      const temp = sop1.value;
+      sop1.value = sop2.value;
+      sop2.value = temp;
+
+      loadComparison();
+    }
+
+    function toggleSyncScroll() {
+      syncScrollEnabled = document.getElementById('syncScroll').checked;
+
+      if (syncScrollEnabled) {
+        setupSyncScroll();
+      } else {
+        removeSyncScroll();
+      }
+    }
+
+    function setupSyncScroll() {
+      const columns = document.querySelectorAll('.column-content');
+      let isScrolling = false;
+
+      columns.forEach((column, index) => {
+        column.addEventListener('scroll', function() {
+          if (!isScrolling && syncScrollEnabled) {
+            isScrolling = true;
+
+            columns.forEach((otherColumn, otherIndex) => {
+              if (otherIndex !== index) {
+                otherColumn.scrollTop = this.scrollTop;
+              }
+            });
+
+            setTimeout(() => {
+              isScrolling = false;
+            }, 50);
+          }
+        });
+      });
+    }
+
+    function removeSyncScroll() {
+      const columns = document.querySelectorAll('.column-content');
+      columns.forEach(column => {
+        column.replaceWith(column.cloneNode(true));
+      });
+    }
+
+    function loadComparison() {
+      const sop1Id = document.getElementById('sop1Select').value;
+      const sop2Id = document.getElementById('sop2Select').value;
+
+      if (!sop1Id || !sop2Id) {
+        showEmptyState();
+        return;
+      }
+
+      const sop1 = sopData[sop1Id];
+      const sop2 = sopData[sop2Id];
+
+      if (!sop1 || !sop2) {
+        showEmptyState();
+        return;
+      }
+
+      const showMetadata = document.getElementById('showMetadata').checked;
+      const showStats = document.getElementById('showStats').checked;
+      const highlightDiff = document.getElementById('highlightDiff').checked;
+
+      if (currentMode === 'metadata-only') {
+        renderMetadataOnly(sop1, sop2);
+      } else if (currentMode === 'version-compare') {
+        renderVersionCompare(sop1, sop2, showMetadata, showStats, highlightDiff);
+      } else {
+        renderSideBySide(sop1, sop2, showMetadata, showStats, highlightDiff);
+      }
+
+      // Setup sync scroll if enabled
+      if (syncScrollEnabled) {
+        setTimeout(setupSyncScroll, 100);
+      }
+    }
+
+    function renderSideBySide(sop1, sop2, showMetadata, showStats, highlightDiff) {
+      const view = document.getElementById('comparisonView');
+
+      view.style.setProperty('--columns', '2');
+
+      let html = `
+        <div class="view-header">
+          <div class="column-header">
+            <h2>${sop1.title}</h2>
+            <div class="version">v${sop1.version}</div>
+            <div class="meta">${sop1.category} • ${sop1.owner}</div>
+          </div>
+          <div class="column-header">
+            <h2>${sop2.title}</h2>
+            <div class="version">v${sop2.version}</div>
+            <div class="meta">${sop2.category} • ${sop2.owner}</div>
+          </div>
+        </div>
+        <div class="view-content">
+          <div class="column-content">
+            ${renderSOPContent(sop1, showMetadata, showStats, highlightDiff, sop2)}
+          </div>
+          <div class="column-content">
+            ${renderSOPContent(sop2, showMetadata, showStats, highlightDiff, sop1)}
+          </div>
+        </div>
+      `;
+
+      view.innerHTML = html;
+    }
+
+    function renderVersionCompare(sop1, sop2, showMetadata, showStats, highlightDiff) {
+      // For demo: treat as different versions of same SOP
+      renderSideBySide(sop1, sop2, showMetadata, showStats, true);
+    }
+
+    function renderMetadataOnly(sop1, sop2) {
+      const view = document.getElementById('comparisonView');
+
+      view.style.setProperty('--columns', '1');
+
+      const metadata = [
+        { field: 'SOP ID', val1: sop1.id, val2: sop2.id },
+        { field: 'Title', val1: sop1.title, val2: sop2.title },
+        { field: 'Version', val1: sop1.version, val2: sop2.version },
+        { field: 'Status', val1: sop1.status, val2: sop2.status },
+        { field: 'Owner', val1: sop1.owner, val2: sop2.owner },
+        { field: 'Category', val1: sop1.category, val2: sop2.category },
+        { field: 'Last Reviewed', val1: sop1.lastReviewed, val2: sop2.lastReviewed },
+        { field: 'Approver', val1: sop1.approver, val2: sop2.approver },
+        { field: 'Word Count', val1: sop1.stats.wordCount, val2: sop2.stats.wordCount },
+        { field: 'Sections', val1: sop1.stats.sectionCount, val2: sop2.stats.sectionCount },
+        { field: 'Dependencies', val1: sop1.stats.dependencies, val2: sop2.stats.dependencies },
+        { field: 'Avg Uses/Month', val1: sop1.stats.avgUse, val2: sop2.stats.avgUse }
+      ];
+
+      let html = `
+        <div style="padding: 30px;">
+          <h2 style="font-size: 22px; color: #2d3748; margin-bottom: 24px; display: flex; align-items: center; gap: 10px;">
+            📊 Metadata Comparison
+          </h2>
+
+          <div class="metadata-comparison">
+            <table>
+              <thead>
+                <tr>
+                  <th>Field</th>
+                  <th>${sop1.id}</th>
+                  <th>${sop2.id}</th>
+                  <th>Match</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${metadata.map(row => {
+                  const match = String(row.val1) === String(row.val2);
+                  return `
+                    <tr>
+                      <td><strong>${row.field}</strong></td>
+                      <td>${row.val1}</td>
+                      <td>${row.val2}</td>
+                      <td>
+                        <span class="diff-indicator ${match ? 'same' : 'different'}"></span>
+                        ${match ? 'Same' : 'Different'}
+                      </td>
+                    </tr>
+                  `;
+                }).join('')}
+              </tbody>
+            </table>
+          </div>
+
+          <div class="stats-summary" style="margin-top: 30px;">
+            <div class="stat-card">
+              <div class="value">${metadata.filter(r => String(r.val1) === String(r.val2)).length}/${metadata.length}</div>
+              <div class="label">Matching Fields</div>
+            </div>
+            <div class="stat-card">
+              <div class="value">${Math.abs(sop1.stats.wordCount - sop2.stats.wordCount)}</div>
+              <div class="label">Word Count Diff</div>
+            </div>
+            <div class="stat-card">
+              <div class="value">${Math.abs(sop1.stats.dependencies - sop2.stats.dependencies)}</div>
+              <div class="label">Dependency Diff</div>
+            </div>
+            <div class="stat-card">
+              <div class="value">${Math.round(Math.abs(sop1.stats.avgUse - sop2.stats.avgUse) / Math.max(sop1.stats.avgUse, sop2.stats.avgUse) * 100)}%</div>
+              <div class="label">Usage Variance</div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      view.innerHTML = html;
+    }
+
+    function renderSOPContent(sop, showMetadata, showStats, highlightDiff, compareSOP) {
+      let html = '';
+
+      // Stats summary
+      if (showStats) {
+        html += `
+          <div class="stats-summary">
+            <div class="stat-card">
+              <div class="value">${sop.stats.wordCount.toLocaleString()}</div>
+              <div class="label">Words</div>
+            </div>
+            <div class="stat-card">
+              <div class="value">${sop.stats.sectionCount}</div>
+              <div class="label">Sections</div>
+            </div>
+            <div class="stat-card">
+              <div class="value">${sop.stats.dependencies}</div>
+              <div class="label">Dependencies</div>
+            </div>
+            <div class="stat-card">
+              <div class="value">${sop.stats.avgUse}</div>
+              <div class="label">Uses/Month</div>
+            </div>
+          </div>
+        `;
+      }
+
+      // Metadata comparison
+      if (showMetadata && compareSOP) {
+        html += `
+          <div class="metadata-comparison">
+            <table>
+              <tr>
+                <th>Version</th>
+                <td>${sop.version} ${sop.version !== compareSOP.version ? '<span class="highlight-diff">⚠️</span>' : ''}</td>
+              </tr>
+              <tr>
+                <th>Status</th>
+                <td>${sop.status}</td>
+              </tr>
+              <tr>
+                <th>Owner</th>
+                <td>${sop.owner} ${sop.owner !== compareSOP.owner ? '<span class="highlight-diff">⚠️</span>' : ''}</td>
+              </tr>
+              <tr>
+                <th>Last Reviewed</th>
+                <td>${sop.lastReviewed} ${sop.lastReviewed !== compareSOP.lastReviewed ? '<span class="highlight-diff">⚠️</span>' : ''}</td>
+              </tr>
+              <tr>
+                <th>Approver</th>
+                <td>${sop.approver} ${sop.approver !== compareSOP.approver ? '<span class="highlight-diff">⚠️</span>' : ''}</td>
+              </tr>
+            </table>
+          </div>
+        `;
+      }
+
+      // Section content
+      Object.values(sop.sections).forEach(section => {
+        html += `
+          <div class="sop-section">
+            <h3>${section.title}</h3>
+            <p>${highlightDiff ? highlightDifferences(section.content, compareSOP) : section.content}</p>
+          </div>
+        `;
+      });
+
+      return html;
+    }
+
+    function highlightDifferences(content, compareSOP) {
+      // Mock highlighting - in production, use proper diff algorithm
+      // For demo, highlight key differences based on keywords
+
+      if (!compareSOP) return content;
+
+      // Simulate finding differences
+      if (content.includes('FHA') && !compareSOP.title.includes('FHA')) {
+        content = content.replace(/FHA/g, '<span class="highlight-diff">FHA</span>');
+      }
+
+      if (content.includes('3.5%')) {
+        content = content.replace(/3\.5%/g, '<span class="highlight-added">3.5%</span>');
+      }
+
+      if (content.includes('Desktop Underwriter') && compareSOP.title.includes('FHA')) {
+        content = content.replace(/Desktop Underwriter/g, '<span class="highlight-diff">Desktop Underwriter</span>');
+      }
+
+      return content;
+    }
+
+    function showEmptyState() {
+      const view = document.getElementById('comparisonView');
+      view.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-state-icon">⚖️</div>
+          <h3>Select Two SOPs to Compare</h3>
+          <p>Use the dropdowns above to choose SOPs for side-by-side comparison</p>
+        </div>
+      `;
+    }
+
+    function exportComparison() {
+      const sop1Id = document.getElementById('sop1Select').value;
+      const sop2Id = document.getElementById('sop2Select').value;
+
+      if (!sop1Id || !sop2Id) {
+        alert('Please select two SOPs to export comparison');
+        return;
+      }
+
+      alert(`📊 Exporting comparison report for ${sop1Id} vs ${sop2Id}...\n\nFormats available:\n• PDF Report\n• Excel Spreadsheet\n• Word Document\n\n(Feature coming soon)`);
+    }
+
+    // Auto-load comparison on page load
+    window.addEventListener('DOMContentLoaded', loadComparison);
+  </script>
+</body>
+</html>
