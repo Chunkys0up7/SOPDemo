@@ -1,0 +1,224 @@
+/**
+ * Pursuit Bank - Brand Design System
+ *
+ * Color Palette:
+ * - Primary Blue: #0052CC
+ * - Primary Gradient: linear-gradient(135deg, #0052CC 0%, #003d99 100%)
+ * - Dark Gray: #1a1a1a
+ * - White: #FFFFFF
+ *
+ * Typography:
+ * - Primary Font: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif
+ * - Weight: 600 (Semibold) for headings
+ * - Style: Clean, modern, professional
+ */
+
+:root {
+  /* Pursuit Brand Colors */
+  --pursuit-primary: #0052CC;
+  --pursuit-primary-dark: #003d99;
+  --pursuit-primary-light: #0066FF;
+  --pursuit-dark-gray: #1a1a1a;
+  --pursuit-light-gray: #f0f0f0;
+  --pursuit-border: #e0e0e0;
+
+  /* Semantic Colors */
+  --pursuit-success: #48bb78;
+  --pursuit-warning: #f59e0b;
+  --pursuit-error: #ef4444;
+  --pursuit-info: #3b82f6;
+
+  /* Text Colors */
+  --pursuit-text-primary: #1a1a1a;
+  --pursuit-text-secondary: #666666;
+  --pursuit-text-light: #999999;
+
+  /* Background Colors */
+  --pursuit-bg-primary: #FFFFFF;
+  --pursuit-bg-secondary: #f5f5f5;
+  --pursuit-bg-tertiary: #f0f0f0;
+
+  /* Gradients */
+  --pursuit-gradient-primary: linear-gradient(135deg, #0052CC 0%, #003d99 100%);
+  --pursuit-gradient-light: linear-gradient(135deg, #0066FF 0%, #0052CC 100%);
+
+  /* Shadows */
+  --pursuit-shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+  --pursuit-shadow-md: 0 2px 8px rgba(0,0,0,0.1);
+  --pursuit-shadow-lg: 0 4px 12px rgba(0,0,0,0.15);
+  --pursuit-shadow-xl: 0 8px 24px rgba(0,0,0,0.2);
+
+  /* Border Radius */
+  --pursuit-radius-sm: 4px;
+  --pursuit-radius-md: 6px;
+  --pursuit-radius-lg: 8px;
+  --pursuit-radius-xl: 12px;
+
+  /* Spacing */
+  --pursuit-space-xs: 4px;
+  --pursuit-space-sm: 8px;
+  --pursuit-space-md: 16px;
+  --pursuit-space-lg: 24px;
+  --pursuit-space-xl: 32px;
+  --pursuit-space-2xl: 48px;
+
+  /* Typography */
+  --pursuit-font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  --pursuit-font-weight-normal: 400;
+  --pursuit-font-weight-medium: 500;
+  --pursuit-font-weight-semibold: 600;
+  --pursuit-font-weight-bold: 700;
+}
+
+/* Global Typography */
+body {
+  font-family: var(--pursuit-font-family);
+  color: var(--pursuit-text-primary);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--pursuit-font-weight-semibold);
+  letter-spacing: -0.5px;
+  color: var(--pursuit-text-primary);
+}
+
+/* Pursuit Brand Components */
+
+.pursuit-btn {
+  font-family: var(--pursuit-font-family);
+  font-weight: var(--pursuit-font-weight-semibold);
+  border-radius: var(--pursuit-radius-md);
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pursuit-btn-primary {
+  background: var(--pursuit-primary);
+  color: white;
+  padding: 12px 24px;
+}
+
+.pursuit-btn-primary:hover {
+  background: var(--pursuit-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--pursuit-shadow-md);
+}
+
+.pursuit-btn-secondary {
+  background: white;
+  color: var(--pursuit-primary);
+  border: 2px solid var(--pursuit-primary);
+  padding: 10px 22px;
+}
+
+.pursuit-btn-secondary:hover {
+  background: var(--pursuit-light-gray);
+}
+
+.pursuit-card {
+  background: white;
+  border-radius: var(--pursuit-radius-lg);
+  box-shadow: var(--pursuit-shadow-md);
+  padding: var(--pursuit-space-lg);
+  border: 1px solid var(--pursuit-border);
+}
+
+.pursuit-card:hover {
+  box-shadow: var(--pursuit-shadow-lg);
+}
+
+.pursuit-gradient-bg {
+  background: var(--pursuit-gradient-primary);
+}
+
+.pursuit-gradient-text {
+  background: var(--pursuit-gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Logo Variants */
+.pursuit-logo-mark {
+  width: 100px;
+  height: 100px;
+}
+
+.pursuit-logo-wordmark {
+  font-family: var(--pursuit-font-family);
+  font-size: 36px;
+  font-weight: var(--pursuit-font-weight-semibold);
+  color: var(--pursuit-primary);
+  letter-spacing: -1px;
+}
+
+/* Status Badges */
+.pursuit-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: var(--pursuit-font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.pursuit-badge-success {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.pursuit-badge-warning {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.pursuit-badge-error {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.pursuit-badge-info {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+/* Navigation */
+.pursuit-nav {
+  background: white;
+  border-bottom: 1px solid var(--pursuit-border);
+  box-shadow: var(--pursuit-shadow-sm);
+}
+
+/* Forms */
+.pursuit-input {
+  font-family: var(--pursuit-font-family);
+  padding: 12px 16px;
+  border: 1px solid var(--pursuit-border);
+  border-radius: var(--pursuit-radius-md);
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.pursuit-input:focus {
+  outline: none;
+  border-color: var(--pursuit-primary);
+  box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.1);
+}
+
+/* Utility Classes */
+.pursuit-text-primary { color: var(--pursuit-primary); }
+.pursuit-text-dark { color: var(--pursuit-dark-gray); }
+.pursuit-text-secondary { color: var(--pursuit-text-secondary); }
+
+.pursuit-bg-primary { background: var(--pursuit-primary); }
+.pursuit-bg-light { background: var(--pursuit-light-gray); }
+.pursuit-bg-white { background: white; }
+
+.pursuit-shadow-sm { box-shadow: var(--pursuit-shadow-sm); }
+.pursuit-shadow-md { box-shadow: var(--pursuit-shadow-md); }
+.pursuit-shadow-lg { box-shadow: var(--pursuit-shadow-lg); }
