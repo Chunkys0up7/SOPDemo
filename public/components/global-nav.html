@@ -1,0 +1,480 @@
+<!-- Global Navigation Component -->
+<!-- Include this in all pages with: <script src="/public/components/global-nav.js"></script> -->
+
+<style>
+  :root {
+    --primary-color: #667eea;
+    --primary-dark: #5568d3;
+    --text-dark: #2d3748;
+    --text-light: #718096;
+    --border-color: #e2e8f0;
+    --bg-light: #f7fafc;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f7fafc;
+  }
+
+  .global-nav {
+    background: white;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+
+  .nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    gap: 20px;
+  }
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 0 0 auto;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  .logo:hover {
+    color: var(--primary-color);
+  }
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background: var(--bg-light);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 8px 12px;
+    min-width: 300px;
+    transition: all 0.2s;
+  }
+
+  .search-bar:focus-within {
+    border-color: var(--primary-color);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  }
+
+  .search-bar input {
+    border: none;
+    background: none;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+    color: var(--text-dark);
+  }
+
+  .search-bar input::placeholder {
+    color: var(--text-light);
+  }
+
+  .search-icon {
+    color: var(--text-light);
+    margin-right: 8px;
+  }
+
+  .nav-center {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .nav-link {
+    padding: 8px 16px;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 6px;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .nav-link:hover {
+    background: var(--bg-light);
+    color: var(--primary-color);
+  }
+
+  .nav-link.active {
+    background: var(--bg-light);
+    color: var(--primary-color);
+  }
+
+  .nav-link .badge {
+    position: absolute;
+    top: 2px;
+    right: 4px;
+    background: #f56565;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 10px;
+    min-width: 18px;
+    text-align: center;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 0 0 auto;
+  }
+
+  .btn-new-sop {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn-new-sop:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  }
+
+  .user-menu {
+    position: relative;
+  }
+
+  .user-trigger {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+    border: 1px solid transparent;
+  }
+
+  .user-trigger:hover {
+    background: var(--bg-light);
+  }
+
+  .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .user-name {
+    font-size: 14px;
+    color: var(--text-dark);
+    font-weight: 500;
+  }
+
+  .dropdown-icon {
+    color: var(--text-light);
+    font-size: 12px;
+  }
+
+  .user-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    min-width: 200px;
+    display: none;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.2s;
+  }
+
+  .user-dropdown.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .user-dropdown a {
+    display: block;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-size: 14px;
+    transition: background 0.2s;
+  }
+
+  .user-dropdown a:first-child {
+    border-radius: 8px 8px 0 0;
+  }
+
+  .user-dropdown a:last-child {
+    border-radius: 0 0 8px 8px;
+    border-top: 1px solid var(--border-color);
+    color: #e53e3e;
+  }
+
+  .user-dropdown a:hover {
+    background: var(--bg-light);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .nav-center {
+      display: none;
+    }
+
+    .search-bar {
+      min-width: 200px;
+    }
+
+    .user-name {
+      display: none;
+    }
+  }
+
+  /* Mobile menu toggle */
+  .mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    color: var(--text-dark);
+    font-size: 24px;
+  }
+
+  @media (max-width: 768px) {
+    .mobile-menu-toggle {
+      display: block;
+    }
+  }
+</style>
+
+<nav class="global-nav">
+  <div class="nav-container">
+    <!-- Left Section -->
+    <div class="nav-left">
+      <a href="/" class="logo">
+        <span>🔷</span>
+        <span>SOP Hub</span>
+      </a>
+
+      <div class="search-bar">
+        <span class="search-icon">🔍</span>
+        <input
+          type="search"
+          placeholder="Search SOPs..."
+          id="global-search"
+          autocomplete="off"
+        />
+      </div>
+    </div>
+
+    <!-- Center Section -->
+    <div class="nav-center">
+      <a href="/public/browse.html" class="nav-link">Browse</a>
+      <a href="/public/status-dashboard.html" class="nav-link">My Dashboard</a>
+      <a href="/public/approvals.html" class="nav-link">
+        Approvals
+        <span class="badge">3</span>
+      </a>
+      <a href="/public/templates.html" class="nav-link">Templates</a>
+      <a href="/dist/visualizations/sop-graph.html" class="nav-link">Graph</a>
+    </div>
+
+    <!-- Right Section -->
+    <div class="nav-right">
+      <button class="btn-new-sop" onclick="window.location.href='/public/upload.html'">
+        <span>+</span>
+        <span>New SOP</span>
+      </button>
+
+      <div class="user-menu">
+        <div class="user-trigger" onclick="toggleUserMenu()">
+          <div class="avatar">AS</div>
+          <span class="user-name">Alice Smith</span>
+          <span class="dropdown-icon">▼</span>
+        </div>
+
+        <div class="user-dropdown" id="userDropdown">
+          <a href="/public/profile.html">My Profile</a>
+          <a href="/public/settings.html">Settings</a>
+          <a href="/public/help.html">Help</a>
+          <a href="#" onclick="logout()">Logout</a>
+        </div>
+      </div>
+
+      <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+        ☰
+      </button>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Toggle user dropdown
+  function toggleUserMenu() {
+    const dropdown = document.getElementById('userDropdown');
+    dropdown.classList.toggle('show');
+  }
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', function(event) {
+    const userMenu = document.querySelector('.user-menu');
+    const dropdown = document.getElementById('userDropdown');
+
+    if (userMenu && !userMenu.contains(event.target)) {
+      dropdown.classList.remove('show');
+    }
+  });
+
+  // Search functionality
+  document.getElementById('global-search')?.addEventListener('input', function(e) {
+    const query = e.target.value.toLowerCase();
+
+    if (query.length < 2) return;
+
+    // Mock search results - in production, this would call an API
+    const mockResults = [
+      {id: 'sop-001', title: 'User Onboarding Process', dept: 'HR'},
+      {id: 'sop-002', title: 'IT System Access Provisioning', dept: 'IT'},
+      {id: 'sop-003', title: 'Security Training Completion', dept: 'Security'},
+      {id: 'sop-005', title: 'Comprehensive HR Onboarding', dept: 'HR'},
+      {id: 'sop-007', title: 'Employee Expense Reimbursement', dept: 'Finance'}
+    ];
+
+    const results = mockResults.filter(sop =>
+      sop.title.toLowerCase().includes(query) ||
+      sop.id.toLowerCase().includes(query) ||
+      sop.dept.toLowerCase().includes(query)
+    );
+
+    showSearchResults(results);
+  });
+
+  function showSearchResults(results) {
+    // Remove existing results dropdown
+    const existing = document.querySelector('.search-results');
+    if (existing) existing.remove();
+
+    if (results.length === 0) return;
+
+    // Create results dropdown
+    const dropdown = document.createElement('div');
+    dropdown.className = 'search-results';
+    dropdown.style.cssText = `
+      position: absolute;
+      top: calc(100% + 5px);
+      left: 0;
+      right: 0;
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-height: 300px;
+      overflow-y: auto;
+      z-index: 1001;
+    `;
+
+    results.forEach(result => {
+      const item = document.createElement('a');
+      item.href = `/public/sop-viewer.html?id=${result.id}`;
+      item.style.cssText = `
+        display: block;
+        padding: 12px 16px;
+        text-decoration: none;
+        color: #2d3748;
+        border-bottom: 1px solid #f7fafc;
+        transition: background 0.2s;
+      `;
+      item.innerHTML = `
+        <div style="font-weight: 600; margin-bottom: 4px;">${result.title}</div>
+        <div style="font-size: 12px; color: #718096;">${result.id} • ${result.dept}</div>
+      `;
+      item.addEventListener('mouseenter', () => item.style.background = '#f7fafc');
+      item.addEventListener('mouseleave', () => item.style.background = 'white');
+      dropdown.appendChild(item);
+    });
+
+    // Position relative to search bar
+    const searchBar = document.querySelector('.search-bar');
+    searchBar.style.position = 'relative';
+    searchBar.appendChild(dropdown);
+  }
+
+  // Close search results when clicking outside
+  document.addEventListener('click', function(event) {
+    const searchBar = document.querySelector('.search-bar');
+    const results = document.querySelector('.search-results');
+
+    if (results && searchBar && !searchBar.contains(event.target)) {
+      results.remove();
+    }
+  });
+
+  // Logout function
+  function logout() {
+    if (confirm('Are you sure you want to logout?')) {
+      // In production, this would call logout API
+      window.location.href = '/login.html';
+    }
+  }
+
+  // Mobile menu toggle
+  function toggleMobileMenu() {
+    alert('Mobile menu would open here with all navigation links');
+  }
+
+  // Highlight active page
+  window.addEventListener('DOMContentLoaded', function() {
+    const currentPage = window.location.pathname;
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    navLinks.forEach(link => {
+      if (link.getAttribute('href') === currentPage ||
+          (currentPage.includes(link.getAttribute('href').replace('.html', '')) &&
+           link.getAttribute('href') !== '/')) {
+        link.classList.add('active');
+      }
+    });
+  });
+</script>

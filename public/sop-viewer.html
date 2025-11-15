@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invoice Processing - SOP Viewer</title>
+  <style>
+    :root {
+      --primary-color: #667eea;
+      --primary-dark: #5568d3;
+      --text-dark: #2d3748;
+      --text-light: #718096;
+      --border-color: #e2e8f0;
+      --bg-light: #f7fafc;
+      --success-color: #48bb78;
+      --warning-color: #ed8936;
+      --danger-color: #f56565;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg-light);
+    }
+
+    .page-container {
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      background: white;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    .breadcrumb a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    /* Action Bar */
+    .action-bar {
+      background: white;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 61px;
+      z-index: 100;
+    }
+
+    .action-left {
+      display: flex;
+      gap: 10px;
+    }
+
+    .action-right {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-secondary {
+      background: var(--bg-light);
+      color: var(--text-dark);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: #edf2f7;
+    }
+
+    .btn-primary {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+
+    /* Main Layout */
+    .main-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr 320px;
+      gap: 0;
+      min-height: calc(100vh - 180px);
+    }
+
+    /* TOC Sidebar */
+    .toc-sidebar {
+      background: white;
+      border-right: 1px solid var(--border-color);
+      padding: 24px;
+      position: sticky;
+      top: 125px;
+      height: calc(100vh - 125px);
+      overflow-y: auto;
+    }
+
+    .toc-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .toc-list {
+      list-style: none;
+    }
+
+    .toc-item {
+      margin-bottom: 8px;
+    }
+
+    .toc-link {
+      display: block;
+      padding: 8px 12px;
+      text-decoration: none;
+      color: var(--text-dark);
+      font-size: 14px;
+      border-radius: 6px;
+      transition: all 0.2s;
+      border-left: 3px solid transparent;
+    }
+
+    .toc-link:hover {
+      background: var(--bg-light);
+      border-left-color: var(--primary-color);
+      transform: translateX(3px);
+    }
+
+    .toc-link.active {
+      background: var(--bg-light);
+      color: var(--primary-color);
+      font-weight: 600;
+      border-left-color: var(--primary-color);
+    }
+
+    .toc-subsection {
+      list-style: none;
+      margin-left: 16px;
+      margin-top: 4px;
+    }
+
+    .toc-subsection .toc-link {
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    .quick-actions {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .quick-actions button {
+      width: 100%;
+      margin-bottom: 8px;
+      justify-content: flex-start;
+    }
+
+    /* Main Content */
+    .sop-content {
+      background: white;
+      padding: 40px;
+      max-width: 900px;
+    }
+
+    .sop-header {
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .sop-title {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 16px;
+    }
+
+    .sop-meta-row {
+      display: flex;
+      gap: 24px;
+      font-size: 14px;
+      color: var(--text-light);
+    }
+
+    .sop-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sop-meta-label {
+      font-weight: 600;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .status-active {
+      background: #c6f6d5;
+      color: #22543d;
+    }
+
+    .section {
+      margin-bottom: 40px;
+      scroll-margin-top: 140px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 16px;
+      padding: 12px;
+      margin: -12px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+
+    .section-header:hover {
+      background: var(--bg-light);
+    }
+
+    .section-header:hover .edit-section-btn {
+      opacity: 1;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 16px;
+    }
+
+    .edit-section-btn {
+      opacity: 0;
+      transition: opacity 0.2s;
+      padding: 6px 12px;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .edit-section-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    .section-content {
+      line-height: 1.7;
+      color: var(--text-dark);
+    }
+
+    .section-content p {
+      margin-bottom: 16px;
+    }
+
+    .section-content ul, .section-content ol {
+      margin-bottom: 16px;
+      padding-left: 24px;
+    }
+
+    .section-content li {
+      margin-bottom: 8px;
+    }
+
+    .section-content h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-top: 24px;
+      margin-bottom: 12px;
+    }
+
+    .section-content code {
+      background: var(--bg-light);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-size: 13px;
+    }
+
+    .section-content blockquote {
+      border-left: 4px solid var(--primary-color);
+      padding-left: 16px;
+      margin: 16px 0;
+      color: var(--text-light);
+      font-style: italic;
+    }
+
+    /* Metadata Sidebar */
+    .metadata-sidebar {
+      background: white;
+      border-left: 1px solid var(--border-color);
+      padding: 24px;
+      position: sticky;
+      top: 125px;
+      height: calc(100vh - 125px);
+      overflow-y: auto;
+    }
+
+    .metadata-card {
+      background: var(--bg-light);
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .metadata-card h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .metadata-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid white;
+      font-size: 13px;
+    }
+
+    .metadata-item:last-child {
+      border-bottom: none;
+    }
+
+    .metadata-label {
+      color: var(--text-light);
+      font-weight: 600;
+    }
+
+    .metadata-value {
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+
+    .dependency-list {
+      list-style: none;
+    }
+
+    .dependency-item {
+      padding: 10px;
+      background: white;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      font-size: 13px;
+      border-left: 3px solid var(--primary-color);
+    }
+
+    .dependency-item a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .dependency-item a:hover {
+      text-decoration: underline;
+    }
+
+    .dependency-type {
+      font-size: 11px;
+      color: var(--text-light);
+      display: block;
+      margin-top: 4px;
+    }
+
+    .action-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+      .main-layout {
+        grid-template-columns: 250px 1fr;
+      }
+
+      .metadata-sidebar {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .main-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .toc-sidebar {
+        display: none;
+      }
+
+      .sop-content {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Include global navigation -->
+  <div id="global-nav-container"></div>
+
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <a href="/">Home</a> /
+      <a href="/public/browse.html?dept=finance">Finance</a> /
+      <span>Invoice Processing</span>
+    </div>
+
+    <!-- Action Bar -->
+    <div class="action-bar">
+      <div class="action-left">
+        <button class="btn btn-secondary" onclick="window.history.back()">
+          <span>←</span>
+          <span>Back</span>
+        </button>
+        <button class="btn btn-secondary">
+          <span>⭐</span>
+          <span>Bookmark</span>
+        </button>
+        <button class="btn btn-secondary">
+          <span>👁️</span>
+          <span>Watch</span>
+        </button>
+      </div>
+
+      <div class="action-right">
+        <button class="btn btn-primary" onclick="enterEditMode()">
+          <span>✏️</span>
+          <span>Edit SOP</span>
+        </button>
+        <button class="btn btn-secondary" onclick="showMoreActions()">
+          <span>⋮</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Layout -->
+    <div class="main-layout">
+      <!-- TOC Sidebar -->
+      <aside class="toc-sidebar">
+        <h3 class="toc-title">Table of Contents</h3>
+        <ul class="toc-list">
+          <li class="toc-item">
+            <a href="#overview" class="toc-link active">Overview</a>
+          </li>
+          <li class="toc-item">
+            <a href="#prerequisites" class="toc-link">Prerequisites</a>
+          </li>
+          <li class="toc-item">
+            <a href="#procedure" class="toc-link">Procedure Steps</a>
+            <ul class="toc-subsection">
+              <li class="toc-item"><a href="#step-1" class="toc-link">Step 1: Receive Invoice</a></li>
+              <li class="toc-item"><a href="#step-2" class="toc-link">Step 2: Verify Details</a></li>
+              <li class="toc-item"><a href="#step-3" class="toc-link">Step 3: Get Approval</a></li>
+              <li class="toc-item"><a href="#step-4" class="toc-link">Step 4: Process Payment</a></li>
+            </ul>
+          </li>
+          <li class="toc-item">
+            <a href="#quality-checks" class="toc-link">Quality Checks</a>
+          </li>
+          <li class="toc-item">
+            <a href="#troubleshooting" class="toc-link">Troubleshooting</a>
+          </li>
+          <li class="toc-item">
+            <a href="#references" class="toc-link">References</a>
+          </li>
+        </ul>
+
+        <div class="quick-actions">
+          <button class="btn btn-secondary" onclick="showDependencies()">
+            <span>🔗</span>
+            <span>View Dependencies</span>
+          </button>
+          <button class="btn btn-secondary" onclick="showVersionHistory()">
+            <span>📜</span>
+            <span>Version History</span>
+          </button>
+          <button class="btn btn-secondary" onclick="showComments()">
+            <span>💬</span>
+            <span>Comments (5)</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="sop-content">
+        <!-- SOP Header -->
+        <div class="sop-header">
+          <h1 class="sop-title">Invoice Processing Procedure</h1>
+          <div class="sop-meta-row">
+            <div class="sop-meta-item">
+              <span class="sop-meta-label">ID:</span>
+              <span>SOP-001</span>
+            </div>
+            <div class="sop-meta-item">
+              <span class="sop-meta-label">Version:</span>
+              <span>1.2.0</span>
+            </div>
+            <div class="sop-meta-item">
+              <span class="sop-meta-label">Owner:</span>
+              <span>Finance Department</span>
+            </div>
+            <div class="sop-meta-item">
+              <span class="sop-meta-label">Status:</span>
+              <span class="status-badge status-active">Active</span>
+            </div>
+            <div class="sop-meta-item">
+              <span class="sop-meta-label">Last Updated:</span>
+              <span>2025-11-01</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section: Overview -->
+        <section class="section" id="overview">
+          <div class="section-header">
+            <h2 class="section-title">Overview</h2>
+            <button class="edit-section-btn" onclick="editSection('overview')">
+              ✏️ Edit Section
+            </button>
+          </div>
+          <div class="section-content">
+            <p>This Standard Operating Procedure (SOP) defines the process for receiving, verifying, approving, and processing invoices for payment. This procedure ensures timely and accurate payment to vendors while maintaining proper financial controls and compliance with company policies.</p>
+
+            <p><strong>Purpose:</strong> To establish a standardized process for invoice handling that minimizes errors, prevents fraud, and ensures compliance with accounting standards and SOX requirements.</p>
+
+            <p><strong>Scope:</strong> This procedure applies to all invoices received by the Finance Department from external vendors for goods and services.</p>
+          </div>
+        </section>
+
+        <!-- Section: Prerequisites -->
+        <section class="section" id="prerequisites">
+          <div class="section-header">
+            <h2 class="section-title">Prerequisites</h2>
+            <button class="edit-section-btn" onclick="editSection('prerequisites')">
+              ✏️ Edit Section
+            </button>
+          </div>
+          <div class="section-content">
+            <p>Before processing invoices, ensure the following requirements are met:</p>
+
+            <ul>
+              <li><strong>System Access:</strong> Workday Finance Module and SAP vendor database access. See <a href="/public/sop-viewer.html?id=sop-002">SOP-002: IT System Access</a> for access provisioning.</li>
+              <li><strong>Training:</strong> Completion of Finance Fundamentals and SOX Compliance training. See <a href="/public/sop-viewer.html?id=sop-003">SOP-003: Security Training</a>.</li>
+              <li><strong>Approver Authority:</strong> Ensure you have the appropriate approval authority level for invoice amounts you'll be processing.</li>
+              <li><strong>Vendor Setup:</strong> Vendor must be registered in the system with current W-9 and banking information.</li>
+            </ul>
+
+            <blockquote>
+              <strong>Note:</strong> Invoices from unregistered vendors must be routed to the Vendor Setup team before processing. Allow 2-3 business days for vendor registration.
+            </blockquote>
+          </div>
+        </section>
+
+        <!-- Section: Procedure Steps -->
+        <section class="section" id="procedure">
+          <div class="section-header">
+            <h2 class="section-title">Procedure Steps</h2>
+            <button class="edit-section-btn" onclick="editSection('procedure')">
+              ✏️ Edit Section
+            </button>
+          </div>
+          <div class="section-content">
+            <h3 id="step-1">Step 1: Receive Invoice</h3>
+            <ol>
+              <li>Invoices are received via:
+                <ul>
+                  <li>Email: <code>ap@company.com</code></li>
+                  <li>Mail: Finance Department, Building A</li>
+                  <li>Vendor Portal: Submit directly to Workday</li>
+                </ul>
+              </li>
+              <li>Log invoice into Workday within 24 hours of receipt</li>
+              <li>Scan paper invoices and attach to Workday record</li>
+              <li>Verify invoice includes:
+                <ul>
+                  <li>Vendor name and address</li>
+                  <li>Invoice number and date</li>
+                  <li>Purchase order number (if applicable)</li>
+                  <li>Itemized list of goods/services</li>
+                  <li>Total amount due</li>
+                  <li>Payment terms</li>
+                </ul>
+              </li>
+            </ol>
+
+            <h3 id="step-2">Step 2: Verify Invoice Details</h3>
+            <ol>
+              <li>Match invoice to purchase order (PO) in SAP
+                <ul>
+                  <li>Verify quantities match PO</li>
+                  <li>Verify unit prices match PO</li>
+                  <li>Check for any unauthorized additions</li>
+                </ul>
+              </li>
+              <li>For non-PO invoices (under $5,000):
+                <ul>
+                  <li>Verify budget approval in email/documentation</li>
+                  <li>Confirm department manager pre-authorization</li>
+                </ul>
+              </li>
+              <li>Check for calculation errors and correct totals</li>
+              <li>Verify tax calculations are correct for jurisdiction</li>
+            </ol>
+
+            <h3 id="step-3">Step 3: Obtain Approval</h3>
+            <ol>
+              <li>Route invoice for approval based on amount:
+                <ul>
+                  <li><strong>$0 - $5,000:</strong> Department Manager</li>
+                  <li><strong>$5,001 - $25,000:</strong> Department Manager + Finance Manager</li>
+                  <li><strong>$25,001 - $100,000:</strong> Department Manager + Finance Manager + Controller</li>
+                  <li><strong>Over $100,000:</strong> Department Manager + Finance Manager + Controller + CFO</li>
+                </ul>
+              </li>
+              <li>Send approval request via Workday workflow</li>
+              <li>SLA for approval: 3 business days per approver</li>
+              <li>If rejected, work with vendor to resolve discrepancies</li>
+            </ol>
+
+            <h3 id="step-4">Step 4: Process Payment</h3>
+            <ol>
+              <li>Once fully approved, schedule payment based on terms:
+                <ul>
+                  <li>Net 30: Schedule for day 28-30</li>
+                  <li>Net 45: Schedule for day 43-45</li>
+                  <li>Early payment discount: Schedule to capture discount</li>
+                </ul>
+              </li>
+              <li>Execute payment batch in Workday</li>
+              <li>Send payment confirmation to vendor via email</li>
+              <li>Update SAP records and close invoice</li>
+              <li>Archive invoice documents per retention policy (7 years)</li>
+            </ol>
+          </div>
+        </section>
+
+        <!-- Section: Quality Checks -->
+        <section class="section" id="quality-checks">
+          <div class="section-header">
+            <h2 class="section-title">Quality Checks</h2>
+            <button class="edit-section-btn" onclick="editSection('quality-checks')">
+              ✏️ Edit Section
+            </button>
+          </div>
+          <div class="section-content">
+            <p>Perform the following quality checks before final processing:</p>
+
+            <ul>
+              <li>✓ Invoice number is not a duplicate in the system</li>
+              <li>✓ Vendor is active and in good standing</li>
+              <li>✓ All required approvals are obtained</li>
+              <li>✓ Payment terms are correctly entered</li>
+              <li>✓ GL coding is accurate and approved</li>
+              <li>✓ Supporting documentation is attached</li>
+              <li>✓ Tax treatment is appropriate</li>
+              <li>✓ Payment method matches vendor preference</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Section: Troubleshooting -->
+        <section class="section" id="troubleshooting">
+          <div class="section-header">
+            <h2 class="section-title">Troubleshooting</h2>
+            <button class="edit-section-btn" onclick="editSection('troubleshooting')">
+              ✏️ Edit Section
+            </button>
+          </div>
+          <div class="section-content">
+            <p><strong>Common Issues and Solutions:</strong></p>
+
+            <p><strong>Invoice doesn't match PO:</strong></p>
+            <ul>
+              <li>Contact vendor for corrected invoice</li>
+              <li>If price increase, require new PO approval</li>
+              <li>Document all communications in Workday</li>
+            </ul>
+
+            <p><strong>Duplicate invoice detected:</strong></p>
+            <ul>
+              <li>Contact vendor to verify</li>
+              <li>Check if previous payment was processed</li>
+              <li>Mark duplicate and do not process</li>
+            </ul>
+
+            <p><strong>Missing approver:</strong></p>
+            <ul>
+              <li>Check org chart for current approver</li>
+              <li>If approver out of office, route to backup per delegation matrix</li>
+              <li>Escalate to Finance Manager if unresolved after 5 days</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Section: References -->
+        <section class="section" id="references">
+          <div class="section-header">
+            <h2 class="section-title">References</h2>
+            <button class="edit-section-btn" onclick="editSection('references')">
+              ✏️ Edit Section
+            </button>
+          </div>
+          <div class="section-content">
+            <ul>
+              <li><a href="/public/sop-viewer.html?id=sop-002">SOP-002: IT System Access Provisioning</a></li>
+              <li><a href="/public/sop-viewer.html?id=sop-003">SOP-003: Security Training Completion</a></li>
+              <li><a href="/public/sop-viewer.html?id=sop-004">SOP-004: Equipment Requisition</a> (for approval chain reference)</li>
+              <li><a href="#">Finance Policy Manual - Section 4.2: Accounts Payable</a></li>
+              <li><a href="#">SOX Compliance Guide - Invoice Controls</a></li>
+            </ul>
+          </div>
+        </section>
+      </main>
+
+      <!-- Metadata Sidebar -->
+      <aside class="metadata-sidebar">
+        <div class="metadata-card">
+          <h3>Document Info</h3>
+          <div class="metadata-item">
+            <span class="metadata-label">Created:</span>
+            <span class="metadata-value">2024-01-15</span>
+          </div>
+          <div class="metadata-item">
+            <span class="metadata-label">Last Review:</span>
+            <span class="metadata-value">2025-10-15</span>
+          </div>
+          <div class="metadata-item">
+            <span class="metadata-label">Next Review:</span>
+            <span class="metadata-value">2026-10-15</span>
+          </div>
+          <div class="metadata-item">
+            <span class="metadata-label">Approver:</span>
+            <span class="metadata-value">Jane Smith</span>
+          </div>
+          <div class="metadata-item">
+            <span class="metadata-label">Contributors:</span>
+            <span class="metadata-value">3</span>
+          </div>
+        </div>
+
+        <div class="metadata-card">
+          <h3>Dependencies</h3>
+          <ul class="dependency-list">
+            <li class="dependency-item">
+              <a href="/public/sop-viewer.html?id=sop-002">SOP-002: IT System Access</a>
+              <span class="dependency-type">Depends on (Strong)</span>
+            </li>
+            <li class="dependency-item">
+              <a href="/public/sop-viewer.html?id=sop-003">SOP-003: Security Training</a>
+              <span class="dependency-type">Depends on (Strong)</span>
+            </li>
+          </ul>
+          <div class="action-buttons">
+            <button class="btn btn-secondary" onclick="window.location.href='/public/sop-dependencies.html'">
+              View Full Details →
+            </button>
+          </div>
+        </div>
+
+        <div class="metadata-card">
+          <h3>Usage Stats</h3>
+          <div class="metadata-item">
+            <span class="metadata-label">Views:</span>
+            <span class="metadata-value">1,247</span>
+          </div>
+          <div class="metadata-item">
+            <span class="metadata-label">Bookmarks:</span>
+            <span class="metadata-value">23</span>
+          </div>
+          <div class="metadata-item">
+            <span class="metadata-label">Watchers:</span>
+            <span class="metadata-value">8</span>
+          </div>
+        </div>
+
+        <div class="metadata-card">
+          <h3>Quick Actions</h3>
+          <div class="action-buttons">
+            <button class="btn btn-secondary" onclick="downloadPDF()">
+              📄 Download PDF
+            </button>
+            <button class="btn btn-secondary" onclick="shareSOP()">
+              📤 Share
+            </button>
+            <button class="btn btn-secondary" onclick="printSOP()">
+              🖨️ Print
+            </button>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    // Load global navigation
+    fetch('/public/components/global-nav.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('global-nav-container').innerHTML = html;
+      });
+
+    // TOC scroll spy
+    const sections = document.querySelectorAll('.section');
+    const tocLinks = document.querySelectorAll('.toc-link');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (window.pageYOffset >= sectionTop - 200) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      tocLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Smooth scroll for TOC links
+    tocLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        if (targetSection) {
+          targetSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Edit section
+    function editSection(sectionId) {
+      alert(`Opening editor for section: ${sectionId}\n\nIn production, this would:\n• Load section content into markdown editor\n• Show preview panel\n• Display impact analysis\n• Enable save/cancel actions`);
+      // In production, would transition to edit mode
+    }
+
+    // Enter edit mode
+    function enterEditMode() {
+      alert('Entering edit mode for entire SOP\n\nIn production, this would:\n• Enable inline editing for all sections\n• Show save/cancel actions\n• Enable impact preview\n• Track changes');
+    }
+
+    // Show dependencies
+    function showDependencies() {
+      window.location.href = '/public/sop-dependencies.html';
+    }
+
+    // Show version history
+    function showVersionHistory() {
+      alert('Version History would show:\n\n• v1.2.0 (current) - 2025-11-01\n• v1.1.0 - 2025-08-15\n• v1.0.0 - 2024-01-15\n\nWith diff view comparing versions');
+    }
+
+    // Show comments
+    function showComments() {
+      alert('Comments panel would slide in showing:\n\n• 5 comments from users\n• Inline comment threads\n• Ability to add new comments\n• @mentions for collaboration');
+    }
+
+    // Show more actions
+    function showMoreActions() {
+      alert('More actions:\n\n• Clone as Template\n• Archive SOP\n• Export to different formats\n• View Analytics\n• Assign Reviewers');
+    }
+
+    // Download PDF
+    function downloadPDF() {
+      alert('Generating PDF...\n\nWould create formatted PDF with:\n• Table of contents\n• Page numbers\n• Header/footer\n• Proper formatting');
+    }
+
+    // Share SOP
+    function shareSOP() {
+      alert('Share options:\n\n• Copy link\n• Email to colleagues\n• Generate public link\n• Add to team workspace');
+    }
+
+    // Print SOP
+    function printSOP() {
+      window.print();
+    }
+  </script>
+</body>
+</html>
