@@ -472,10 +472,11 @@ function startServer(port) {
     log('╚═══════════════════════════════════════════════════════════╝\n', 'bright');
 
     log(`🌐 Server:        http://localhost:${port}`, 'green');
-    log(`📊 Dashboard:     http://localhost:${port}/public/dashboard.html`, 'green');
-    log(`🤖 AI Assistant:  http://localhost:${port}/public/sop-assistant.html`, 'green');
-    log(`📋 Templates:     http://localhost:${port}/public/templates.html`, 'green');
-    log(`🔷 Graph:         http://localhost:${port}/dist/visualizations/sop-graph.html\n`, 'green');
+    log(`🏠 Home:          http://localhost:${port}/public/index.html`, 'green');
+    log(`📚 Browse SOPs:   http://localhost:${port}/public/sops.html`, 'green');
+    log(`➕ Contribute:    http://localhost:${port}/public/contribute.html`, 'green');
+    log(`🔍 Search:        http://localhost:${port}/public/search.html`, 'green');
+    log(`📖 Documentation: http://localhost:${port}/public/docs.html\n`, 'green');
 
     log('🔌 API Endpoints:', 'blue');
     log('   POST /api/assistant/query     - RAG-powered SOP queries', 'cyan');
