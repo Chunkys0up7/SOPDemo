@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Workspace - Pursuit Bank SOP Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            color: #1a1a1a;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .logo-lockup {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+        }
+
+        .wordmark {
+            font-size: 20px;
+            font-weight: 600;
+            color: #0052CC;
+        }
+
+        .nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-link {
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #0052CC;
+        }
+
+        /* Main Layout */
+        .main-layout {
+            display: flex;
+            height: calc(100vh - 71px);
+        }
+
+        /* Left Panel - SOP List */
+        .sop-panel {
+            width: 320px;
+            background: white;
+            border-right: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-header {
+            padding: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .panel-header h2 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #0052CC;
+        }
+
+        .sop-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .sop-item {
+            padding: 12px;
+            margin-bottom: 8px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .sop-item:hover {
+            background: #e3f2fd;
+            border-left-color: #0052CC;
+        }
+
+        .sop-item.active {
+            background: #e3f2fd;
+            border-left-color: #0052CC;
+        }
+
+        .sop-item-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .sop-item-meta {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Center Panel - Process Builder */
+        .process-panel {
+            flex: 1;
+            background: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .process-header {
+            padding: 20px 30px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .process-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .process-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: #0052CC;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #003d99;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #666;
+            border: 1px solid #e0e0e0;
+        }
+
+        .btn-secondary:hover {
+            background: #f8f9fa;
+        }
+
+        .process-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 30px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: #999;
+        }
+
+        .empty-state-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .empty-state-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #666;
+        }
+
+        .empty-state-text {
+            font-size: 14px;
+        }
+
+        /* SOP Details */
+        .sop-details {
+            max-width: 900px;
+        }
+
+        .sop-header-section {
+            margin-bottom: 30px;
+        }
+
+        .sop-main-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .sop-metadata {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-active {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .badge-mortgage {
+            background: #e3f2fd;
+            color: #0052CC;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+        }
+
+        .section-content {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .procedure-steps {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+
+        .procedure-steps li {
+            counter-increment: step-counter;
+            padding: 16px;
+            margin-bottom: 12px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            position: relative;
+            padding-left: 60px;
+        }
+
+        .procedure-steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 16px;
+            top: 16px;
+            width: 32px;
+            height: 32px;
+            background: #0052CC;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        /* Dependencies */
+        .dependency-card {
+            padding: 16px;
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            border-radius: 4px;
+            margin-bottom: 12px;
+        }
+
+        .dependency-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #1a1a1a;
+        }
+
+        .dependency-desc {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .component-card {
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            border-left: 3px solid #4caf50;
+        }
+
+        .component-type {
+            font-size: 11px;
+            font-weight: 600;
+            color: #4caf50;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .component-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: #1a1a1a;
+        }
+
+        /* Right Panel - Dependencies */
+        .deps-panel {
+            width: 280px;
+            background: white;
+            border-left: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .deps-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .deps-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+        }
+
+        .dep-item {
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .dep-item:hover {
+            background: #e3f2fd;
+        }
+
+        .dep-item-title {
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 2px;
+        }
+
+        .dep-item-type {
+            font-size: 11px;
+            color: #666;
+        }
+
+        .quick-action {
+            padding: 12px;
+            background: #e3f2fd;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .quick-action:hover {
+            border-color: #0052CC;
+            background: #bbdefb;
+        }
+
+        .quick-action-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #0052CC;
+            margin-bottom: 2px;
+        }
+
+        .quick-action-desc {
+            font-size: 11px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-lockup">
+            <img src="assets/branding/pursuit-logo-primary.svg" alt="Pursuit Bank" class="logo">
+            <div class="wordmark">Pursuit</div>
+        </div>
+        <nav class="nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="workspace.html" class="nav-link active">Workspace</a>
+            <a href="graph.html" class="nav-link">Graph</a>
+            <a href="contribute.html" class="nav-link">Contribute</a>
+        </nav>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="main-layout">
+        <!-- Left Panel: SOP List -->
+        <div class="sop-panel">
+            <div class="panel-header">
+                <h2>SOPs</h2>
+                <input type="text" class="search-box" placeholder="Search SOPs..." id="sop-search">
+            </div>
+            <div class="sop-list" id="sop-list">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Center Panel: Process Builder -->
+        <div class="process-panel">
+            <div class="process-header">
+                <div class="process-title" id="process-title">My Workspace</div>
+                <div class="process-actions">
+                    <button class="btn btn-secondary" id="btn-view-graph">View in Graph</button>
+                    <button class="btn btn-primary" id="btn-generate">Generate Process</button>
+                </div>
+            </div>
+            <div class="process-content" id="process-content">
+                <div class="empty-state">
+                    <div class="empty-state-icon">📋</div>
+                    <div class="empty-state-title">Select an SOP to get started</div>
+                    <div class="empty-state-text">Choose from the list on the left to view details and generate processes</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel: Dependencies & Actions -->
+        <div class="deps-panel">
+            <div class="panel-header">
+                <h2>Quick Actions</h2>
+            </div>
+            <div class="deps-content" id="deps-content">
+                <div class="quick-action" onclick="window.location.href='graph.html'">
+                    <div class="quick-action-title">View Dependency Graph</div>
+                    <div class="quick-action-desc">Visualize SOP relationships</div>
+                </div>
+                <div class="quick-action" onclick="window.location.href='contribute.html'">
+                    <div class="quick-action-title">Create New SOP</div>
+                    <div class="quick-action-desc">Add to the library</div>
+                </div>
+                <div class="quick-action" onclick="window.location.href='search.html'">
+                    <div class="quick-action-title">Semantic Search</div>
+                    <div class="quick-action-desc">Find SOPs by description</div>
+                </div>
+
+                <div class="deps-title" style="margin-top: 20px;">Dependencies</div>
+                <div id="deps-list">
+                    <p style="font-size: 13px; color: #999;">Select an SOP to view dependencies</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const sopDatabase = [
+            {
+                id: 'sop-mf-001',
+                title: 'FHA Underwriting Guidelines',
+                department: 'Mortgage',
+                status: 'active',
+                version: '2.1.0',
+                owner: 'Mortgage Operations',
+                purpose: 'Standardized procedure for underwriting FHA loans to ensure compliance with HUD requirements.',
+                steps: [
+                    'Review borrower credit report and verify minimum credit score of 580 for 3.5% down payment',
+                    'Calculate debt-to-income ratio, ensuring it does not exceed 43%',
+                    'Verify employment history for minimum 2 years continuous employment',
+                    'Order FHA-approved appraisal to determine property value',
+                    'Review and approve all required FHA documentation'
+                ],
+                dependencies: [
+                    { id: 'sop-mf-003', title: 'Credit Report Analysis', type: 'depends-on' },
+                    { id: 'sop-mf-005', title: 'Property Appraisal Review', type: 'depends-on' }
+                ],
+                components: [
+                    { type: 'atom', name: 'Credit Score Verification' },
+                    { type: 'atom', name: 'DTI Calculation Form' },
+                    { type: 'molecule', name: 'Employment Verification Workflow' }
+                ]
+            },
+            {
+                id: 'sop-mf-002',
+                title: 'Conventional Loan Underwriting',
+                department: 'Mortgage',
+                status: 'active',
+                version: '3.0.2',
+                owner: 'Mortgage Operations',
+                purpose: 'Process for underwriting conventional loans following Fannie Mae and Freddie Mac guidelines.',
+                steps: [
+                    'Verify minimum credit score of 620 for conventional loan eligibility',
+                    'Calculate loan-to-value ratio based on down payment and purchase price',
+                    'Review automated underwriting system (DU/LP) findings',
+                    'Verify all income documentation including tax returns and pay stubs',
+                    'Complete final loan approval and generate commitment letter'
+                ],
+                dependencies: [
+                    { id: 'sop-mf-003', title: 'Credit Report Analysis', type: 'depends-on' },
+                    { id: 'sop-mf-004', title: 'Income Verification', type: 'depends-on' }
+                ],
+                components: [
+                    { type: 'atom', name: 'LTV Calculator' },
+                    { type: 'molecule', name: 'AUS Processing Workflow' },
+                    { type: 'organism', name: 'Complete Underwriting Package' }
+                ]
+            },
+            {
+                id: 'sop-mf-006',
+                title: 'Clear to Close Process',
+                department: 'Mortgage',
+                status: 'active',
+                version: '1.5.0',
+                owner: 'Closing Department',
+                purpose: 'Final verification and approval process before loan closing.',
+                steps: [
+                    'Verify all conditions from underwriting approval have been satisfied',
+                    'Review title commitment and ensure clear title',
+                    'Confirm hazard insurance coverage is in place',
+                    'Verify employment one last time (72 hours before closing)',
+                    'Generate final closing disclosure and send to borrower',
+                    'Issue clear to close authorization to closing agent'
+                ],
+                dependencies: [
+                    { id: 'sop-mf-001', title: 'FHA Underwriting Guidelines', type: 'depends-on' },
+                    { id: 'sop-mf-002', title: 'Conventional Loan Underwriting', type: 'depends-on' }
+                ],
+                components: [
+                    { type: 'molecule', name: 'Final Verification Checklist' },
+                    { type: 'molecule', name: 'Title Review Process' }
+                ]
+            },
+            {
+                id: 'sop-comp-001',
+                title: 'AML Transaction Monitoring',
+                department: 'Compliance',
+                status: 'active',
+                version: '2.3.0',
+                owner: 'Compliance Department',
+                purpose: 'Procedures for monitoring and reporting suspicious financial activities.',
+                steps: [
+                    'Review automated alerts from transaction monitoring system',
+                    'Investigate flagged transactions for suspicious patterns',
+                    'Document all findings in case management system',
+                    'Escalate high-risk cases to BSA Officer',
+                    'File SAR (Suspicious Activity Report) if necessary'
+                ],
+                dependencies: [],
+                components: [
+                    { type: 'atom', name: 'Alert Review Form' },
+                    { type: 'molecule', name: 'Investigation Workflow' }
+                ]
+            },
+            {
+                id: 'sop-hr-001',
+                title: 'Employee Onboarding',
+                department: 'HR',
+                status: 'active',
+                version: '1.8.0',
+                owner: 'Human Resources',
+                purpose: 'Complete onboarding process for new employees.',
+                steps: [
+                    'Complete new hire paperwork and I-9 verification',
+                    'Set up employee in payroll and benefits systems',
+                    'Provision IT accounts and equipment',
+                    'Conduct orientation and compliance training',
+                    'Assign mentor and review 90-day goals'
+                ],
+                dependencies: [
+                    { id: 'sop-it-001', title: 'IT Account Provisioning', type: 'depends-on' }
+                ],
+                components: [
+                    { type: 'atom', name: 'I-9 Form' },
+                    { type: 'atom', name: 'Benefits Enrollment Form' },
+                    { type: 'organism', name: 'Complete Onboarding Workflow' }
+                ]
+            }
+        ];
+
+        let currentSOP = null;
+
+        // Populate SOP list
+        function renderSOPList(filter = '') {
+            const listEl = document.getElementById('sop-list');
+            const filtered = sopDatabase.filter(sop =>
+                sop.title.toLowerCase().includes(filter.toLowerCase()) ||
+                sop.department.toLowerCase().includes(filter.toLowerCase())
+            );
+
+            listEl.innerHTML = filtered.map(sop => `
+                <div class="sop-item" onclick="selectSOP('${sop.id}')">
+                    <div class="sop-item-title">${sop.title}</div>
+                    <div class="sop-item-meta">${sop.department} • v${sop.version}</div>
+                </div>
+            `).join('');
+        }
+
+        // Select SOP
+        function selectSOP(id) {
+            currentSOP = sopDatabase.find(sop => sop.id === id);
+            if (!currentSOP) return;
+
+            // Update active state
+            document.querySelectorAll('.sop-item').forEach(item => item.classList.remove('active'));
+            event.target.closest('.sop-item').classList.add('active');
+
+            // Render SOP details
+            renderSOPDetails();
+            renderDependencies();
+        }
+
+        // Render SOP details
+        function renderSOPDetails() {
+            if (!currentSOP) return;
+
+            const contentEl = document.getElementById('process-content');
+            document.getElementById('process-title').textContent = currentSOP.title;
+
+            contentEl.innerHTML = `
+                <div class="sop-details">
+                    <div class="sop-header-section">
+                        <div class="sop-main-title">${currentSOP.title}</div>
+                        <div class="sop-metadata">
+                            <div class="meta-item">
+                                <strong>Status:</strong>
+                                <span class="badge badge-active">${currentSOP.status}</span>
+                            </div>
+                            <div class="meta-item">
+                                <strong>Department:</strong>
+                                <span class="badge badge-mortgage">${currentSOP.department}</span>
+                            </div>
+                            <div class="meta-item">
+                                <strong>Version:</strong> ${currentSOP.version}
+                            </div>
+                            <div class="meta-item">
+                                <strong>Owner:</strong> ${currentSOP.owner}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Purpose</div>
+                        <div class="section-content">${currentSOP.purpose}</div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Procedure</div>
+                        <ol class="procedure-steps">
+                            ${currentSOP.steps.map(step => `<li>${step}</li>`).join('')}
+                        </ol>
+                    </div>
+
+                    ${currentSOP.components.length > 0 ? `
+                    <div class="section">
+                        <div class="section-title">Reusable Components</div>
+                        <div class="component-grid">
+                            ${currentSOP.components.map(comp => `
+                                <div class="component-card">
+                                    <div class="component-type">${comp.type}</div>
+                                    <div class="component-name">${comp.name}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        // Render dependencies
+        function renderDependencies() {
+            if (!currentSOP) return;
+
+            const depsEl = document.getElementById('deps-list');
+
+            if (currentSOP.dependencies.length === 0) {
+                depsEl.innerHTML = '<p style="font-size: 13px; color: #999;">No dependencies</p>';
+                return;
+            }
+
+            depsEl.innerHTML = currentSOP.dependencies.map(dep => `
+                <div class="dep-item" onclick="selectSOPById('${dep.id}')">
+                    <div class="dep-item-title">${dep.title}</div>
+                    <div class="dep-item-type">${dep.type}</div>
+                </div>
+            `).join('');
+        }
+
+        // Select SOP by ID
+        function selectSOPById(id) {
+            const sopItem = document.querySelector(`.sop-item[onclick="selectSOP('${id}')"]`);
+            if (sopItem) {
+                sopItem.click();
+            }
+        }
+
+        // Search
+        document.getElementById('sop-search').addEventListener('input', function(e) {
+            renderSOPList(e.target.value);
+        });
+
+        // View in graph
+        document.getElementById('btn-view-graph').addEventListener('click', function() {
+            if (currentSOP) {
+                window.location.href = 'graph.html';
+            }
+        });
+
+        // Generate process
+        document.getElementById('btn-generate').addEventListener('click', function() {
+            if (!currentSOP) {
+                alert('Please select an SOP first');
+                return;
+            }
+
+            alert(`Process generation for "${currentSOP.title}" will be implemented with AI assistance to create step-by-step workflows based on this SOP.`);
+        });
+
+        // Initialize
+        renderSOPList();
+    </script>
+</body>
+</html>

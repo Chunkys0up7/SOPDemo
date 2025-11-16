@@ -431,10 +431,10 @@
             <div class="wordmark">Pursuit</div>
         </div>
         <nav class="nav">
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="sops.html" class="nav-link">SOPs</a>
+            <a href="index.html" class="nav-link">Dashboard</a>
+            <a href="workspace.html" class="nav-link">Workspace</a>
+            <a href="graph.html" class="nav-link active">Graph</a>
             <a href="contribute.html" class="nav-link">Contribute</a>
-            <a href="docs.html" class="nav-link">Documentation</a>
         </nav>
     </header>
 
@@ -455,8 +455,8 @@
                 <div class="control-group">
                     <label class="control-label">Layout</label>
                     <div class="control-buttons">
-                        <button class="control-btn active" data-layout="cose">Organic</button>
-                        <button class="control-btn" data-layout="breadthfirst">Hierarchical</button>
+                        <button class="control-btn active" data-layout="breadthfirst">Hierarchical</button>
+                        <button class="control-btn" data-layout="cose">Organic</button>
                         <button class="control-btn" data-layout="circle">Circle</button>
                         <button class="control-btn" data-layout="grid">Grid</button>
                     </div>
@@ -611,23 +611,26 @@
                             'background-color': function(ele) {
                                 return colorMap[ele.data('type')] || '#999';
                             },
-                            'label': 'data(label)',
+                            'label': function(ele) {
+                                // Shorter labels for cleaner view
+                                const label = ele.data('label');
+                                return label.length > 20 ? label.substring(0, 18) + '...' : label;
+                            },
                             'color': '#fff',
                             'text-valign': 'center',
                             'text-halign': 'center',
-                            'font-size': '12px',
+                            'font-size': '10px',
                             'font-weight': '600',
                             'width': function(ele) {
-                                return ele.data('type') === 'sop' ? 60 : 40;
+                                return ele.data('type') === 'sop' ? 70 : 50;
                             },
                             'height': function(ele) {
-                                return ele.data('type') === 'sop' ? 60 : 40;
+                                return ele.data('type') === 'sop' ? 70 : 50;
                             },
                             'text-wrap': 'wrap',
-                            'text-max-width': '80px',
-                            'border-width': 3,
-                            'border-color': '#fff',
-                            'box-shadow': '0 4px 8px rgba(0,0,0,0.1)'
+                            'text-max-width': '65px',
+                            'border-width': 2,
+                            'border-color': '#fff'
                         }
                     },
                     {
@@ -686,22 +689,12 @@
                     }
                 ],
                 layout: {
-                    name: 'cose',
-                    idealEdgeLength: 100,
-                    nodeOverlap: 20,
-                    refresh: 20,
+                    name: 'breadthfirst',
+                    directed: true,
+                    spacingFactor: 1.5,
                     fit: true,
-                    padding: 30,
-                    randomize: false,
-                    componentSpacing: 100,
-                    nodeRepulsion: 400000,
-                    edgeElasticity: 100,
-                    nestingFactor: 5,
-                    gravity: 80,
-                    numIter: 1000,
-                    initialTemp: 200,
-                    coolingFactor: 0.95,
-                    minTemp: 1.0
+                    padding: 50,
+                    avoidOverlap: true
                 }
             });
 
@@ -891,15 +884,32 @@
                 document.querySelectorAll('[data-layout]').forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
 
-                // Apply layout
+                // Apply layout with optimized settings
                 const layoutName = this.getAttribute('data-layout');
-                const layout = cy.layout({
+                let layoutOptions = {
                     name: layoutName,
                     fit: true,
-                    padding: 30,
+                    padding: 50,
                     animate: true,
                     animationDuration: 500
-                });
+                };
+
+                // Specific settings for each layout
+                if (layoutName === 'breadthfirst') {
+                    layoutOptions.directed = true;
+                    layoutOptions.spacingFactor = 1.5;
+                    layoutOptions.avoidOverlap = true;
+                } else if (layoutName === 'cose') {
+                    layoutOptions.idealEdgeLength = 120;
+                    layoutOptions.nodeOverlap = 40;
+                    layoutOptions.nodeRepulsion = 500000;
+                } else if (layoutName === 'circle') {
+                    layoutOptions.spacingFactor = 1.2;
+                } else if (layoutName === 'grid') {
+                    layoutOptions.spacingFactor = 1.5;
+                }
+
+                const layout = cy.layout(layoutOptions);
                 layout.run();
             });
         });
