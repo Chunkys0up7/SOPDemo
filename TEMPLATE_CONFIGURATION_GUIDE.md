@@ -127,6 +127,7 @@ Fields specifically designed to enhance discoverability:
 **Purpose:** Single-purpose, reusable components
 
 **Use for:**
+
 - Login procedures
 - Form submissions
 - Verification steps
@@ -134,6 +135,7 @@ Fields specifically designed to enhance discoverability:
 - Simple validations
 
 **Key sections:**
+
 - Purpose & Description
 - Scope & Applicability
 - Content (focused, single-purpose)
@@ -143,6 +145,7 @@ Fields specifically designed to enhance discoverability:
 - Reusability Information
 
 **Metadata highlights:**
+
 ```yaml
 department: [IT|Operations|HR|Finance|Legal|Compliance|Security|Customer Service]
 complexity: [Basic|Intermediate|Advanced]
@@ -154,12 +157,14 @@ reusable: true
 **Purpose:** Multi-step procedures combining atoms
 
 **Use for:**
+
 - Account setup workflows
 - Document processing procedures
 - Multi-step approvals
 - Verification processes
 
 **Key sections:**
+
 - Purpose & Overview
 - Prerequisites
 - Components Used (includes atoms)
@@ -169,6 +174,7 @@ reusable: true
 - Exception Handling
 
 **Metadata highlights:**
+
 ```yaml
 composedOf: [atom-id-1, atom-id-2]
 estimatedDuration: "30-60 minutes"
@@ -179,12 +185,14 @@ estimatedDuration: "30-60 minutes"
 **Purpose:** Complete, end-to-end workflows
 
 **Use for:**
+
 - Employee onboarding (Day 1 → 90 days)
 - Project lifecycles
 - Complex compliance workflows
 - Multi-phase processes
 
 **Key sections:**
+
 - Purpose & Overview
 - Roles & Responsibilities
 - Timeline Overview
@@ -195,6 +203,7 @@ estimatedDuration: "30-60 minutes"
 - Communication Plan
 
 **Metadata highlights:**
+
 ```yaml
 composedOf: [atom-id-1, molecule-id-1, molecule-id-2]
 estimatedDuration: "1-2 weeks"
@@ -206,12 +215,14 @@ dependencies: [sop-xxx, sop-yyy]
 **Purpose:** Complete, documented standard operating procedure
 
 **Use for:**
+
 - Department-level procedures
 - Compliance-driven processes
 - Regulatory-required documentation
 - Enterprise-wide standards
 
 **Key sections:**
+
 - Metadata Summary (table)
 - Purpose & Business Value
 - Scope & Applicability
@@ -232,6 +243,7 @@ dependencies: [sop-xxx, sop-yyy]
 - Appendices (Glossary, Workflows, Forms, FAQs)
 
 **Metadata highlights:**
+
 ```yaml
 id: sop-[dept-abbrev]-[number]
 status: [draft|in-review|approved|active|archived|deprecated]
@@ -275,6 +287,7 @@ cp templates/sop-template.md sops/[department]/sop-[dept]-[number].md
 ### Step 3: Fill in Metadata
 
 **Replace all placeholders:**
+
 - `[name]` → Descriptive identifier
 - `[department]` → Choose from taxonomy
 - `[processCategory]` → Choose from taxonomy
@@ -283,6 +296,7 @@ cp templates/sop-template.md sops/[department]/sop-[dept]-[number].md
 - `[YYYY-MM-DD]` → Actual dates
 
 **Example:**
+
 ```yaml
 id: atom-it-login-procedure
 type: atom
@@ -301,6 +315,7 @@ keywords: [login, authentication, access, credentials]
 ### Step 4: Complete Content Sections
 
 Follow the template structure:
+
 1. Fill in Purpose/Description
 2. Define Scope (what's included/excluded)
 3. Write step-by-step procedures
@@ -355,16 +370,19 @@ node tools/generate-sop-data.js 10
 ```
 
 **What it generates per set:**
+
 - 2 Atoms (single-purpose components)
 - 1 Molecule (using the 2 atoms)
 - All with complete, realistic metadata
 - All following the enhanced template structure
 
 **Output location:**
+
 - Atoms: `sop-components/atoms/atom-[dept]-[num]-[variant].md`
 - Molecules: `sop-components/molecules/molecule-[dept]-[num].md`
 
 **Generated metadata includes:**
+
 - Random department from taxonomy
 - Random process category
 - Random complexity level
@@ -422,6 +440,7 @@ The configuration file defines all taxonomies, validation rules, and system beha
 ### Taxonomy Reference
 
 **Departments:**
+
 - IT
 - Operations
 - HR
@@ -433,6 +452,7 @@ The configuration file defines all taxonomies, validation rules, and system beha
 - Multi-Department
 
 **Process Categories:**
+
 - System Configuration
 - Troubleshooting
 - Compliance & Audit
@@ -441,11 +461,13 @@ The configuration file defines all taxonomies, validation rules, and system beha
 - Training & Onboarding
 
 **Complexity Levels:**
+
 - Basic: < 5 steps, no technical knowledge required
 - Intermediate: 5-15 steps, standard technical knowledge
 - Advanced: > 15 steps, specialized expertise needed
 
 **Audience Roles:**
+
 - C-Level Executive
 - Manager/Supervisor
 - Individual Contributor
@@ -454,6 +476,7 @@ The configuration file defines all taxonomies, validation rules, and system beha
 - Contractor
 
 **Compliance Frameworks:**
+
 - ISO 9001 (Quality Management)
 - HIPAA (Healthcare Privacy)
 - SOX (Financial Controls)
@@ -471,6 +494,7 @@ The configuration file defines all taxonomies, validation rules, and system beha
 ### 1. Metadata Discipline
 
 **DO:**
+
 - ✅ Always complete ALL required metadata fields
 - ✅ Use values from established taxonomies
 - ✅ Add rich keywords for searchability
@@ -478,6 +502,7 @@ The configuration file defines all taxonomies, validation rules, and system beha
 - ✅ Keep metadata current during reviews
 
 **DON'T:**
+
 - ❌ Leave placeholder values in production
 - ❌ Create new taxonomy values without approval
 - ❌ Skip optional fields that add value
@@ -518,6 +543,7 @@ The configuration file defines all taxonomies, validation rules, and system beha
 ### 5. Reusability
 
 **Design for reuse from the start:**
+
 - Make atoms single-purpose
 - Document where components are used
 - Create variations for different scenarios
@@ -537,6 +563,7 @@ The configuration file defines all taxonomies, validation rules, and system beha
 ### 7. Compliance Tracking
 
 **Document all compliance requirements:**
+
 - Tag all applicable frameworks
 - Reference specific regulatory citations
 - Define audit requirements
@@ -549,24 +576,28 @@ The configuration file defines all taxonomies, validation rules, and system beha
 When implementing the new template structure:
 
 ### Phase 1: Foundation
+
 - [ ] Review template files and understand structure
 - [ ] Review taxonomy in sop-config.json
 - [ ] Customize taxonomies for your organization (if needed)
 - [ ] Set up style guide for consistent usage
 
 ### Phase 2: Pilot
+
 - [ ] Convert 3-5 high-value SOPs to new template
 - [ ] Generate sample data with generator script
 - [ ] Test searchability with pilot users
 - [ ] Gather feedback and refine
 
 ### Phase 3: Rollout
+
 - [ ] Train content owners on new templates
 - [ ] Convert existing SOPs in phases
 - [ ] Establish review and approval workflows
 - [ ] Set up audit trails and analytics
 
 ### Phase 4: Optimization
+
 - [ ] Monitor usage analytics
 - [ ] Refine metadata based on search patterns
 - [ ] Extract frequently reused modules into atoms

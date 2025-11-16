@@ -9,6 +9,7 @@ This document showcases realistic test data that demonstrates the enhanced SOP t
 ### 1. **atom-password-reset.md** - Highly Reusable Security Component
 
 **Demonstrates:**
+
 - ✅ **Rich Metadata**: Department (IT), Process Category (Troubleshooting), Complexity (Basic)
 - ✅ **Multi-Audience**: Individual Contributors, Technicians, AND Customers
 - ✅ **Compliance Tracking**: SOX, HIPAA, SOC 2 frameworks
@@ -20,6 +21,7 @@ This document showcases realistic test data that demonstrates the enhanced SOP t
 - ✅ **Version History**: Tracked from v1.0.0 to v2.1.0 with detailed change log
 
 **Key Searchability Features:**
+
 ```yaml
 keywords: [password, reset, authentication, credentials, login, access]
 tags: [reusable, core, authentication, security]
@@ -27,6 +29,7 @@ complianceFrameworks: [SOX, HIPAA, SOC 2]
 ```
 
 Users can find this component by searching:
+
 - "password" or "reset" (keywords)
 - Filtering by IT department
 - Filtering by Troubleshooting category
@@ -35,6 +38,7 @@ Users can find this component by searching:
 - Full-text search on any content
 
 **Key Reusability Features:**
+
 ```yaml
 usedIn:
   - molecule-account-recovery
@@ -48,6 +52,7 @@ Shows exactly where this component is used and how many variations exist.
 **Key Adaptability Features:**
 
 Example Decision Logic:
+
 ```markdown
 **Decision Point**: Verification Method
 - **IF** user remembers security questions → Use self-service portal method 1
@@ -63,6 +68,7 @@ Supports multiple scenarios dynamically without separate procedures.
 ### 2. **atom-access-request-approval.md** - Multi-Department Governance Component
 
 **Demonstrates:**
+
 - ✅ **Multi-Department Scope**: Tagged as "Multi-Department" (used across IT, HR, Finance, Compliance)
 - ✅ **Intermediate Complexity**: More complex approval workflows
 - ✅ **Executive Audience**: Managers and C-Level executives are primary users
@@ -73,6 +79,7 @@ Supports multiple scenarios dynamically without separate procedures.
 - ✅ **Escalation Matrix**: Time-based auto-escalation with configurable thresholds
 
 **Key Searchability Features:**
+
 ```yaml
 department: Multi-Department
 keywords: [access, approval, authorization, permissions, security, compliance]
@@ -83,6 +90,7 @@ complianceFrameworks: [SOX, HIPAA, SOC 2, ISO 9001]
 **Advanced Decision Logic Example:**
 
 4-Level Approval Matrix:
+
 ```markdown
 | Access Level | Risk | Approvers Required | Example Systems |
 |-------------|------|-------------------|-----------------|
@@ -93,6 +101,7 @@ complianceFrameworks: [SOX, HIPAA, SOC 2, ISO 9001]
 ```
 
 Conflict of Interest Auto-Detection:
+
 ```markdown
 **Decision Point**: Conflict of Interest Check
 - **IF** user requests both "AP Entry" AND "AP Approval" → Auto-deny (SOX violation)
@@ -107,6 +116,7 @@ This shows sophisticated business logic embedded directly in the SOP.
 ### 3. **molecule-new-user-account-setup.md** - Complex Multi-Step Workflow
 
 **Demonstrates:**
+
 - ✅ **Component Composition**: Combines 2 atoms (password-reset + access-request-approval)
 - ✅ **Estimated Duration**: 45-60 minutes (helps with planning)
 - ✅ **Multi-Step Procedure**: 7 detailed steps with sub-steps
@@ -119,6 +129,7 @@ This shows sophisticated business logic embedded directly in the SOP.
 **Key Structure:**
 
 Shows how atoms are **embedded** in molecules:
+
 ```markdown
 ## Components Used
 
@@ -131,6 +142,7 @@ levels based on the new employee's role.
 ```
 
 Each step includes:
+
 - Estimated time
 - Owner (who performs it)
 - System(s) used
@@ -172,19 +184,23 @@ This demonstrates the **production-ready quality** of the templates.
 Users can find SOPs by **combining filters**:
 
 **Example 1: Find all IT troubleshooting procedures**
+
 - Filter: Department = "IT"
 - Filter: Process Category = "Troubleshooting"
 - **Result:** atom-password-reset and others
 
 **Example 2: Find all SOX-compliant procedures**
+
 - Filter: Compliance Frameworks = "SOX"
 - **Result:** atom-password-reset, atom-access-request-approval, molecule-new-user-account-setup
 
 **Example 3: Find procedures for managers**
+
 - Filter: Audience = "Manager/Supervisor"
 - **Result:** atom-access-request-approval
 
 **Example 4: Find basic complexity procedures for end users**
+
 - Filter: Complexity = "Basic"
 - Filter: Audience = "Individual Contributor"
 - **Result:** atom-password-reset
@@ -192,17 +208,20 @@ Users can find SOPs by **combining filters**:
 ### Full-Text Search Examples
 
 **Search term:** "password reset"
+
 - **Weighted results:**
   - atom-password-reset (title match - weight 3.0)
   - molecule-new-user-account-setup (keyword match - weight 2.5)
   - Any SOPs mentioning password reset in content (weight 1.0)
 
 **Search term:** "approval workflow"
+
 - **Results:**
   - atom-access-request-approval (keyword match)
   - molecule-new-user-account-setup (references approval atom)
 
 **Search term:** "HIPAA compliance"
+
 - **Results:** All procedures tagged with HIPAA framework
 
 ---
@@ -230,6 +249,7 @@ organism-employee-onboarding-workflow (Organism - not created yet)
 **Scenario:** atom-access-request-approval needs to be updated to add a new approval level.
 
 **Impact:**
+
 1. **Direct impact:** 12+ workflows that use this atom
 2. **Downstream impact:** Any molecules using those workflows
 3. **Risk assessment:** HIGH (critical approval component)
@@ -246,6 +266,7 @@ This is **exactly** what the impact analysis tool would show.
 **Scenario 1: Standard Employee Password Reset**
 
 User flow:
+
 1. User forgets password
 2. **Decision Point:** Can verify identity?
    - Remembers security questions → ✅ Self-service portal
@@ -256,6 +277,7 @@ User flow:
 **Scenario 2: Failed Self-Service Attempt**
 
 User flow:
+
 1. User forgets password
 2. **Decision Point:** Can verify identity?
    - Forgot security questions → ❌ Self-service fails after 3 attempts
@@ -279,6 +301,7 @@ From molecule-new-user-account-setup:
 ```
 
 **What happens:**
+
 1. HR submits new hire with tomorrow's start date
 2. System detects < 48 hours
 3. Auto-flags as "urgent"
@@ -397,14 +420,17 @@ nextReview: 2026-02-01
 **Scenario:** Create "Employee Offboarding" SOP
 
 **Step 1:** Identify reusable components
+
 - Use {{atom-access-request-approval}} for revoking access
 - Use {{atom-password-reset}} variant for account disabling
 - Create new atom: atom-exit-interview
 
 **Step 2:** Create molecule combining atoms
+
 - molecule-account-deprovisioning
 
 **Step 3:** Create organism for complete workflow
+
 - organism-employee-offboarding
   - Uses molecule-account-deprovisioning
   - Adds HR tasks
@@ -417,6 +443,7 @@ nextReview: 2026-02-01
 **User need:** "I need to reset a user's password but they're a privileged user"
 
 **Search approach:**
+
 1. Search for "password reset"
 2. Find atom-password-reset
 3. Review "Available variations" section
@@ -430,6 +457,7 @@ nextReview: 2026-02-01
 **Scenario:** New GDPR requirement affects password storage
 
 **Impact analysis:**
+
 1. Search for GDPR compliance tag
 2. Find all affected procedures
 3. Update atom-password-reset (single source)
@@ -514,9 +542,11 @@ Enables **self-service troubleshooting** before escalation.
 ## 🔮 Next Steps
 
 1. **Generate More Test Data**
+
    ```bash
    node tools/generate-sop-data.js 10
    ```
+
    Creates 30 atoms, 10 molecules with full metadata
 
 2. **Create Organism Examples**
