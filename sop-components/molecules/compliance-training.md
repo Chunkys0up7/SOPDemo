@@ -20,6 +20,7 @@ All employees must complete mandatory compliance training within the first week 
 ### Module 1: Code of Conduct (30 minutes)
 
 **Topics Covered**:
+
 - Company values and ethics
 - Professional behavior standards
 - Conflict of interest policies
@@ -32,9 +33,10 @@ All employees must complete mandatory compliance training within the first week 
 
 **Component**: See confidentiality agreement below
 
-{{include: atom-confidentiality-agreement}}
+{{include: confidentiality-agreement}}
 
 **Topics Covered**:
+
 - Identifying confidential information
 - Data classification levels
 - Secure handling procedures
@@ -46,6 +48,7 @@ All employees must complete mandatory compliance training within the first week 
 ### Module 3: Anti-Discrimination & Harassment (45 minutes)
 
 **Topics Covered**:
+
 - Protected classes under law
 - Identifying harassment and discrimination
 - Bystander intervention
@@ -59,6 +62,7 @@ All employees must complete mandatory compliance training within the first week 
 ### Module 4: Workplace Safety (30 minutes)
 
 **Topics Covered**:
+
 - Emergency evacuation procedures
 - First aid and emergency contacts
 - Hazard reporting
@@ -70,6 +74,7 @@ All employees must complete mandatory compliance training within the first week 
 ### Module 5: Information Security (45 minutes)
 
 **Topics Covered**:
+
 - Password security best practices
 - Phishing and social engineering
 - Device security (laptop, phone)
@@ -89,6 +94,7 @@ All employees must complete mandatory compliance training within the first week 
 ### Step 2: Complete Each Module
 
 **For each module**:
+
 - [ ] Watch all video content (cannot skip)
 - [ ] Review all written materials
 - [ ] Take notes on key points
@@ -96,6 +102,7 @@ All employees must complete mandatory compliance training within the first week 
 - [ ] Pass final assessment
 
 **Retake Policy**:
+
 - Failed assessments can be retaken immediately
 - No limit on attempts
 - Must review missed questions before retaking
@@ -103,6 +110,7 @@ All employees must complete mandatory compliance training within the first week 
 ### Step 3: Sign Acknowledgments
 
 After completing all modules, digitally sign:
+
 - [ ] Code of Conduct acknowledgment
 - [ ] Confidentiality agreement
 - [ ] Anti-discrimination policy acknowledgment
@@ -112,6 +120,7 @@ After completing all modules, digitally sign:
 ### Step 4: Submit Certificates
 
 The system automatically:
+
 - Generates completion certificates
 - Notifies HR of completion
 - Adds certificates to your personnel file
@@ -126,6 +135,7 @@ The system automatically:
 | Manager 1:1 discussion | Week 2 | 30 minutes |
 
 **Consequences of missing deadline**:
+
 - System access may be limited
 - Formal notification to management
 - Required explanation for delay
@@ -135,18 +145,22 @@ The system automatically:
 Some roles require additional training:
 
 ### Finance/Accounting
+
 - SOX compliance (2 hours)
 - Financial fraud prevention (1 hour)
 
 ### Sales/Marketing
+
 - GDPR and privacy compliance (1 hour)
 - Anti-corruption and bribery (1 hour)
 
 ### Engineering/IT
+
 - Secure coding practices (2 hours)
 - Data protection and privacy (1 hour)
 
 ### Management
+
 - Hiring and interview compliance (1 hour)
 - Performance management best practices (1 hour)
 
@@ -155,6 +169,7 @@ Some roles require additional training:
 ## Annual Refresher Training
 
 All training must be refreshed annually:
+
 - **When**: Each October
 - **Duration**: 2 hours (condensed version)
 - **Notification**: Email sent 30 days in advance
@@ -163,12 +178,14 @@ All training must be refreshed annually:
 ## Verification and Documentation
 
 After completion, you will receive:
+
 - Digital certificates for each module
 - Master completion certificate
 - Email confirmation
 - Entry in HR training record
 
 **Save your certificates** - you may need them for:
+
 - Audit purposes
 - Transfer to new department
 - Professional development tracking
@@ -176,6 +193,7 @@ After completion, you will receive:
 ## Questions and Support
 
 ### Training Content Questions
+
 - **General questions**: training-support@company.com
 - **Technical issues**: it-support@company.com
 - **Policy clarification**: hr-compliance@company.com
@@ -183,6 +201,7 @@ After completion, you will receive:
 ### Reporting Concerns
 
 If you witness or experience violations of policies covered in training:
+
 - **Ethics hotline**: 1-800-XXX-XXXX (anonymous)
 - **HR**: hr-concerns@company.com
 - **Legal**: legal@company.com
@@ -193,6 +212,7 @@ If you witness or experience violations of policies covered in training:
 ## Tracking Your Progress
 
 View your training status:
+
 1. Login to **training.company.com**
 2. Click "My Training Dashboard"
 3. View completion percentages and certificates

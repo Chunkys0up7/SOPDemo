@@ -18,6 +18,7 @@ This procedure outlines the secure process for creating user credentials across 
 ## Security Requirements
 
 **IMPORTANT**: All credential creation must follow security best practices:
+
 - Use password generator tools (never user-chosen initial passwords)
 - Enable MFA for all accounts
 - Follow principle of least privilege
@@ -25,13 +26,14 @@ This procedure outlines the secure process for creating user credentials across 
 
 ## Component: Access Request Form
 
-{{include: atom-access-request-form}}
+{{include: access-request-form}}
 
 ## Credential Creation Steps
 
 ### Step 1: Validate Request
 
 Verify that access request form includes:
+
 - ✓ Employee information complete
 - ✓ Manager approval signature
 - ✓ IT Security review completed
@@ -63,6 +65,7 @@ Initial Password:
 ### Step 4: Enable Security Features
 
 For each account:
+
 1. ✓ Enable Multi-Factor Authentication
 2. ✓ Set password expiration (90 days)
 3. ✓ Enable login notifications
@@ -72,16 +75,19 @@ For each account:
 ### Step 5: Secure Credential Delivery
 
 **Method 1: In-Person (Preferred)**
+
 - Provide credentials during onboarding session
 - Verify identity before disclosure
 - Require immediate password change
 
 **Method 2: Secure Email**
+
 - Send to personal email (not work email)
 - Use encrypted email if available
 - Include expiration time for temporary password
 
 **Method 3: Password Manager Share**
+
 - Use enterprise password manager
 - Share specific credentials securely
 - Set sharing expiration
@@ -89,6 +95,7 @@ For each account:
 ## Verification Checklist
 
 After credential creation, verify:
+
 - [ ] User can successfully login to all requested systems
 - [ ] MFA is properly configured and working
 - [ ] User is only in appropriate security groups
@@ -99,6 +106,7 @@ After credential creation, verify:
 ## Audit Trail
 
 Record in IT Management System:
+
 ```json
 {
   "employee_id": "EMP-12345",

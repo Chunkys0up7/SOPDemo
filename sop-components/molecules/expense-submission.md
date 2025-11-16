@@ -21,6 +21,7 @@ This workflow guides employees through submitting business expenses for reimburs
 ### Eligible Expenses
 
 ✅ **Reimbursable**:
+
 - Business travel (airfare, hotels, ground transportation)
 - Client meetings and entertainment
 - Business supplies and equipment
@@ -29,6 +30,7 @@ This workflow guides employees through submitting business expenses for reimburs
 - Home office expenses (if approved)
 
 ❌ **Not Reimbursable**:
+
 - Commuting to/from office
 - Personal meals (unless traveling)
 - Alcohol (unless client entertainment with approval)
@@ -39,6 +41,7 @@ This workflow guides employees through submitting business expenses for reimburs
 ### Documentation Requirements
 
 **Always keep**:
+
 - Original itemized receipts (not just credit card slips)
 - Business purpose notes
 - Attendee names for meals/entertainment
@@ -49,6 +52,7 @@ This workflow guides employees through submitting business expenses for reimburs
 ### Step 1: Gather Documentation
 
 **For each expense, collect**:
+
 - [ ] Itemized receipt (required for amounts > $25)
 - [ ] Credit card statement (if applicable)
 - [ ] Conference/event registration confirmation
@@ -59,9 +63,10 @@ This workflow guides employees through submitting business expenses for reimburs
 
 ### Step 2: Complete Expense Form
 
-{{include: atom-expense-report-form}}
+{{include: expense-report-form}}
 
 **Tips for accuracy**:
+
 - Round to nearest dollar
 - Group similar expenses by date/category
 - Provide clear descriptions (not just "Lunch")
@@ -71,9 +76,10 @@ This workflow guides employees through submitting business expenses for reimburs
 
 **Approval workflow based on amount**:
 
-{{include: molecule-approval-chain}}
+{{include: approval-chain}}
 
 **Standard Approval Thresholds**:
+
 - **< $100**: Auto-approved (manager notified)
 - **$100 - $500**: Manager approval required
 - **$501 - $5,000**: Manager + Finance approval
@@ -96,6 +102,7 @@ This workflow guides employees through submitting business expenses for reimburs
 6. Submit for approval
 
 **System auto-checks**:
+
 - Policy compliance
 - Missing receipts
 - Duplicate expenses
@@ -104,12 +111,14 @@ This workflow guides employees through submitting business expenses for reimburs
 ### Step 5: Manager Review
 
 Your manager will:
+
 - Review business purpose
 - Verify policy compliance
 - Approve or reject with comments
 - Typical turnaround: 2-3 business days
 
 **If rejected**:
+
 - Review rejection reason
 - Make requested corrections
 - Resubmit with explanations
@@ -117,6 +126,7 @@ Your manager will:
 ### Step 6: Finance Processing
 
 Finance team will:
+
 - Verify documentation completeness
 - Check approval chain
 - Process for payment
@@ -125,10 +135,12 @@ Finance team will:
 ### Step 7: Reimbursement
 
 **Payment method**:
+
 - **Direct deposit**: 5-7 business days after final approval
 - **Check**: 10-12 business days after final approval
 
 **Track your reimbursement**:
+
 - Check expense system for status
 - Email notification when approved
 - Email notification when paid
@@ -138,6 +150,7 @@ Finance team will:
 ### Corporate Credit Card Expenses
 
 If you have a company card:
+
 1. Still submit expense report
 2. Mark as "Corporate Card" not "Reimbursement"
 3. Attach same documentation
@@ -147,6 +160,7 @@ If you have a company card:
 ### Conference/Travel Advances
 
 For major travel expenses:
+
 1. Request advance 2 weeks before travel
 2. Submit advance request form
 3. Receive funds before trip
@@ -158,6 +172,7 @@ For major travel expenses:
 **Current IRS rate**: $0.67/mile
 
 **Required documentation**:
+
 - Date of travel
 - Starting location (usually home or office)
 - Destination(s)
@@ -174,6 +189,7 @@ For major travel expenses:
 ### International Travel
 
 Additional requirements:
+
 - Currency conversion (use date of transaction rate)
 - Original receipts in foreign currency
 - Converted amounts in USD
@@ -207,6 +223,7 @@ Additional requirements:
 ## Common Mistakes to Avoid
 
 ❌ **Don't**:
+
 - Submit expenses months after they occurred
 - Lose receipts (photograph immediately!)
 - Forget to document business purpose
@@ -215,6 +232,7 @@ Additional requirements:
 - Submit without manager pre-approval for large amounts
 
 ✓ **Do**:
+
 - Submit expenses monthly
 - Photograph receipts immediately
 - Provide clear, specific descriptions
@@ -225,17 +243,20 @@ Additional requirements:
 ## Troubleshooting
 
 ### "Missing Receipt" Error
+
 - Upload clear photo of receipt
 - For lost receipts < $25: Complete missing receipt affidavit
 - For lost receipts > $25: Manager approval required
 
 ### "Out of Policy" Warning
+
 - Review policy limits
 - Add explanation/justification
 - Obtain pre-approval for exception
 - Consider if truly business necessary
 
 ### Delay in Reimbursement
+
 - Check expense system status
 - Verify all approvals received
 - Contact finance after 10 business days
@@ -244,12 +265,14 @@ Additional requirements:
 ## Audit and Compliance
 
 **Random audits** may require:
+
 - Additional documentation
 - Explanation of business purpose
 - Manager attestation
 - Policy compliance verification
 
 **Violations may result in**:
+
 - Reimbursement denial
 - Repayment requirement
 - Disciplinary action

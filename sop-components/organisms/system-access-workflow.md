@@ -36,14 +36,16 @@ graph LR
 
 **Step 1**: Complete access request form
 
-{{include: atom-access-request-form}}
+{{include: access-request-form}}
 
 **Step 2**: Submit to manager for approval
+
 - Email form to direct manager
 - Include business justification
 - Specify urgency if time-sensitive
 
 ### Automatic Actions
+
 - Request logged in IT ticketing system
 - Unique request ID generated
 - Requestor receives confirmation email
@@ -53,22 +55,25 @@ graph LR
 
 ## Stage 2: Approval Chain
 
-{{include: molecule-approval-chain}}
+{{include: approval-chain}}
 
 ### Access Request Specific Approvals
 
 **Standard Access** (Email, Basic Tools):
+
 - Level 1: Manager approval only
 - Timeline: 24 hours
 - Auto-approved for standard new hires
 
 **Elevated Access** (CRM, Financial Systems):
+
 - Level 1: Manager approval
 - Level 2: Department head approval
 - Level 3: IT Security review
 - Timeline: 2-3 business days
 
 **Privileged Access** (Admin Rights, Production Systems):
+
 - Level 1: Manager approval
 - Level 2: Department head approval
 - Level 3: IT Security review
@@ -79,6 +84,7 @@ graph LR
 ### Approval Decision Points
 
 Each approver must verify:
+
 - ✓ Business need is legitimate
 - ✓ Principle of least privilege applied
 - ✓ Access level appropriate for role
@@ -92,6 +98,7 @@ Each approver must verify:
 ### IT Security Team Actions
 
 **Risk Assessment**:
+
 ```
 Low Risk: Standard business applications
 Medium Risk: Systems with sensitive data
@@ -100,6 +107,7 @@ Critical: Financial systems, executive access
 ```
 
 **Security Checks**:
+
 - [ ] Employee background check completed
 - [ ] No conflicting access (separation of duties)
 - [ ] Compliance training completed
@@ -119,25 +127,28 @@ Critical: Financial systems, executive access
 
 ## Stage 4: Credential Creation
 
-{{include: molecule-credential-creation}}
+{{include: credential-creation}}
 
 ### Provisioning Checklist
 
 IT Admin performs:
 
 **Account Creation**:
+
 - [ ] User account created in Active Directory
 - [ ] Email address configured
 - [ ] User added to appropriate security groups
 - [ ] License assignments completed
 
 **System-Specific Setup**:
+
 - [ ] CRM: Profile created, territory assigned
 - [ ] Financial: Role-based access configured
 - [ ] Development: Repository access granted
 - [ ] Project Tools: Added to relevant projects
 
 **Security Configuration**:
+
 - [ ] MFA enabled and enrollment link sent
 - [ ] Password complexity enforced
 - [ ] Session timeout configured
@@ -151,6 +162,7 @@ IT Admin performs:
 ### Pre-Delivery Testing
 
 IT verifies:
+
 - [ ] Can successfully login to all systems
 - [ ] Appropriate permissions present
 - [ ] No excessive permissions granted
@@ -160,6 +172,7 @@ IT verifies:
 ### Common Validation Tests
 
 **Email Test**:
+
 ```bash
 # Verify email delivery
 Send test email to new account
@@ -169,6 +182,7 @@ Verify delivery to external addresses
 ```
 
 **System Access Test**:
+
 ```bash
 # For each provisioned system:
 1. Login with new credentials
@@ -185,6 +199,7 @@ Verify delivery to external addresses
 ### Secure Delivery Methods
 
 **Option 1: In-Person Handoff** (Preferred for new hires)
+
 - Schedule 30-minute session
 - Verify identity before disclosure
 - Walk through first login
@@ -192,12 +207,14 @@ Verify delivery to external addresses
 - Answer questions
 
 **Option 2: Secure Email** (Remote employees)
+
 - Send to verified personal email
 - Use encrypted email if available
 - Include expiration time (24 hours)
 - Require acknowledgment of receipt
 
 **Option 3: Password Manager Share** (Existing employees)
+
 - Share via enterprise password manager
 - Set sharing expiration (48 hours)
 - Notify via separate channel
@@ -243,6 +260,7 @@ IT Department
 ### Required Documentation
 
 **IT Management System Records**:
+
 ```json
 {
   "request_id": "REQ-2025-00123",
@@ -295,6 +313,7 @@ IT Department
 ### Compliance Documentation
 
 Maintain records for audit purposes:
+
 - Original access request form with signatures
 - Approval chain with dates and approvers
 - Security review assessment
@@ -311,6 +330,7 @@ Maintain records for audit purposes:
 ### 24-Hour Follow-up
 
 IT Service Desk contacts user:
+
 - Confirm successful login to all systems
 - Verify MFA is working properly
 - Address any access issues
@@ -319,6 +339,7 @@ IT Service Desk contacts user:
 ### 7-Day Access Review
 
 Manager verifies:
+
 - Employee is productively using systems
 - Access level is appropriate
 - No additional access needed
@@ -327,15 +348,18 @@ Manager verifies:
 ### Ongoing Monitoring
 
 **Monthly**: IT reviews active accounts for:
+
 - Dormant accounts (no login in 30+ days)
 - Excessive permissions
 - Unusual access patterns
 
 **Quarterly**: Full access recertification
+
 - Managers attest to appropriateness of all team access
 - Identify and remove unnecessary access
 
 **Annually**: Comprehensive access audit
+
 - Review all privileged access
 - Update access based on role changes
 - Revoke access for inactive accounts
@@ -347,6 +371,7 @@ Manager verifies:
 ### Emergency Access Requests
 
 For urgent business needs:
+
 1. Manager emails IT Security directly
 2. Explain emergency justification
 3. Temporary access granted (24-48 hours)
@@ -356,6 +381,7 @@ For urgent business needs:
 ### Access Denials
 
 If request denied at any stage:
+
 1. Denial reason documented
 2. Requestor and manager notified
 3. Option to appeal with additional justification
@@ -365,6 +391,7 @@ If request denied at any stage:
 ### Access Modifications
 
 For existing users requesting additional access:
+
 - Follow same approval workflow
 - Additive permissions require same scrutiny
 - Full audit trail maintained
