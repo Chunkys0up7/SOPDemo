@@ -21,7 +21,7 @@ node tools/serve-enhanced.js --port=8080
 
 ### What You'll See
 
-```
+```text
 ╔═══════════════════════════════════════════════════════════╗
 ║   🏦 Pursuit Bank SOP Management System                  ║
 ║   Production-Ready Demo Server                           ║
@@ -50,6 +50,7 @@ node tools/serve-enhanced.js --port=8080
 **URL**: http://localhost:8080/public/dashboard.html
 
 **What to Show**:
+
 1. **Live Stats** (top row - loads from API)
    - Total SOPs: 6
    - Active SOPs: 6
@@ -71,6 +72,7 @@ node tools/serve-enhanced.js --port=8080
    - 🎨 Brand Guidelines
 
 **Open Browser Console** to see:
+
 ```
 🏦 Pursuit Bank SOP Dashboard
 📡 Loading live data from API endpoints:
@@ -80,6 +82,7 @@ node tools/serve-enhanced.js --port=8080
 ```
 
 **Key Points**:
+
 - All stats are **live data** from API endpoints
 - Dashboard auto-loads on page render
 - Fallback to demo data if API unavailable
@@ -100,6 +103,7 @@ node tools/serve-enhanced.js --port=8080
 2. **Try Example Queries** (click the suggestions or type):
 
    **Query 1**: "What are the FHA credit score requirements?"
+
    ```
    Expected Response:
    Based on FHA Underwriting Standards...
@@ -112,6 +116,7 @@ node tools/serve-enhanced.js --port=8080
    ```
 
    **Query 2**: "What are the wire transfer approval limits?"
+
    ```
    Expected Response:
    According to Wire Transfer Security...
@@ -123,6 +128,7 @@ node tools/serve-enhanced.js --port=8080
    ```
 
    **Query 3**: "What's required for clear to close?"
+
    ```
    Expected Response:
    Per Clear to Close Procedures...
@@ -139,6 +145,7 @@ node tools/serve-enhanced.js --port=8080
    - Compliance frameworks cited
 
 4. **Open Browser Console** to see:
+
    ```
    🤖 SOP Assistant - Production RAG API Active
    [API] Assistant query: "What are the FHA credit score requirements?"
@@ -146,6 +153,7 @@ node tools/serve-enhanced.js --port=8080
    ```
 
 **Key Points**:
+
 - This is **real RAG** (not mock!)
 - Vector similarity search working
 - Cosine similarity for relevance scoring
@@ -153,6 +161,7 @@ node tools/serve-enhanced.js --port=8080
 - Ready for OpenAI/Anthropic integration
 
 **Technical Details** (for developers):
+
 - Mock vector database with 5D embeddings
 - Semantic search using cosine similarity
 - Query embedding based on keywords
@@ -198,6 +207,7 @@ node tools/serve-enhanced.js --port=8080
    - Shows last updated timestamp
 
 **Open Browser Console** to see:
+
 ```
 📊 SOP Metrics Dashboard - Live Data
 API Endpoints:
@@ -206,6 +216,7 @@ API Endpoints:
 ```
 
 **Key Points**:
+
 - **All data from API** (not hardcoded)
 - Real-time updates available
 - Production-ready metrics structure
@@ -237,6 +248,7 @@ API Endpoints:
    - YAML frontmatter with metadata
 
 3. **Key Template**: Mortgage Underwriting
+
    ```yaml
    ---
    id: template-mortgage-underwriting
@@ -249,6 +261,7 @@ API Endpoints:
    ```
 
 **Key Points**:
+
 - Production-ready templates
 - Based on real mortgage finance examples
 - Full docs-as-code structure
@@ -274,6 +287,7 @@ API Endpoints:
    - Supersedes/versions
 
 3. **Example Flow**
+
    ```
    SOP-MF-001 (AUS Processing)
       ↓ prerequisite
@@ -285,6 +299,7 @@ API Endpoints:
    ```
 
 **Key Points**:
+
 - Graph-based architecture
 - Typed relationships
 - Visual dependency tracking
@@ -307,6 +322,7 @@ Content-Type: application/json
 ```
 
 **Response**:
+
 ```json
 {
   "query": "What are the FHA credit requirements?",
@@ -336,6 +352,7 @@ GET /api/assistant/health
 ```
 
 **Response**:
+
 ```json
 {
   "status": "operational",
@@ -359,6 +376,7 @@ GET /api/sops/metrics
 ```
 
 **Response**:
+
 ```json
 {
   "totalSOPs": 6,
@@ -483,16 +501,19 @@ GET /api/sops/quality
 ### ROI & Business Value
 
 **Current Demo Value**:
+
 - Investment: ~$50K (development time)
 - Annual Savings: $201K (quality automation)
 - 3-Year ROI: 605%
 
 **With Full Implementation** (add OpenAI + Pinecone):
+
 - Additional Investment: $20-50K
 - Total Annual Savings: $320K+
 - 3-Year ROI: 890%
 
 **Key Savings**:
+
 - 70% faster SOP discovery (AI assistant)
 - 50% reduction in SOP errors (automation)
 - 40% faster training (auto-generated quizzes)
@@ -505,6 +526,7 @@ GET /api/sops/quality
 ### Quick Wins (2-3 weeks)
 
 1. **Activate Analytics** (30 minutes)
+
    ```bash
    # Sign up: https://plausible.io ($9/month)
    # Edit: public/components/global-nav.html (line 294)
@@ -512,6 +534,7 @@ GET /api/sops/quality
    ```
 
 2. **Add Real LLM** (2 days)
+
    ```bash
    npm install openai
    # Set OPENAI_API_KEY
@@ -519,6 +542,7 @@ GET /api/sops/quality
    ```
 
 3. **Add Vector DB** (1 day)
+
    ```bash
    npm install @pinecone-database/pinecone
    # Set PINECONE_API_KEY
@@ -573,6 +597,7 @@ GET /api/sops/quality
 
 **Problem**: Port 8080 already in use
 **Solution**:
+
 ```bash
 node tools/serve-enhanced.js --port=8081
 ```
@@ -586,6 +611,7 @@ node tools/serve-enhanced.js --port=8081
 
 **Problem**: API endpoints not responding
 **Solution**:
+
 1. Check server console for errors
 2. Verify you're on http://localhost:8080 (not file://)
 3. Check browser console for CORS errors
@@ -594,6 +620,7 @@ node tools/serve-enhanced.js --port=8081
 
 **Problem**: API request failing
 **Solution**:
+
 1. Open browser console (F12)
 2. Look for "Assistant API error"
 3. Check server is running
@@ -604,11 +631,13 @@ node tools/serve-enhanced.js --port=8081
 ## 📁 Key Files Reference
 
 ### Server & APIs
+
 - `tools/serve-enhanced.js` - Main server (USE THIS)
 - `tools/serve.js` - Old server (deprecated)
 - `server/api/assistant.js` - Unused (integrated into serve-enhanced.js)
 
 ### Frontend Pages
+
 - `public/dashboard.html` - Main dashboard (live API)
 - `public/sop-assistant.html` - AI chat (production RAG)
 - `public/sop-metrics.html` - Metrics dashboard (live API)
@@ -616,12 +645,14 @@ node tools/serve-enhanced.js --port=8081
 - `public/components/global-nav.html` - Navigation (analytics-ready)
 
 ### Documentation
+
 - `DEMO_WALKTHROUGH.md` - This file
 - `IMPLEMENTATION_STATUS.md` - What's real vs mock
 - `docs/RBAC_DESIGN.md` - Permission system design
 - `docs/ANALYTICS_SETUP.md` - Analytics guide
 
 ### SOPs (Examples)
+
 - `sops/mortgage/sop-mf-001-aus.md` - AUS Processing
 - `sops/mortgage/sop-mf-003-fha.md` - FHA Underwriting (1,500 lines!)
 - `sops/mortgage/sop-mf-004-ctc.md` - Clear to Close
@@ -632,21 +663,25 @@ node tools/serve-enhanced.js --port=8081
 ## 🎯 Next Steps After Demo
 
 ### Immediate (Week 1)
+
 1. Gather feedback from stakeholders
 2. Activate analytics (30min setup)
 3. Test CI/CD pipeline
 
 ### Short-term (Weeks 2-4)
+
 4. Integrate real LLM (OpenAI/Anthropic)
 5. Add real vector database (Pinecone)
 6. Enhance search functionality
 
 ### Medium-term (Months 2-3)
+
 7. Implement user authentication
 8. Build approval workflows
 9. Create compliance reporting
 
 ### Long-term (Months 4-6)
+
 10. Full RBAC system
 11. Advanced analytics
 12. Mobile app
@@ -656,11 +691,13 @@ node tools/serve-enhanced.js --port=8081
 ## 📞 Support & Questions
 
 ### During Demo
+
 - Press F12 to show browser console
 - Look for colorful log messages showing API status
 - All API calls are logged with timing
 
 ### After Demo
+
 - Review `IMPLEMENTATION_STATUS.md` for feature matrix
 - Check `docs/` folder for design documents
 - See `README.md` for project overview
