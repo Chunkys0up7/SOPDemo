@@ -254,6 +254,91 @@
       "version": "2.0.0",
       "composedOf": ["atom-emergency-contact", "atom-benefits-overview", "atom-confidentiality-agreement", "molecule-benefits-enrollment", "molecule-compliance-training"],
       "reusableIn": ["sop-005"]
+    },
+    "atom-password-reset": {
+      "id": "atom-password-reset",
+      "type": "atom",
+      "title": "Password Reset Procedure",
+      "version": "2.1.0",
+      "department": "IT",
+      "processCategory": "Troubleshooting",
+      "complexity": "Basic",
+      "audience": ["Individual Contributor", "Technician/Specialist", "Customer/External User"],
+      "tags": ["reusable", "core", "authentication", "security"],
+      "keywords": ["password", "reset", "authentication", "credentials", "login", "access"],
+      "complianceFrameworks": ["SOX", "HIPAA", "SOC 2"],
+      "reusableIn": ["molecule-account-recovery", "molecule-new-user-account-setup", "organism-it-support-workflow"],
+      "variationCount": 3,
+      "owner": "IT Department",
+      "maintainer": "IT Security Team Lead",
+      "approver": "CISO",
+      "lastReviewed": "2025-11-01"
+    },
+    "atom-access-request-approval": {
+      "id": "atom-access-request-approval",
+      "type": "atom",
+      "title": "System Access Request Approval",
+      "version": "1.3.0",
+      "department": "Multi-Department",
+      "processCategory": "Compliance & Audit",
+      "complexity": "Intermediate",
+      "audience": ["Manager/Supervisor", "C-Level Executive"],
+      "tags": ["reusable", "approval", "authorization", "governance"],
+      "keywords": ["access", "approval", "authorization", "permissions", "security", "compliance"],
+      "complianceFrameworks": ["SOX", "HIPAA", "SOC 2", "ISO 9001"],
+      "reusableIn": ["molecule-system-provisioning", "molecule-role-change", "molecule-new-user-account-setup", "organism-employee-onboarding"],
+      "variationCount": 2,
+      "owner": "IT Department",
+      "maintainer": "IT Governance Team",
+      "approver": "CISO",
+      "lastReviewed": "2025-10-15"
+    },
+    "molecule-new-user-account-setup": {
+      "id": "molecule-new-user-account-setup",
+      "type": "molecule",
+      "title": "New User Account Setup and Provisioning",
+      "version": "2.0.0",
+      "department": "IT",
+      "processCategory": "System Configuration",
+      "complexity": "Intermediate",
+      "audience": ["Technician/Specialist", "Individual Contributor"],
+      "tags": ["workflow", "onboarding", "standard", "critical"],
+      "keywords": ["account", "setup", "provisioning", "new hire", "user creation", "access"],
+      "complianceFrameworks": ["SOX", "HIPAA", "SOC 2", "ISO 9001"],
+      "estimatedDuration": "45-60 minutes",
+      "composedOf": ["atom-access-request-approval", "atom-password-reset"],
+      "reusableIn": ["organism-employee-onboarding-workflow", "organism-contractor-onboarding"],
+      "variationCount": 2,
+      "owner": "IT Department",
+      "maintainer": "IT Operations Team Lead",
+      "approver": "IT Director",
+      "lastReviewed": "2025-11-10"
+    },
+    "sop-it-001": {
+      "id": "sop-it-001",
+      "type": "sop",
+      "title": "IT Account Provisioning and Password Management",
+      "version": "2.0.0",
+      "status": "active",
+      "department": "IT",
+      "processCategory": "System Configuration",
+      "complexity": "Intermediate",
+      "audience": ["Technician/Specialist", "Individual Contributor", "Manager/Supervisor"],
+      "tags": ["account-management", "security", "onboarding"],
+      "keywords": ["account", "provisioning", "password", "access", "security", "compliance"],
+      "complianceFrameworks": ["SOX", "HIPAA", "SOC 2", "ISO 9001"],
+      "owner": "IT Department",
+      "components": [
+        "atom-password-reset",
+        "atom-access-request-approval",
+        "molecule-new-user-account-setup"
+      ],
+      "metadata": {
+        "lastReviewed": "2025-11-10",
+        "approver": "IT Director",
+        "estimatedDuration": "45-60 minutes",
+        "successRate": "98%"
+      }
     }
   },
   "edges": [
@@ -396,6 +481,31 @@
       "target": "molecule-expense-submission",
       "type": "component-of",
       "description": "Approval chain is part of expense submission"
+    },
+    {
+      "id": "edge-017",
+      "source": "atom-password-reset",
+      "target": "molecule-new-user-account-setup",
+      "type": "component-of",
+      "description": "Password reset is part of new user account setup"
+    },
+    {
+      "id": "edge-018",
+      "source": "atom-access-request-approval",
+      "target": "molecule-new-user-account-setup",
+      "type": "component-of",
+      "description": "Access request approval is part of account setup workflow"
+    },
+    {
+      "id": "edge-019",
+      "source": "sop-it-001",
+      "target": "sop-002",
+      "type": "related-to",
+      "description": "Password management procedures complement system access provisioning",
+      "strength": "normal",
+      "metadata": {
+        "reason": "Both cover IT account and access management"
+      }
     }
   ]
 }
