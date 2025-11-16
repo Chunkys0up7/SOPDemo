@@ -283,6 +283,7 @@ This document analyzes the complete user journey through the SOP ecosystem, iden
 ### Navigation Flows
 
 **Flow 1: Quick Update**
+
 ```
 Home → Search "invoice" → SOP-001 viewer →
 Edit Section → Impact preview → Publish → Done
@@ -290,6 +291,7 @@ Edit Section → Impact preview → Publish → Done
 ```
 
 **Flow 2: New SOP from Template**
+
 ```
 Home → Templates → Select "Finance SOP" →
 Fill form → Auto-generate structure →
@@ -298,6 +300,7 @@ Edit sections → Publish → Done
 ```
 
 **Flow 3: Dependency Check Before Update**
+
 ```
 SOP Viewer → Click "Dependencies" in sidebar →
 Inline panel shows impacts → Notify owners →
@@ -306,6 +309,7 @@ Proceed with edit
 ```
 
 **Flow 4: Approval**
+
 ```
 Email notification → Click link →
 Approval page (diff view) →
@@ -338,6 +342,7 @@ Approval page (diff view) →
 ### Edit Mode Features
 
 **1. Inline Section Editing**
+
 ```html
 <section id="prerequisites">
   <h2>Prerequisites
@@ -360,6 +365,7 @@ Approval page (diff view) →
 ```
 
 **2. Impact Preview Panel**
+
 ```
 ┌────────────────────────────────────────────────┐
 │ 📊 Impact Analysis                             │
@@ -383,6 +389,7 @@ Approval page (diff view) →
 ```
 
 **3. Version Comparison View**
+
 ```
 ┌────────────────────────┬────────────────────────┐
 │ Current (v1.2.0)       │ Your Changes (v1.3.0)  │
@@ -403,6 +410,7 @@ Approval page (diff view) →
 ### SOP Template Types
 
 **1. Standard Operating Procedure**
+
 ```yaml
 template_id: standard-sop
 sections:
@@ -422,6 +430,7 @@ suggested_for:
 ```
 
 **2. Policy Document**
+
 ```yaml
 template_id: policy
 sections:
@@ -443,6 +452,7 @@ suggested_for:
 ```
 
 **3. Quick Reference Guide**
+
 ```yaml
 template_id: quick-reference
 sections:
@@ -459,6 +469,7 @@ suggested_for:
 ```
 
 **4. Checklist**
+
 ```yaml
 template_id: checklist
 sections:
@@ -628,39 +639,49 @@ suggested_for:
 ## Key UX Principles
 
 ### 1. **Progressive Disclosure**
+
 Don't overwhelm users. Show core actions first, advanced options on demand.
 
 **Example:**
+
 - Default: [Edit] [Dependencies] buttons visible
 - Advanced: [Version History] [Analytics] [Export] behind "More Actions" menu
 
 ### 2. **Contextual Actions**
+
 Actions appear where users need them, not in a distant menu.
 
 **Example:**
+
 - "Edit This Section" button appears on hover over each section
 - "View Dependencies" appears when hovering over cross-references
 
 ### 3. **Feedback at Every Step**
+
 Users always know what's happening and what to do next.
 
 **Examples:**
+
 - Auto-save: "Draft saved 10 seconds ago"
 - Impact preview: "2 SOPs will be affected"
 - Approval: "Waiting on Sarah (4h left in SLA)"
 
 ### 4. **Undo/Escape Hatches**
+
 Users can back out of any action without consequences.
 
 **Examples:**
+
 - [Cancel] button always visible during editing
 - Drafts auto-saved, never lose work
 - "Discard changes?" confirmation before exiting
 
 ### 5. **Smart Defaults**
+
 System predicts what users want, reducing decisions.
 
 **Examples:**
+
 - Version bump auto-suggested based on change size
 - Approvers auto-populated from department rules
 - Effective date defaults to "upon approval"
@@ -678,6 +699,7 @@ System predicts what users want, reducing decisions.
 ### Mobile-Specific Features
 
 1. **Quick Actions Floating Button**
+
 ```
 ┌──────────────────────┐
 │                      │
@@ -697,11 +719,13 @@ Tap [+] → Shows:
 ```
 
 2. **Swipe Gestures**
+
 - Swipe right: Open TOC
 - Swipe left: Open metadata panel
 - Swipe down: Refresh
 
 3. **Offline Support**
+
 - Bookmarked SOPs cached for offline viewing
 - Edits saved locally, sync when online
 
@@ -712,21 +736,25 @@ Tap [+] → Shows:
 ### WCAG 2.1 AA Compliance
 
 **Visual:**
+
 - Color contrast ratio ≥ 4.5:1
 - Focus indicators visible
 - No reliance on color alone
 
 **Keyboard:**
+
 - All actions keyboard-accessible
 - Skip navigation links
 - Tab order logical
 
 **Screen Reader:**
+
 - ARIA labels on all interactive elements
 - Landmark regions defined
 - Status messages announced
 
 **Cognitive:**
+
 - Simple, clear language
 - Consistent navigation
 - Error messages helpful, not technical
@@ -760,24 +788,28 @@ Tap [+] → Shows:
 ## Implementation Priorities
 
 ### Phase 1: Core Navigation (Week 1-2)
+
 - ✅ Global navigation bar
 - ✅ Search functionality
 - ✅ Breadcrumb navigation
 - ✅ Unified dashboard
 
 ### Phase 2: SOP Viewer (Week 3-4)
+
 - ✅ Formatted markdown rendering
 - ✅ TOC sidebar
 - ✅ Metadata sidebar
 - ✅ Inline edit buttons
 
 ### Phase 3: Edit Workflow (Week 5-6)
+
 - ✅ Section-level editing
 - ✅ Impact preview
 - ✅ Version comparison
 - ✅ Approval workflow
 
 ### Phase 4: Templates & Advanced (Week 7-8)
+
 - ✅ Template system
 - ✅ Clone SOP functionality
 - ✅ Bulk operations

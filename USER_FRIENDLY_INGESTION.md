@@ -202,6 +202,7 @@ class SOPSlackBot:
 ```
 
 **Benefits:**
+
 - Zero context switching (already in Slack)
 - Conversational interface (feels natural)
 - Immediate feedback (not silent upload)
@@ -343,6 +344,7 @@ Reply to this email to add notes or corrections.
 ```
 
 **Benefits:**
+
 - Works with existing email workflow
 - No new tool to learn
 - Can forward from anywhere (mobile, desktop)
@@ -668,6 +670,7 @@ That's it. Everything else is conditional or extracted automatically.
 ### Conditional Branching
 
 **If "Update existing":**
+
 ```
 Which SOP? [Search or select from dropdown]
 → System shows current version, highlights changes
@@ -675,6 +678,7 @@ Which SOP? [Search or select from dropdown]
 ```
 
 **If "New SOP":**
+
 ```
 Which department? [Auto-filled from owner]
 → System suggests related SOPs based on content
@@ -822,6 +826,7 @@ class ExtractionLearner:
 ### Notifications
 
 **Real-time updates via:**
+
 - **Email:** Daily digest + immediate for action items
 - **Slack:** Mentions when approval needed or published
 - **In-app:** Badge counts on dashboard
@@ -992,12 +997,14 @@ Keep building great documentation! 🎉
 ### Week 1-2: Core Infrastructure
 
 **Backend:**
+
 - [ ] S3 presigned URL upload endpoint
 - [ ] Document parser (PDF, DOCX, MD)
 - [ ] Basic metadata extraction (title, owner)
 - [ ] Ingestion queue (RabbitMQ or SQS)
 
 **Frontend:**
+
 - [ ] Drag-and-drop upload widget
 - [ ] Upload progress tracking
 - [ ] Status dashboard (basic)
@@ -1009,12 +1016,14 @@ Keep building great documentation! 🎉
 ### Week 3-4: Multi-Channel + AI Extraction
 
 **Backend:**
+
 - [ ] Slack bot integration
 - [ ] Email gateway
 - [ ] NLP entity extraction (spaCy)
 - [ ] Confidence scoring
 
 **Frontend:**
+
 - [ ] Progressive disclosure form
 - [ ] Suggestion UI (approve/correct)
 - [ ] Batch upload workspace
@@ -1026,11 +1035,13 @@ Keep building great documentation! 🎉
 ### Week 5-6: Community + Polish
 
 **Backend:**
+
 - [ ] Comment/discussion system
 - [ ] Notification service (email, Slack)
 - [ ] Recognition/badges
 
 **Frontend:**
+
 - [ ] Discussion threads UI
 - [ ] Notification preferences
 - [ ] Mobile-responsive design
@@ -1252,6 +1263,7 @@ analytics.track('sop_published', {
 **The key insight:** Friction at ingestion kills adoption. Make it effortless to contribute and people will.
 
 **Our strategy:**
+
 1. Meet users where they work (Slack, email, mobile)
 2. Ask 3 questions, extract the rest automatically
 3. Show real-time status, close the feedback loop

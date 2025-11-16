@@ -69,6 +69,7 @@ SOPs (📄)
 ```
 
 **Example Flow**:
+
 ```
 atom-access-request-form
     ↓ (used in)
@@ -98,6 +99,7 @@ All SOPs and components are nodes in a graph with explicit relationships:
 ```
 
 **Relationship Types**:
+
 - `depends-on`: Strong dependency between SOPs
 - `related-to`: Weak relationship (reference)
 - `component-of`: Component used in larger unit
@@ -212,6 +214,7 @@ npm run serve
 ```
 
 You should see:
+
 - ✅ 4 built SOPs
 - ✅ Interactive HTML visualization
 - ✅ Build and validation reports
@@ -249,6 +252,7 @@ npm run impact -- sop-001 --depth=5
 ```
 
 **Output**:
+
 - Terminal visualization of impact tree
 - JSON report in `dist/impact-analysis/`
 
@@ -285,6 +289,7 @@ npm run validate -- --strict
 ```
 
 **Checks**:
+
 - ✅ Graph structure integrity
 - ✅ Component references validity
 - ✅ Circular dependency detection
@@ -302,6 +307,7 @@ npm run serve -- --port=3000
 ```
 
 Navigate to `http://localhost:8080` to:
+
 - View built SOPs
 - Explore interactive visualizations
 - Access build reports
@@ -316,6 +322,7 @@ Navigate to `http://localhost:8080` to:
 **Purpose**: Assembles complete SOPs from modular components
 
 **Features**:
+
 - Processes component includes (`{{include: component-id}}`)
 - Resolves references (`{{reference: component-id}}`)
 - Generates dependency sections
@@ -323,6 +330,7 @@ Navigate to `http://localhost:8080` to:
 - Creates build reports
 
 **Usage**:
+
 ```bash
 node tools/build.js [sop-id]
 ```
@@ -332,6 +340,7 @@ node tools/build.js [sop-id]
 **Purpose**: Analyzes change propagation through dependency graph
 
 **Features**:
+
 - Traverses dependency graph
 - Identifies all affected documents
 - Calculates risk levels
@@ -339,11 +348,13 @@ node tools/build.js [sop-id]
 - Exports detailed reports
 
 **Usage**:
+
 ```bash
 node tools/impact-analysis.js <node-id> [--depth=N]
 ```
 
 **Risk Levels**:
+
 - 🟢 **Low**: 0-2 direct impacts
 - 🟡 **Medium**: 3-5 direct impacts
 - 🔴 **High**: 6-10 direct impacts
@@ -354,12 +365,14 @@ node tools/impact-analysis.js <node-id> [--depth=N]
 **Purpose**: Generates visual representations of SOP graph
 
 **Formats**:
+
 - **HTML**: Interactive, filterable graph viewer
 - **Mermaid**: Diagrams for GitHub/documentation
 - **DOT**: For Graphviz rendering
 - **ASCII**: Terminal-friendly visualization
 
 **Usage**:
+
 ```bash
 node tools/visualize.js --format=<format> [--output=file]
 ```
@@ -369,6 +382,7 @@ node tools/visualize.js --format=<format> [--output=file]
 **Purpose**: Ensures ecosystem integrity
 
 **Validations**:
+
 - Graph structure consistency
 - Component reference validity
 - Circular dependency detection
@@ -377,6 +391,7 @@ node tools/visualize.js --format=<format> [--output=file]
 - Broken link detection
 
 **Usage**:
+
 ```bash
 node tools/validate.js [--strict]
 ```
@@ -386,12 +401,14 @@ node tools/validate.js [--strict]
 **Purpose**: Local development server
 
 **Features**:
+
 - Serves built documentation
 - Auto-refreshing index page
 - File browsing
 - MIME type handling
 
 **Usage**:
+
 ```bash
 node tools/serve.js [--port=8080]
 ```
@@ -552,6 +569,7 @@ composedOf:
 The POC includes a complete CI/CD pipeline (`.github/workflows/build-and-publish.yml`):
 
 **Triggered on**:
+
 - Push to `main` or `develop` branches
 - Pull requests to `main`
 - Manual workflow dispatch
@@ -608,6 +626,7 @@ The POC includes a complete CI/CD pipeline (`.github/workflows/build-and-publish
 ### 1. Component Design
 
 ✅ **DO**:
+
 - Keep atoms focused on single purpose
 - Use semantic versioning
 - Document dependencies clearly
@@ -615,6 +634,7 @@ The POC includes a complete CI/CD pipeline (`.github/workflows/build-and-publish
 - Write reusable content
 
 ❌ **DON'T**:
+
 - Mix multiple concepts in one atom
 - Create deep nesting (max 3 levels)
 - Hard-code organization-specific details in reusable components
@@ -624,6 +644,7 @@ The POC includes a complete CI/CD pipeline (`.github/workflows/build-and-publish
 ### 2. Graph Management
 
 ✅ **DO**:
+
 - Use descriptive edge types
 - Document why dependencies exist
 - Mark strong dependencies explicitly
@@ -631,6 +652,7 @@ The POC includes a complete CI/CD pipeline (`.github/workflows/build-and-publish
 - Validate after every change
 
 ❌ **DON'T**:
+
 - Create circular dependencies
 - Use vague relationship descriptions
 - Mix different relationship semantics
@@ -639,6 +661,7 @@ The POC includes a complete CI/CD pipeline (`.github/workflows/build-and-publish
 ### 3. Version Control
 
 ✅ **DO**:
+
 - Commit atomic changes
 - Write descriptive commit messages
 - Use feature branches for major changes
@@ -646,6 +669,7 @@ The POC includes a complete CI/CD pipeline (`.github/workflows/build-and-publish
 - Review all SOP changes via PRs
 
 ❌ **DON'T**:
+
 - Commit broken validation
 - Skip CI/CD checks
 - Push directly to main
@@ -654,6 +678,7 @@ The POC includes a complete CI/CD pipeline (`.github/workflows/build-and-publish
 ### 4. Impact Analysis
 
 ✅ **DO**:
+
 - Run impact analysis before major changes
 - Review all affected documents
 - Notify stakeholders of downstream impacts
@@ -661,6 +686,7 @@ The POC includes a complete CI/CD pipeline (`.github/workflows/build-and-publish
 - Document impact analysis results
 
 ❌ **DON'T**:
+
 - Skip impact analysis for "small" changes
 - Ignore downstream dependencies
 - Make breaking changes without coordination
@@ -672,6 +698,7 @@ The POC includes a complete CI/CD pipeline (`.github/workflows/build-and-publish
 ### Interactive HTML Visualization
 
 The HTML visualization provides:
+
 - **Filtering**: By node type (SOP, organism, molecule, atom)
 - **Search**: Find nodes by ID or title
 - **Statistics**: Real-time counts and metrics
@@ -739,16 +766,19 @@ npm run serve
 Track these KPIs to measure ecosystem health:
 
 ### Build Metrics
+
 - **Build Success Rate**: Target >99%
 - **Build Time**: Track average build duration
 - **Failed Builds**: Monitor and investigate failures
 
 ### Quality Metrics
+
 - **Validation Pass Rate**: Target 100%
 - **Component Reuse**: % of components used in multiple SOPs
 - **Broken References**: Target 0
 
 ### Impact Metrics
+
 - **High-Risk Changes**: Count of changes affecting 10+ documents
 - **Impact Analysis Coverage**: % of changes analyzed before commit
 - **Stakeholder Notification Rate**: % of affected parties notified

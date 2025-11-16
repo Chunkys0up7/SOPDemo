@@ -5,6 +5,7 @@ Last Updated: November 16, 2025
 ## 🎯 What's Actually Implemented
 
 ### ✅ **Core System** (Fully Functional)
+
 - **Graph-Based Architecture** - SOPs with typed dependencies
 - **Version Control** - Full git-based change tracking
 - **6 Comprehensive SOPs** - Mortgage finance examples (FHA, AUS, CTC, Wire Transfer, etc.)
@@ -14,6 +15,7 @@ Last Updated: November 16, 2025
 - **Quality Automation** - Pre-commit hooks for linting, spell check, link validation
 
 ### ✅ **Documentation & Tooling** (Working)
+
 - **Pre-commit Hooks** - Markdown linting, spell checking, link validation
 - **Custom Dictionaries** - 200+ mortgage finance terms
 - **Link Validator** - Checks `{{include:}}` references
@@ -23,6 +25,7 @@ Last Updated: November 16, 2025
 ### 🚧 **Mock/Placeholder Features** (Design Only)
 
 #### AI/LLM Features
+
 - **RAG Assistant** - UI exists, uses mock responses
   - ❌ No real vector database
   - ❌ No LLM API integration
@@ -30,6 +33,7 @@ Last Updated: November 16, 2025
   - 📄 See: `public/sop-assistant.html`
 
 #### Access Control
+
 - **RBAC System** - Documented but not implemented
   - ❌ No authentication
   - ❌ No permission checks
@@ -37,6 +41,7 @@ Last Updated: November 16, 2025
   - 📄 See: `docs/RBAC_DESIGN.md`
 
 #### Analytics
+
 - **Usage Tracking** - Designed but not connected
   - ❌ No analytics service integrated
   - ❌ No tracking code active
@@ -66,6 +71,7 @@ Last Updated: November 16, 2025
 | **Knowledge Extraction** | 📋 Design | 0% | Future feature |
 
 **Legend:**
+
 - ✅ Production = Working and usable
 - ✅ Ready = Created but not tested in production
 - 🚧 Mock = UI exists but uses fake data
@@ -76,12 +82,14 @@ Last Updated: November 16, 2025
 ## 🚀 How to Run (Current State)
 
 ### Prerequisites
+
 ```bash
 node --version  # v20+ required
 npm --version   # v10+ required
 ```
 
 ### Quick Start
+
 ```bash
 cd C:\Users\camer\projects\SOPDemo
 
@@ -96,6 +104,7 @@ http://localhost:8080
 ```
 
 ### Key URLs
+
 - **Dashboard**: http://localhost:8080/public/dashboard.html
 - **AI Assistant**: http://localhost:8080/public/sop-assistant.html (mock)
 - **Templates**: http://localhost:8080/public/templates.html
@@ -132,6 +141,7 @@ http://localhost:8080
 If you want to implement production RAG, here's the path:
 
 ### 1. Choose Vector Database (Pick One)
+
 ```bash
 # Option A: Pinecone (Easiest)
 npm install @pinecone-database/pinecone
@@ -144,6 +154,7 @@ npm install @qdrant/js-client-rest
 ```
 
 ### 2. Get LLM API Access
+
 ```bash
 # OpenAI
 npm install openai
@@ -155,7 +166,9 @@ npm install @anthropic-ai/sdk
 ```
 
 ### 3. Update `sop-assistant.html`
+
 Replace the mock functions (lines 616-1045) with real API calls:
+
 ```javascript
 // Instead of generateMockResponse(), call actual LLM:
 const response = await fetch('/api/assistant/query', {
@@ -166,7 +179,9 @@ const response = await fetch('/api/assistant/query', {
 ```
 
 ### 4. Create Backend Endpoint
+
 Add to `server.js`:
+
 ```javascript
 app.post('/api/assistant/query', async (req, res) => {
   const { query, sources } = req.body;
@@ -208,10 +223,12 @@ app.post('/api/assistant/query', async (req, res) => {
 1. **Sign up**: https://plausible.io
 2. **Get tracking code**
 3. **Add to** `public/components/global-nav.html` before `</head>`:
+
 ```html
 <script defer data-domain="your-domain.com"
         src="https://plausible.io/js/script.js"></script>
 ```
+
 4. **Done!** View dashboard at plausible.io
 
 **Estimated Effort**: 30 minutes
@@ -224,18 +241,21 @@ app.post('/api/assistant/query', async (req, res) => {
 **⚠️ Warning: This is complex - defer until other features are done**
 
 ### Phase 1: Basic Auth
+
 1. Add Passport.js or Auth0
 2. Create user login page
 3. Session management
 4. Estimated: 1-2 weeks
 
 ### Phase 2: Permissions
+
 1. Implement role checking
 2. Add permission middleware
 3. Update UI to hide/show based on role
 4. Estimated: 2-3 weeks
 
 ### Phase 3: Workflows
+
 1. Build approval system
 2. Add notifications
 3. Create admin dashboard
@@ -251,6 +271,7 @@ app.post('/api/assistant/query', async (req, res) => {
 Based on ROI and user value:
 
 ### **Phase 1: Quick Wins** (2-3 weeks)
+
 1. ✅ CI/CD Pipeline - Already created, test it!
 2. 🔄 Production RAG - Make AI assistant real
 3. 🔄 Usage Analytics - Add Plausible tracking
@@ -258,6 +279,7 @@ Based on ROI and user value:
 **ROI**: $120K savings/year, 2-week effort
 
 ### **Phase 2: Foundation** (4-6 weeks)
+
 4. 🔄 Formal Ontology - Document graph schema
 5. 🔄 Enhanced Search - Real semantic search
 6. 🔄 Quality Metrics - Automated reporting
@@ -265,6 +287,7 @@ Based on ROI and user value:
 **ROI**: $84K additional savings/year
 
 ### **Phase 3: Enterprise** (8-12 weeks)
+
 7. 🔄 Compliance Engine - Automated checks
 8. 🔄 Knowledge Extraction - NLP pipeline
 9. 🔄 RBAC System - Full permissions
@@ -326,11 +349,13 @@ SOPDemo/
 ## 💰 Current vs Target ROI
 
 ### Current Demo Value
+
 - **Investment**: ~$50K (development time)
 - **Annual Savings**: $201K (from quality automation)
 - **3-Year ROI**: 605%
 
 ### With Full Implementation
+
 - **Additional Investment**: $345K over 12 months
 - **Total Annual Savings**: $729K
 - **3-Year ROI**: 532%
@@ -341,7 +366,9 @@ SOPDemo/
 ## 🎓 How to Demo This
 
 ### To Stakeholders
+
 **Show these working features:**
+
 1. Dashboard with clear calls-to-action
 2. Template library (9 professional templates)
 3. Comprehensive mortgage SOPs
@@ -350,13 +377,16 @@ SOPDemo/
 6. Pursuit Bank branding throughout
 
 **Explain these as "coming soon":**
+
 1. AI assistant (mock now, real with budget)
 2. Analytics dashboard (show design doc)
 3. RBAC (show design doc)
 4. Compliance automation (future phase)
 
 ### To Developers
+
 **Show the architecture:**
+
 1. Graph-based data model
 2. Git-based version control
 3. Quality automation (pre-commit hooks)
@@ -368,17 +398,20 @@ SOPDemo/
 ## 📞 Support & Next Steps
 
 ### Questions?
+
 - Check `docs/` folder for detailed design docs
 - Review RBAC_DESIGN.md for permission system
 - See ANALYTICS_SETUP.md for tracking guide
 
 ### Ready to Implement?
+
 1. **Start with CI/CD**: Test the GitHub Actions workflow
 2. **Add Analytics**: Sign up for Plausible (30min setup)
 3. **Plan RAG**: Budget for OpenAI/Pinecone APIs
 4. **Defer RBAC**: Wait until core features are done
 
 ### Contributing
+
 1. All changes via pull requests
 2. Pre-commit hooks will validate
 3. CI/CD will run on push
@@ -389,6 +422,7 @@ SOPDemo/
 ## 🏆 Success Metrics
 
 ### Current Demo
+
 - ✅ 6 comprehensive SOPs (4,000+ lines)
 - ✅ 15 pages with consistent branding
 - ✅ 9 professional templates
@@ -396,6 +430,7 @@ SOPDemo/
 - ✅ Server runs successfully
 
 ### When Fully Implemented
+
 - 🎯 80% search success rate
 - 🎯 50% reduction in SOP errors
 - 🎯 40% faster SOP discovery

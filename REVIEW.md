@@ -13,6 +13,7 @@
 The POC successfully demonstrates the core concepts of graph-based, modular SOP management with docs-as-code methodology. The architecture is sound, the tools are functional, and the concept is proven. However, there are several UX issues and opportunities for improvement that would make the system production-ready.
 
 ### ✅ Strengths
+
 - Solid graph-based architecture
 - Working automation tools
 - Clean validation system
@@ -20,6 +21,7 @@ The POC successfully demonstrates the core concepts of graph-based, modular SOP 
 - Comprehensive documentation
 
 ### ⚠️ Areas for Improvement
+
 - Component inclusion needs frontmatter stripping
 - HTML visualization could be more interactive
 - Impact analysis output could be more actionable
@@ -33,6 +35,7 @@ The POC successfully demonstrates the core concepts of graph-based, modular SOP 
 ### 1. Builder Tool (`build.js`) - ⭐⭐⭐⭐☆
 
 **What Works Well**:
+
 - ✅ Successfully assembles all 4 SOPs
 - ✅ Processes component includes correctly
 - ✅ Generates comprehensive metadata
@@ -43,6 +46,7 @@ The POC successfully demonstrates the core concepts of graph-based, modular SOP 
 **Issues Identified**:
 
 #### 🔴 **CRITICAL: Frontmatter Pollution**
+
 The biggest issue is that component frontmatter is being included in the final built SOPs:
 
 ```markdown
@@ -65,9 +69,11 @@ reusable: true
 **Fix Required**: Strip frontmatter before including component content
 
 #### 🟡 **MEDIUM: Nested Include Duplication**
+
 When a molecule includes an atom via `{{include}}`, and then the molecule itself is included in a SOP, we get nested frontmatter and potential content duplication.
 
 **Example**: In sop-002, the access-request-form appears twice because:
+
 1. It's directly in sop-002's components
 2. It's also included by molecule-credential-creation which is also in sop-002
 
@@ -75,12 +81,15 @@ When a molecule includes an atom via `{{include}}`, and then the molecule itself
 **Fix Required**: Smart deduplication or clear guidance on when to use direct components vs nested includes
 
 #### 🟡 **MEDIUM: No Progress Indicator for Large Builds**
+
 While the colored output is nice, there's no progress percentage or ETA for large builds.
 
 **Recommendation**: Add progress like "Building SOP 2 of 4 (50%)"
 
 #### 🟢 **MINOR: Build Report Could Include Metrics**
+
 The build report is functional but could include:
+
 - Total lines generated
 - Component reuse statistics
 - Build time per SOP
@@ -91,6 +100,7 @@ The build report is functional but could include:
 ### 2. Impact Analyzer (`impact-analysis.js`) - ⭐⭐⭐⭐⭐
 
 **What Works Exceptionally Well**:
+
 - ✅ Clear, hierarchical visualization of impact
 - ✅ Risk level calculation is sensible
 - ✅ Circular dependency detection works perfectly
@@ -100,6 +110,7 @@ The build report is functional but could include:
 - ✅ Depth limiting prevents infinite recursion
 
 **Example Output Analysis**:
+
 ```
 📊 Impact Analysis Results:
 ├─ Direct Impacts: 3
@@ -115,13 +126,17 @@ This is **excellent UX** - clear, concise, and actionable.
 **Minor Improvements**:
 
 #### 🟢 **MINOR: Add "What Changed" Section**
+
 When analyzing impact, it would be helpful to show:
+
 - What version is current
 - What the change might be (if analyzing a git diff)
 - Which specific sections are affected
 
 #### 🟢 **MINOR: Suggest Notification List**
+
 The analyzer knows who's affected - it could suggest:
+
 ```
 📧 Stakeholders to Notify:
 - HR Department (owner of sop-001)
@@ -138,6 +153,7 @@ The analyzer knows who's affected - it could suggest:
 **What Works Well**:
 
 #### HTML Format (Best)
+
 - ✅ Clean, modern design
 - ✅ Filtering by type works
 - ✅ Search functionality
@@ -147,6 +163,7 @@ The analyzer knows who's affected - it could suggest:
 - ✅ Shows dependencies clearly
 
 #### Mermaid Format (Excellent)
+
 - ✅ Valid Mermaid syntax
 - ✅ Proper node shapes for each type
 - ✅ Color styling with classDefs
@@ -154,6 +171,7 @@ The analyzer knows who's affected - it could suggest:
 - ✅ Renders perfectly in GitHub
 
 #### ASCII Format (Good for CLI)
+
 - ✅ Terminal-friendly
 - ✅ Shows basic structure
 - ✅ Includes statistics
@@ -164,6 +182,7 @@ The analyzer knows who's affected - it could suggest:
 
 Current state: List view only
 **Missing features** that would make it excellent:
+
 - Visual graph rendering (using D3.js, vis.js, or Cytoscape.js)
 - Click to expand/collapse dependencies
 - Zoom and pan for large graphs
@@ -173,12 +192,15 @@ Current state: List view only
 **Recommendation**: Add a visual network graph view alongside the list view
 
 #### 🟡 **MEDIUM: No Direct Links Between Nodes**
+
 In the HTML visualization, when it shows "Used By: sop-001", there's no clickable link to jump to that node.
 
 **Recommendation**: Make node references clickable
 
 #### 🟢 **MINOR: Auto-Refresh on HTML**
+
 The HTML has this commented out:
+
 ```javascript
 // Auto-refresh every 5 seconds
 setTimeout(() => location.reload(), 5000);
@@ -189,6 +211,7 @@ setTimeout(() => location.reload(), 5000);
 **Recommendation**: Make auto-refresh opt-in or remove it
 
 #### 🟢 **MINOR: DOT Format Not Tested**
+
 We generated DOT format but haven't verified it renders correctly with Graphviz.
 
 **Recommendation**: Add a test or documentation about rendering DOT files
@@ -200,6 +223,7 @@ We generated DOT format but haven't verified it renders correctly with Graphviz.
 ### 4. Validator (`validate.js`) - ⭐⭐⭐⭐⭐
 
 **What Works Exceptionally Well**:
+
 - ✅ Comprehensive validation checks
 - ✅ Clear error messages with context
 - ✅ Circular dependency detection
@@ -210,6 +234,7 @@ We generated DOT format but haven't verified it renders correctly with Graphviz.
 - ✅ Strict mode option
 
 **Example Output**:
+
 ```
 ✓ Graph has required fields
 ✓ Validated 11 nodes
@@ -223,7 +248,9 @@ We generated DOT format but haven't verified it renders correctly with Graphviz.
 **Minor Enhancement**:
 
 #### 🟢 **MINOR: Suggest Auto-Fixes**
+
 When validation fails, the validator could suggest:
+
 ```
 ✗ ERROR: Node sop-003 references non-existent component: molecule-quiz-completion
 
@@ -239,6 +266,7 @@ When validation fails, the validator could suggest:
 ### 5. Development Server (`serve.js`) - ⭐⭐⭐☆☆
 
 **What Works**:
+
 - ✅ Simple HTTP server works
 - ✅ Serves all file types correctly
 - ✅ Dynamic index page generation
@@ -248,7 +276,9 @@ When validation fails, the validator could suggest:
 **Issues**:
 
 #### 🟡 **MEDIUM: Auto-Refresh is Annoying**
+
 The index page auto-refreshes every 5 seconds, which:
+
 - Interrupts reading
 - Resets scroll position
 - Makes clicking links difficult
@@ -257,6 +287,7 @@ The index page auto-refreshes every 5 seconds, which:
 **Recommendation**: Remove auto-refresh or make it opt-in with a toggle button
 
 #### 🟡 **MEDIUM: No Markdown Rendering**
+
 When you click on a built SOP (`.md` file), it shows raw Markdown instead of rendered HTML.
 
 **Current**: User sees `# Welcome Message` and `## Your First Day`
@@ -265,16 +296,19 @@ When you click on a built SOP (`.md` file), it shows raw Markdown instead of ren
 **Recommendation**: Add markdown rendering with a library like `marked`
 
 #### 🟡 **MEDIUM: No Syntax Highlighting**
+
 JSON files show as plain text without syntax highlighting.
 
 **Recommendation**: Add syntax highlighting for JSON, Markdown, etc.
 
 #### 🟡 **MEDIUM: No Breadcrumbs or Navigation**
+
 When viewing a deep file like `/dist/sops/sop-001.md`, there's no easy way to navigate back.
 
 **Recommendation**: Add breadcrumb navigation
 
 #### 🟢 **MINOR: Missing Dark Mode**
+
 Modern documentation sites typically offer dark mode.
 
 **Overall**: Functional but basic. Needs markdown rendering at minimum.
@@ -286,6 +320,7 @@ Modern documentation sites typically offer dark mode.
 ### Terminal/CLI Experience - ⭐⭐⭐⭐⭐
 
 **Strengths**:
+
 - Color-coded output is **excellent**
 - Icons (📊, 🔨, ✓, ✗) make output scannable
 - Clear hierarchy with indentation
@@ -294,6 +329,7 @@ Modern documentation sites typically offer dark mode.
 - Consistent formatting across tools
 
 **Example** of great CLI UX:
+
 ```
 ═══════════════════════════════════════════════
    SOP Builder - Modular Documentation
@@ -305,6 +341,7 @@ Modern documentation sites typically offer dark mode.
 This is **industry-standard quality**. Well done!
 
 **Minor Issues**:
+
 - Some tools are verbose (could add `--quiet` flag)
 - No `--help` flag implementation
 - No `--version` flag
@@ -316,6 +353,7 @@ This is **industry-standard quality**. Well done!
 #### Design Assessment
 
 **Visual Design**: ⭐⭐⭐⭐☆
+
 - Modern gradient background
 - Good color scheme (purple gradient)
 - Proper whitespace
@@ -324,6 +362,7 @@ This is **industry-standard quality**. Well done!
 - Professional typography
 
 **Color Coding**: ⭐⭐⭐⭐⭐
+
 - SOPs: Blue
 - Organisms: Purple
 - Molecules: Green
@@ -332,6 +371,7 @@ This is **industry-standard quality**. Well done!
 This is **excellent** - each level clearly distinct, follows a logical hierarchy.
 
 **Information Hierarchy**: ⭐⭐⭐⭐☆
+
 ```
 Header
   ↓
@@ -349,11 +389,13 @@ Good flow. Natural reading order.
 #### Interaction Design
 
 **Filtering**: ⭐⭐⭐⭐☆
+
 - Dropdown works well
 - Instant filtering
 - Clear options
 
 **Search**: ⭐⭐⭐⭐☆
+
 - Highlights matches
 - Real-time filtering
 - Searches both ID and title
@@ -361,6 +403,7 @@ Good flow. Natural reading order.
 **Issue**: No "Clear Search" button
 
 **Navigation**: ⭐⭐☆☆☆
+
 - No clickable links between nodes
 - No "back to top" button
 - No smooth scrolling
@@ -369,6 +412,7 @@ Good flow. Natural reading order.
 #### Missing Interactive Features
 
 **What Users Expect** (based on modern doc sites):
+
 1. ❌ Visual network graph (not just list)
 2. ❌ Click to expand/collapse dependencies
 3. ❌ Hover tooltips with more info
@@ -378,6 +422,7 @@ Good flow. Natural reading order.
 7. ❌ Dark mode toggle
 
 **What We Have**:
+
 1. ✅ List view
 2. ✅ Filtering
 3. ✅ Search
@@ -413,16 +458,19 @@ Welcome to [Company Name]!
 ```
 
 **Problems**:
+
 1. Frontmatter creates visual clutter
-2. Multiple `# ` headings at the same level (confusing hierarchy)
+2. Multiple `#` headings at the same level (confusing hierarchy)
 3. Component metadata not useful to end users
 4. Repetitive content when atoms are nested
 
 **Who is the audience?**
+
 - If it's **developers/authors**: Frontmatter might be okay
 - If it's **end users** (employees following the SOP): This is confusing
 
 **Recommendation**:
+
 - Create two build targets:
   - `build --for-authors`: Includes all metadata
   - `build --for-users`: Clean, stripped output
@@ -455,6 +503,7 @@ Welcome to [Company Name]! We're thrilled...
 ```
 
 **Current vs Ideal**:
+
 - Current: Developer-focused, shows plumbing
 - Ideal: User-focused, shows only what's needed
 
@@ -493,6 +542,7 @@ Welcome to [Company Name]! We're thrilled...
 ```
 
 **Why this is excellent**:
+
 1. ✅ Nodes have all essential metadata
 2. ✅ Edges have semantic meaning (type, strength)
 3. ✅ Descriptions provide context
@@ -526,12 +576,14 @@ SOPs (📄) - Full Standard Operating Procedures
 ```
 
 **This maps perfectly** to:
+
 - Atoms = Reusable content blocks
 - Molecules = Standard procedures
 - Organisms = Business processes
 - SOPs = Policy documents
 
 **Evidence it works**:
+
 - `atom-access-request-form` is used in 3 places
 - Changes to an atom propagate predictably
 - Easy to understand at any level
@@ -543,6 +595,7 @@ SOPs (📄) - Full Standard Operating Procedures
 ### JavaScript Code - ⭐⭐⭐⭐☆
 
 **Strengths**:
+
 - ✅ Modern ES6+ syntax (import/export)
 - ✅ Consistent code style
 - ✅ Good error handling in most places
@@ -553,6 +606,7 @@ SOPs (📄) - Full Standard Operating Procedures
 **Issues**:
 
 #### 🟡 **MEDIUM: No Input Validation**
+
 Tools accept user input but don't validate thoroughly:
 
 ```javascript
@@ -563,6 +617,7 @@ await builder.build(sopId);  // No validation sopId exists
 **Could cause**: Confusing error messages
 
 #### 🟢 **MINOR: No JSDoc Comments**
+
 Functions lack JSDoc, making IDE autocomplete less helpful:
 
 ```javascript
@@ -575,6 +630,7 @@ async buildSOP(sopId) { ... }
 ```
 
 #### 🟢 **MINOR: Some Magic Numbers**
+
 ```javascript
 if (directCount <= 2 && !hasStrongDependencies) return 'low';
 if (directCount <= 5 || hasStrongDependencies) return 'medium';
@@ -591,6 +647,7 @@ These thresholds should be configurable constants.
 ### Build Performance - ⭐⭐⭐⭐☆
 
 **Current Performance** (4 SOPs, 9 components):
+
 - Build time: ~500ms
 - All builds successful
 - No memory issues
@@ -605,6 +662,7 @@ These thresholds should be configurable constants.
 | 500 | 2000 | ~60s+ | Need caching, parallel builds |
 
 **Recommendation**:
+
 - For < 100 SOPs: Current approach is fine
 - For > 100 SOPs: Add caching (build only changed SOPs)
 - For > 500 SOPs: Consider pre-built database
@@ -616,6 +674,7 @@ These thresholds should be configurable constants.
 ### README.md - ⭐⭐⭐⭐⭐
 
 **Outstanding documentation**:
+
 - ✅ Clear table of contents
 - ✅ Quick start section
 - ✅ Comprehensive examples
@@ -628,6 +687,7 @@ These thresholds should be configurable constants.
 **This is better than most open-source projects**. Genuinely impressive.
 
 **Minor additions** that could help:
+
 - Video walkthrough
 - FAQ section
 - Common pitfalls
@@ -648,6 +708,7 @@ These thresholds should be configurable constants.
 ### What Needs Work Before Production
 
 ⚠️ **Critical**:
+
 1. Fix frontmatter pollution in built SOPs
 2. Add markdown rendering to dev server
 3. Implement proper error handling everywhere
@@ -812,11 +873,13 @@ These thresholds should be configurable constants.
 **Scenario**: Company with 200 SOPs
 
 **Current State** (traditional approach):
+
 - 2 hours per SOP update (finding dependencies, updating links)
 - 10 SOPs updated per month
 - 20 hours/month = $2,000/month (at $100/hr)
 
 **With This System**:
+
 - 15 minutes per SOP update (just edit the component)
 - Automatic propagation
 - 2.5 hours/month = $250/month
@@ -824,6 +887,7 @@ These thresholds should be configurable constants.
 **Savings**: $1,750/month = $21,000/year
 
 **Plus intangibles**:
+
 - Reduced errors
 - Faster onboarding
 - Better compliance

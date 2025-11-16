@@ -12,6 +12,7 @@
 This document identifies **18 high-impact improvements** to enhance the SOP system using docs-as-code principles. Each improvement is prioritized by impact, effort, and ROI, with implementation examples.
 
 **Quick Wins (High Impact, Low Effort):**
+
 1. Pre-commit hooks for validation
 2. Pull request templates
 3. CODEOWNERS file
@@ -116,6 +117,7 @@ npx husky init
 ```
 
 **`.husky/pre-commit`:**
+
 ```bash
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
@@ -124,6 +126,7 @@ npx lint-staged
 ```
 
 **`package.json` addition:**
+
 ```json
 {
   "lint-staged": {
@@ -140,6 +143,7 @@ npx lint-staged
 ```
 
 **Benefits:**
+
 - Catch validation errors before commit
 - Auto-fix markdown formatting
 - Validate frontmatter structure
@@ -160,6 +164,7 @@ npx lint-staged
 **Implementation:**
 
 **`.github/PULL_REQUEST_TEMPLATE.md`:**
+
 ```markdown
 ## 📝 SOP Change Summary
 
@@ -247,6 +252,7 @@ npx lint-staged
 ```
 
 **Benefits:**
+
 - Standardized change documentation
 - Clear compliance tracking
 - Comprehensive review checklist
@@ -267,6 +273,7 @@ npx lint-staged
 **Implementation:**
 
 **`.github/CODEOWNERS`:**
+
 ```plaintext
 # Pursuit Bank SOP System - Code Owners
 # This file defines who should review changes to SOPs
@@ -305,6 +312,7 @@ npx lint-staged
 ```
 
 **Benefits:**
+
 - Automatic reviewer assignment
 - Clear ownership
 - Faster review routing
@@ -325,6 +333,7 @@ npx lint-staged
 **Implementation:**
 
 **`.github/ISSUE_TEMPLATE/sop-update.yml`:**
+
 ```yaml
 name: 📝 SOP Update Request
 description: Request an update to an existing SOP
@@ -431,6 +440,7 @@ body:
 ```
 
 **`.github/ISSUE_TEMPLATE/new-sop.yml`:**
+
 ```yaml
 name: ✨ New SOP Request
 description: Request creation of a new SOP
@@ -503,6 +513,7 @@ body:
 ```
 
 **Benefits:**
+
 - Structured change requests
 - Clear compliance tracking
 - Better prioritization
@@ -527,6 +538,7 @@ npm install --save-dev markdownlint-cli
 ```
 
 **`.markdownlintrc`:**
+
 ```json
 {
   "default": true,
@@ -547,6 +559,7 @@ npm install --save-dev markdownlint-cli
 ```
 
 **`package.json` script:**
+
 ```json
 {
   "scripts": {
@@ -557,12 +570,14 @@ npm install --save-dev markdownlint-cli
 ```
 
 **Add to CI (`.github/workflows/build-and-publish.yml`):**
+
 ```yaml
 - name: Lint Markdown
   run: npm run lint:md
 ```
 
 **Benefits:**
+
 - Consistent formatting
 - Improved readability
 - Fewer formatting debates
@@ -589,6 +604,7 @@ npm install --save-dev cspell
 ```
 
 **`cspell.json`:**
+
 ```json
 {
   "version": "0.2",
@@ -625,6 +641,7 @@ npm install --save-dev cspell
 ```
 
 **`dictionaries/mortgage-finance.txt`:**
+
 ```
 AUS
 DTI
@@ -639,12 +656,14 @@ FHA
 ```
 
 **CI Integration:**
+
 ```yaml
 - name: Spell Check
   run: npx cspell "sops/**/*.md" "*.md"
 ```
 
 **Benefits:**
+
 - Catch typos before publication
 - Maintain professionalism
 - Custom finance dictionary
@@ -669,6 +688,7 @@ npm install --save-dev markdown-link-check
 ```
 
 **`tools/check-links.js`:**
+
 ```javascript
 #!/usr/bin/env node
 
@@ -707,6 +727,7 @@ checkLinks();
 ```
 
 **`.markdown-link-check.json`:**
+
 ```json
 {
   "ignorePatterns": [
@@ -732,6 +753,7 @@ checkLinks();
 ```
 
 **Benefits:**
+
 - Catch broken links before merge
 - Validate external references
 - Custom pattern ignoring
@@ -752,6 +774,7 @@ checkLinks();
 **Implementation:**
 
 **`.github/workflows/sop-diff.yml`:**
+
 ```yaml
 name: SOP Change Detection
 
@@ -822,6 +845,7 @@ jobs:
 ```
 
 **Benefits:**
+
 - Clear change visibility
 - Automated diff generation
 - Review checklist reminders
@@ -846,6 +870,7 @@ npm install --save-dev conventional-changelog-cli
 ```
 
 **Conventional Commit Format:**
+
 ```
 <type>(<scope>): <subject>
 
@@ -855,6 +880,7 @@ npm install --save-dev conventional-changelog-cli
 ```
 
 **Types:**
+
 - `feat`: New SOP or major procedure addition
 - `fix`: Correction to existing SOP
 - `docs`: Documentation updates
@@ -863,6 +889,7 @@ npm install --save-dev conventional-changelog-cli
 - `regulatory`: Regulatory change implementation
 
 **Example:**
+
 ```
 compliance(sop-mf-003): update MIP rates per HUD ML 2025-14
 
@@ -877,6 +904,7 @@ Training: Required
 ```
 
 **`package.json` script:**
+
 ```json
 {
   "scripts": {
@@ -886,6 +914,7 @@ Training: Required
 ```
 
 **Benefits:**
+
 - Automated changelog generation
 - Standardized commit messages
 - Better release notes
@@ -906,6 +935,7 @@ Training: Required
 **Implementation:**
 
 **`templates/sop-mortgage-underwriting.md`:**
+
 ```markdown
 ---
 id: sop-mf-XXX
@@ -1084,6 +1114,7 @@ Before beginning this process, ensure:
 ```
 
 **Template Validation Script (`tools/validate-template.js`):**
+
 ```javascript
 #!/usr/bin/env node
 
@@ -1130,6 +1161,7 @@ async function validateSOPTemplate(filePath) {
 ```
 
 **Benefits:**
+
 - Consistent structure
 - Complete documentation
 - Validation enforcement
@@ -1157,6 +1189,7 @@ npm install --save-dev markdown-pdf
 ```
 
 **`tools/generate-pdf.js`:**
+
 ```javascript
 #!/usr/bin/env node
 
@@ -1192,6 +1225,7 @@ generatePDFs();
 ```
 
 **`templates/pdf-styles.css`:**
+
 ```css
 @page {
   margin: 1in;
@@ -1254,6 +1288,7 @@ code {
 ```
 
 **CI Integration:**
+
 ```yaml
 - name: Generate PDFs
   run: npm run pdf:generate
@@ -1266,6 +1301,7 @@ code {
 ```
 
 **Benefits:**
+
 - Automated PDF generation
 - Printable compliance copies
 - Branded formatting
@@ -1286,6 +1322,7 @@ code {
 **Implementation:**
 
 **`public/sop-version-compare.html`:**
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -1352,6 +1389,7 @@ code {
 ```
 
 **Benefits:**
+
 - Visual change comparison
 - Side-by-side or unified view
 - Highlight added/removed/changed
@@ -1372,6 +1410,7 @@ code {
 **Implementation:**
 
 **`tools/compliance-report.js`:**
+
 ```javascript
 #!/usr/bin/env node
 
@@ -1497,6 +1536,7 @@ generateComplianceReport();
 ```
 
 **Benefits:**
+
 - Compliance visibility
 - Review tracking
 - Framework coverage
@@ -1517,6 +1557,7 @@ generateComplianceReport();
 **Implementation:**
 
 **Enhance frontmatter:**
+
 ```yaml
 training:
   required: true
@@ -1537,6 +1578,7 @@ training:
 ```
 
 **Benefits:**
+
 - Linked training content
 - Automated quiz generation
 - Training compliance tracking
@@ -1555,6 +1597,7 @@ training:
 **Solution:** Comprehensive metrics dashboard.
 
 **Metrics to Track:**
+
 - Total SOPs by category
 - SOPs updated in last 30/60/90 days
 - Average time since last review
@@ -1567,6 +1610,7 @@ training:
 - Validation error trends
 
 **Benefits:**
+
 - System health visibility
 - Proactive maintenance
 - Stakeholder reporting
@@ -1579,6 +1623,7 @@ training:
 ## Implementation Roadmap
 
 ### Week 1-2: Quick Wins
+
 - [ ] Pre-commit hooks (1 day)
 - [ ] PR template (2 hours)
 - [ ] CODEOWNERS (2 hours)
@@ -1589,6 +1634,7 @@ training:
 **Impact:** High
 
 ### Week 3-5: High-Value
+
 - [ ] Spell checking (4 hours)
 - [ ] Link validation (1 day)
 - [ ] SOP change detection (1 day)
@@ -1599,6 +1645,7 @@ training:
 **Impact:** High
 
 ### Week 6-12: Strategic
+
 - [ ] PDF export (3 days)
 - [ ] Version comparison UI (3 days)
 - [ ] Compliance tracking (4 days)
@@ -1613,18 +1660,21 @@ training:
 ## Success Metrics
 
 ### Efficiency Gains
+
 - **Time saved per SOP update:** 30%
 - **Review cycle time:** -50%
 - **Onboarding time for new authors:** -40%
 - **Compliance reporting time:** -70%
 
 ### Quality Improvements
+
 - **Broken links:** 0
 - **Spelling errors:** <1 per 1000 words
 - **Formatting consistency:** 95%+
 - **Template compliance:** 100%
 
 ### Adoption Metrics
+
 - **PR template usage:** 100%
 - **Conventional commit usage:** 80%+
 - **Pre-commit hook adoption:** 100%
@@ -1635,12 +1685,14 @@ training:
 ## Budget & Resources
 
 ### Tool Costs
+
 - **GitHub Actions:** Included (existing)
 - **npm packages:** Free (all open source)
 - **PDF generation:** Free (pandoc/markdown-pdf)
 - **Total additional cost:** $0/month
 
 ### Development Time
+
 - **Phase 1:** 2 days
 - **Phase 2:** 6 days
 - **Phase 3:** 20 days
@@ -1649,6 +1701,7 @@ training:
 ### ROI Calculation
 
 **Monthly time savings:**
+
 - Pre-commit validation: 8 hours
 - Automated linting: 2 hours
 - Link checking: 8 hours
@@ -1674,12 +1727,14 @@ training:
 These 15 improvements transform the SOP system into a world-class docs-as-code implementation. Starting with quick wins provides immediate value, while strategic enhancements build long-term capability.
 
 **Recommended Approach:**
+
 1. Implement Phase 1 (Quick Wins) immediately
 2. Gather feedback and metrics
 3. Prioritize Phase 2 based on feedback
 4. Plan Phase 3 for ongoing improvement
 
 **Next Steps:**
+
 1. Review and approve improvement plan
 2. Create implementation tickets
 3. Assign development resources

@@ -35,10 +35,13 @@ tags:
 ## 🎯 Overview
 
 ### Purpose
+
 This SOP establishes comprehensive underwriting standards for Federal Housing Administration (FHA) insured mortgage loans. FHA loans provide flexible qualification standards with down payments as low as 3.5%, making homeownership accessible to first-time buyers and borrowers with limited savings or credit challenges. This SOP ensures compliant underwriting that balances borrower accessibility with sound risk management.
 
 ### Scope
+
 **Applies to:**
+
 - All FHA-insured forward mortgages (purchase and rate/term refinance)
 - FHA 203(b) standard program
 - FHA 203(k) rehabilitation loans
@@ -47,11 +50,13 @@ This SOP establishes comprehensive underwriting standards for Federal Housing Ad
 - AUS-approved FHA loans requiring manual validation
 
 **Does NOT apply to:**
+
 - Reverse mortgages / HECM (see separate guidelines)
 - FHA-to-FHA streamline refinances without appraisal (see SOP-MF-014)
 - Construction-to-permanent loans (see SOP-MF-015)
 
 ### Key Statistics (2024 Performance)
+
 - **Annual FHA Volume:** 892 loans ($184M)
 - **Average Loan Amount:** $206,500
 - **Average Credit Score:** 658
@@ -65,9 +70,10 @@ This SOP establishes comprehensive underwriting standards for Federal Housing Ad
 
 ## 📋 Prerequisites
 
-### Before Underwriting FHA Loan:
+### Before Underwriting FHA Loan
 
 #### Required Documentation (Per {{include: sop-mf-008}})
+
 - [ ] Complete 1003 Uniform Residential Loan Application
 - [ ] FHA case number assigned via FHA Connection
 - [ ] Credit report (tri-merge, <120 days old, min 2 bureaus)
@@ -79,6 +85,7 @@ This SOP establishes comprehensive underwriting standards for Federal Housing Ad
 - [ ] Borrower authorization forms (4506-C, credit, etc.)
 
 #### System Requirements
+
 - Access to FHA Connection for case management
 - Access to TOTAL Scorecard (AUS)
 - Access to CAIVRS (Credit Alert System)
@@ -86,6 +93,7 @@ This SOP establishes comprehensive underwriting standards for Federal Housing Ad
 - FHA Handbook 4000.1 reference guide
 
 #### Key Dates and Deadlines
+
 - **Credit report expiration:** 120 days from date pulled
 - **Appraisal expiration:** 120 days from effective date (150 days for new construction)
 - **VOE/VOD expiration:** 120 days from date issued
@@ -107,6 +115,7 @@ This SOP establishes comprehensive underwriting standards for Federal Housing Ad
 | **Below 500** | NOT ELIGIBLE | N/A |
 
 **Important Notes:**
+
 - FHA does not use "credit score cutoffs" - entire credit profile evaluated
 - Non-traditional credit acceptable if borrower has no credit score
 - Derogatory credit events require waiting periods (see below)
@@ -123,12 +132,14 @@ This SOP establishes comprehensive underwriting standards for Federal Housing Ad
 | **Loan Modification** | No waiting period | If performing as agreed |
 
 **Extenuating Circumstances Criteria:**
+
 - Loss of employment (beyond borrower control)
 - Serious illness or death of wage earner
 - Unexpected increase in debt (medical, disaster)
 - Must show 12+ months re-established creditworthiness
 
 **Example:**
+
 ```
 Borrower: John Smith
 Event: Chapter 7 Bankruptcy discharged 03/15/2023
@@ -146,6 +157,7 @@ Manual Underwrite: Required to document extenuating circumstances
 #### Debt-to-Income (DTI) Ratios
 
 **Maximum DTI with AUS Approval:**
+
 - **No limit** if TOTAL Scorecard returns "Accept"
 - Common range: 31% front-end / 43% back-end
 - DTI up to 56.9% acceptable with strong compensating factors
@@ -160,6 +172,7 @@ Manual Underwrite: Required to document extenuating circumstances
 | **500-579** | 31% | 43% | Maximum (compensating factors do not allow higher) |
 
 **DTI Calculation Formula:**
+
 ```
 PITI = Principal + Interest + Taxes + Insurance + HOA + MIP
 Monthly Housing Payment (Front-End) = PITI ÷ Gross Monthly Income
@@ -167,6 +180,7 @@ Total Monthly Obligations (Back-End) = (PITI + All Debts) ÷ Gross Monthly Incom
 ```
 
 **Debts Included in DTI:**
+
 - All monthly housing payment (PITI + MIP + HOA)
 - Installment debt (>10 months remaining)
 - Revolving debt (min payment or 5% of balance, whichever higher)
@@ -175,6 +189,7 @@ Total Monthly Obligations (Back-End) = (PITI + All Debts) ÷ Gross Monthly Incom
 - Student loans (actual payment or 0.5% of balance if $0 payment)
 
 **Debts Excluded from DTI:**
+
 - Installment debt with ≤10 months remaining
 - Authorized user accounts (unless making payments)
 - Business debts (if on credit but paid by business with 12+ month history)
@@ -191,6 +206,7 @@ For manually underwritten loans, borrower must have sufficient residual income a
 | 5+ persons | $921 |
 
 **Calculation:**
+
 ```
 Gross Monthly Income: $5,500
 Less: Federal/State/Local taxes: -$1,100
@@ -208,6 +224,7 @@ Meets Requirement: YES ✓
 ### Property Eligibility
 
 #### Eligible Property Types
+
 - [ ] 1-unit principal residence
 - [ ] 2-4 unit principal residence (owner-occupied)
 - [ ] FHA-approved condominium projects
@@ -215,6 +232,7 @@ Meets Requirement: YES ✓
 - [ ] New construction (builder warranty required)
 
 #### Ineligible Property Types
+
 - ❌ Investment properties (non-owner occupied)
 - ❌ Vacation homes / second homes
 - ❌ Co-ops (unless in approved pilot program)
@@ -226,6 +244,7 @@ Meets Requirement: YES ✓
 Must meet **Minimum Property Standards (MPS)** and **Minimum Property Requirements (MPR)**:
 
 **MPR Checklist:**
+
 - [ ] Safe, sound, and secure (structurally sound)
 - [ ] Protects health and safety of occupants
 - [ ] Free of defective construction or conditions
@@ -237,6 +256,7 @@ Must meet **Minimum Property Standards (MPS)** and **Minimum Property Requiremen
 - [ ] Vehicular access to public street
 
 **Common MPR Deficiencies:**
+
 - Peeling/flaking paint (pre-1978 homes)
 - Missing/broken handrails
 - GFCI outlets missing in wet areas
@@ -253,6 +273,7 @@ Must meet **Minimum Property Standards (MPS)** and **Minimum Property Requiremen
 ### Step 1: Receive Loan File from Processing
 
 #### Initial File Review
+
 - [ ] FHA case number assigned and active
 - [ ] CAIVRS clearance obtained (no federal debt delinquencies)
 - [ ] All required documents present and current
@@ -262,12 +283,14 @@ Must meet **Minimum Property Standards (MPS)** and **Minimum Property Requiremen
 #### Determine Underwriting Path
 
 **Path A: AUS Accept/Eligible**
+
 - TOTAL Scorecard returned "Accept/Eligible"
 - Proceed with streamlined AUS underwriting
 - Validate key findings, minimal compensating factors needed
 - Typical turn time: 1-2 days
 
 **Path B: AUS Refer**
+
 - TOTAL Scorecard returned "Refer" (unable to approve via AUS)
 - Proceed to manual underwriting
 - Full documentation and analysis required
@@ -275,6 +298,7 @@ Must meet **Minimum Property Standards (MPS)** and **Minimum Property Requiremen
 - Typical turn time: 3-5 days
 
 **Path C: AUS Refer with Correctable Issues**
+
 - TOTAL returned "Refer" due to data errors or missing info
 - Correct errors and resubmit to AUS
 - Common: income miscoded, debts omitted, wrong property type
@@ -285,6 +309,7 @@ Must meet **Minimum Property Standards (MPS)** and **Minimum Property Requiremen
 **Access:** FHA Connection → TOTAL Scorecard
 
 **Required Data Fields:**
+
 - Borrower information (SSN, DOB, current address)
 - Employment and income details
 - Assets (down payment + reserves)
@@ -303,6 +328,7 @@ Must meet **Minimum Property Standards (MPS)** and **Minimum Property Requiremen
 | **Out of Scope** | Loan type not eligible for FHA | Stop processing, convert to conventional or deny |
 
 **Common "Refer" Reasons:**
+
 - DTI >56.9% (exceeds AUS max)
 - Credit score <580 (manual underwrite required)
 - Insufficient credit history (thin file)
@@ -320,6 +346,7 @@ Print and save TOTAL findings to loan file. This is required for quality control
 #### Pull and Review Credit Report
 
 **Requirements:**
+
 - Tri-merge credit report from approved vendor
 - All 3 bureaus (Equifax, Experian, TransUnion)
 - Residential Mortgage Credit Report (RMCR) format
@@ -329,6 +356,7 @@ Print and save TOTAL findings to loan file. This is required for quality control
 Use **middle score** of borrower (or lowest middle score if multiple borrowers):
 
 **Example (Single Borrower):**
+
 ```
 Equifax: 642
 Experian: 658
@@ -337,6 +365,7 @@ Representative Score: 651 (middle of three)
 ```
 
 **Example (Multiple Borrowers):**
+
 ```
 Borrower 1:          Borrower 2:
 Equifax: 680         Equifax: 620
@@ -351,6 +380,7 @@ Representative Score: 635 (lowest middle score - used for pricing)
 #### Analyze Credit History
 
 **Review for:**
+
 - Payment history (last 12-24 months)
 - Outstanding balances on revolving accounts
 - Derogatory events (lates, collections, chargeoffs, judgments)
@@ -370,23 +400,27 @@ Representative Score: 635 (lowest middle score - used for pricing)
 **Derogatory Credit Events - Analysis:**
 
 **Late Payments:**
+
 - Isolated 30-day late: Generally acceptable with explanation
 - Pattern of 30-day lates: Requires explanation, shows payment behavior
 - 60-day late within 12 months: Red flag, requires strong explanation
 - 90+ day late within 12 months: Requires explanation + compensating factors
 
 **Collections/Chargeoffs:**
+
 - Medical collections: Disregard (per FHA policy update)
 - Non-medical collections <$2,000 aggregate: Disregard
 - Non-medical collections ≥$2,000: Must pay off or set up payment plan
 - Disputed collections: Obtain letter from creditor validating dispute
 
 **Judgments/Tax Liens:**
+
 - Outstanding judgments: Must be paid off before closing OR payment plan with 3+ months history
 - Federal tax liens: Must have IRS payment plan with 3+ months on-time payments
 - State/local tax liens: Case-by-case, prefer paid off
 
 **Example Credit Analysis:**
+
 ```
 Borrower: Sarah Johnson
 Credit Score: 658 (Equifax), 671 (Experian), 663 (TransUnion)
@@ -422,6 +456,7 @@ If borrower has **no credit score** or **insufficient tradelines** for score:
 **Requirement:** Minimum 3 tradelines with 12+ month history
 
 **Acceptable Tradelines:**
+
 - Rental history (verified with landlord, 12+ months)
 - Utility payments (phone, electric, water, gas)
 - Insurance payments (car, renters, life)
@@ -430,11 +465,13 @@ If borrower has **no credit score** or **insufficient tradelines** for score:
 - Medical payments
 
 **Documentation:**
+
 - 12-month history of payments
 - Cancelled checks, bank statements, or letters from payees
 - Must show consistent on-time payments (no 30+ day lates)
 
 **Example Non-Traditional Credit File:**
+
 ```
 Borrower: Maria Gonzalez (Recent immigrant, no US credit)
 
@@ -469,17 +506,20 @@ Assessment: ACCEPTABLE - Meets 3-tradeline requirement
 **Standard Employment (W-2 Wage Earner):**
 
 **Required Documentation:**
+
 - Most recent 30 days paystubs showing YTD earnings
 - W-2s for most recent 2 years
 - Written VOE or verbal VOE with paystub within 30 days of closing
 - Federal tax returns (1040) for most recent 2 years
 
 **Stability Requirement:**
+
 - 2+ years in same line of work (not necessarily same employer)
 - Job changes acceptable if in same field or advancement
 - Recent job change (<6 months) requires explanation
 
 **Income Calculation:**
+
 ```
 Example: Salary Employee
 
@@ -504,11 +544,13 @@ If borrower has **overtime, bonus, commission, or variable hours:**
 **Requirement:** 2-year history with likelihood of continuance
 
 **Calculation:**
+
 - Average last 2 years
 - If declining trend, use lower amount or exclude
 - If increasing trend, document reason and likelihood to continue
 
 **Example:**
+
 ```
 Hourly Employee with Overtime:
 
@@ -536,6 +578,7 @@ Calculation:
 **Self-Employed Income:**
 
 **Requirements:**
+
 - 2 years tax returns (1040 + business returns)
 - YTD profit & loss statement
 - Business license (if required)
@@ -543,6 +586,7 @@ Calculation:
 
 **Calculation:**
 Use **business cash flow analysis** - add back non-cash expenses:
+
 ```
 Per Tax Return (Schedule C or Partnership K-1):
 
@@ -584,6 +628,7 @@ Qualifying Income: $5,987.50/month
 #### Acceptable Source of Funds
 
 **Acceptable Assets:**
+
 - Checking/savings accounts (2-month statements)
 - Retirement accounts (401k, IRA, etc.) - with vesting/penalty considered
 - Stocks, bonds, mutual funds (recent statement)
@@ -592,6 +637,7 @@ Qualifying Income: $5,987.50/month
 - Employer assistance programs (documented)
 
 **Unacceptable Assets:**
+
 - Cash on hand (undocumented)
 - Unsecured borrowed funds (personal loans)
 - Credit card cash advances
@@ -602,24 +648,28 @@ Qualifying Income: $5,987.50/month
 **FHA allows 100% of down payment and closing costs from gift funds**
 
 **Requirements:**
+
 - [ ] Gift letter signed by donor (FHA model form)
 - [ ] Evidence of donor's ability to give (bank statement showing funds)
 - [ ] Evidence of transfer to borrower (wire confirmation, cancelled check)
 - [ ] If cash gift, must be deposited and seasoned 60+ days
 
 **Acceptable Donors:**
+
 - Family member (related by blood, marriage, adoption, legal guardianship)
 - Employer or labor union
 - Charitable organization
 - Government agency or public entity
 
 **Unacceptable Donors:**
+
 - Seller or anyone with financial interest in sale
 - Real estate agent or broker
 - Builder or developer
 - Lender or mortgage broker
 
 **Gift Letter Template:**
+
 ```
 GIFT LETTER
 
@@ -655,6 +705,7 @@ Borrower Signature: ________________  Date: ______
 However, reserves strengthen the file and provide compensating factors:
 
 **Reserve Calculation:**
+
 ```
 Monthly PITI + MIP + HOA = Housing Payment
 Reserves = Liquid Assets ÷ Housing Payment
@@ -672,6 +723,7 @@ Compensating Factor: YES (6 months reserves)
 Any **single deposit >50% of total monthly income** requires source documentation:
 
 **Acceptable Sources:**
+
 - Payroll deposit (paystub matches)
 - Tax refund (copy of refund check/1040)
 - Transfer from known account (statement showing withdrawal)
@@ -679,11 +731,13 @@ Any **single deposit >50% of total monthly income** requires source documentatio
 - Sale of asset (bill of sale, previous ownership docs)
 
 **Unacceptable Explanations:**
+
 - "Savings" (must show where saved from)
 - "Sold item" (without documentation)
 - "Borrowed from friend" (unsecured loan not allowed for down payment)
 
 **Example:**
+
 ```
 Bank Statement: September 2025
 Regular Deposits: $3,800 (paystub), $3,800 (paystub)
@@ -711,10 +765,12 @@ FHA requires **both** upfront and annual mortgage insurance:
 **Current Rate: 1.75% of base loan amount**
 
 Can be:
+
 - Paid in cash at closing, OR
 - Financed into loan amount (most common)
 
 **Calculation:**
+
 ```
 Base Loan Amount: $200,000
 UFMIP: $200,000 × 1.75% = $3,500
@@ -733,6 +789,7 @@ Max LTV check:
 #### Annual Mortgage Insurance Premium (Annual MIP)
 
 **Rates vary by:**
+
 - Base loan amount
 - LTV ratio
 - Loan term
@@ -747,6 +804,7 @@ Max LTV check:
 | **>$726,200** (30-year) | 0.80% | 1.05% | 1.05% |
 
 **Monthly Payment Calculation:**
+
 ```
 Loan Amount: $203,500 (includes UFMIP)
 LTV: 96.5% (>95%)
@@ -762,6 +820,7 @@ Included in PITI+MIP payment for DTI calculation
 #### MIP Cancellation
 
 **FHA loans originated after June 3, 2013:**
+
 - **LTV ≤90% at origination:** MIP cancels after 11 years
 - **LTV >90% at origination:** MIP for life of loan (never cancels)
 
@@ -774,25 +833,29 @@ This is a key disclosure to borrower - MIP does not automatically cancel at 78% 
 #### FHA Appraisal Requirements
 
 **Must be:**
+
 - [ ] Completed by FHA-approved appraiser on FHA Roster
 - [ ] URAR form (Fannie Mae 1004) with FHA addendum
 - [ ] Contains FHA case number
 - [ ] Effective date <120 days old (150 for new construction)
 - [ ] Meets Minimum Property Requirements (MPR)
 
-#### Review Appraisal for:
+#### Review Appraisal for
 
 **Value:**
+
 - Appraised value supports loan amount
 - Value is reasonable compared to sales price
 - Comparable sales are recent and similar
 
 **Property Condition:**
+
 - No MPR deficiencies noted
 - All deficiencies require repair/correction
 - Appraiser noted "subject to" conditions
 
 **Health and Safety:**
+
 - No peeling paint (pre-1978 homes)
 - No structural damage
 - All systems functional
@@ -801,11 +864,13 @@ This is a key disclosure to borrower - MIP does not automatically cancel at 78% 
 **Required Repairs:**
 
 If appraiser notes deficiencies:
+
 1. **Required Repairs:** Must be completed before closing
 2. **Completion Certificate:** Appraiser or inspector confirms completion
 3. **Escrow for Repairs:** Allowed for minor items <$5,000
 
 **Common Required Repairs:**
+
 - Handrail installation/repair
 - GFCI outlets in wet areas
 - Peeling/flaking paint remediation
@@ -822,24 +887,28 @@ If TOTAL Scorecard returned "Refer," full manual underwriting analysis required:
 #### Four Key Areas of Analysis
 
 **1. Credit:**
+
 - Credit score ≥580 (or 500-579 with 10% down)
 - Acceptable payment history
 - Derogatory events explained with extenuating circumstances
 - 12+ months re-established credit after major event
 
 **2. Capacity (Income/DTI):**
+
 - Stable income with 2+ year history
 - Income sufficient for debt obligations
 - DTI within limits (31%/43% or with compensating factors)
 - Residual income meets minimum threshold
 
 **3. Collateral (Property):**
+
 - Appraised value supports loan
 - Property meets MPR standards
 - No title issues or liens
 - Marketable property in stable area
 
 **4. Capital (Assets):**
+
 - Sufficient funds for down payment + closing costs
 - Source of funds documented
 - Reserves (if any) add strength to file
@@ -849,6 +918,7 @@ If TOTAL Scorecard returned "Refer," full manual underwriting analysis required:
 If DTI exceeds 31%/43%, **minimum ONE compensating factor required:**
 
 **Acceptable Compensating Factors:**
+
 - [ ] Excellent credit history (no derogatory items, 720+ score)
 - [ ] Conservative use of consumer credit (low balances, low utilization)
 - [ ] Minimal increase in housing payment (new payment ≤current rent/payment)
@@ -860,6 +930,7 @@ If DTI exceeds 31%/43%, **minimum ONE compensating factor required:**
 - [ ] Down payment >10% (10%+ equity position)
 
 **Example Manual Underwrite:**
+
 ```
 Borrower: Michael Johnson
 Credit Score: 658
@@ -900,6 +971,7 @@ Decision: APPROVED with compensating factors
 #### Decision Options
 
 **Approval:**
+
 ```
 APPROVAL LETTER
 
@@ -929,6 +1001,7 @@ TOTAL Scorecard Reference: N/A (Manual Underwrite)
 ```
 
 **Suspension (More Info Needed):**
+
 ```
 LOAN SUSPENDED - Additional Information Required
 
@@ -957,6 +1030,7 @@ Date: 09/15/2025
 ```
 
 **Denial:**
+
 ```
 ADVERSE ACTION NOTICE
 
@@ -990,6 +1064,7 @@ This is an Adverse Action Notice pursuant to the Equal Credit Opportunity Act.
 ## ✅ Quality Control Checks
 
 **Pre-Decision QC:**
+
 - [ ] All 4 Cs analyzed (Credit, Capacity, Collateral, Capital)
 - [ ] Income calculations verified and documented
 - [ ] DTI calculated correctly (housing + all debts)
@@ -1002,6 +1077,7 @@ This is an Adverse Action Notice pursuant to the Equal Credit Opportunity Act.
 - [ ] Reserves calculated (if applicable)
 
 **Post-Decision QC:**
+
 - [ ] Approval conditions clear and specific
 - [ ] Conditions can reasonably be satisfied
 - [ ] Denial reasons comply with ECOA (specific, not discriminatory)
@@ -1017,6 +1093,7 @@ This is an Adverse Action Notice pursuant to the Equal Credit Opportunity Act.
 ### Issue: Borrower has No Credit Score (Non-Traditional Credit)
 
 **Resolution:**
+
 1. Explain to borrower that FHA allows non-traditional credit
 2. Obtain 12-month payment history for minimum 3 tradelines:
    - Rent (landlord verification or cancelled checks)
@@ -1033,6 +1110,7 @@ This is an Adverse Action Notice pursuant to the Equal Credit Opportunity Act.
 ### Issue: DTI Exceeds 43% (Manual Underwrite)
 
 **Resolution:**
+
 1. Verify DTI calculation is correct:
    - Include ALL debts with >10 months remaining
    - Include student loans (even if deferred, use 0.5% of balance)
@@ -1055,6 +1133,7 @@ This is an Adverse Action Notice pursuant to the Equal Credit Opportunity Act.
 ### Issue: Recent Bankruptcy or Foreclosure
 
 **Resolution:**
+
 1. Determine type of event and completion date:
    - Chapter 7 Bankruptcy: 2 years from discharge (1 year with extenuating circumstances)
    - Chapter 13 Bankruptcy: 1 year of payment plan
@@ -1081,6 +1160,7 @@ This is an Adverse Action Notice pursuant to the Equal Credit Opportunity Act.
 ### Issue: Appraisal Shows Required Repairs
 
 **Resolution:**
+
 1. Review appraiser's requirements - categorize:
    - **Health & Safety:** Must be completed before closing
    - **Minor Repairs:** May escrow if <$5,000
@@ -1101,6 +1181,7 @@ This is an Adverse Action Notice pursuant to the Equal Credit Opportunity Act.
 ### Issue: Large Undocumented Deposit
 
 **Resolution:**
+
 1. Identify all deposits >50% of monthly income
 2. Request explanation and documentation from borrower
 3. Acceptable documentation:
@@ -1123,23 +1204,27 @@ This is an Adverse Action Notice pursuant to the Equal Credit Opportunity Act.
 ## 📚 References and Resources
 
 ### FHA Guidelines
+
 - **FHA Handbook 4000.1** - Single Family Housing Policy Handbook (primary reference)
 - **HUD Mortgagee Letters** - Policy updates and clarifications
 - **FHA Connection** - Case management and TOTAL Scorecard access
 - **HUD-FHA INFO** - 1-800-CALL-FHA for technical support
 
 ### Related SOPs
+
 - {{include: sop-mf-002}} - Automated Underwriting System (AUS) Processing
 - {{include: sop-mf-008}} - Income Documentation and Verification Standards
 - {{include: sop-mf-009}} - Appraisal Review and Property Valuation
 - {{include: sop-mf-013}} - Borrower Identity Verification
 
 ### Training and Certification
+
 - **Required Training:** FHA 203(b) Underwriting Basics (8 hours)
 - **Annual Refresher:** FHA Policy Updates (4 hours)
 - **Certification:** FHA DE Underwriter (for Direct Endorsement authority)
 
 ### Forms and Worksheets
+
 - Form HUD-92900-A: HUD/VA Addendum to Uniform Residential Appraisal Report
 - Form HUD-92800.5B: Conditional Commitment Direct Endorsement
 - Manual Underwriting Worksheet (internal form)

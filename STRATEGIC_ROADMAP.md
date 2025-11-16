@@ -114,6 +114,7 @@ This document outlines the strategic roadmap for evolving our SOP ecosystem POC 
 #### Month 1: Infrastructure & Governance
 
 **Week 1-2: Governance Structure**
+
 - [ ] Define Change Advisory Board (CAB) charter
 - [ ] Identify CAB members (cross-functional representation)
 - [ ] Document approval authorities and escalation paths
@@ -121,6 +122,7 @@ This document outlines the strategic roadmap for evolving our SOP ecosystem POC 
 - [ ] Define SLA targets (time-to-publish, approval SLAs)
 
 **Week 3-4: Technical Infrastructure**
+
 - [ ] Deploy Neo4j graph database (Docker/Cloud)
 - [ ] Set up GitHub Actions / GitLab CI pipeline
 - [ ] Configure branch protection rules
@@ -128,6 +130,7 @@ This document outlines the strategic roadmap for evolving our SOP ecosystem POC 
 - [ ] Set up Slack/Teams notifications for workflow events
 
 **Deliverables:**
+
 - ✅ CAB charter and governance documentation
 - ✅ Graph database operational
 - ✅ CI/CD pipeline running basic validation
@@ -136,6 +139,7 @@ This document outlines the strategic roadmap for evolving our SOP ecosystem POC 
 #### Month 2: Document Ingestion Pipeline
 
 **Week 1-2: Ingestion Architecture**
+
 - [ ] Design ingestion pipeline architecture
 - [ ] Implement PDF parser (Apache Tika)
 - [ ] Add OCR capability (Tesseract) for scanned documents
@@ -143,6 +147,7 @@ This document outlines the strategic roadmap for evolving our SOP ecosystem POC 
 - [ ] Create ingestion API endpoints
 
 **Week 3-4: Quality Gates 1-3**
+
 - [ ] Implement Gate 1: Format validation (schema compliance)
 - [ ] Implement Gate 2: Structure recognition (document parsing)
 - [ ] Implement Gate 3: Reference integrity (link checking)
@@ -150,6 +155,7 @@ This document outlines the strategic roadmap for evolving our SOP ecosystem POC 
 - [ ] Add quality scoring to validation report
 
 **Deliverables:**
+
 - ✅ Ingestion pipeline handling 3+ formats
 - ✅ First 3 quality gates operational
 - ✅ Quality dashboard showing pass/fail status
@@ -164,6 +170,7 @@ This document outlines the strategic roadmap for evolving our SOP ecosystem POC 
 #### Month 3: Semantic Enrichment
 
 **Week 1-2: Entity Extraction**
+
 - [ ] Implement NLP pipeline for entity recognition
   - Extract: roles, systems, processes, compliance requirements
 - [ ] Build terminology dictionary/ontology
@@ -171,12 +178,14 @@ This document outlines the strategic roadmap for evolving our SOP ecosystem POC 
 - [ ] Add confidence scoring to extractions
 
 **Week 3-4: Relationship Discovery**
+
 - [ ] Implement relationship extraction (depends-on, component-of, etc.)
 - [ ] Build dependency graph enrichment
 - [ ] Add compliance mapping automation
 - [ ] Create impact radius calculation
 
 **Deliverables:**
+
 - ✅ Entities extracted from pilot SOPs
 - ✅ Relationships mapped in knowledge graph
 - ✅ Compliance requirements traced
@@ -185,6 +194,7 @@ This document outlines the strategic roadmap for evolving our SOP ecosystem POC 
 #### Month 4: Complete Quality Framework
 
 **Week 1-2: Remaining Quality Gates**
+
 - [ ] Implement Gate 4: Semantic enrichment quality
 - [ ] Implement Gate 5: Content coverage validation
 - [ ] Implement Gate 6: Compliance mapping verification
@@ -192,6 +202,7 @@ This document outlines the strategic roadmap for evolving our SOP ecosystem POC 
 - [ ] Implement Gate 8: Performance metrics
 
 **Week 3-4: Workflow Integration**
+
 - [ ] Build approval workflow in CI/CD
 - [ ] Integrate CAB review checkpoints
 - [ ] Add multi-stakeholder sign-off for high-impact changes
@@ -199,6 +210,7 @@ This document outlines the strategic roadmap for evolving our SOP ecosystem POC 
 - [ ] Create escalation automation (SLA breach alerts)
 
 **Deliverables:**
+
 - ✅ All 8 quality gates operational
 - ✅ Approval workflow enforced in pipeline
 - ✅ CAB review process functioning
@@ -214,12 +226,14 @@ This document outlines the strategic roadmap for evolving our SOP ecosystem POC 
 #### Month 5: Portfolio Expansion
 
 **Week 1-2: Bulk Ingestion**
+
 - [ ] Ingest remaining SOP portfolio (prioritized batches)
 - [ ] Validate all SOPs through quality gates
 - [ ] Address common quality issues (batch remediation)
 - [ ] Build cross-SOP dependency map
 
 **Week 3-4: Continuous Monitoring**
+
 - [ ] Implement daily validation jobs (link checking, format)
 - [ ] Add weekly semantic validation (entity/relationship drift)
 - [ ] Create monthly compliance audits
@@ -227,6 +241,7 @@ This document outlines the strategic roadmap for evolving our SOP ecosystem POC 
 - [ ] Add staleness detection (last-modified tracking)
 
 **Deliverables:**
+
 - ✅ Full SOP portfolio ingested
 - ✅ Continuous monitoring operational
 - ✅ Automated remediation for common issues
@@ -235,12 +250,14 @@ This document outlines the strategic roadmap for evolving our SOP ecosystem POC 
 #### Month 6: Optimization & Rollout
 
 **Week 1-2: Performance Optimization**
+
 - [ ] Optimize graph queries (indexing, caching)
 - [ ] Tune pipeline performance (parallel processing)
 - [ ] Add performance monitoring and SLA tracking
 - [ ] Implement rate limiting and resource quotas
 
 **Week 3-4: Organization Rollout**
+
 - [ ] Conduct user training (content creators, approvers, consumers)
 - [ ] Create user guides and video tutorials
 - [ ] Establish support process (helpdesk, Slack channel)
@@ -248,6 +265,7 @@ This document outlines the strategic roadmap for evolving our SOP ecosystem POC 
 - [ ] Celebrate launch! 🎉
 
 **Deliverables:**
+
 - ✅ System meeting performance SLAs
 - ✅ Users trained and onboarded
 - ✅ Support process operational
@@ -287,9 +305,11 @@ This document outlines the strategic roadmap for evolving our SOP ecosystem POC 
 ## Quality Gates Framework (Detailed)
 
 ### Gate 1: Format Validation
+
 **Type:** Blocking
 **Trigger:** Document upload/commit
 **Checks:**
+
 - Valid file format (PDF, DOCX, MD, etc.)
 - Schema compliance (required frontmatter fields)
 - Character encoding correctness
@@ -301,9 +321,11 @@ This document outlines the strategic roadmap for evolving our SOP ecosystem POC 
 ---
 
 ### Gate 2: Structure Recognition
+
 **Type:** Blocking
 **Trigger:** After format validation passes
 **Checks:**
+
 - Document structure successfully parsed
 - Required sections present (Overview, Procedure, etc.)
 - Headings hierarchy valid
@@ -315,9 +337,11 @@ This document outlines the strategic roadmap for evolving our SOP ecosystem POC 
 ---
 
 ### Gate 3: Reference Integrity
+
 **Type:** Blocking
 **Trigger:** After structure recognition
 **Checks:**
+
 - All internal links point to valid sections
 - All cross-references to other SOPs exist
 - External URLs accessible (HTTP 200 check)
@@ -329,9 +353,11 @@ This document outlines the strategic roadmap for evolving our SOP ecosystem POC 
 ---
 
 ### Gate 4: Semantic Enrichment
+
 **Type:** Non-blocking (flags for review)
 **Trigger:** After reference validation
 **Checks:**
+
 - Entities extractable with >70% confidence
 - Relationships identifiable
 - Terminology consistent with ontology
@@ -343,9 +369,11 @@ This document outlines the strategic roadmap for evolving our SOP ecosystem POC 
 ---
 
 ### Gate 5: Content Coverage
+
 **Type:** Non-blocking (quality score impact)
 **Trigger:** After semantic enrichment
 **Checks:**
+
 - Minimum word count met per section
 - All required metadata populated
 - Procedure steps numbered and complete
@@ -357,9 +385,11 @@ This document outlines the strategic roadmap for evolving our SOP ecosystem POC 
 ---
 
 ### Gate 6: Compliance Mapping
+
 **Type:** Blocking for regulated SOPs
 **Trigger:** After content coverage
 **Checks:**
+
 - Regulatory requirements traced
 - Compliance statements present
 - Audit trail metadata complete
@@ -371,9 +401,11 @@ This document outlines the strategic roadmap for evolving our SOP ecosystem POC 
 ---
 
 ### Gate 7: Dependency Analysis
+
 **Type:** Non-blocking (approval impact)
 **Trigger:** After compliance mapping
 **Checks:**
+
 - Affected SOPs identified
 - Impact radius calculated
 - Breaking changes flagged
@@ -385,9 +417,11 @@ This document outlines the strategic roadmap for evolving our SOP ecosystem POC 
 ---
 
 ### Gate 8: Performance Metrics
+
 **Type:** Non-blocking (monitoring only)
 **Trigger:** Throughout pipeline
 **Checks:**
+
 - Processing time within SLA
 - Resource utilization acceptable
 - No memory leaks or errors
@@ -503,29 +537,35 @@ This document outlines the strategic roadmap for evolving our SOP ecosystem POC 
 ### Immediate (Phase 1)
 
 **Graph Database:**
+
 - **Recommended:** Neo4j Community (free) or Aura (cloud)
 - **Alternative:** Amazon Neptune (if AWS-native)
 - **Rationale:** Native graph queries, mature ecosystem, visualization tools
 
 **CI/CD:**
+
 - **Recommended:** GitHub Actions (if on GitHub) or GitLab CI
 - **Rationale:** Native integration, easy to configure, extensive marketplace
 
 **Document Processing:**
+
 - **Recommended:** Apache Tika + Tesseract OCR
 - **Rationale:** Open source, handles 1000+ formats, battle-tested
 
 ### Near-Term (Phase 2)
 
 **Workflow Engine:**
+
 - **Recommended:** Temporal.io or Camunda
 - **Rationale:** Complex approval flows, retry logic, audit trails
 
 **Search:**
+
 - **Recommended:** Elasticsearch or Meilisearch
 - **Rationale:** Fast semantic search, faceting, highlighting
 
 **NLP/Entity Extraction:**
+
 - **Recommended:** spaCy + custom training
 - **Alternative:** OpenAI API (faster to deploy, less customizable)
 - **Rationale:** Domain-specific entity recognition requires customization
@@ -533,14 +573,17 @@ This document outlines the strategic roadmap for evolving our SOP ecosystem POC 
 ### Long-Term (Phase 3+)
 
 **Monitoring:**
+
 - **Recommended:** Prometheus + Grafana
 - **Rationale:** Industry standard, rich visualization, alerting
 
 **Notification:**
+
 - **Recommended:** Slack/Teams webhooks + email
 - **Rationale:** Meet users where they are
 
 **Analytics:**
+
 - **Recommended:** Metabase or Apache Superset
 - **Rationale:** Self-service BI for quality metrics
 
@@ -580,6 +623,7 @@ This document outlines the strategic roadmap for evolving our SOP ecosystem POC 
 ## Next Actions (Immediate)
 
 ### Week 1-2: Strategic Alignment
+
 1. **Review this roadmap** with stakeholders
 2. **Secure executive sponsorship** (identify C-level champion)
 3. **Form Change Advisory Board** (recruit members)
@@ -587,6 +631,7 @@ This document outlines the strategic roadmap for evolving our SOP ecosystem POC 
 5. **Define success criteria** (align on metrics)
 
 ### Week 3-4: Technical Foundation
+
 1. **Deploy Neo4j** (Docker local or Aura cloud trial)
 2. **Set up GitHub Actions** (basic CI pipeline)
 3. **Create CAB charter** (governance document)
@@ -594,6 +639,7 @@ This document outlines the strategic roadmap for evolving our SOP ecosystem POC 
 5. **Establish weekly standup** (track progress)
 
 ### Month 2: First Deliverables
+
 1. **Ingestion pipeline MVP** (PDF + Markdown at minimum)
 2. **Quality gates 1-3 operational** (format, structure, references)
 3. **CAB first meeting** (review charter, process, pilot SOPs)

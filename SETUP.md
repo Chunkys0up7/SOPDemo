@@ -60,12 +60,14 @@ npm install
 ```
 
 **Expected output:**
+
 ```
 added 2 packages, and audited 3 packages in 2s
 found 0 vulnerabilities
 ```
 
 **Packages installed:**
+
 - `marked` - For markdown rendering
 - `js-yaml` - For YAML parsing
 
@@ -82,6 +84,7 @@ ls -la
 ```
 
 **You should see:**
+
 ```
 .git/
 .github/
@@ -117,6 +120,7 @@ npm run validate
 ```
 
 **Expected output:**
+
 ```
 ═══════════════════════════════════════════════
         SOP Validation Tool
@@ -151,6 +155,7 @@ STATUS: ✓ VALIDATION PASSED
 **✅ If you see "VALIDATION PASSED" - Perfect! Continue to next step.**
 
 **❌ If validation fails:**
+
 - Make sure you're in the correct directory
 - Try `npm install` again
 - Check that all files were cloned correctly
@@ -166,6 +171,7 @@ npm run build
 ```
 
 **Expected output:**
+
 ```
 ═══════════════════════════════════════════
    SOP Builder - Modular Documentation
@@ -196,11 +202,13 @@ Build Summary
 ```
 
 **Check the output:**
+
 ```bash
 ls -lh dist/sops/
 ```
 
 **You should see 7 SOP files:**
+
 ```
 sop-001.md    16K
 sop-002.md    25K
@@ -222,6 +230,7 @@ npm run impact -- atom-access-request-form
 ```
 
 **Expected output:**
+
 ```
 ═══════════════════════════════════════════════
      SOP Impact Analysis - Change Propagation
@@ -246,6 +255,7 @@ npm run impact -- atom-access-request-form
 ```
 
 **Try analyzing different components:**
+
 ```bash
 npm run impact -- atom-confidentiality-agreement
 npm run impact -- molecule-approval-chain
@@ -265,6 +275,7 @@ npm run visualize -- --format=html
 ```
 
 **Output:**
+
 ```
 ✓ Visualization saved to: /path/to/dist/visualizations/sop-graph.html
 
@@ -272,6 +283,7 @@ npm run visualize -- --format=html
 ```
 
 **Open the file:**
+
 - **Mac**: `open dist/visualizations/sop-graph.html`
 - **Linux**: `xdg-open dist/visualizations/sop-graph.html`
 - **Windows**: `start dist/visualizations/sop-graph.html`
@@ -287,6 +299,7 @@ npm run visualize -- --format=mermaid
 Creates: `dist/visualizations/sop-graph.mermaid.md`
 
 **View it:**
+
 ```bash
 cat dist/visualizations/sop-graph.mermaid.md
 ```
@@ -310,6 +323,7 @@ npm run serve
 ```
 
 **Expected output:**
+
 ```
 ═══════════════════════════════════════════════
      SOP Documentation Server
@@ -322,11 +336,13 @@ Press Ctrl+C to stop
 ```
 
 **Open in your browser:**
+
 ```
 http://localhost:8080
 ```
 
 **You'll see:**
+
 - Dashboard with statistics
 - List of all built SOPs
 - List of visualizations
@@ -456,16 +472,21 @@ npm run visualize -- --format=html
 ## 🐛 Troubleshooting
 
 ### Problem: "npm: command not found"
+
 **Solution:** Install Node.js from https://nodejs.org/
 
 ### Problem: "Cannot find module 'marked'"
+
 **Solution:**
+
 ```bash
 npm install
 ```
 
 ### Problem: "Validation failed"
+
 **Solution:**
+
 ```bash
 # Check what's wrong
 npm run validate
@@ -475,7 +496,9 @@ npm run validate
 ```
 
 ### Problem: "Build creates empty files"
+
 **Solution:**
+
 ```bash
 # Make sure components directory exists
 ls -la sop-components/
@@ -489,7 +512,9 @@ npm run build
 ```
 
 ### Problem: "Server won't start"
+
 **Solution:**
+
 ```bash
 # Port 8080 might be in use
 npm run serve -- --port=3000
@@ -504,7 +529,9 @@ netstat -ano | findstr :8080
 ```
 
 ### Problem: "Impact analysis shows errors"
+
 **Solution:**
+
 ```bash
 # Make sure graph is valid
 npm run validate
@@ -514,7 +541,9 @@ npm run impact -- atom-welcome-message
 ```
 
 ### Problem: "Visualizations not generating"
+
 **Solution:**
+
 ```bash
 # Check dist directory exists
 mkdir -p dist/visualizations
@@ -547,23 +576,27 @@ After setup, verify everything works:
 ## 🎓 Next Steps
 
 ### 1. Explore the System
+
 - Open the interactive HTML visualization
 - Click through SOPs in the web server
 - Run impact analysis on different components
 - Read through the test data documentation
 
 ### 2. Learn the Architecture
+
 - Read `README.md` for complete overview
 - Check `TEST_DATA.md` for component details
 - Review `REVIEW.md` for deep analysis
 
 ### 3. Try Making Changes
+
 - Modify a component
 - Add a new atom using the template
 - Update the graph structure
 - Rebuild and see the changes
 
 ### 4. Understand the Tools
+
 - Study `tools/build.js` to see how assembly works
 - Review `tools/impact-analysis.js` for dependency tracking
 - Examine `tools/visualize.js` for graph generation

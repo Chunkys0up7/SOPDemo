@@ -36,6 +36,7 @@ This document specifies the technical architecture for ingesting documents from 
 ```
 
 **Implementation:**
+
 - **Manual Upload:** Web form (drag-drop) → uploads to S3/local storage → triggers pipeline
 - **File Share:** Watchdog daemon monitors directories → detects new files → queues for processing
 - **Email:** Dedicated email address → mail server hook → extracts attachments → queue
@@ -45,8 +46,10 @@ This document specifies the technical architecture for ingesting documents from 
 - **API:** REST endpoint `/api/v1/ingest` → authentication → validation → queue
 
 **Queue Design:**
+
 - Use **message queue** (RabbitMQ, AWS SQS, or Redis Queue)
 - Message format:
+
 ```json
 {
   "ingestion_id": "uuid",
@@ -548,6 +551,7 @@ class SemanticEnricher:
 **Graph Storage Steps:**
 
 1. **Node Creation (SOP)**
+
    ```cypher
    CREATE (s:SOP {
      id: 'sop-001',
@@ -563,6 +567,7 @@ class SemanticEnricher:
    ```
 
 2. **Entity Nodes**
+
    ```cypher
    CREATE (r:Role {name: 'IT Administrator'})
    CREATE (sys:System {name: 'Active Directory'})
@@ -570,6 +575,7 @@ class SemanticEnricher:
    ```
 
 3. **Relationship Edges**
+
    ```cypher
    MATCH (s1:SOP {id: 'sop-001'}), (s2:SOP {id: 'sop-002'})
    CREATE (s1)-[:DEPENDS_ON {strength: 'strong', description: 'Requires IT system access'}]->(s2)
@@ -888,18 +894,21 @@ quality_scores = Histogram('quality_scores', 'SOP quality scores')
 ## Testing Strategy
 
 ### Unit Tests
+
 - Each parser (PDF, DOCX, Markdown)
 - Each quality gate in isolation
 - Entity extraction accuracy (F1 score > 0.85)
 - Relationship extraction precision/recall
 
 ### Integration Tests
+
 - End-to-end ingestion flow (happy path)
 - Error scenarios (corrupted PDF, empty document)
 - Retry logic (simulated transient failures)
 - Quality gate composition (all gates in sequence)
 
 ### Performance Tests
+
 - Load testing: 100 concurrent uploads
 - Bulk ingestion: 1000 SOPs in batch
 - Large documents: 200-page PDF with OCR
@@ -910,18 +919,21 @@ quality_scores = Histogram('quality_scores', 'SOP quality scores')
 ## Deployment \& Rollout
 
 ### Phase 1: Pilot (Month 2)
+
 - Deploy to dev environment
 - Ingest 10-15 pilot SOPs
 - Validate accuracy manually
 - Tune quality thresholds
 
 ### Phase 2: Staging (Month 3-4)
+
 - Deploy to staging environment
 - Bulk ingest historical SOPs (100+)
 - User acceptance testing
 - Performance benchmarking
 
 ### Phase 3: Production (Month 5+)
+
 - Phased rollout to production
 - Monitor error rates closely
 - Collect user feedback

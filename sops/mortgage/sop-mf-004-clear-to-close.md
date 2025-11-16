@@ -36,12 +36,14 @@ tags:
 ## 🎯 Overview
 
 ### Purpose
+
 This SOP establishes the comprehensive verification process to issue "Clear to Close" (CTC) status for mortgage loans. CTC is the final quality control checkpoint before scheduling closing and funding, ensuring all underwriting conditions are satisfied, documentation is complete, and the loan complies with investor, regulatory, and internal requirements. **No loan shall proceed to closing without documented CTC approval.**
 
 ###
 
  Scope
 **Applies to:**
+
 - All loan types before closing (conventional, FHA, VA, USDA, jumbo)
 - Purchase and refinance transactions
 - All loan amounts and property types
@@ -49,11 +51,13 @@ This SOP establishes the comprehensive verification process to issue "Clear to C
 - Manually underwritten loans
 
 **Critical Timing:**
+
 - CTC must be issued BEFORE Closing Disclosure (CD) final delivery
 - Minimum 24-hour buffer between CTC and closing (best practice: 48 hours)
 - Closing cannot occur without valid CTC status
 
 ### Key Statistics (2024 Performance)
+
 - **Annual CTC Volume:** 4,847 loans cleared
 - **Average Time to CTC:** 2.3 days from final condition receipt
 - **CTC Rescind Rate:** 1.2% (58 loans rescinded after initial CTC)
@@ -63,6 +67,7 @@ This SOP establishes the comprehensive verification process to issue "Clear to C
 - **Investor Purchase Rate:** 100% (no loans rejected by investors)
 
 **Quality Metrics:**
+
 - Zero early funding violations (TRID 3-day waiting period)
 - Zero post-closing regulatory violations
 - 99.6% loan documentation accuracy
@@ -74,6 +79,7 @@ This SOP establishes the comprehensive verification process to issue "Clear to C
 Before beginning CTC review, verify the following are in the loan file:
 
 ### Underwriting Requirements
+
 - [ ] **Final loan approval** from underwriter (signed approval letter)
 - [ ] **All conditions cleared** (Prior-to-Doc and Prior-to-Fund conditions satisfied)
 - [ ] **Final credit report** pulled (<120 days old, no new derogatory items)
@@ -85,6 +91,7 @@ Before beginning CTC review, verify the following are in the loan file:
 - [ ] **Investor approval** (if selling loan) or warehouse approval (if keeping)
 
 ### TRID Compliance Requirements (Per {{include: sop-mf-010}})
+
 - [ ] **Initial Loan Estimate** delivered within 3 business days of application
 - [ ] **Initial Closing Disclosure** delivered at least 3 business days before consummation
 - [ ] **APR tolerance** within 0.125% of LE (or redisclosure completed if exceeded)
@@ -92,6 +99,7 @@ Before beginning CTC review, verify the following are in the loan file:
 - [ ] **Changed circumstances** documented if fees changed
 
 ### System Requirements
+
 - Access to Loan Origination System (LOS)
 - Access to document imaging system
 - Access to Final CD and LE comparison tool
@@ -107,6 +115,7 @@ This comprehensive 75-point checklist must be completed for every loan:
 ### Section 1: Borrower and Property Verification (10 points)
 
 #### 1.1 Borrower Identity
+
 - [ ] **1.1.1** Borrower name(s) match across all documents (application, credit, title, CD)
 - [ ] **1.1.2** SSN matches across all documents (4506-C, credit, W-2s)
 - [ ] **1.1.3** Current address verified and matches credit report
@@ -114,6 +123,7 @@ This comprehensive 75-point checklist must be completed for every loan:
 - [ ] **1.1.5** No identity fraud indicators (OFAC, fraud alerts, suspicious activity)
 
 **Documentation:**
+
 ```
 Verification Log:
 Borrower: John Michael Smith
@@ -134,6 +144,7 @@ Identity Verified: YES ✓
 ```
 
 #### 1.2 Property Verification
+
 - [ ] **1.2.1** Property address matches across all documents (appraisal, title, CD, contract)
 - [ ] **1.2.2** Legal description matches title commitment and appraisal
 - [ ] **1.2.3** Property type confirmed (SFR, condo, 2-4 unit, etc.)
@@ -141,6 +152,7 @@ Identity Verified: YES ✓
 - [ ] **1.2.5** Property value supports loan amount (LTV within limits)
 
 **Example:**
+
 ```
 Property: 123 Oak Street, Austin, TX 78701
 Legal Description: Lot 15, Block 3, Oak Hills Subdivision, Travis County, TX
@@ -166,6 +178,7 @@ Property Verified: YES ✓
 ### Section 2: Credit and Liabilities Verification (12 points)
 
 #### 2.1 Final Credit Report Review
+
 - [ ] **2.1.1** Credit report <120 days old at closing date
 - [ ] **2.1.2** Soft credit re-pull completed within 10 days of closing (verify no new debt)
 - [ ] **2.1.3** Credit score supports loan program (no score drop below minimums)
@@ -173,6 +186,7 @@ Property Verified: YES ✓
 - [ ] **2.1.5** All collections >$1,000 paid off or in payment plan (if required by investor)
 
 **Soft Credit Re-Pull Example:**
+
 ```
 Original Credit Report: August 15, 2025
 Representative Score: 658
@@ -199,6 +213,7 @@ Cleared for Closing: YES ✓
 ```
 
 #### 2.2 Debt-to-Income (DTI) Verification
+
 - [ ] **2.2.1** All liabilities from credit report included in DTI
 - [ ] **2.2.2** Student loans calculated correctly (payment or 0.5% of balance)
 - [ ] **2.2.3** Alimony/child support included (if applicable)
@@ -208,6 +223,7 @@ Cleared for Closing: YES ✓
 - [ ] **2.2.7** Paid-off debts verified if used to qualify
 
 **DTI Re-Calculation:**
+
 ```
 Final DTI Verification (at CTC):
 
@@ -244,6 +260,7 @@ Within Guidelines: YES ✓
 ### Section 3: Income and Employment Verification (15 points)
 
 #### 3.1 Employment Verification
+
 - [ ] **3.1.1** Verbal VOE completed within 10 days of closing (required)
 - [ ] **3.1.2** Borrower still employed at same company
 - [ ] **3.1.3** Income confirmed unchanged or increased
@@ -251,6 +268,7 @@ Within Guidelines: YES ✓
 - [ ] **3.1.5** Final paystub dated within 30 days of closing
 
 **Verbal VOE Documentation:**
+
 ```
 VERBAL VERIFICATION OF EMPLOYMENT
 
@@ -283,6 +301,7 @@ Action: Cleared for closing
 ```
 
 #### 3.2 Income Documentation
+
 - [ ] **3.2.1** Income calculations match underwriting approval
 - [ ] **3.2.2** Final paystub YTD earnings support projected annual income
 - [ ] **3.2.3** Self-employed: YTD P&L shows consistent income
@@ -290,6 +309,7 @@ Action: Cleared for closing
 - [ ] **3.2.5** Social Security/pension: Award letter or statement in file
 
 #### 3.3 Asset Verification
+
 - [ ] **3.3.1** Bank statements current (dated within 90 days of closing)
 - [ ] **3.3.2** Funds sufficient for closing costs + down payment + reserves
 - [ ] **3.3.3** Large deposits explained and sourced
@@ -297,6 +317,7 @@ Action: Cleared for closing
 - [ ] **3.3.5** No overdrafts or NSF fees on final statements
 
 **Final Asset Verification:**
+
 ```
 Required Funds at Closing (per Final CD):
 Down Payment: $21,000
@@ -326,6 +347,7 @@ Verification: Sufficient funds CONFIRMED ✓
 ### Section 4: Appraisal and Property Condition (8 points)
 
 #### 4.1 Appraisal Review
+
 - [ ] **4.1.1** Appraisal dated within 120 days of closing (150 for new construction)
 - [ ] **4.1.2** Appraised value ≥ purchase price (or loan amount if refi)
 - [ ] **4.1.3** No adverse conditions noted requiring further review
@@ -333,12 +355,14 @@ Verification: Sufficient funds CONFIRMED ✓
 - [ ] **4.1.5** Property condition meets investor standards (FHA MPR, conventional, etc.)
 
 #### 4.2 Required Repairs
+
 - [ ] **4.2.1** All required repairs completed (if applicable)
 - [ ] **4.2.2** Completion certificate from appraiser or inspector received
 - [ ] **4.2.3** Photos of completed repairs in file
 - [ ] **4.2.4** OR repair escrow established per investor guidelines (if allowed)
 
 **Example Repair Completion:**
+
 ```
 Appraisal Dated: 09/15/2025
 Required Repairs Noted:
@@ -367,6 +391,7 @@ Cleared: YES ✓
 ### Section 5: Title and Legal (10 points)
 
 #### 5.1 Title Review
+
 - [ ] **5.1.1** Title commitment or update received and reviewed
 - [ ] **5.1.2** Seller has clear title (no unacceptable liens or encumbrances)
 - [ ] **5.1.3** Required Schedule B exceptions cleared or accepted by underwriter
@@ -374,6 +399,7 @@ Cleared: YES ✓
 - [ ] **5.1.5** No title issues preventing closing
 
 **Title Commitment Review:**
+
 ```
 Title Commitment: First American Title
 Commitment Date: 09/25/2025
@@ -401,6 +427,7 @@ Title Insurance: Clear to insure ✓
 ```
 
 #### 5.2 Vesting and Ownership
+
 - [ ] **5.2.1** Title vesting matches borrower intent (sole, joint tenants, community property)
 - [ ] **5.2.2** Non-purchasing spouse signature obtained (if required by state)
 - [ ] **5.2.3** Entity vesting (LLC, trust) has proper authorization docs
@@ -412,6 +439,7 @@ Title Insurance: Clear to insure ✓
 ### Section 6: Insurance Requirements (5 points)
 
 #### 6.1 Homeowner's Insurance
+
 - [ ] **6.1.1** Insurance binder or policy received
 - [ ] **6.1.2** Coverage amount ≥ loan amount or replacement cost
 - [ ] **6.1.3** Lender named as mortgagee/loss payee (exact name match)
@@ -419,6 +447,7 @@ Title Insurance: Clear to insure ✓
 - [ ] **6.1.5** First year premium paid or will be paid at closing (receipt or on CD)
 
 **Insurance Verification:**
+
 ```
 Insurance Binder Review:
 Company: State Farm Insurance
@@ -452,6 +481,7 @@ Verified: Insurance adequate and compliant ✓
 ### Section 7: Closing Disclosure Review (15 points)
 
 #### 7.1 CD Accuracy
+
 - [ ] **7.1.1** All borrower and property information correct
 - [ ] **7.1.2** Loan amount, interest rate, monthly payment match approval
 - [ ] **7.1.3** Loan terms (fixed/ARM, years, prepayment penalty) correct
@@ -460,6 +490,7 @@ Verified: Insurance adequate and compliant ✓
 - [ ] **7.1.6** Cash to close reconciles (LE to CD comparison)
 
 #### 7.2 TRID Compliance
+
 - [ ] **7.1.7** Initial CD delivered ≥3 business days before consummation
 - [ ] **7.1.8** APR tolerance: Within 0.125% of LE (or redisclosed if exceeded)
 - [ ] **7.1.9** Zero tolerance fees: No increase (loan origination, transfer taxes)
@@ -468,6 +499,7 @@ Verified: Insurance adequate and compliant ✓
 - [ ] **7.1.12** Revised CD provided if fees changed requiring redisclosure
 
 **TRID Tolerance Analysis:**
+
 ```
 Loan Estimate (LE) vs Final Closing Disclosure (CD):
 
@@ -507,6 +539,7 @@ Redisclosure Required: NO
 ### Section 8: Funding and Wire Authorization (10 points)
 
 #### 8.1 Investor/Warehouse Approval
+
 - [ ] **8.1.1** Investor purchase commitment received (if selling)
 - [ ] **8.1.2** Warehouse line approval obtained (if keeping temporarily)
 - [ ] **8.1.3** Funding amount confirmed
@@ -514,6 +547,7 @@ Redisclosure Required: NO
 - [ ] **8.1.5** Rate lock still active (or extended if needed)
 
 #### 8.2 Wire Transfer Preparation (Per {{include: sop-mf-005}})
+
 - [ ] **8.2.1** Wire instructions received from title company/attorney
 - [ ] **8.2.2** Wire amount calculated (loan amount - fees + escrows)
 - [ ] **8.2.3** Callback verification of wire instructions completed
@@ -527,12 +561,14 @@ Redisclosure Required: NO
 ### Step 1: Receive Final Conditions from Underwriter
 
 When underwriter issues final approval with conditions:
+
 1. Review approval letter for all Prior-to-Doc (PTD) and Prior-to-Fund (PTF) conditions
 2. Create condition tracking checklist in LOS
 3. Assign conditions to appropriate staff (processor, closer, borrower)
 4. Set target date for condition receipt (usually 48 hours before closing)
 
 **Example Conditions:**
+
 ```
 LOAN APPROVAL WITH CONDITIONS
 
@@ -559,6 +595,7 @@ Eligible for CTC: YES
 ### Step 2: Verify All Conditions Satisfied
 
 For each condition:
+
 1. Confirm document received and dated appropriately
 2. Review document for accuracy and completeness
 3. Upload to loan imaging system
@@ -566,6 +603,7 @@ For each condition:
 5. Document who reviewed and date cleared
 
 **Condition Tracking Example:**
+
 ```
 Condition: #2 - Final bank statement showing gift deposit
 
@@ -590,6 +628,7 @@ Status: CLEARED ✓
 ### Step 3: Complete CTC Quality Control Checklist
 
 Use the 75-point master checklist (Sections 1-8 above):
+
 1. Start at Section 1, proceed sequentially through Section 8
 2. Mark each item as:
    - ✓ Compliant
@@ -599,6 +638,7 @@ Use the 75-point master checklist (Sections 1-8 above):
 4. Cannot issue CTC until all items are ✓ Compliant
 
 **Checklist Status Report:**
+
 ```
 CTC Quality Control Review
 Loan: 2025-LA-04789
@@ -623,12 +663,14 @@ CTC Status: APPROVED
 ### Step 4: Final Review and CTC Issuance
 
 **Pre-CTC Sign-Off:**
+
 1. Processor reviews file completeness
 2. Closer reviews CD and closing documents
 3. Closing Manager performs final QC review
 4. All three sign off on CTC readiness
 
 **Issue CTC in System:**
+
 ```
 CLEAR TO CLOSE ISSUED
 
@@ -666,6 +708,7 @@ Notes:
 ### Step 5: Post-CTC Monitoring
 
 **After CTC issued, monitor for changes:**
+
 1. Daily credit monitoring for new debt
 2. Employment re-verification before funding
 3. Property insurance update (confirm still active)
@@ -674,6 +717,7 @@ Notes:
 
 **CTC Rescind Triggers:**
 If any of these occur, CTC must be rescinded immediately:
+
 - New debt taken out by borrower
 - Job loss or income reduction
 - Credit score drops below minimum
@@ -683,6 +727,7 @@ If any of these occur, CTC must be rescinded immediately:
 - Borrower requests loan changes (amount, terms)
 
 **Rescind Example:**
+
 ```
 CTC RESCINDED
 
@@ -716,6 +761,7 @@ Status: CTC RESCINDED - Loan on hold pending resolution
 ## ⏱️ Rush Clear to Close (Same-Day/Next-Day Closings)
 
 ### When Rush CTC is Appropriate
+
 - Rate lock expiring (documented rate lock extension not available)
 - Seller possession needed urgently (lease-back expired, moving truck scheduled)
 - Construction deadline (builder completion, weather concerns)
@@ -727,6 +773,7 @@ Status: CTC RESCINDED - Loan on hold pending resolution
 **Rush CTC Timeline:** 4-24 hours
 
 **Additional Requirements for Rush:**
+
 1. **VP or higher approval** - Rush CTC requires senior management sign-off
 2. **Heightened QC** - Second reviewer must validate checklist
 3. **Risk assessment** - Document business justification for rush
@@ -736,6 +783,7 @@ Status: CTC RESCINDED - Loan on hold pending resolution
 **Rush CTC Fee:** $500 (charged to borrower if discretionary rush, waived if lender delay)
 
 **Rush CTC Documentation:**
+
 ```
 RUSH CLEAR TO CLOSE REQUEST
 
@@ -774,6 +822,7 @@ Status: RUSH CTC APPROVED ✓
 **Performed by:** QC Department (independent from closing team)
 
 **Sample Selection:**
+
 - 10% random sample of all CTC loans daily
 - 100% review of:
   - Loans >$726,200 (high balance/jumbo)
@@ -782,6 +831,7 @@ Status: RUSH CTC APPROVED ✓
   - Loans with prior QC defects
 
 **QC Checklist (Abridged):**
+
 - [ ] All 75-point CTC checklist items verified
 - [ ] Conditions properly cleared with documentation
 - [ ] DTI calculation accurate
@@ -802,6 +852,7 @@ Status: RUSH CTC APPROVED ✓
 | **No Findings** | Clean file | Proceed to funding, no action needed |
 
 **QC Report Example:**
+
 ```
 PRE-FUNDING QC REVIEW
 
@@ -834,6 +885,7 @@ Cleared for Funding: YES ✓
 **Performed:** Within 30 days of closing
 
 **Reviews:**
+
 - Final executed documents
 - Funding accuracy (correct amount, timely)
 - Closing package completeness
@@ -841,6 +893,7 @@ Cleared for Funding: YES ✓
 - Investor delivery timeline (if selling loan)
 
 **Defect Tracking:**
+
 - Categorize any defects found
 - Root cause analysis
 - Corrective action plan
@@ -855,6 +908,7 @@ Cleared for Funding: YES ✓
 **Scenario:** Borrower cannot provide required verification (employer won't verify employment, bank won't provide statement, etc.)
 
 **Resolution:**
+
 1. Attempt alternative documentation:
    - VOE: Use paystub + W-2 + IRS 4506-C tax transcript
    - Bank statement: Use online banking screenshot + bank letter
@@ -870,6 +924,7 @@ Cleared for Funding: YES ✓
 **Scenario:** Final credit re-pull shows score dropped from 685 to 575 (below 580 FHA minimum)
 
 **Resolution:**
+
 1. Pull full credit report to identify cause:
    - New late payments
    - New collections
@@ -889,6 +944,7 @@ Cleared for Funding: YES ✓
 **Scenario:** Fire/flood/storm damage to property between appraisal and closing
 
 **Resolution:**
+
 1. Immediately inspect damage:
    - Get contractor estimates
    - Assess severity (cosmetic vs structural)
@@ -907,6 +963,7 @@ Cleared for Funding: YES ✓
 **Scenario:** Title company finds unreleased lien, judgment, or ownership issue 48 hours before closing
 
 **Resolution:**
+
 1. Assess severity:
    - **Clearable:** Old mortgage payoff not released, judgment satisfied but not released
    - **Complex:** Estate issues, missing heirs, boundary disputes
@@ -928,6 +985,7 @@ Cleared for Funding: YES ✓
 **Scenario:** Fee changes, loan amount adjusts, or interest rate changes after borrower received initial CD
 
 **Resolution:**
+
 1. Determine if change requires new 3-day wait:
    - **APR increases >0.125%:** YES, new 3-day wait required
    - **Loan amount increases:** YES, new 3-day wait
@@ -948,6 +1006,7 @@ Cleared for Funding: YES ✓
 ## 📚 References and Related SOPs
 
 ### Internal SOPs
+
 - {{include: sop-mf-002}} - Automated Underwriting System (AUS) Processing
 - {{include: sop-mf-003}} - FHA Underwriting Standards
 - {{include: sop-mf-005}} - Wire Transfer Security and Dual Approval
@@ -956,12 +1015,14 @@ Cleared for Funding: YES ✓
 - {{include: sop-mf-010}} - TRID Compliance and Disclosure Timing
 
 ### External Resources
+
 - **CFPB TRID Rule:** 12 CFR § 1026.19(e) and (f)
 - **Fannie Mae Selling Guide:** Chapter B3 (Underwriting Borrowers)
 - **Freddie Mac Seller Guide:** Chapter 5300 (Closing and Delivery)
 - **FHA Handbook 4000.1:** Section II.A (Origination Through Post-Closing)
 
 ### Forms and Templates
+
 - CTC Quality Control Checklist (75-point)
 - Condition Tracking Worksheet
 - Wire Authorization Form

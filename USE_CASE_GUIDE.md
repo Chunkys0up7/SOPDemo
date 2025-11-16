@@ -5,6 +5,7 @@
 This guide demonstrates how the SOP Management System operates in a real mortgage finance environment at **Apex Mortgage Company**. Through detailed end-to-end scenarios, we showcase the system's capabilities including dependency tracking, cross-referencing, impact analysis, training integration, and real-time collaboration.
 
 **System Capabilities Demonstrated:**
+
 - Graph-based dependency tracking across 15 interconnected SOPs
 - Section-level cross-references with live updates
 - Role-based personalized dashboards
@@ -19,6 +20,7 @@ This guide demonstrates how the SOP Management System operates in a real mortgag
 ## 📊 Current System State
 
 ### Organization Overview
+
 - **Company:** Apex Mortgage Company
 - **Annual Volume:** 4,847 loans ($2.3 billion)
 - **Departments:** Processing, Underwriting, Closing, Compliance
@@ -28,6 +30,7 @@ This guide demonstrates how the SOP Management System operates in a real mortgag
 - **Compliance Frameworks:** TRID, FHA, Fannie Mae, Freddie Mac, BSA/AML
 
 ### System Metrics (Last 30 Days)
+
 - **Total SOP Views:** 12,847
 - **Total Searches:** 1,847
 - **Training Quizzes Completed:** 342
@@ -41,6 +44,7 @@ This guide demonstrates how the SOP Management System operates in a real mortgag
 ## 🌟 Use Case 1: End-to-End FHA Loan Processing
 
 ### Scenario Overview
+
 **Borrower:** Maria Gonzalez, first-time homebuyer
 **Property:** $210,000 purchase, Austin, TX
 **Loan Type:** FHA 203(b), 3.5% down payment
@@ -58,6 +62,7 @@ This scenario demonstrates how **5 interconnected SOPs** work together through t
 #### Day 1: Loan Application Received
 
 **Maria's Dashboard View:**
+
 ```
 📊 My Dashboard - Maria Gonzalez, Loan Processor
 
@@ -76,6 +81,7 @@ Quick Actions:
 ```
 
 **Maria's Workflow:**
+
 1. Opens **SOP-MF-001: Conventional Loan Processing Workflow**
    - Initial application review section
    - Notices cross-reference: *"For FHA loans, also refer to {{include: sop-mf-003}}"*
@@ -99,6 +105,7 @@ Quick Actions:
 #### Day 2: Document Collection
 
 **Maria Receives Notification:**
+
 ```
 🔔 Notification
 📝 SOP Update: Income Documentation Standards
@@ -113,12 +120,14 @@ Actions:
 ```
 
 Maria clicks **"See Impact":**
+
 - System shows dependency graph
 - Highlights **SOP-MF-008** updated
 - Shows **3 dependent SOPs** affected
 - Impact Analysis: "LOW - Minor clarification, no workflow changes"
 
 **Maria's Actions:**
+
 1. Reviews changes (self-employed calc - not applicable to Sarah)
 2. Marks notification as "Reviewed"
 3. Continues document collection per SOP-MF-008
@@ -132,11 +141,13 @@ Maria clicks **"See Impact":**
 #### Day 5: AUS Submission
 
 **Michael's Workflow:**
+
 1. Receives loan file from Maria
 2. Opens **SOP-MF-002: AUS Processing**
 3. Follows Step 2: "Run TOTAL Scorecard"
 
 **Cross-Reference Chain:**
+
 ```
 SOP-MF-002 (AUS Processing)
   → References SOP-MF-003 (FHA Underwriting) for FHA-specific guidelines
@@ -151,6 +162,7 @@ Michael navigates between 4 SOPs using inline cross-reference links - **no searc
 **TOTAL Scorecard Result:** "Refer" (DTI 48%, requires manual underwrite)
 
 **Michael Uses Comparison Tool:**
+
 1. Opens **SOP Comparison** from toolbar
 2. Selects:
    - Left: **SOP-MF-003** (FHA Underwriting) v2.4.1
@@ -160,6 +172,7 @@ Michael navigates between 4 SOPs using inline cross-reference links - **no searc
 5. Sees DTI 48% now requires 1 compensating factor (was 2 in prior version)
 
 **Decision:**
+
 ```
 APPROVED with Compensating Factors
 
@@ -177,6 +190,7 @@ Conditions: (see approval letter)
 ```
 
 **Michael Creates Approval with Conditions:**
+
 ```
 APPROVAL LETTER
 
@@ -192,6 +206,7 @@ Prior to Funding (PTF):
 ```
 
 **System Actions:**
+
 - Sends notifications to Maria (processor) and Emily (closer)
 - Each notification links to relevant SOP section
 - Tracks conditions in workflow system
@@ -206,6 +221,7 @@ Prior to Funding (PTF):
 #### Day 20: Condition Tracking
 
 **Emily's Dashboard:**
+
 ```
 👥 Team Dashboard - Closing Department
 
@@ -226,6 +242,7 @@ Prior to Funding (PTF):
 ```
 
 Emily clicks **"Send Reminder"** → System auto-generates email:
+
 ```
 Subject: Condition Reminder - Loan 2025-LA-05123
 
@@ -253,6 +270,7 @@ Emily Patterson, Closing Manager
 **Emily Opens:** **SOP-MF-004: Clear to Close Verification**
 
 **75-Point Checklist Progress:**
+
 - Section 1 (Borrower/Property): 10/10 ✓
 - Section 2 (Credit/Liabilities): 11/12 (awaiting final credit re-pull)
 - Section 3 (Income/Employment): 14/15 (awaiting verbal VOE)
@@ -260,6 +278,7 @@ Emily Patterson, Closing Manager
 - Sections 5-8: Not started
 
 **Emily Uses Training Quiz to Refresh Knowledge:**
+
 1. Opens **SOP Training** from quick links
 2. Selects **SOP-MF-004: Clear to Close**
 3. Generates quiz: 10 questions, Intermediate difficulty
@@ -290,6 +309,7 @@ Reference: SOP-MF-004, Section 3.1 [View SOP]
 #### Day 26: Clear to Close Issued
 
 **Emily completes final checklist:**
+
 ```
 CTC Quality Control Review
 Loan: 2025-LA-05123
@@ -310,6 +330,7 @@ CTC APPROVED
 ```
 
 **System Actions:**
+
 1. Sends notifications to all stakeholders:
    - Sarah (borrower): "Congratulations! Clear to Close"
    - Maria (processor): "CTC issued, prepare closing docs"
@@ -325,6 +346,7 @@ CTC APPROVED
 **Actor:** Robert Taylor (Treasury Manager)
 
 **Robert Receives Wire Request:**
+
 ```
 🔔 Notification
 💰 Wire Transfer Request
@@ -343,6 +365,7 @@ Approval Status:
 ```
 
 **Robert's Workflow:**
+
 1. Clicks **"View SOP-MF-005"** → Opens Wire Transfer Security SOP
 2. Reviews Step 2: "Verification Protocol"
 3. Follows mandatory callback verification:
@@ -363,6 +386,7 @@ Approval Status:
    - No red flags identified
 
 **Robert Approves Wire Request:**
+
 - Adds authorization code: RT-20251029-5123
 - Routes to VP for second approval
 - Wire queued for execution 10/30 @ 10:00 AM
@@ -374,6 +398,7 @@ Approval Status:
 #### Day 31: QC Review Triggers Update
 
 **QC Department identifies trend:**
+
 ```
 QUALITY CONTROL TREND ALERT
 
@@ -394,16 +419,19 @@ instead of "best practice"
 ```
 
 **Compliance Officer Initiates SOP Update:**
+
 1. Opens **SOP-MF-003** in edit mode
 2. Navigates to Section 5.3: "Gift Funds"
 3. Clicks **✏️ Edit Section**
 
 **Three-Panel Editor Opens:**
+
 - **Left Panel (Markdown Editor):** Shows current text
 - **Center Panel (Live Preview):** Real-time rendering
 - **Right Panel (Impact Analysis):** Shows dependencies
 
 **Impact Analysis Displays:**
+
 ```
 ⚠ IMPACT PREVIEW
 
@@ -430,13 +458,16 @@ Review dependent SOPs for consistency
 ```
 
 **Update Process:**
+
 1. **Edit:** Changes "best practice" to "REQUIRED"
 2. **Preview:** Verifies formatting correct
 3. **Impact:** Reviews affected users
 4. **Save:** Creates version 2.4.2
 
 **System Actions:**
+
 1. Creates new version with change log:
+
 ```
 Version 2.4.2 - October 31, 2025
 Author: Jessica Martinez (Compliance Officer)
@@ -448,6 +479,7 @@ Approver: Michael Chen (Chief Underwriter)
 ```
 
 2. Sends intelligent notifications:
+
 ```
 🔔 To: Closing Team (23 users)
 Priority: MEDIUM
@@ -492,11 +524,13 @@ Related SOPs Also Updated:
 **Compliance Officer:** Jessica Martinez
 
 **Workflow:**
+
 1. Receives HUD Mortgagee Letter 2025-12
 2. Identifies impact: Annual MIP rates changing for loans >$726,200
 3. Uses **Advanced Search** to find affected SOPs:
 
 **Search Query:**
+
 ```
 Keywords: "annual MIP" "mortgage insurance premium"
 Filters:
@@ -507,6 +541,7 @@ Sort: Relevance
 ```
 
 **Results:**
+
 ```
 Found 3 SOPs:
 
@@ -534,6 +569,7 @@ Found 3 SOPs:
 ### Phase 2: Update Coordination
 
 **Jessica Creates Update Plan:**
+
 ```
 📋 SOP UPDATE PROJECT
 
@@ -571,6 +607,7 @@ Testing: Update test scenarios with new rates
 1. Opens SOP in edit mode
 2. Navigates to Section 6.2: "Annual MIP Rates"
 3. **Impact Analysis shows:**
+
 ```
 🔴 CRITICAL IMPACT
 
@@ -591,6 +628,7 @@ This section is HEAVILY REFERENCED:
 ```
 
 4. **Updates MIP Rate Table:**
+
 ```markdown
 ### Annual MIP Rates (Effective January 1, 2026)
 
@@ -610,6 +648,7 @@ This section is HEAVILY REFERENCED:
 
 **Calculation Example (Updated):**
 ```
+
 Loan Amount: $203,500
 LTV: 96.5% (>95%)
 Term: 30 years
@@ -620,6 +659,7 @@ Monthly MIP: $1,526.25 ÷ 12 = $127.19 (was $135.67)
 
 Monthly Savings: $8.48
 Annual Savings: $101.75
+
 ```
 
 5. **Adds Transition Notes:**
@@ -642,6 +682,7 @@ Annual Savings: $101.75
 ```
 
 6. **Saves with Version Note:**
+
 ```
 Version 2.5.0 - November 5, 2025
 Major Update: MIP rate changes per HUD ML 2025-12
@@ -664,6 +705,7 @@ Regulatory Citation: HUD Mortgagee Letter 2025-12
 **System Actions After Save:**
 
 1. **Auto-Detects Dependent SOPs:**
+
 ```
 Impact Analysis Results:
 
@@ -679,6 +721,7 @@ Analytics Dashboard (1):
 ```
 
 2. **Sends Notifications to Owners:**
+
 ```
 🔔 To: Emily Patterson (SOP-MF-010 Owner)
 Priority: HIGH
@@ -747,7 +790,8 @@ Reference: SOP-MF-003, Section 6.2 (v2.5.0)
 
 **System Generates Multi-Channel Campaign:**
 
-#### Email to All Underwriters (18 staff):
+#### Email to All Underwriters (18 staff)
+
 ```
 Subject: IMPORTANT: FHA MIP Rates Changing January 1, 2026
 
@@ -779,7 +823,8 @@ Questions? Reply to this email or contact Michael Chen.
 [View Full Details] [Take Quiz] [Download Rate Comparison Chart]
 ```
 
-#### In-App Notification:
+#### In-App Notification
+
 ```
 🔔 Critical Update
 📚 SOP-MF-003: FHA MIP Rates Changed
@@ -803,7 +848,8 @@ Your Progress: 0% complete
 [Start Learning Path →]
 ```
 
-#### Dashboard Widget:
+#### Dashboard Widget
+
 ```
 ⚠ ACTION REQUIRED
 
@@ -825,6 +871,7 @@ Progress: ▰▰▱▱▱ 2/5 steps complete
 ### Phase 6: Tracking and Compliance
 
 **Training Dashboard (Manager View):**
+
 ```
 📊 FHA MIP Update Training Compliance
 
@@ -858,6 +905,7 @@ Actions:
 ```
 
 **Auto-Reminders:**
+
 ```
 Day 7: Email reminder to 5 incomplete
 Day 10: Manager notification of incomplete staff
@@ -872,6 +920,7 @@ Day 14: Compliance report to VP
 **January 2, 2026 - First Day of New Rates**
 
 **QC Dashboard Alert:**
+
 ```
 🔍 QUALITY CHECK
 
@@ -898,6 +947,7 @@ Training Effectiveness: 100% (no staff knowledge errors)
 ```
 
 **System Learning:**
+
 - Identifies LOS calculator bug
 - Creates ticket for IT to fix
 - Documents lesson learned
@@ -918,6 +968,7 @@ Training Effectiveness: 100% (no staff knowledge errors)
 ### Week 1: Orientation and Basics
 
 **Jennifer's Onboarding Dashboard:**
+
 ```
 👋 Welcome, Jennifer Kim!
 
@@ -942,6 +993,7 @@ This Week:
 ```
 
 **Jennifer Uses Personalized Recommendations:**
+
 ```
 💡 Recommended for You
 
@@ -975,6 +1027,7 @@ Based on your role (Underwriter) and progress:
 ### Week 2: Hands-On Practice
 
 **Jennifer Takes First Quiz:**
+
 ```
 📝 Quiz: FHA Underwriting Basics
 
@@ -1005,6 +1058,7 @@ Recommended Actions:
 ```
 
 **Jennifer Reviews Missed Questions:**
+
 ```
 Question 7 (DTI Calculation):
 A borrower has a student loan with $0 payment (income-driven repayment).
@@ -1038,6 +1092,7 @@ Also see: SOP-MF-008 (Income Documentation), Section 5.4
 ### Week 3: Real Loan Reviews
 
 **Jennifer Shadows Michael on Live Case:**
+
 ```
 🎥 Live Case Review Session
 
@@ -1079,6 +1134,7 @@ cover it, escalate to me. Never guess on FHA rules."
 ### Week 4: First Solo Review
 
 **Jennifer Underwrites First Loan (With Supervision):**
+
 ```
 📋 First Solo Underwrite
 
@@ -1135,6 +1191,7 @@ Submitted to: Michael Chen for review
 ```
 
 **Michael's Review of Jennifer's Work:**
+
 ```
 ✅ SENIOR UNDERWRITER REVIEW
 
@@ -1172,6 +1229,7 @@ Next Steps:
 ```
 
 **Jennifer's Certification Updated:**
+
 ```
 🏆 CERTIFICATION PROGRESS
 
@@ -1204,6 +1262,7 @@ Estimated Completion: November 29, 2025 (on track!)
 ### Usage Analytics (30-Day Period)
 
 **Engagement Metrics:**
+
 ```
 Total Users: 142
 Daily Active Users: 129 (91%)
@@ -1222,6 +1281,7 @@ Cross-References Clicked: 3,247 (avg 4.2 per SOP view)
 ```
 
 **Training Metrics:**
+
 ```
 Quizzes Completed: 342
 Average Score: 87%
@@ -1240,6 +1300,7 @@ Improvement Areas:
 ```
 
 **Compliance Metrics:**
+
 ```
 Post-Closing Audit Defects: 0.4% (19/4,847 loans)
 Defect Categories:
@@ -1256,6 +1317,7 @@ Attribution:
 ```
 
 **Time Savings:**
+
 ```
 Average Time to Find SOP: 28 seconds (was 8 minutes)
 Improvement: 94% faster
@@ -1278,26 +1340,31 @@ Total: $173,000/year
 ## 🎯 Key Takeaways
 
 ### 1. Cross-Referencing Eliminates Confusion
+
 - **Before:** Users searched for related SOPs, often missing key dependencies
 - **After:** Inline `{{include: sop-id}}` links navigate instantly
 - **Impact:** 94% faster to find related procedures, 67% fewer errors
 
 ### 2. Impact Analysis Prevents Cascading Failures
+
 - **Before:** SOP updates broke downstream procedures without warning
 - **After:** Real-time impact preview shows affected SOPs before saving
 - **Impact:** Zero breaking changes since implementation
 
 ### 3. Training Integration Accelerates Competency
+
 - **Before:** Training separate from daily work, often outdated
 - **After:** Quiz generated from live SOP content, always current
 - **Impact:** 79% faster time to competency, 27-point increase in retention
 
 ### 4. Intelligent Notifications Reduce Overload
+
 - **Before:** Blast emails to all staff, 23% open rate
 - **After:** Role-based, relevance-filtered notifications, 78% open rate
 - **Impact:** 60% reduction in information overload, 85% update awareness
 
 ### 5. Version Comparison Simplifies Change Management
+
 - **Before:** Text descriptions of changes, hard to visualize
 - **After:** Side-by-side diffs with synchronized scrolling
 - **Impact:** 87% faster change review, 100% regulatory update compliance

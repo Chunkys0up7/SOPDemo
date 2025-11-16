@@ -83,6 +83,7 @@ The SOP Assistant uses **RAG (Retrieval Augmented Generation)** to enable intell
 ### 1. **Knowledge Base Preparation**
 
 #### Chunking Strategy
+
 SOPs are broken into semantic chunks for better retrieval:
 
 ```javascript
@@ -113,6 +114,7 @@ const chunkingStrategies = {
 ```
 
 **Current Implementation (Mock):**
+
 ```javascript
 const sopKnowledgeBase = [
   {
@@ -135,6 +137,7 @@ const sopKnowledgeBase = [
 #### Embedding Generation
 
 **Option 1: OpenAI Embeddings** (Recommended for production)
+
 ```python
 import openai
 
@@ -153,6 +156,7 @@ def generate_embeddings(chunks):
 ```
 
 **Option 2: Open Source (Sentence Transformers)**
+
 ```python
 from sentence_transformers import SentenceTransformer
 
@@ -172,6 +176,7 @@ def generate_embeddings(chunks):
 ### 2. **Vector Database**
 
 #### Option A: Pinecone (Managed, Easiest)
+
 ```python
 import pinecone
 
@@ -203,6 +208,7 @@ def retrieve_sources(query_embedding, top_k=5):
 ```
 
 #### Option B: Weaviate (Open Source)
+
 ```python
 import weaviate
 
@@ -235,6 +241,7 @@ def retrieve_sources(query, top_k=5):
 ```
 
 #### Option C: pgvector (PostgreSQL Extension)
+
 ```sql
 -- Setup
 CREATE EXTENSION vector;
@@ -352,6 +359,7 @@ async def create_embedding(request: EmbeddingRequest):
 ### 4. **LLM Generation**
 
 #### Option 1: OpenAI GPT-4
+
 ```javascript
 async function generateResponse(query, sources) {
   const context = sources.map(s =>
@@ -387,6 +395,7 @@ async function generateResponse(query, sources) {
 ```
 
 #### Option 2: Anthropic Claude
+
 ```javascript
 async function generateResponse(query, sources) {
   const context = sources.map(s =>
@@ -417,6 +426,7 @@ async function generateResponse(query, sources) {
 ```
 
 #### Option 3: Self-Hosted (Llama 2)
+
 ```python
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
@@ -462,6 +472,7 @@ Provide a detailed answer based on the sources above. [/INST]"""
 ## 🚀 Implementation Roadmap
 
 ### Phase 1: Mock Demo (✅ Completed)
+
 - [x] Chat interface UI
 - [x] Mock knowledge base with 6 SOP chunks
 - [x] Simple keyword-based retrieval
@@ -469,6 +480,7 @@ Provide a detailed answer based on the sources above. [/INST]"""
 - [x] Source citation display
 
 ### Phase 2: Basic RAG (Week 1-2)
+
 - [ ] Integrate OpenAI embeddings API
 - [ ] Set up Pinecone vector database
 - [ ] Implement real semantic search
@@ -476,6 +488,7 @@ Provide a detailed answer based on the sources above. [/INST]"""
 - [ ] Add proper citation extraction
 
 ### Phase 3: Enhanced RAG (Week 3-4)
+
 - [ ] Hybrid search (semantic + keyword)
 - [ ] Re-ranking with cross-encoder
 - [ ] Conversation memory (follow-up questions)
@@ -483,6 +496,7 @@ Provide a detailed answer based on the sources above. [/INST]"""
 - [ ] A/B test different prompting strategies
 
 ### Phase 4: Advanced Features (Month 2)
+
 - [ ] Multi-query retrieval (query expansion)
 - [ ] Hierarchical retrieval (section → document → related)
 - [ ] Self-correction (verify answer against sources)
@@ -490,6 +504,7 @@ Provide a detailed answer based on the sources above. [/INST]"""
 - [ ] Export to SOP with metadata
 
 ### Phase 5: Production Hardening (Month 3)
+
 - [ ] Rate limiting and caching
 - [ ] Cost optimization (smart caching, smaller models)
 - [ ] Evaluation metrics (accuracy, relevance)
@@ -511,10 +526,12 @@ Provide a detailed answer based on the sources above. [/INST]"""
 **Recommended for POC:** OpenAI embeddings + Pinecone + Claude Sonnet ≈ **$0.018/query**
 
 **Cost at Scale:**
+
 - 10,000 queries/month: ~$180 + $70 (Pinecone) = **$250/month**
 - 100,000 queries/month: ~$1,800 + $70 = **$1,870/month**
 
 **Cost Optimization Strategies:**
+
 1. Cache common queries (50% reduction)
 2. Use smaller embedding models for less critical queries
 3. Implement smart retrieval (only call LLM when needed)
@@ -524,6 +541,7 @@ Provide a detailed answer based on the sources above. [/INST]"""
 ## 📊 Evaluation Metrics
 
 ### Retrieval Quality
+
 ```python
 metrics = {
     'precision_at_k': 0.85,  # % of retrieved docs that are relevant
@@ -534,6 +552,7 @@ metrics = {
 ```
 
 ### Generation Quality
+
 ```python
 metrics = {
     'faithfulness': 0.92,    # Answer is grounded in sources
@@ -544,6 +563,7 @@ metrics = {
 ```
 
 ### User Satisfaction
+
 - Response time: <3 seconds (target)
 - User rating: 4.2/5 (current mock)
 - Task completion: 87% (can user accomplish goal)
@@ -552,12 +572,14 @@ metrics = {
 ## 🔒 Security & Compliance
 
 ### Data Privacy
+
 - **No PII in embeddings:** Strip sensitive data before embedding
 - **Access control:** Users only search SOPs they have permission to view
 - **Audit logging:** Track all queries and responses
 - **Data retention:** Configure vector DB to comply with retention policies
 
 ### Prompt Injection Protection
+
 ```javascript
 function sanitizeQuery(query) {
   // Remove attempts to manipulate system prompt
@@ -580,6 +602,7 @@ function sanitizeQuery(query) {
 ```
 
 ### Rate Limiting
+
 ```javascript
 const rateLimit = {
   window: '1 minute',
@@ -592,6 +615,7 @@ const rateLimit = {
 ## 🧪 Testing Strategy
 
 ### Unit Tests
+
 ```python
 def test_retrieval_accuracy():
     query = "How do I process invoices over $10,000?"
@@ -613,6 +637,7 @@ def test_generation_faithfulness():
 ```
 
 ### Integration Tests
+
 ```javascript
 describe('RAG Pipeline', () => {
   it('should answer query end-to-end', async () => {
@@ -630,11 +655,13 @@ describe('RAG Pipeline', () => {
 ## 📚 References & Resources
 
 ### Papers
+
 - **RAG Paper:** [Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks](https://arxiv.org/abs/2005.11401)
 - **Dense Retrieval:** [Dense Passage Retrieval for Open-Domain Question Answering](https://arxiv.org/abs/2004.04906)
 - **Evaluation:** [RAGAS: Automated Evaluation of RAG](https://arxiv.org/abs/2309.15217)
 
 ### Tools & Libraries
+
 - **LangChain:** RAG orchestration framework - https://python.langchain.com/
 - **LlamaIndex:** Data framework for LLM apps - https://www.llamaindex.ai/
 - **Weaviate:** Open-source vector database - https://weaviate.io/
@@ -642,6 +669,7 @@ describe('RAG Pipeline', () => {
 - **RAGAS:** RAG evaluation framework - https://github.com/explodinggradients/ragas
 
 ### Tutorials
+
 - [Building Production RAG Systems](https://www.pinecone.io/learn/series/rag/)
 - [Advanced RAG Techniques](https://www.anthropic.com/index/claude-retrieval)
 - [Evaluating RAG Systems](https://docs.ragas.io/en/latest/)

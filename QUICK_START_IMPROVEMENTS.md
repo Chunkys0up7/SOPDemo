@@ -21,9 +21,11 @@ We've identified **18 high-impact improvements** organized into 3 phases:
 We've created implementation examples for 3 quick wins:
 
 ### 1. Pull Request Template
+
 **File:** `.github/PULL_REQUEST_TEMPLATE.md`
 
 **What it does:**
+
 - Standardizes SOP change requests
 - Includes comprehensive review checklist
 - Tracks compliance and training impact
@@ -33,29 +35,35 @@ We've created implementation examples for 3 quick wins:
 When you create a PR, GitHub automatically loads this template. Simply fill in the sections.
 
 ### 2. CODEOWNERS File
+
 **File:** `.github/CODEOWNERS`
 
 **What it does:**
+
 - Auto-assigns reviewers based on files changed
 - Routes SOPs to department owners
 - Ensures compliance review for regulated content
 - Requires specialized review for high-risk SOPs
 
 **Examples:**
+
 - Changes to `sop-mf-005-wire-transfer*.md` → auto-assigns @treasury-manager, @cfo, @fraud-prevention-team
 - Any compliance-related file → auto-assigns @compliance-officer
 - Brand assets → auto-assigns @marketing-team
 
 ### 3. SOP Update Issue Template
+
 **File:** `.github/ISSUE_TEMPLATE/sop-update.yml`
 
 **What it does:**
+
 - Structured form for SOP change requests
 - Captures urgency, compliance impact, training needs
 - Auto-labels and routes to appropriate team
 - Ensures all context is provided upfront
 
 **How to use:**
+
 1. Go to Issues tab
 2. Click "New Issue"
 3. Select "SOP Update Request" template
@@ -70,6 +78,7 @@ When you create a PR, GitHub automatically loads this template. Simply fill in t
 The three examples above are already created. To activate them:
 
 1. **Review and customize CODEOWNERS**
+
    ```bash
    # Edit .github/CODEOWNERS to use your actual GitHub usernames/teams
    # Replace @underwriting-team with actual team/user handles
@@ -119,6 +128,7 @@ chmod +x .husky/pre-commit
 ```
 
 **Add to `package.json`:**
+
 ```json
 {
   "lint-staged": {
@@ -131,6 +141,7 @@ chmod +x .husky/pre-commit
 ```
 
 **Create `.markdownlintrc`:**
+
 ```json
 {
   "default": true,
@@ -141,6 +152,7 @@ chmod +x .husky/pre-commit
 ```
 
 **Test it:**
+
 ```bash
 # Make a change to a SOP with formatting issues
 # Try to commit
@@ -161,6 +173,7 @@ npm install --save-dev cspell
 ```
 
 **Create `cspell.json`:**
+
 ```json
 {
   "version": "0.2",
@@ -184,6 +197,7 @@ npm install --save-dev cspell
 ```
 
 **Add npm script:**
+
 ```json
 {
   "scripts": {
@@ -193,6 +207,7 @@ npm install --save-dev cspell
 ```
 
 **Add to CI (`.github/workflows/build-and-publish.yml`):**
+
 ```yaml
 - name: Spell Check
   run: npm run spellcheck
@@ -211,6 +226,7 @@ npm install --save-dev markdown-link-check
 ```
 
 **Create `tools/check-links.js`:**
+
 ```javascript
 #!/usr/bin/env node
 import { exec } from 'child_process';
@@ -238,6 +254,7 @@ checkLinks();
 ```
 
 **Add to package.json:**
+
 ```json
 {
   "scripts": {
@@ -247,6 +264,7 @@ checkLinks();
 ```
 
 **Add to CI:**
+
 ```yaml
 - name: Check Links
   run: npm run check:links
@@ -272,6 +290,7 @@ checkLinks();
 ### Team Feedback
 
 Run a survey after 4 weeks:
+
 - Are PRs easier to review?
 - Is the checklist helpful?
 - Are pre-commit hooks catching issues early?
@@ -302,27 +321,35 @@ Once Phase 1 is solid, move to Phase 2:
 ## 💡 Tips for Success
 
 ### 1. Start Small
+
 Don't try to implement everything at once. The 4-week plan above is realistic and high-impact.
 
 ### 2. Gather Feedback
+
 After each improvement, ask the team:
+
 - What's working well?
 - What's annoying?
 - What should we adjust?
 
 ### 3. Document Everything
+
 Update the team wiki with:
+
 - How to use new templates
 - What the pre-commit hooks do
 - How to add custom words to spell checker
 
 ### 4. Celebrate Wins
+
 When you hit milestones:
+
 - Share metrics (time saved, errors prevented)
 - Thank contributors
 - Showcase examples of great PRs
 
 ### 5. Iterate
+
 These aren't set in stone. Adjust based on your team's needs.
 
 ---
@@ -330,17 +357,21 @@ These aren't set in stone. Adjust based on your team's needs.
 ## 📞 Getting Help
 
 ### Questions About Implementation?
+
 - Check `DOCS_AS_CODE_IMPROVEMENTS.md` for detailed specs
 - Review example files in `.github/`
 - Open a discussion in GitHub
 
 ### Need Custom Modifications?
+
 The templates and configs are meant to be customized:
+
 - Edit CODEOWNERS for your team structure
 - Adjust PR template for your workflow
 - Add domain-specific words to spellchecker
 
 ### Found Issues?
+
 Open an issue using the provided templates!
 
 ---
@@ -348,12 +379,15 @@ Open an issue using the provided templates!
 ## ✨ Success Stories (Add Your Own!)
 
 ### Example: Pre-Commit Hooks
+>
 > "Pre-commit hooks saved me 3 trips through CI by catching formatting issues locally. Game changer!" - Maria, Processor
 
 ### Example: PR Template
+>
 > "The checklist ensures I don't forget anything. My PRs get approved faster now." - Michael, Underwriter
 
 ### Example: CODEOWNERS
+>
 > "I love that the right people are automatically tagged. No more @ mentions in comments." - Sarah, Manager
 
 ---
@@ -361,6 +395,7 @@ Open an issue using the provided templates!
 ## 📈 ROI Summary
 
 **Investment:**
+
 - Week 1: 2 hours (enable examples)
 - Week 2: 4 hours (pre-commit hooks)
 - Week 3: 2 hours (spell checking)
@@ -368,6 +403,7 @@ Open an issue using the provided templates!
 - **Total: 11 hours**
 
 **Returns (Monthly):**
+
 - Time saved in CI/CD: 8 hours
 - Faster PR reviews: 12 hours
 - Fewer review cycles: 10 hours

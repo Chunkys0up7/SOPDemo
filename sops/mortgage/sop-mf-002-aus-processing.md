@@ -32,6 +32,7 @@ This SOP defines the standardized process for submitting loan files to Automated
 Before submitting to AUS, verify the following:
 
 ### Required Documentation (per {{include: sop-mf-008}})
+
 - ✅ Complete 1003 Uniform Residential Loan Application
 - ✅ Income documentation (W2s, paystubs, tax returns per {{include: sop-mf-008}})
 - ✅ Asset documentation (2 most recent statements)
@@ -39,11 +40,13 @@ Before submitting to AUS, verify the following:
 - ✅ Appraisal or property valuation (if applicable)
 
 ### System Access
+
 - Desktop Underwriter credentials (Fannie Mae approved lender)
 - Loan Product Advisor credentials (Freddie Mac seller/servicer)
 - Loan Origination System (LOS) integration active
 
 ### Training Requirements
+
 - AUS Fundamentals certification (required annually)
 - Desktop Underwriter training (Fannie Mae University)
 - Loan Product Advisor training (Freddie Mac Learn)
@@ -135,6 +138,7 @@ Before submitting to AUS, verify the following:
 | **Out of Scope** | Loan parameters exceed AUS limits | Review loan parameters; may need jumbo program |
 
 **Key DU Findings to Review:**
+
 - ☑️ **Credit:** Required minimum representative credit score
 - ☑️ **Income/Employment:** Documentation requirements (verify 4506-C)
 - ☑️ **Assets:** Reserve requirements (months of PITI)
@@ -152,6 +156,7 @@ Before submitting to AUS, verify the following:
 | **Unable to Determine** | Insufficient data | Re-submit with complete info |
 
 **Key LPA Findings to Review:**
+
 - ☑️ **Appraisal Type:** Full/Exterior/Desktop/ACE/Waiver
 - ☑️ **Income/Employment:** VOE required (yes/no)
 - ☑️ **Assets:** Reserve months required
@@ -181,6 +186,7 @@ Before submitting to AUS, verify the following:
 ### Step 6: AUS Resubmission Protocol
 
 **When to Resubmit:**
+
 - Changed circumstances (income, assets, credit changes)
 - Property value update (new appraisal)
 - Loan parameters change (LTV, rate, term, loan amount)
@@ -188,6 +194,7 @@ Before submitting to AUS, verify the following:
 - Error correction in original submission
 
 **Resubmission Process:**
+
 1. Document reason for resubmission in loan notes
 2. Update changed data fields only
 3. Re-upload updated documents
@@ -196,6 +203,7 @@ Before submitting to AUS, verify the following:
 6. Document comparison in loan file (before/after findings)
 
 **Version Control:**
+
 - DU maintains version history automatically
 - Always use most recent findings for underwriting decisions
 - Keep all versions in loan file for audit trail
@@ -242,6 +250,7 @@ Perform the following checks before finalizing AUS submission:
 - [ ] Senior processor peer review completed (first submission)
 
 **Post-Submission Quality Check:**
+
 - [ ] DU/LPA findings saved to loan file within 1 hour
 - [ ] Conditions list created and assigned within 4 hours
 - [ ] Loan officer notified of results within 4 hours
@@ -254,6 +263,7 @@ Perform the following checks before finalizing AUS submission:
 **Symptoms:** Submission fails with error message before findings generated
 
 **Resolution:**
+
 1. Review error message for specific field(s) causing issue
 2. Common errors:
    - Invalid SSN format (must be XXX-XX-XXXX)
@@ -269,12 +279,14 @@ Perform the following checks before finalizing AUS submission:
 **Symptoms:** LPA cannot provide Accept/Caution recommendation
 
 **Possible Causes:**
+
 - Insufficient data provided (income, assets, credit)
 - Credit report missing tradelines
 - LTV/DTI ratios outside normal parameters
 - Occupancy or property type inconsistency
 
 **Resolution:**
+
 1. Review Feedback Certificate "Messages" section for specific issues
 2. Provide missing data elements
 3. Verify all fields are completed accurately
@@ -286,6 +298,7 @@ Perform the following checks before finalizing AUS submission:
 **Symptoms:** Initial finding was Approve, resubmission returns Refer
 
 **Action Required:**
+
 1. **STOP** - Do not proceed with loan
 2. Compare original and new findings side-by-side
 3. Identify specific change that caused downgrade:
@@ -306,6 +319,7 @@ Perform the following checks before finalizing AUS submission:
 **Symptoms:** Expected appraisal waiver based on strong file, but DU/LPA requires full appraisal
 
 **Possible Reasons:**
+
 - Property not in AUS database (new construction, rural, recent sale)
 - LTV too high for waiver (typically must be <80%)
 - Credit score below waiver threshold (typically 700+)
@@ -313,6 +327,7 @@ Perform the following checks before finalizing AUS submission:
 - Recent title transfer or ownership change
 
 **Resolution:**
+
 1. Review DU/LPA findings for appraisal waiver eligibility factors
 2. Consider lowering LTV (larger down payment) if close to threshold
 3. If waiver is critical, discuss with borrower:
@@ -326,6 +341,7 @@ Perform the following checks before finalizing AUS submission:
 ### Ability to Repay (ATR) / Qualified Mortgage (QM)
 
 All AUS-approved loans meet ATR/QM safe harbor:
+
 - ✅ DU Approve/Eligible = QM Safe Harbor
 - ✅ LPA Accept = QM Safe Harbor
 - ⚠️ DU Approve/Ineligible = Complies with ATR, but not QM
@@ -338,6 +354,7 @@ Document QM status in loan file notes.
 **Critical:** AUS findings may impact disclosed fees on Loan Estimate/Closing Disclosure
 
 **Changed Circumstances that trigger revised disclosures:**
+
 - AUS requires MI when initially waived
 - Required reserves increase (impacts cash-to-close)
 - Appraisal requirement changes (waiver to full appraisal - cost increase)
@@ -354,6 +371,7 @@ Monitor for changed circumstances and issue revised disclosures per {{include: s
 ### Record Retention
 
 Maintain the following in permanent loan file:
+
 - All DU Finding reports (all versions)
 - All LPA Feedback Certificates (all versions)
 - Condition clearance documentation
@@ -365,6 +383,7 @@ Maintain the following in permanent loan file:
 ## References
 
 ### Internal SOPs
+
 - {{include: sop-mf-001}} Conventional Loan Processing Workflow
 - {{include: sop-mf-008}} Income Documentation and Verification Standards
 - {{include: sop-mf-009}} Appraisal Review and Collateral Evaluation
@@ -373,6 +392,7 @@ Maintain the following in permanent loan file:
 - {{include: sop-mf-011}} Exception Approval and Escalation Matrix
 
 ### External Resources
+
 - [Fannie Mae Selling Guide](https://singlefamily.fanniemae.com/selling-guide) - Comprehensive underwriting guidelines
 - [Desktop Underwriter Documentation](https://singlefamily.fanniemae.com/originating-underwriting/mortgage-products/desktop-underwriter) - DU user guides and release notes
 - [Freddie Mac Selling Guide](https://guide.freddiemac.com/) - Complete selling policies
@@ -380,11 +400,13 @@ Maintain the following in permanent loan file:
 - [CFPB ATR/QM Rule](https://www.consumerfinance.gov/rules-policy/regulations/1026/43/) - Ability to Repay regulation
 
 ### Training Resources
+
 - Fannie Mae University: DU Essentials course
 - Freddie Mac Learn: LPA Certification
 - MBA Mortgage Basics: Automated Underwriting module
 
 ### System Links
+
 - Desktop Underwriter: https://du.fanniemae.com
 - Loan Product Advisor: https://lpa.freddiemac.com
 - Fannie Mae Connect: https://connect.fanniemae.com
@@ -393,6 +415,7 @@ Maintain the following in permanent loan file:
 ---
 
 **Document Control:**
+
 - **Version:** 3.1.5
 - **Effective Date:** 2025-10-28
 - **Next Review:** 2026-01-28

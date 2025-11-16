@@ -9,6 +9,7 @@ This document outlines the most critical issues found during review and provides
 **Problem**: Component frontmatter appears in final SOPs, creating clutter
 
 **Current Output**:
+
 ```markdown
 ---
 id: atom-welcome-message
@@ -20,6 +21,7 @@ Content here...
 ```
 
 **Desired Output**:
+
 ```markdown
 # Welcome Message
 Content here...
@@ -66,6 +68,7 @@ getComponent(componentId) {
 ### Fix for `tools/serve.js`
 
 1. Update package.json to add marked dependency:
+
 ```json
 "dependencies": {
   "marked": "^11.1.0",
@@ -74,6 +77,7 @@ getComponent(componentId) {
 ```
 
 2. Add at top of `serve.js`:
+
 ```javascript
 import { marked } from 'marked';
 ```
@@ -341,6 +345,7 @@ node tools/validate.js --help
 ```
 
 Expected results:
+
 - ✅ Built SOPs have no frontmatter
 - ✅ Markdown renders as HTML in browser
 - ✅ No auto-refresh interruption
@@ -364,12 +369,14 @@ Expected results:
 ## 🚀 After Fixes
 
 Once these are applied:
+
 - Built SOPs will be clean and professional ✅
 - Dev server will be actually usable ✅
 - UX will improve significantly ✅
 - POC will be much closer to production-ready ✅
 
 Commit message:
+
 ```
 fix: Critical UX improvements for built SOPs and dev server
 

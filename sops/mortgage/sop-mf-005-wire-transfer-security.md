@@ -34,10 +34,13 @@ tags:
 ## 🎯 Overview
 
 ### Purpose
+
 This SOP establishes comprehensive security protocols for initiating, approving, and executing wire transfers for mortgage loan closings. Wire transfer fraud has increased 480% in the mortgage industry since 2020, with average losses of $150,000 per incident. This protocol implements multi-layered security controls to prevent unauthorized transfers and protect borrowers, investors, and company assets.
 
 ### Scope
+
 **Applies to:**
+
 - All outgoing wire transfers for loan funding
 - Payoff wires to existing lienholders
 - Commission and broker fee disbursements
@@ -45,11 +48,13 @@ This SOP establishes comprehensive security protocols for initiating, approving,
 - Earnest money deposits (>$10,000)
 
 **Does NOT apply to:**
+
 - ACH transfers (see {{include: sop-mf-012}})
 - Checks under $5,000 (standard check procedures apply)
 - Internal transfers between company accounts
 
 ### Key Statistics (2024 Performance)
+
 - **Total Wire Volume:** 4,847 wires/year ($2.3 billion)
 - **Average Wire Amount:** $474,500
 - **Fraud Attempts Blocked:** 23 attempts/year ($3.2M saved)
@@ -70,6 +75,7 @@ This SOP establishes comprehensive security protocols for initiating, approving,
 5. **IMMEDIATELY report suspicious requests** - Delay is acceptable; fraud is not
 
 ### Common Fraud Scenarios (Real Examples)
+
 - ✉️ **Email Compromise:** Borrower's email hacked, fake wire instructions sent 24 hours before closing
 - 📞 **Phone Spoofing:** Caller ID shows title company number, but it's a scammer
 - 👔 **Impersonation:** Fake attorney creates look-alike email (j0hn@lawfirm.com vs john@lawfirm.com)
@@ -85,6 +91,7 @@ This SOP establishes comprehensive security protocols for initiating, approving,
 Before initiating any wire transfer, verify ALL of the following:
 
 ### Required Documentation
+
 - [ ] **Clear to Close (CTC) issued** - Per {{include: sop-mf-004}}
 - [ ] **Final CD delivered** - 3+ business days before closing (TRID)
 - [ ] **Funding conditions cleared** - All underwriting conditions satisfied
@@ -93,12 +100,14 @@ Before initiating any wire transfer, verify ALL of the following:
 - [ ] **Wire authorization form** - Original signed by borrower (wet signature or eSign)
 
 ### Account Verification Requirements
+
 - [ ] **Beneficiary bank verified** - ABA routing number validated via Fed database
 - [ ] **Account ownership confirmed** - Name on account matches recipient exactly
 - [ ] **Account type confirmed** - Checking, savings, escrow, etc.
 - [ ] **OFAC screening completed** - Beneficiary not on sanctions lists
 
 ### System Access Requirements
+
 - Dual approval authority in wire platform (Jack Henry SilverLake or equivalent)
 - Current OFAC training certification (<12 months old)
 - Fraud awareness training completed annually
@@ -124,6 +133,7 @@ Before initiating any wire transfer, verify ALL of the following:
 #### 1.1 Obtain Original Wire Instructions
 
 **Accepted Sources (in order of preference):**
+
 1. **Title company closing portal** - Most secure, authenticated platform
 2. **Borrower online portal** - Our secure platform with MFA enabled
 3. **Encrypted email** - With digital signature verification
@@ -131,6 +141,7 @@ Before initiating any wire transfer, verify ALL of the following:
 5. **Email attachment** - LEAST preferred, requires enhanced verification
 
 **🚫 NEVER ACCEPT:**
+
 - Wire instructions in body of regular email
 - Instructions from personal email accounts (Gmail, Yahoo, etc.)
 - Screenshots of wire instructions
@@ -140,6 +151,7 @@ Before initiating any wire transfer, verify ALL of the following:
 #### 1.2 Document Receipt
 
 Log wire instruction receipt in loan file:
+
 - Date/time received
 - Source and method (e.g., "Title company portal, 11/10/2025 2:34 PM")
 - Person who received instructions
@@ -147,6 +159,7 @@ Log wire instruction receipt in loan file:
 - Initial OFAC pre-screen result
 
 **Example Documentation:**
+
 ```
 Wire Instructions Log Entry:
 Received: 11/10/2025 at 2:34 PM EST
@@ -163,6 +176,7 @@ OFAC Pre-Screen: CLEAR (no matches)
 #### 1.3 Initial Red Flag Assessment
 
 **STOP and escalate to Fraud Prevention if ANY of these are present:**
+
 - [ ] Wire instructions received <24 hours before closing (rushed timeline)
 - [ ] Instructions differ from closing disclosure
 - [ ] Account type changed from previous communication
@@ -183,6 +197,7 @@ OFAC Pre-Screen: CLEAR (no matches)
 **Purpose:** Verify wire instructions directly with recipient using phone number from independent source (NOT from email).
 
 **Procedure:**
+
 1. **Obtain independent phone number:**
    - Look up title company on their official website
    - Use phone number from title commitment letterhead
@@ -204,6 +219,7 @@ OFAC Pre-Screen: CLEAR (no matches)
    - Expected date/time
 
 4. **Document conversation:**
+
 ```
 Verification Call Log:
 Date/Time: 11/10/2025 3:15 PM EST
@@ -219,6 +235,7 @@ Next Step: Proceed to dual approval
 #### 2.2 Written Confirmation (Required for wires >$15K)
 
 Send verification email to confirmed email address:
+
 ```
 Subject: Wire Verification Required - Loan #2025-LA-04789
 
@@ -249,6 +266,7 @@ Direct: (555) 123-4567
 #### 2.3 OFAC Sanctions Screening
 
 **Automated Screening:**
+
 1. Access OFAC screening system (Jack Henry or Comply Advantage)
 2. Enter beneficiary information:
    - Full legal name
@@ -267,11 +285,13 @@ Direct: (555) 123-4567
 
 **False Positive Handling:**
 Common false positives: "Jose Garcia" (common name), "First National Bank" (generic)
+
 - Review full name, address, date of birth
 - Document reasoning for override
 - Require Compliance Officer approval
 
 **Example OFAC Documentation:**
+
 ```
 OFAC Screening Report:
 Loan: 2025-LA-04789
@@ -293,6 +313,7 @@ Next OFAC Screen: At wire execution (dual verification)
 Use form: **FRM-WIRE-001** (available in document library)
 
 **Required Fields:**
+
 - Loan number and property address
 - Borrower name(s)
 - Closing date
@@ -311,6 +332,7 @@ Use form: **FRM-WIRE-001** (available in document library)
 #### 3.2 Attach Supporting Documentation
 
 Create wire package in document management system:
+
 - [ ] Wire Transfer Request Form (FRM-WIRE-001)
 - [ ] Original wire instructions (PDF from source)
 - [ ] Callback verification log (Step 2.1)
@@ -329,17 +351,20 @@ Example: `WIRE-2025LA04789-251110-001`
 **Approval Workflow (Based on Amount):**
 
 **For wires $15,001 - $100,000:**
+
 1. Closer prepares and submits request
 2. Closing Manager reviews and approves
 3. Auto-routes to Treasury for execution
 
 **For wires $100,001 - $500,000:**
+
 1. Closer prepares and submits
 2. Closing Manager reviews
 3. VP of Closing approves
 4. Treasury executes
 
 **For wires $500,001+:**
+
 1. Closer prepares
 2. Closing Manager reviews
 3. VP of Closing approves
@@ -355,6 +380,7 @@ Example: `WIRE-2025LA04789-251110-001`
 #### 4.1 First Approver Review (Closing Manager)
 
 **Review Checklist:**
+
 - [ ] Wire amount matches Final CD (page 3, cash to close)
 - [ ] Beneficiary information verified via callback (log attached)
 - [ ] OFAC screening clear
@@ -366,11 +392,13 @@ Example: `WIRE-2025LA04789-251110-001`
 - [ ] Execution date is appropriate (not rushed/suspicious timing)
 
 **If ANY item fails review:**
+
 - Return to Closer with specific feedback
 - Do NOT approve
 - Document reason for return
 
 **Approval Documentation:**
+
 ```
 First Approval Review:
 Reviewer: Michael Chen, Closing Manager
@@ -388,6 +416,7 @@ Routed To: Jennifer Rodriguez (VP Closing) for second approval
 #### 4.2 Second Approver Review (VP or CFO)
 
 **Enhanced Review for High-Value Wires:**
+
 - Verify first approver followed complete checklist
 - Independent OFAC re-screen (second verification)
 - Review borrower contact history for any fraud indicators
@@ -395,11 +424,13 @@ Routed To: Jennifer Rodriguez (VP Closing) for second approval
 - Check for any unusual patterns (e.g., multiple wires same day)
 
 **Additional Verification for Wires >$500K:**
+
 - Video call or in-person meeting with borrower to confirm
 - Request borrower to verbally confirm last 4 digits of account
 - Send test wire of $1.00 with confirmation callback
 
 **Final Approval:**
+
 ```
 Second Approval Review:
 Reviewer: Jennifer Rodriguez, VP Closing
@@ -421,6 +452,7 @@ Execution Window: 11/11/2025 9:00 AM - 2:00 PM EST
 #### 5.1 Pre-Execution Verification
 
 **Treasury Staff Responsibilities:**
+
 1. Verify dual approval is complete (two authorization codes present)
 2. Re-verify routing number via Fed ABA database
 3. Confirm sufficient funds in funding account
@@ -428,6 +460,7 @@ Execution Window: 11/11/2025 9:00 AM - 2:00 PM EST
 5. Perform final OFAC screen (third verification)
 
 **Fed ABA Routing Number Verification:**
+
 ```
 Access: https://www.frbservices.org/EPaymentsDirectory/
 Enter Routing: 111000025
@@ -441,6 +474,7 @@ Proceed: YES
 **Banking Platform:** Jack Henry SilverLake Wire Module
 
 **Execution Steps:**
+
 1. Log into wire platform with hardware token authentication
 2. Create new wire transaction
 3. Enter beneficiary details (triple-check routing and account)
@@ -457,6 +491,7 @@ Proceed: YES
 10. Save wire confirmation number
 
 **Wire Confirmation:**
+
 ```
 Wire Execution Confirmation:
 Execution Date/Time: 11/11/2025 10:23 AM EST
@@ -475,12 +510,14 @@ Status: TRANSMITTED
 #### 5.3 Send Wire Confirmation to Recipient
 
 **Immediate Actions:**
+
 1. Call recipient to notify wire has been sent
 2. Provide wire reference number (APXM-20251111-04789)
 3. Confirm expected arrival time
 4. Request callback when funds are received
 
 **Email Confirmation:**
+
 ```
 Subject: Wire Transmitted - Loan #2025-LA-04789
 
@@ -511,6 +548,7 @@ Apex Mortgage Treasury Department
 #### 6.1 Track Wire Status
 
 **Same-Day Monitoring:**
+
 - 12:00 PM EST: Check bank portal for wire status
 - 2:00 PM EST: Follow up if not confirmed received
 - 4:00 PM EST: Escalate to bank if still pending
@@ -528,11 +566,13 @@ Apex Mortgage Treasury Department
 #### 6.2 Obtain Receipt Confirmation
 
 **Required Confirmations:**
+
 1. **Callback from recipient:** "Funds received and confirmed"
 2. **Email confirmation:** Screenshot or email from recipient showing funds posted
 3. **Bank verification:** Receiving bank confirms credit to account
 
 **Confirmation Documentation:**
+
 ```
 Wire Receipt Confirmation:
 Confirmation Date/Time: 11/11/2025 1:47 PM EST
@@ -549,6 +589,7 @@ Closing Status: Ready to proceed (wire received)
 #### 6.3 Update Loan File and Close Wire Request
 
 **Final Documentation:**
+
 1. Attach all wire confirmations to loan file
 2. Update loan milestone: "Funding Wire Sent - Confirmed Received"
 3. Notify Closer that wire is complete
@@ -556,6 +597,7 @@ Closing Status: Ready to proceed (wire received)
 5. File in closed wire log for monthly reconciliation
 
 **Monthly Reconciliation:**
+
 - Treasury reconciles all wires with bank statements
 - Verify all wires have receipt confirmation
 - Report any discrepancies or unconfirmed wires
@@ -568,6 +610,7 @@ Closing Status: Ready to proceed (wire received)
 Perform these quality checks at each stage:
 
 ### Pre-Wire Quality Checks
+
 - [ ] Loan is Clear to Close (no outstanding conditions)
 - [ ] Final CD delivered 3+ business days before closing
 - [ ] Wire amount matches CD exactly (page 3, cash to close)
@@ -576,6 +619,7 @@ Perform these quality checks at each stage:
 - [ ] Callback verification documented
 
 ### During Approval Quality Checks
+
 - [ ] Dual approval obtained per threshold requirements
 - [ ] All supporting documents attached to wire request
 - [ ] No red flags identified in fraud assessment
@@ -583,6 +627,7 @@ Perform these quality checks at each stage:
 - [ ] Account information triple-checked for accuracy
 
 ### Post-Execution Quality Checks
+
 - [ ] Wire confirmation received from bank
 - [ ] Recipient confirmed funds received
 - [ ] Amount matches original request exactly
@@ -596,6 +641,7 @@ Perform these quality checks at each stage:
 ### Issue 1: Recipient Reports Wire Not Received (>4 hours after transmission)
 
 **Resolution Steps:**
+
 1. Check bank portal for wire status - look for "COMPLETED" status
 2. Verify wire reference number with bank - call wire department directly
 3. Confirm routing and account number were correct - compare to original request
@@ -642,6 +688,7 @@ Perform these quality checks at each stage:
    - Document decision-making process
 
 **Red Flags for Changed Instructions:**
+
 - ❌ Different email domain (even slight variation)
 - ❌ Sense of urgency ("must send today or deal falls through")
 - ❌ Different account type (e.g., was checking, now savings)
@@ -654,12 +701,14 @@ Perform these quality checks at each stage:
 ### Issue 3: OFAC Match or Potential Match
 
 **Immediate Actions:**
+
 1. **DO NOT proceed with wire** - Place on hold immediately
 2. Escalate to Compliance Officer within 30 minutes
 3. Print full OFAC report with match details
 4. Gather additional beneficiary information (DOB, address, entity type)
 
 **Compliance Officer Review:**
+
 - Compare match criteria: name, address, DOB, country
 - Determine if true positive or false positive
 - Review SDN list notes and basis for sanctioning
@@ -680,18 +729,21 @@ Perform these quality checks at each stage:
 **Options:**
 
 **Option A: Next-Business-Day Wire**
+
 - Most common solution
 - Request executed next morning
 - Notify closing parties of 1-day delay
 - Adjust closing date if necessary
 
 **Option B: After-Hours Wire (Emergency Only)**
+
 - Requires CFO approval
 - Additional $50 bank fee
 - Only for extreme circumstances (e.g., rate lock expiring, penalty interest)
 - Must document business justification
 
 **Option C: Delay Closing**
+
 - Coordinate with all parties (buyer, seller, agents, title)
 - Rescheduleclosing for next available date
 - Update Closing Disclosure if fee changes
@@ -702,6 +754,7 @@ Perform these quality checks at each stage:
 ### Issue 5: Wrong Amount Wired (Over or Under Funded)
 
 **Immediate Response:**
+
 1. Contact recipient immediately - explain discrepancy
 2. Determine cause:
    - Data entry error during wire execution
@@ -712,18 +765,21 @@ Perform these quality checks at each stage:
 **Resolution:**
 
 **If OVERFUNDED (sent too much):**
+
 - Request return wire for excess amount
 - Provide return wire instructions to recipient
 - Monitor for return within 2 business days
 - Escalate if not returned timely
 
 **If UNDERFUNDED (sent too little):**
+
 - Calculate shortage amount
 - Prepare supplemental wire request
 - Follow full dual approval process (no shortcuts)
 - Coordinate with closing to ensure sufficient funds before closing
 
 **Post-Incident:**
+
 - Root cause analysis within 24 hours
 - Implement corrective actions
 - Retrain staff if process not followed
@@ -738,27 +794,32 @@ Perform these quality checks at each stage:
 This SOP ensures compliance with:
 
 **1. Bank Secrecy Act (BSA) / Anti-Money Laundering (AML)**
+
 - Wire amounts >$10,000 must be reported on CTR if cash equivalent
 - Maintain wire records for 5 years minimum
 - Monitor for suspicious patterns (structuring, frequent wires, high-risk countries)
 
 **2. Office of Foreign Assets Control (OFAC)**
+
 - Screen ALL wire beneficiaries against SDN list
 - Screen at time of request AND at execution (dual verification)
 - Block any wires to sanctioned individuals or entities
 - File blocking reports with OFAC within 10 days
 
 **3. Consumer Financial Protection Bureau (CFPB)**
+
 - Wire amounts must match Final Closing Disclosure
 - No hidden fees or undisclosed charges
 - Timing must comply with TRID 3-day waiting period
 
 **4. GLBA Privacy**
+
 - Encrypt all wire instructions in transit
 - Limit access to wire information (need-to-know basis)
 - Do not disclose wire details to unauthorized parties
 
 **5. Cybersecurity Standards**
+
 - Use MFA for wire platform access
 - Encrypt all wire-related communications
 - Maintain audit logs of all wire activities
@@ -780,6 +841,7 @@ This SOP ensures compliance with:
 ### Audit Trail Requirements
 
 Every wire must have complete audit trail showing:
+
 - Who requested wire (name, date, time)
 - Who verified beneficiary (name, date, time, phone number called)
 - Who performed OFAC screening (name, date, result)
@@ -788,6 +850,7 @@ Every wire must have complete audit trail showing:
 - Who confirmed receipt (name, date, time, confirmation method)
 
 **Audit Trail Review:**
+
 - Internal Audit reviews 25 random wires quarterly
 - Compliance reviews 100% of wires >$500K
 - External auditors review wire controls annually
@@ -797,29 +860,34 @@ Every wire must have complete audit trail showing:
 ## 📚 References and Related SOPs
 
 ### Internal References
+
 - {{include: sop-mf-004}} - Clear to Close Verification Process
 - {{include: sop-mf-011}} - Fraud Detection and Prevention Protocol
 - {{include: sop-mf-012}} - ACH Transfer Procedures
 - {{include: sop-mf-013}} - Borrower Identity Verification Standards
 
 ### External Resources
+
 - **ALTA Best Practices:** Section 7.2 - Wire Fraud Prevention
 - **MBA Wire Fraud Toolkit:** https://www.mba.org/wirefraud
 - **CFPB TRID Guidance:** Timing of wire transfers and closing
 - **FinCEN SAR Filing:** https://www.fincen.gov/resources/filing-information
 
 ### Training Requirements
+
 - **Initial Training:** 4-hour wire fraud prevention course (required for all closing staff)
 - **Annual Refresher:** 2-hour update on new fraud tactics and protocol changes
 - **Certification Renewal:** Every 12 months
 
 ### Forms and Templates
+
 - **FRM-WIRE-001:** Wire Transfer Request Form
 - **FRM-WIRE-002:** Callback Verification Log
 - **FRM-WIRE-003:** Wire Amendment Request (for changed instructions)
 - **FRM-WIRE-004:** Wire Incident Report
 
 ### Contact Information
+
 - **Fraud Hotline:** x5500 or fraud@apexmortgage.com (monitored 24/7)
 - **Treasury Department:** x4590 (M-F 8:00 AM - 5:00 PM EST)
 - **Compliance Officer:** x4400 (Jessica Martinez)
@@ -838,6 +906,7 @@ Every wire must have complete audit trail showing:
 | 2.8.5 | 2024-09-01 | David Kim | Added red flag assessment checklist | Jennifer Rodriguez (CCO) |
 
 ### Review Schedule
+
 - **Next Scheduled Review:** 2026-02-10 (Quarterly review)
 - **Responsible Party:** Emily Patterson, Closing Department Manager
 - **Review Triggers:**
@@ -852,6 +921,7 @@ Every wire must have complete audit trail showing:
 Use this checklist to assess any wire request for fraud indicators:
 
 ### Email Red Flags
+
 - [ ] Email from unfamiliar domain or slight variation (g00gle.com vs google.com)
 - [ ] Spelling or grammatical errors unusual for sender
 - [ ] Different email signature or formatting than previous emails
@@ -862,6 +932,7 @@ Use this checklist to assess any wire request for fraud indicators:
 - [ ] Subject line doesn't match typical closing communications
 
 ### Wire Instruction Red Flags
+
 - [ ] Instructions differ from previous communications
 - [ ] Account type changed (checking to savings, business to personal)
 - [ ] Bank location doesn't match title company location
@@ -871,6 +942,7 @@ Use this checklist to assess any wire request for fraud indicators:
 - [ ] Wire amount different from Final CD
 
 ### Communication Red Flags
+
 - [ ] Unable to reach recipient via known phone number
 - [ ] Recipient seems unfamiliar with loan details
 - [ ] Recipient reluctant to verify via callback
@@ -879,6 +951,7 @@ Use this checklist to assess any wire request for fraud indicators:
 - [ ] Caller ID doesn't match stated phone number
 
 ### Timing Red Flags
+
 - [ ] Wire request received <24 hours before closing
 - [ ] Instructions changed at last minute
 - [ ] Pressure to wire before approvals complete
@@ -886,6 +959,7 @@ Use this checklist to assess any wire request for fraud indicators:
 - [ ] Request received over weekend/holiday
 
 **Scoring:**
+
 - **0-2 flags:** Proceed with standard verification protocol
 - **3-5 flags:** Enhanced verification required + supervisor approval
 - **6+ flags:** High fraud risk - delay wire, full investigation, CFO approval required
@@ -906,6 +980,7 @@ Use this checklist to assess any wire request for fraud indicators:
 Borrower's email account compromised 48 hours before closing. Attacker monitored email traffic and sent fake wire instructions appearing to come from title company, using domain "firstamericant1tle.com" (number 1 instead of letter i).
 
 **How We Detected:**
+
 1. Closer noticed email arrived at 11:47 PM (unusual time for title company)
 2. Domain had slight variation when hovering over sender name
 3. Callback verification protocol required call to title company
@@ -913,6 +988,7 @@ Borrower's email account compromised 48 hours before closing. Attacker monitored
 5. Title company confirmed they did NOT send new wire instructions
 
 **Outcome:**
+
 - Wire blocked before execution
 - Real wire instructions obtained from title company
 - Closing proceeded as scheduled
@@ -920,6 +996,7 @@ Borrower's email account compromised 48 hours before closing. Attacker monitored
 - Borrower notified to change email passwords
 
 **Lessons Learned:**
+
 - Callback verification is critical (would have funded fraud without it)
 - Train staff to notice domain variations
 - After-hours emails should raise suspicion
@@ -935,12 +1012,14 @@ Borrower's email account compromised 48 hours before closing. Attacker monitored
 Fraudster spoofed title company phone number using VoIP technology. Caller ID showed title company number. Fraudster called closing department claiming "urgent wire instruction change" and provided new account details.
 
 **How We Detected:**
+
 1. Protocol requires us to call THEM (not accept inbound calls for wire changes)
 2. Staff hung up and called number from title commitment
 3. Real title company had no record of calling us
 4. Real title company confirmed original wire instructions unchanged
 
 **Outcome:**
+
 - Fraud attempt blocked
 - Original wire instructions used
 - Closing proceeded
@@ -948,6 +1027,7 @@ Fraudster spoofed title company phone number using VoIP technology. Caller ID sh
 - Reported to FBI IC3
 
 **Lessons Learned:**
+
 - NEVER accept wire changes via inbound calls
 - Always hang up and call back using known number
 - Phone spoofing is easy and common
@@ -966,6 +1046,7 @@ Title company email compromised. Fraudster sent "updated wire instructions" 18 h
 This incident occurred BEFORE our enhanced callback verification protocol was mandatory. Staff member accepted email instructions without independent verification.
 
 **Outcome:**
+
 - Wire sent to fraudulent account
 - Discovered 4 hours later when title company called asking where wire was
 - Bank recall attempted but funds already withdrawn
@@ -974,18 +1055,21 @@ This incident occurred BEFORE our enhanced callback verification protocol was ma
 - Law enforcement notified
 
 **Recovery:**
+
 - Insurance covered $350,000 (after $50K deductible)
 - Remaining $62,000 absorbed by company
 - Fraud ring identified and prosecuted
 - Recovered $0 from fraudsters
 
 **Lessons Learned:**
+
 - This loss led to mandatory callback verification protocol (SOP version 3.0.0)
 - NO exceptions to verification protocol, regardless of time pressure
 - Train staff that "urgency" is a red flag, not a reason to shortcut security
 - Insurance is backup, not primary defense
 
 **Protocol Changes Implemented:**
+
 1. Mandatory callback verification (Step 2.1)
 2. Independent phone number lookup required
 3. Dual approval thresholds lowered
@@ -993,6 +1077,7 @@ This incident occurred BEFORE our enhanced callback verification protocol was ma
 5. This SOP created and made mandatory
 
 **Result Since Protocol Implementation:**
+
 - 23 fraud attempts detected and blocked in 2024
 - $3.2 million in attempted fraud prevented
 - **$0 losses** since protocol implemented
