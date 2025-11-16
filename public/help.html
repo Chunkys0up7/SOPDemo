@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help & Documentation - SOP System</title>
+  <style>
+    :root {
+      --primary-color: #0052CC;
+      --text-dark: #2d3748;
+      --text-light: #718096;
+      --border-color: #e2e8f0;
+      --bg-light: #f7fafc;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-light);
+    }
+
+    .page-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .page-header {
+      background: white;
+      padding: 48px 32px;
+      border-radius: 12px;
+      margin-bottom: 32px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+
+    .page-header h1 {
+      font-size: 36px;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+    }
+
+    .search-box {
+      max-width: 600px;
+      margin: 24px auto 0;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 16px 20px 16px 48px;
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      font-size: 16px;
+      transition: all 0.2s;
+    }
+
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 4px rgba(0, 82, 204, 0.1);
+    }
+
+    .search-box::before {
+      content: "🔍";
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+    }
+
+    .help-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .help-card {
+      background: white;
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .help-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+
+    .help-card-icon {
+      font-size: 40px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .help-card h3 {
+      font-size: 18px;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+    }
+
+    .help-card p {
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    .faq-section {
+      background: white;
+      border-radius: 12px;
+      padding: 32px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      margin-bottom: 32px;
+    }
+
+    .faq-section h2 {
+      font-size: 24px;
+      color: var(--text-dark);
+      margin-bottom: 24px;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border-color);
+      padding: 20px 0;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-question {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-question:hover {
+      color: var(--primary-color);
+    }
+
+    .faq-answer {
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.8;
+    }
+
+    .contact-section {
+      background: linear-gradient(135deg, #0052CC 0%, #003d99 100%);
+      color: white;
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .contact-section h2 {
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    .contact-section p {
+      font-size: 16px;
+      margin-bottom: 24px;
+      opacity: 0.95;
+    }
+
+    .btn-white {
+      background: white;
+      color: var(--primary-color);
+      padding: 12px 32px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+    @media (max-width: 768px) {
+      .help-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Global Navigation -->
+  <script>
+    fetch('/public/components/global-nav.html')
+      .then(response => response.text())
+      .then(html => {
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = html;
+        document.body.insertBefore(tempDiv.firstChild, document.body.firstChild);
+      });
+  </script>
+
+  <div class="page-container">
+    <div class="page-header">
+      <h1>❓ Help & Documentation</h1>
+      <p style="color: var(--text-light); font-size: 16px;">Get answers to your questions about the SOP System</p>
+      <div class="search-box">
+        <input type="search" placeholder="Search for help articles..." />
+      </div>
+    </div>
+
+    <div class="help-grid">
+      <div class="help-card" onclick="alert('Tutorial: Getting Started\n\nLearn how to:\n• Navigate the dashboard\n• Search for SOPs\n• Use templates\n• Create your first SOP')">
+        <span class="help-card-icon">🚀</span>
+        <h3>Getting Started</h3>
+        <p>Learn the basics of navigating and using the SOP System</p>
+      </div>
+
+      <div class="help-card" onclick="window.location.href='/public/templates.html'">
+        <span class="help-card-icon">📝</span>
+        <h3>Creating SOPs</h3>
+        <p>Step-by-step guide to creating and publishing SOPs</p>
+      </div>
+
+      <div class="help-card" onclick="alert('Enhanced Templates Guide\n\nLearn about:\n• Atom templates (reusable components)\n• Molecule templates (multi-step workflows)\n• Organism templates (complete processes)\n• Metadata and searchability')">
+        <span class="help-card-icon">⚛️</span>
+        <h3>Enhanced Templates</h3>
+        <p>Understanding atoms, molecules, and organisms</p>
+      </div>
+
+      <div class="help-card" onclick="window.location.href='/public/sop-search.html'">
+        <span class="help-card-icon">🔍</span>
+        <h3>Search & Discovery</h3>
+        <p>Find SOPs quickly using filters and semantic search</p>
+      </div>
+
+      <div class="help-card" onclick="alert('Collaboration Guide\n\nFeatures:\n• Approval workflows\n• Version control\n• Comments and feedback\n• Team permissions')">
+        <span class="help-card-icon">👥</span>
+        <h3>Collaboration</h3>
+        <p>Working with teams and approval workflows</p>
+      </div>
+
+      <div class="help-card" onclick="alert('Compliance Guide\n\nSupported frameworks:\n• SOX\n• HIPAA\n• GDPR\n• ISO 9001\n• PCI-DSS\n• SOC 2\n\nLearn how to tag and track compliance.')">
+        <span class="help-card-icon">✅</span>
+        <h3>Compliance & Audit</h3>
+        <p>Managing regulatory requirements and frameworks</p>
+      </div>
+    </div>
+
+    <div class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          How do I create a new SOP from a template?
+          <span>▼</span>
+        </div>
+        <div class="faq-answer">
+          Click the "+ New SOP" button in the navigation bar or select a template from the dashboard.
+          Choose from Atom (reusable component), Molecule (multi-step workflow), Organism (complete workflow),
+          or Complete SOP (production-ready). The template will load with all metadata fields pre-configured
+          for searchability and reusability.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          What's the difference between Atom, Molecule, and Organism templates?
+          <span>▼</span>
+        </div>
+        <div class="faq-answer">
+          These are based on Atomic Design principles: <strong>Atoms</strong> are single-purpose reusable components
+          (e.g., password reset). <strong>Molecules</strong> combine multiple atoms into multi-step procedures
+          (e.g., new user setup). <strong>Organisms</strong> orchestrate complete end-to-end workflows with roles,
+          timelines, and escalation matrices (e.g., IT support workflow).
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          How do I track which SOPs need compliance approval?
+          <span>▼</span>
+        </div>
+        <div class="faq-answer">
+          Navigate to the Approvals page to see all pending SOP approvals. You can filter by compliance framework
+          (SOX, HIPAA, GDPR, etc.) and priority level. Each SOP shows its compliance frameworks in the metadata,
+          making it easy to track regulatory requirements.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          Can I reuse parts of existing SOPs in new documents?
+          <span>▼</span>
+        </div>
+        <div class="faq-answer">
+          Yes! Atoms are designed for reusability. When viewing an SOP, you'll see which components it uses
+          and where they're reused across other SOPs. The "usedIn" metadata field tracks all workflows that
+          include each atom, making it easy to see dependencies.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          How do I search for SOPs by department or complexity?
+          <span>▼</span>
+        </div>
+        <div class="faq-answer">
+          Use the faceted search on the Search page or Browse page. You can filter by department, process category,
+          complexity level (Basic/Intermediate/Advanced), audience, compliance frameworks, and more. All enhanced
+          templates include rich metadata to make SOPs highly searchable.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          What happens when I update an SOP that's used in other workflows?
+          <span>▼</span>
+        </div>
+        <div class="faq-answer">
+          The system will show you an impact analysis listing all SOPs and workflows that reference the component
+          you're updating. You'll see which sections are affected and can choose to cascade the update or create
+          a new version. This ensures you don't break dependent workflows.
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-section">
+      <h2>Still Need Help?</h2>
+      <p>Our support team is here to assist you with any questions</p>
+      <button class="btn-white" onclick="alert('Contact Support\n\nEmail: support@pursuit.bank\nPhone: 1-800-SOP-HELP\nHours: Monday-Friday, 9am-5pm EST\n\nOr use the AI Assistant for instant answers!')">
+        Contact Support →
+      </button>
+    </div>
+  </div>
+</body>
+</html>

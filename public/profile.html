@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile - SOP System</title>
+  <style>
+    :root {
+      --primary-color: #0052CC;
+      --text-dark: #2d3748;
+      --text-light: #718096;
+      --border-color: #e2e8f0;
+      --bg-light: #f7fafc;
+      --success-color: #48bb78;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-light);
+    }
+
+    .page-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .profile-header {
+      background: white;
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      display: flex;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .avatar-large {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0052CC 0%, #003d99 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 48px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .profile-info {
+      flex: 1;
+    }
+
+    .profile-info h1 {
+      font-size: 32px;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+
+    .profile-role {
+      font-size: 16px;
+      color: var(--text-light);
+      margin-bottom: 16px;
+    }
+
+    .profile-meta {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      font-size: 14px;
+      color: var(--text-light);
+    }
+
+    .main-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .card h2 {
+      font-size: 20px;
+      color: var(--text-dark);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 20px;
+      background: var(--bg-light);
+      border-radius: 8px;
+    }
+
+    .stat-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+
+    .activity-item {
+      display: flex;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .activity-item:last-child {
+      border-bottom: none;
+    }
+
+    .activity-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--bg-light);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .activity-content {
+      flex: 1;
+    }
+
+    .activity-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+    }
+
+    .activity-time {
+      font-size: 12px;
+      color: var(--text-light);
+    }
+
+    .badge {
+      padding: 4px 12px;
+      background: var(--bg-light);
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-dark);
+      display: inline-block;
+      margin-right: 8px;
+      margin-bottom: 8px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #003d99;
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 768px) {
+      .main-layout {
+        grid-template-columns: 1fr;
+      }
+      .profile-header {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Global Navigation -->
+  <script>
+    fetch('/public/components/global-nav.html')
+      .then(response => response.text())
+      .then(html => {
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = html;
+        document.body.insertBefore(tempDiv.firstChild, document.body.firstChild);
+      });
+  </script>
+
+  <div class="page-container">
+    <div class="profile-header">
+      <div class="avatar-large">AS</div>
+      <div class="profile-info">
+        <h1>Alice Smith</h1>
+        <div class="profile-role">Senior Operations Manager • IT Department</div>
+        <div class="profile-meta">
+          <span>📧 alice.smith@pursuit.bank</span>
+          <span>📍 San Francisco, CA</span>
+          <span>📅 Joined Jan 2023</span>
+          <span>🎯 347 SOPs Contributed</span>
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="window.location.href='/public/settings.html'">
+        Edit Profile
+      </button>
+    </div>
+
+    <div class="main-layout">
+      <div style="display: grid; gap: 24px;">
+        <div class="card">
+          <h2>📊 My Statistics</h2>
+          <div class="stat-grid">
+            <div class="stat-item">
+              <div class="stat-value">23</div>
+              <div class="stat-label">SOPs Created</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">89</div>
+              <div class="stat-label">SOPs Reviewed</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">156</div>
+              <div class="stat-label">Approvals</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">3</div>
+              <div class="stat-label">Pending Reviews</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>🏆 Expertise & Certifications</h2>
+          <div style="margin-bottom: 16px;">
+            <div style="font-size: 13px; font-weight: 600; color: var(--text-dark); margin-bottom: 8px;">Departments</div>
+            <div class="badge">IT Operations</div>
+            <div class="badge">Security</div>
+            <div class="badge">Compliance</div>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <div style="font-size: 13px; font-weight: 600; color: var(--text-dark); margin-bottom: 8px;">Compliance Frameworks</div>
+            <div class="badge">SOX</div>
+            <div class="badge">HIPAA</div>
+            <div class="badge">ISO 9001</div>
+            <div class="badge">SOC 2</div>
+          </div>
+          <div>
+            <div style="font-size: 13px; font-weight: 600; color: var(--text-dark); margin-bottom: 8px;">Skills</div>
+            <div class="badge">Process Documentation</div>
+            <div class="badge">Risk Management</div>
+            <div class="badge">Audit Preparation</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: grid; gap: 24px;">
+        <div class="card">
+          <h2>⚡ Recent Activity</h2>
+          <div>
+            <div class="activity-item">
+              <div class="activity-icon">✅</div>
+              <div class="activity-content">
+                <div class="activity-title">Approved: Wire Transfer Security SOP</div>
+                <div class="activity-time">2 hours ago</div>
+              </div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon">📝</div>
+              <div class="activity-content">
+                <div class="activity-title">Updated: Password Reset Procedure v2.2.0</div>
+                <div class="activity-time">Yesterday at 3:42 PM</div>
+              </div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon">💬</div>
+              <div class="activity-content">
+                <div class="activity-title">Commented on: GDPR Data Subject Requests</div>
+                <div class="activity-time">2 days ago</div>
+              </div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon">⚛️</div>
+              <div class="activity-content">
+                <div class="activity-title">Created: Access Request Approval Matrix</div>
+                <div class="activity-time">1 week ago</div>
+              </div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon">👁</div>
+              <div class="activity-content">
+                <div class="activity-title">Reviewed: New User Account Setup</div>
+                <div class="activity-time">1 week ago</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>📋 My Responsibilities</h2>
+          <div style="font-size: 14px; line-height: 1.8; color: var(--text-dark);">
+            <div style="margin-bottom: 16px;">
+              <strong>SOP Owner:</strong><br>
+              <span style="color: var(--text-light);">12 SOPs across IT Operations and Security</span>
+            </div>
+            <div style="margin-bottom: 16px;">
+              <strong>Approver For:</strong><br>
+              <span style="color: var(--text-light);">IT Department SOPs, Security Policies, Compliance Frameworks</span>
+            </div>
+            <div style="margin-bottom: 16px;">
+              <strong>Department Lead:</strong><br>
+              <span style="color: var(--text-light);">IT Operations - responsible for maintaining operational SOPs</span>
+            </div>
+            <div>
+              <strong>Compliance Coordinator:</strong><br>
+              <span style="color: var(--text-light);">SOX and SOC 2 audit preparation</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
