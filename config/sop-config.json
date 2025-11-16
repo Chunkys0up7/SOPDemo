@@ -1,8 +1,8 @@
 {
   "project": {
     "name": "SOP Ecosystem POC",
-    "version": "1.0.0",
-    "description": "Proof of concept for graph-based, modular SOP management"
+    "version": "2.0.0",
+    "description": "Production-ready graph-based, modular SOP management with enhanced metadata and searchability"
   },
   "directories": {
     "components": "sop-components",
@@ -14,27 +14,132 @@
   "validation": {
     "strictMode": false,
     "requiredSOPFields": [
+      "id",
       "title",
       "version",
       "status",
-      "owner"
+      "owner",
+      "department",
+      "processCategory",
+      "complexity",
+      "audience"
     ],
     "requiredComponentFields": [
       "id",
       "type",
       "version",
-      "title"
+      "title",
+      "department",
+      "owner"
+    ],
+    "optionalSOPFields": [
+      "keywords",
+      "tags",
+      "complianceFrameworks",
+      "relatedSOPs",
+      "estimatedDuration",
+      "volumeMetric",
+      "targetSLA"
+    ]
+  },
+  "metadata": {
+    "taxonomies": {
+      "departments": [
+        "IT",
+        "Operations",
+        "HR",
+        "Finance",
+        "Legal",
+        "Compliance",
+        "Security",
+        "Customer Service",
+        "Multi-Department"
+      ],
+      "processCategories": [
+        "System Configuration",
+        "Troubleshooting",
+        "Compliance & Audit",
+        "Maintenance & Updates",
+        "Risk Management",
+        "Training & Onboarding"
+      ],
+      "complexity": [
+        "Basic",
+        "Intermediate",
+        "Advanced"
+      ],
+      "audience": [
+        "C-Level Executive",
+        "Manager/Supervisor",
+        "Individual Contributor",
+        "Technician/Specialist",
+        "Customer/External User",
+        "Contractor"
+      ],
+      "status": [
+        "draft",
+        "in-review",
+        "approved",
+        "active",
+        "archived",
+        "deprecated"
+      ],
+      "complianceFrameworks": [
+        "ISO 9001",
+        "HIPAA",
+        "SOX",
+        "GDPR",
+        "FDA",
+        "PCI-DSS",
+        "FERPA",
+        "CCPA",
+        "SOC 2"
+      ]
+    },
+    "relationshipTypes": [
+      "depends-on",
+      "related-to",
+      "supersedes",
+      "superseded-by",
+      "references"
     ]
   },
   "versioning": {
     "format": "semantic",
-    "autoIncrement": false
+    "autoIncrement": false,
+    "trackChanges": true,
+    "requireApproval": true
   },
   "build": {
     "outputFormat": "markdown",
     "includeMetadata": true,
     "generateTableOfContents": true,
-    "processIncludes": true
+    "processIncludes": true,
+    "generateSearchIndex": true,
+    "generateJSON": true,
+    "exportFormats": ["markdown", "html", "pdf", "json"]
+  },
+  "search": {
+    "enabled": true,
+    "indexMetadata": true,
+    "indexFullText": true,
+    "facetedSearch": {
+      "enabled": true,
+      "facets": [
+        "department",
+        "processCategory",
+        "complexity",
+        "audience",
+        "complianceFrameworks",
+        "status"
+      ]
+    },
+    "relevanceWeighting": {
+      "title": 3.0,
+      "keywords": 2.5,
+      "tags": 2.0,
+      "content": 1.0
+    }
   },
   "visualization": {
     "defaultFormat": "mermaid",
@@ -44,11 +149,45 @@
       "organism": "#f3e5f5",
       "molecule": "#e8f5e9",
       "atom": "#fff3e0"
+    },
+    "nodeSizing": {
+      "byComplexity": true,
+      "byReusability": true
     }
   },
   "impactAnalysis": {
     "maxDepth": 10,
     "exportResults": true,
-    "includeWeakDependencies": true
+    "includeWeakDependencies": true,
+    "trackReusability": true,
+    "analyzeCompliance": true
+  },
+  "qualityControl": {
+    "requireApproval": true,
+    "requireReview": true,
+    "minimumReviewers": 1,
+    "trackCheckpoints": true,
+    "auditTrail": true
+  },
+  "compliance": {
+    "trackFrameworks": true,
+    "auditFrequency": {
+      "ISO 9001": "annually",
+      "HIPAA": "annually",
+      "SOX": "quarterly",
+      "GDPR": "annually"
+    },
+    "recordRetention": {
+      "default": "7 years",
+      "financial": "7 years",
+      "hr": "7 years",
+      "legal": "10 years"
+    }
+  },
+  "reusability": {
+    "trackUsage": true,
+    "generateComponentRegistry": true,
+    "showDependencyTree": true,
+    "versionDependencies": true
   }
 }
