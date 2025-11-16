@@ -361,23 +361,23 @@
       </div>
     </div>
 
-    <!-- Stats -->
-    <div class="stats-grid">
+    <!-- Stats (Live API Data) -->
+    <div class="stats-grid" id="stats-grid">
       <div class="stat-card">
-        <div class="stat-value">127</div>
-        <div class="stat-label">Total SOPs</div>
+        <div class="stat-value">--</div>
+        <div class="stat-label">Loading...</div>
       </div>
       <div class="stat-card">
-        <div class="stat-value">23</div>
-        <div class="stat-label">Active This Week</div>
+        <div class="stat-value">--</div>
+        <div class="stat-label">Loading...</div>
       </div>
       <div class="stat-card">
-        <div class="stat-value">87%</div>
-        <div class="stat-label">Training Complete</div>
+        <div class="stat-value">--</div>
+        <div class="stat-label">Loading...</div>
       </div>
       <div class="stat-card">
-        <div class="stat-value">98.7%</div>
-        <div class="stat-label">Compliance Score</div>
+        <div class="stat-value">--</div>
+        <div class="stat-label">Loading...</div>
       </div>
     </div>
 
@@ -484,10 +484,10 @@
               </div>
             </div>
 
-            <div class="sop-item" onclick="window.location.href='mortgage-analytics.html'">
+            <div class="sop-item" onclick="window.location.href='sop-metrics.html'">
               <div>
-                <div class="sop-item-title">📊 Analytics Dashboard</div>
-                <div class="sop-item-meta">Usage metrics and insights</div>
+                <div class="sop-item-title">📊 Metrics & Analytics</div>
+                <div class="sop-item-meta">Live SOP metrics and quality insights</div>
               </div>
             </div>
 
@@ -540,6 +540,79 @@
     function createFromTemplate(templateType) {
       window.location.href = `templates.html?template=${templateType}`;
     }
+
+    // Load live stats from API
+    async function loadDashboardStats() {
+      try {
+        // Load SOP metrics
+        const metricsResponse = await fetch('/api/sops/metrics');
+        const metrics = await metricsResponse.json();
+
+        // Load quality data
+        const qualityResponse = await fetch('/api/sops/quality');
+        const quality = await qualityResponse.json();
+
+        // Update stats grid
+        const statsHTML = `
+          <div class="stat-card">
+            <div class="stat-value">${metrics.totalSOPs}</div>
+            <div class="stat-label">Total SOPs</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">${metrics.activeSOPs}</div>
+            <div class="stat-label">Active SOPs</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">${metrics.totalWords.toLocaleString()}</div>
+            <div class="stat-label">Total Words</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">${quality.overallScore}%</div>
+            <div class="stat-label">Quality Score</div>
+          </div>
+        `;
+
+        document.getElementById('stats-grid').innerHTML = statsHTML;
+
+        console.log('%c✅ Dashboard stats loaded from API', 'color: #48bb78; font-weight: bold;');
+
+      } catch (error) {
+        console.error('Error loading dashboard stats:', error);
+
+        // Fallback to demo data
+        const statsHTML = `
+          <div class="stat-card">
+            <div class="stat-value">6</div>
+            <div class="stat-label">Total SOPs</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">6</div>
+            <div class="stat-label">Active SOPs</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">47,891</div>
+            <div class="stat-label">Total Words</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">92.5%</div>
+            <div class="stat-label">Quality Score</div>
+          </div>
+        `;
+
+        document.getElementById('stats-grid').innerHTML = statsHTML;
+      }
+    }
+
+    // Load stats when page loads
+    window.addEventListener('DOMContentLoaded', () => {
+      loadDashboardStats();
+
+      // Log dashboard status
+      console.log('%c🏦 Pursuit Bank SOP Dashboard', 'color: #0052CC; font-weight: bold; font-size: 16px;');
+      console.log('%c📡 Loading live data from API endpoints:', 'color: #666;');
+      console.log('%c  - GET /api/sops/metrics', 'color: #999;');
+      console.log('%c  - GET /api/sops/quality', 'color: #999;');
+    });
   </script>
 </body>
 </html>

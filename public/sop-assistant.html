@@ -561,11 +561,9 @@
 
       <div class="sidebar-section">
         <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">Knowledge Base Stats</h3>
-        <div style="font-size: 13px; color: var(--text-light); line-height: 1.8;">
-          📚 7 SOPs indexed<br>
-          📄 42 sections vectorized<br>
-          🔍 1,248 chunks available<br>
-          ✨ Ready for queries
+        <div id="kb-stats" style="font-size: 13px; color: var(--text-light); line-height: 1.8;">
+          📚 Loading stats...<br>
+          ⏳ Please wait
         </div>
       </div>
     </div>
@@ -708,20 +706,51 @@
       document.getElementById('sendBtn').disabled = true;
       addLoadingMessage();
 
-      // Simulate processing delay
-      await sleep(800);
+      try {
+        // Call production RAG API
+        const maxSources = parseInt(document.getElementById('maxSources').value);
+        const apiResponse = await fetch('/api/assistant/query', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            query: query,
+            topK: maxSources
+          })
+        });
 
-      // Perform RAG retrieval
-      const retrievedSources = await retrieveRelevantSources(query);
+        if (!apiResponse.ok) {
+          throw new Error(`API error: ${apiResponse.status}`);
+        }
 
-      // Generate response
-      const response = await generateResponse(query, retrievedSources);
+        const data = await apiResponse.json();
 
-      // Remove loading message
-      removeLoadingMessage();
+        // Remove loading message
+        removeLoadingMessage();
 
-      // Add assistant response
-      addAssistantMessage(response, retrievedSources);
+        // Add assistant response with actual sources
+        addAssistantMessage({
+          text: data.answer,
+          type: 'answer'
+        }, data.sources.map(s => ({
+          sopId: s.sopId,
+          sopTitle: s.title,
+          section: s.section,
+          relevanceScore: s.relevance / 100,
+          content: '' // Not returned from API for performance
+        })));
+
+      } catch (error) {
+        console.error('Assistant API error:', error);
+        removeLoadingMessage();
+
+        // Show error message
+        addAssistantMessage({
+          text: `I encountered an error processing your request: ${error.message}\n\nPlease try again or contact support if the issue persists.`,
+          type: 'error'
+        }, []);
+      }
 
       // Re-enable input
       isProcessing = false;
@@ -1204,6 +1233,40 @@ Try one of the example queries in the sidebar for a more detailed demonstration!
     function sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
     }
+
+    // Load knowledge base stats from API
+    async function loadKBStats() {
+      try {
+        const response = await fetch('/api/assistant/health');
+        const data = await response.json();
+
+        const statsHtml = `
+          📚 ${data.stats.totalEmbeddings} SOP sections indexed<br>
+          🤖 RAG: ${data.services.vectorDB} mode<br>
+          💬 LLM: ${data.services.llm} mode<br>
+          ⚡ Avg response: ${data.stats.avgResponseTime}<br>
+          ✨ Status: ${data.status}
+        `;
+
+        document.getElementById('kb-stats').innerHTML = statsHtml;
+      } catch (error) {
+        document.getElementById('kb-stats').innerHTML = `
+          ⚠️ Unable to load stats<br>
+          📡 Check API connection
+        `;
+      }
+    }
+
+    // Initialize on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      loadKBStats();
+
+      // Log API info
+      console.log('%c🤖 SOP Assistant - Production RAG API Active', 'color: #0052CC; font-weight: bold; font-size: 14px;');
+      console.log('%cEndpoint: /api/assistant/query', 'color: #666;');
+      console.log('%cVector DB: Mock (ready for Pinecone/Weaviate)', 'color: #666;');
+      console.log('%cLLM: Mock (ready for OpenAI/Anthropic)', 'color: #666;');
+    });
   </script>
 </body>
 </html>

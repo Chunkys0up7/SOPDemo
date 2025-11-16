@@ -289,6 +289,73 @@
   }
 </style>
 
+<!-- Analytics Tracking (Plausible - Ready to activate) -->
+<!-- SETUP: Sign up at plausible.io and replace "your-domain.com" with actual domain -->
+<!-- <script defer data-domain="your-domain.com" src="https://plausible.io/js/script.js"></script> -->
+
+<!-- Analytics Helper Functions -->
+<script>
+  // Privacy-focused analytics helpers (ready for Plausible integration)
+  window.sopAnalytics = {
+    // Track custom events (when Plausible is active)
+    trackEvent: function(eventName, props = {}) {
+      if (typeof plausible !== 'undefined') {
+        plausible(eventName, { props });
+      } else {
+        // Console log for demo mode
+        console.log('[Analytics Demo]', eventName, props);
+      }
+    },
+
+    // Track SOP views
+    trackSOPView: function(sopId, sopTitle) {
+      this.trackEvent('SOP View', {
+        sop_id: sopId,
+        sop_title: sopTitle
+      });
+    },
+
+    // Track search queries
+    trackSearch: function(query, resultCount) {
+      this.trackEvent('Search', {
+        query: query,
+        results: resultCount
+      });
+    },
+
+    // Track template usage
+    trackTemplateUse: function(templateId, templateName) {
+      this.trackEvent('Template Use', {
+        template_id: templateId,
+        template_name: templateName
+      });
+    },
+
+    // Track AI assistant queries
+    trackAssistantQuery: function(query, confidence) {
+      this.trackEvent('AI Query', {
+        query_length: query.length,
+        confidence: Math.round(confidence * 100)
+      });
+    }
+  };
+
+  // Log analytics status on load
+  window.addEventListener('DOMContentLoaded', function() {
+    const analyticsActive = typeof plausible !== 'undefined';
+    console.log(
+      '%c📊 Analytics Status: ' + (analyticsActive ? 'Active' : 'Demo Mode'),
+      'color: #0052CC; font-weight: bold;'
+    );
+    if (!analyticsActive) {
+      console.log(
+        '%cTo activate: Sign up at plausible.io and uncomment script tag in global-nav.html',
+        'color: #718096;'
+      );
+    }
+  });
+</script>
+
 <nav class="global-nav">
   <div class="nav-container">
     <!-- Left Section -->
@@ -314,6 +381,7 @@
     <div class="nav-center">
       <a href="/public/browse.html" class="nav-link">Browse</a>
       <a href="/public/status-dashboard.html" class="nav-link">My Dashboard</a>
+      <a href="/public/sop-metrics.html" class="nav-link">📊 Metrics</a>
       <a href="/public/approvals.html" class="nav-link">
         Approvals
         <span class="badge">3</span>
