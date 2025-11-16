@@ -10,13 +10,19 @@
     "impact": "node tools/impact-analysis.js",
     "visualize": "node tools/visualize.js",
     "serve": "node tools/serve.js",
+    "serve:enhanced": "node tools/serve-enhanced.js",
     "test": "node --test tests/*.test.js",
     "lint:md": "markdownlint 'sops/**/*.md' '*.md' --ignore node_modules --ignore dist",
     "lint:md:fix": "markdownlint --fix 'sops/**/*.md' '*.md' --ignore node_modules --ignore dist",
     "spellcheck": "cspell 'sops/**/*.md' '*.md'",
     "check:links": "node tools/check-links.js",
     "check:all": "npm run lint:md && npm run spellcheck && npm run validate",
-    "prepare": "husky"
+    "pdf:generate": "node tools/generate-pdf.js",
+    "compliance:report": "node tools/compliance-report.js",
+    "training:generate": "node tools/generate-training-quiz.js",
+    "reports:all": "npm run compliance:report && npm run pdf:generate && npm run training:generate",
+    "prepare": "husky",
+    "start": "npm run serve:enhanced"
   },
   "keywords": [
     "sop",

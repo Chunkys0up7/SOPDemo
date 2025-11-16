@@ -1,0 +1,78 @@
+name: SOP Change Detection
+
+on:
+  pull_request:
+    paths:
+      - 'sops/**/*.md'
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect changed SOPs
+        id: changes
+        run: |
+          CHANGED_SOPS=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | grep '^sops/.*\.md$' || true)
+          echo "changed_files<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGED_SOPS" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Generate change summary
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const { execSync } = require('child_process');
+
+            const changedFiles = `${{ steps.changes.outputs.changed_files }}`.split('\n').filter(f => f);
+
+            if (changedFiles.length === 0) {
+              console.log('No SOP files changed');
+              return;
+            }
+
+            let comment = '## 📝 SOP Changes Detected\n\n';
+            comment += `**${changedFiles.length} SOP(s) modified in this PR**\n\n`;
+
+            for (const file of changedFiles) {
+              comment += `### ${file}\n\n`;
+
+              // Get diff stats
+              try {
+                const stats = execSync(`git diff origin/${{ github.base_ref }}...HEAD --numstat -- "${file}"`).toString().trim();
+                const [added, removed] = stats.split('\t');
+
+                comment += `- ➕ ${added} lines added\n`;
+                comment += `- ➖ ${removed} lines removed\n\n`;
+
+                // Get actual diff (limit to first 50 lines to avoid huge comments)
+                const diff = execSync(`git diff origin/${{ github.base_ref }}...HEAD -- "${file}" | head -100`).toString();
+                comment += '<details><summary>📋 View Changes</summary>\n\n';
+                comment += '```diff\n' + diff + '\n```\n\n';
+                comment += '</details>\n\n';
+              } catch (error) {
+                comment += `⚠️ Could not generate diff for this file\n\n`;
+              }
+            }
+
+            comment += '---\n\n';
+            comment += '### ⚠️ Review Checklist\n\n';
+            comment += '- [ ] Version number incremented in frontmatter\n';
+            comment += '- [ ] Compliance impact assessed\n';
+            comment += '- [ ] Cross-references validated\n';
+            comment += '- [ ] Dependent SOPs reviewed\n';
+            comment += '- [ ] Training team notified (if applicable)\n';
+            comment += '- [ ] Effective date set\n';
+
+            // Post comment to PR
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });

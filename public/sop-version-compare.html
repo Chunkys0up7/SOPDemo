@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOP Version Compare - Pursuit Bank</title>
+  <link rel="stylesheet" href="/public/assets/branding/pursuit-brand.css">
+  <script src="https://cdn.jsdelivr.net/npm/diff@5.1.0/dist/diff.min.js"></script>
+  <style>
+    :root {
+      --primary-color: #0052CC;
+      --primary-dark: #003d99;
+      --text-dark: #2d3748;
+      --text-light: #718096;
+      --border-color: #e2e8f0;
+      --bg-light: #f7fafc;
+      --success-color: #48bb78;
+      --danger-color: #f56565;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-light);
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 40px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 12px rgba(0, 82, 204, 0.15);
+    }
+
+    .header h1 {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      font-size: 16px;
+      opacity: 0.95;
+    }
+
+    .controls {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
+    }
+
+    .control-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr auto 1fr 100px;
+      gap: 20px;
+      align-items: end;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    select {
+      padding: 12px;
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 14px;
+      color: var(--text-dark);
+      background: white;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    select:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.1);
+    }
+
+    .vs-label {
+      text-align: center;
+      font-weight: 700;
+      color: var(--text-light);
+      font-size: 18px;
+      padding-top: 24px;
+    }
+
+    .btn-compare {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-compare:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 82, 204, 0.3);
+    }
+
+    .diff-output {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      padding: 30px;
+      min-height: 400px;
+    }
+
+    .diff-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background: var(--bg-light);
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    .diff-stats {
+      display: flex;
+      gap: 30px;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .stat-added {
+      color: var(--success-color);
+      font-weight: 600;
+    }
+
+    .stat-removed {
+      color: var(--danger-color);
+      font-weight: 600;
+    }
+
+    .diff-container {
+      font-family: 'Courier New', Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.5;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .diff-line {
+      padding: 4px 12px;
+      display: grid;
+      grid-template-columns: 50px 50px 1fr;
+      gap: 12px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .diff-line-number {
+      color: var(--text-light);
+      text-align: right;
+      user-select: none;
+      font-size: 12px;
+    }
+
+    .diff-line-content {
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .diff-line.added {
+      background: #e6ffed;
+      color: #1a1a1a;
+    }
+
+    .diff-line.removed {
+      background: #ffeef0;
+      color: #1a1a1a;
+    }
+
+    .diff-line.context {
+      background: white;
+    }
+
+    .diff-line.added .diff-line-content {
+      color: #22543d;
+    }
+
+    .diff-line.removed .diff-line-content {
+      color: #742a2a;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-light);
+    }
+
+    .empty-state-icon {
+      font-size: 64px;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+
+    .empty-state-text {
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-light);
+    }
+
+    .loading-spinner {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border: 4px solid var(--border-color);
+      border-top-color: var(--primary-color);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 1024px) {
+      .control-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .vs-label {
+        padding-top: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Global Navigation -->
+  <script>
+    fetch('/public/components/global-nav.html')
+      .then(response => response.text())
+      .then(html => {
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = html;
+        document.body.insertBefore(tempDiv.firstChild, document.body.firstChild);
+      });
+  </script>
+
+  <div class="container">
+    <div class="header">
+      <h1>⚖️ SOP Version Comparison</h1>
+      <p>Visual side-by-side comparison of SOP versions</p>
+    </div>
+
+    <div class="controls">
+      <div class="control-grid">
+        <div class="form-group">
+          <label>SOP to Compare</label>
+          <select id="sop-select">
+            <option value="">Select SOP...</option>
+            <option value="sop-mf-001">SOP-MF-001 - AUS Processing</option>
+            <option value="sop-mf-002">SOP-MF-002 - Manual Underwriting</option>
+            <option value="sop-mf-003">SOP-MF-003 - FHA Underwriting</option>
+            <option value="sop-mf-004">SOP-MF-004 - Clear to Close</option>
+            <option value="sop-mf-005">SOP-MF-005 - Wire Transfer Security</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Version A</label>
+          <select id="version-a">
+            <option value="current">Current (HEAD)</option>
+            <option value="v3.1.4">v3.1.4 (Nov 10)</option>
+            <option value="v3.1.3">v3.1.3 (Nov 5)</option>
+            <option value="v3.1.2">v3.1.2 (Oct 28)</option>
+          </select>
+        </div>
+
+        <div class="vs-label">vs</div>
+
+        <div class="form-group">
+          <label>Version B</label>
+          <select id="version-b">
+            <option value="current">Current (HEAD)</option>
+            <option value="v3.1.4">v3.1.4 (Nov 10)</option>
+            <option value="v3.1.3">v3.1.3 (Nov 5)</option>
+            <option value="v3.1.2">v3.1.2 (Oct 28)</option>
+          </select>
+        </div>
+
+        <button class="btn-compare" onclick="loadComparison()">Compare</button>
+      </div>
+    </div>
+
+    <div class="diff-output" id="diff-output">
+      <div class="empty-state">
+        <div class="empty-state-icon">📄</div>
+        <div class="empty-state-text">Select an SOP and two versions to compare</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function loadComparison() {
+      const sopId = document.getElementById('sop-select').value;
+      const versionA = document.getElementById('version-a').value;
+      const versionB = document.getElementById('version-b').value;
+
+      if (!sopId) {
+        alert('Please select an SOP to compare');
+        return;
+      }
+
+      if (versionA === versionB) {
+        alert('Please select two different versions');
+        return;
+      }
+
+      const outputDiv = document.getElementById('diff-output');
+      outputDiv.innerHTML = `
+        <div class="loading">
+          <div class="loading-spinner"></div>
+          <p>Loading comparison...</p>
+        </div>
+      `;
+
+      try {
+        // In production, this would fetch from Git history via API
+        // For demo, we'll generate a mock diff
+        const diff = await generateMockDiff(sopId, versionA, versionB);
+
+        outputDiv.innerHTML = renderDiff(diff);
+
+        console.log('%c📊 Version Comparison Generated', 'color: #0052CC; font-weight: bold;');
+        console.log(`SOP: ${sopId}`);
+        console.log(`Version A: ${versionA}`);
+        console.log(`Version B: ${versionB}`);
+
+      } catch (error) {
+        console.error('Error loading comparison:', error);
+        outputDiv.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">⚠️</div>
+            <div class="empty-state-text">Error loading comparison: ${error.message}</div>
+          </div>
+        `;
+      }
+    }
+
+    async function generateMockDiff(sopId, versionA, versionB) {
+      // Mock diff for demonstration
+      // In production, fetch from: GET /api/sop-diff?sop=${sopId}&v1=${versionA}&v2=${versionB}
+
+      await new Promise(resolve => setTimeout(resolve, 800)); // Simulate API delay
+
+      return {
+        sopId,
+        versionA,
+        versionB,
+        linesAdded: 12,
+        linesRemoved: 8,
+        changes: [
+          { type: 'context', oldLine: 1, newLine: 1, content: '---' },
+          { type: 'context', oldLine: 2, newLine: 2, content: 'id: ' + sopId },
+          { type: 'context', oldLine: 3, newLine: 3, content: 'title: Sample SOP Title' },
+          { type: 'removed', oldLine: 4, newLine: null, content: 'version: 3.1.3' },
+          { type: 'added', oldLine: null, newLine: 4, content: 'version: 3.1.4' },
+          { type: 'context', oldLine: 5, newLine: 5, content: 'status: active' },
+          { type: 'context', oldLine: 6, newLine: 6, content: '---' },
+          { type: 'context', oldLine: 7, newLine: 7, content: '' },
+          { type: 'context', oldLine: 8, newLine: 8, content: '## Purpose' },
+          { type: 'context', oldLine: 9, newLine: 9, content: '' },
+          { type: 'removed', oldLine: 10, newLine: null, content: 'This procedure outlines the basic requirements.' },
+          { type: 'added', oldLine: null, newLine: 10, content: 'This procedure outlines the comprehensive requirements for processing.' },
+          { type: 'context', oldLine: 11, newLine: 11, content: '' },
+          { type: 'context', oldLine: 12, newLine: 12, content: '## Procedure' },
+          { type: 'context', oldLine: 13, newLine: 13, content: '' },
+          { type: 'context', oldLine: 14, newLine: 14, content: '1. Verify documentation' },
+          { type: 'added', oldLine: null, newLine: 15, content: '2. Conduct compliance review' },
+          { type: 'context', oldLine: 15, newLine: 16, content: '2. Process application' },
+          { type: 'removed', oldLine: 16, newLine: null, content: '3. Complete checklist' },
+          { type: 'added', oldLine: null, newLine: 17, content: '3. Complete comprehensive checklist (see Appendix A)' },
+          { type: 'context', oldLine: 17, newLine: 18, content: '' },
+          { type: 'context', oldLine: 18, newLine: 19, content: '## References' },
+          { type: 'added', oldLine: null, newLine: 20, content: '' },
+          { type: 'added', oldLine: null, newLine: 21, content: '- FHA Handbook 4000.1' },
+          { type: 'added', oldLine: null, newLine: 22, content: '- TRID Guidelines' }
+        ]
+      };
+    }
+
+    function renderDiff(diff) {
+      const infoHtml = `
+        <div class="diff-info">
+          <div>
+            <strong>${diff.sopId}</strong>: Comparing <strong>${diff.versionA}</strong> → <strong>${diff.versionB}</strong>
+          </div>
+          <div class="diff-stats">
+            <div class="stat-item">
+              <span class="stat-added">+${diff.linesAdded}</span>
+              <span>added</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-removed">-${diff.linesRemoved}</span>
+              <span>removed</span>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const diffLines = diff.changes.map(change => {
+        const oldLineNum = change.oldLine !== null ? change.oldLine : '';
+        const newLineNum = change.newLine !== null ? change.newLine : '';
+
+        return `
+          <div class="diff-line ${change.type}">
+            <div class="diff-line-number">${oldLineNum}</div>
+            <div class="diff-line-number">${newLineNum}</div>
+            <div class="diff-line-content">${escapeHtml(change.content)}</div>
+          </div>
+        `;
+      }).join('');
+
+      return infoHtml + '<div class="diff-container">' + diffLines + '</div>';
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // Initialize
+    window.addEventListener('DOMContentLoaded', () => {
+      console.log('%c⚖️ SOP Version Comparison Tool', 'color: #0052CC; font-weight: bold; font-size: 14px;');
+      console.log('%cSelect an SOP and versions to compare', 'color: #666;');
+    });
+  </script>
+</body>
+</html>
