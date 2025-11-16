@@ -74,204 +74,302 @@
         .hero {
             background: linear-gradient(135deg, #0052CC 0%, #003d99 100%);
             color: white;
-            padding: 60px 40px;
+            padding: 80px 40px;
             text-align: center;
         }
 
         .hero h1 {
-            font-size: 48px;
+            font-size: 56px;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             line-height: 1.1;
         }
 
         .hero p {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 400;
-            opacity: 0.9;
-            max-width: 600px;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            line-height: 1.5;
+        }
+
+        .hero-features {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            max-width: 900px;
             margin: 0 auto;
+        }
+
+        .hero-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .hero-feature svg {
+            width: 20px;
+            height: 20px;
         }
 
         /* Container */
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 40px;
+            padding: 60px 40px;
         }
 
-        /* Cards Grid */
-        .card-grid {
+        /* Section Header */
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Feature Showcase */
+        .feature-showcase {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
         }
 
-        .card {
+        .showcase-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .showcase-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 28px rgba(0,82,204,0.15);
+        }
+
+        .showcase-visual {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e0e8ff 100%);
+            padding: 40px;
+            min-height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .showcase-content {
+            padding: 30px;
+        }
+
+        .showcase-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .showcase-description {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .showcase-stats {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #0052CC;
+            font-weight: 600;
+        }
+
+        /* Graph Visualization Preview */
+        .graph-preview {
+            position: relative;
+        }
+
+        .graph-node {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: white;
+            border: 3px solid #0052CC;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            color: #0052CC;
+            text-align: center;
+            padding: 5px;
+            box-shadow: 0 2px 8px rgba(0,82,204,0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .graph-node:nth-child(1) { top: 20%; left: 15%; animation-delay: 0s; }
+        .graph-node:nth-child(2) { top: 50%; left: 50%; animation-delay: 0.5s; background: #0052CC; color: white; border-color: #003d99; }
+        .graph-node:nth-child(3) { top: 20%; right: 15%; animation-delay: 1s; }
+        .graph-node:nth-child(4) { bottom: 20%; left: 30%; animation-delay: 1.5s; }
+        .graph-node:nth-child(5) { bottom: 20%; right: 30%; animation-delay: 2s; }
+
+        .graph-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(0,82,204,0.3), rgba(0,82,204,0.8));
+            transform-origin: left center;
+        }
+
+        /* RAG Visualization */
+        .rag-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .rag-stage {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 2px 6px rgba(0,82,204,0.1);
+        }
+
+        .rag-number {
+            width: 36px;
+            height: 36px;
+            background: #0052CC;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .rag-text {
+            font-size: 14px;
+            font-weight: 500;
+            color: #1a1a1a;
+        }
+
+        /* Atomic Design Visual */
+        .atomic-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .atomic-level {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .atomic-blocks {
+            display: flex;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .atomic-block {
+            height: 40px;
+            background: #0052CC;
+            border-radius: 4px;
+            flex: 1;
+            opacity: 0.9;
+            transition: transform 0.3s;
+        }
+
+        .atomic-block:hover {
+            transform: scale(1.1);
+        }
+
+        .atomic-level:nth-child(1) .atomic-block { background: #00A86B; }
+        .atomic-level:nth-child(2) .atomic-block { background: #0052CC; }
+        .atomic-level:nth-child(3) .atomic-block { background: #764ba2; }
+
+        .atomic-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1a1a1a;
+            min-width: 80px;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 60px;
+        }
+
+        .action-card {
             background: white;
             border-radius: 8px;
             padding: 30px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             cursor: pointer;
+            border-left: 4px solid #0052CC;
         }
 
-        .card:hover {
+        .action-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 8px 20px rgba(0,82,204,0.15);
         }
 
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+        .action-icon {
+            width: 48px;
+            height: 48px;
             margin-bottom: 15px;
         }
 
-        .card-icon {
-            width: 48px;
-            height: 48px;
-            flex-shrink: 0;
-        }
-
-        .card-title {
-            font-size: 18px;
+        .action-title {
+            font-size: 20px;
             font-weight: 600;
             color: #1a1a1a;
+            margin-bottom: 10px;
         }
 
-        .card-description {
+        .action-description {
             font-size: 14px;
             color: #666;
             line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .card-action {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #0052CC;
-            text-decoration: none;
-            transition: gap 0.3s;
-        }
-
-        .card-action:hover {
-            gap: 12px;
-        }
-
-        .card-action svg {
-            width: 16px;
-            height: 16px;
-        }
-
-        /* Button Styles */
-        .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 4px;
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-primary {
-            background: #0052CC;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #003d99;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 82, 204, 0.3);
-        }
-
-        .btn-secondary {
-            background: white;
-            color: #0052CC;
-            border: 2px solid #0052CC;
-        }
-
-        .btn-secondary:hover {
-            background: #f0f4ff;
-        }
-
-        /* Section Header */
-        .section-header {
-            margin-top: 50px;
-            margin-bottom: 20px;
-        }
-
-        .section-header h2 {
-            font-size: 24px;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 8px;
-        }
-
-        .section-header p {
-            font-size: 14px;
-            color: #666;
-        }
-
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 25px;
-            border-radius: 8px;
-            border-left: 4px solid #0052CC;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        .stat-value {
-            font-size: 32px;
-            font-weight: 700;
-            color: #0052CC;
-            margin-bottom: 5px;
-        }
-
-        .stat-label {
-            font-size: 13px;
-            font-weight: 500;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Badge */
-        .badge {
-            display: inline-block;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-left: 10px;
-        }
-
-        .badge-success {
-            background: #e6f7ed;
-            color: #1a7857;
-        }
-
-        .badge-primary {
-            background: #e0e8ff;
-            color: #0052CC;
         }
 
         /* Footer */
@@ -286,6 +384,26 @@
         .footer p {
             font-size: 14px;
             opacity: 0.7;
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .badge-ai {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .badge-new {
+            background: #e6f7ed;
+            color: #1a7857;
         }
     </style>
 </head>
@@ -306,141 +424,231 @@
 
     <!-- Hero -->
     <section class="hero">
-        <h1>SOP Management System</h1>
-        <p>Modern, modular documentation system powered by semantic ontology and intelligent governance</p>
+        <h1>Intelligent SOP Management</h1>
+        <p>AI-powered documentation with semantic search, visual dependency graphs, and modular component architecture. Make complex compliance simple.</p>
+
+        <div class="hero-features">
+            <div class="hero-feature">
+                <svg fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                </svg>
+                RAG-Powered Search
+            </div>
+            <div class="hero-feature">
+                <svg fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                </svg>
+                Interactive Dependency Graphs
+            </div>
+            <div class="hero-feature">
+                <svg fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                </svg>
+                Modular Components
+            </div>
+        </div>
     </section>
 
     <!-- Main Content -->
     <div class="container">
-        <!-- Stats -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-value">5</div>
-                <div class="stat-label">Active SOPs</div>
+        <!-- Section Header -->
+        <div class="section-header">
+            <h2>Advanced Capabilities</h2>
+            <p>Modern documentation infrastructure powered by semantic ontology, graph theory, and AI</p>
+        </div>
+
+        <!-- Feature Showcase -->
+        <div class="feature-showcase">
+            <!-- RAG-Powered Search -->
+            <div class="showcase-card">
+                <div class="showcase-visual">
+                    <div class="rag-visual">
+                        <div class="rag-stage">
+                            <div class="rag-number">1</div>
+                            <div class="rag-text">Query: "FHA credit score requirements"</div>
+                        </div>
+                        <div class="rag-stage">
+                            <div class="rag-number">2</div>
+                            <div class="rag-text">Vector Search → Find relevant SOPs</div>
+                        </div>
+                        <div class="rag-stage">
+                            <div class="rag-number">3</div>
+                            <div class="rag-text">AI generates contextual answer</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="showcase-content">
+                    <div class="showcase-title">
+                        RAG-Powered Semantic Search
+                        <span class="badge badge-ai">AI</span>
+                    </div>
+                    <p class="showcase-description">
+                        Ask questions in natural language. Our Retrieval-Augmented Generation (RAG) system uses vector embeddings and semantic similarity to find exact answers across all SOPs, even when using different terminology.
+                    </p>
+                    <div class="showcase-stats">
+                        <span class="stat">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                            </svg>
+                            40% Better Relevance
+                        </span>
+                        <span class="stat">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"/>
+                            </svg>
+                            &lt;0.3s Response Time
+                        </span>
+                    </div>
+                </div>
             </div>
-            <div class="stat-card">
-                <div class="stat-value">18</div>
-                <div class="stat-label">Components</div>
+
+            <!-- Interactive Dependency Graph -->
+            <div class="showcase-card">
+                <div class="showcase-visual">
+                    <div class="graph-preview">
+                        <div class="graph-node">FHA<br>Underwriting</div>
+                        <div class="graph-node">SOP-MF-002</div>
+                        <div class="graph-node">Credit<br>Check</div>
+                        <div class="graph-node">Property<br>Appraisal</div>
+                        <div class="graph-node">Clear to<br>Close</div>
+                    </div>
+                </div>
+                <div class="showcase-content">
+                    <div class="showcase-title">
+                        Interactive Dependency Graphs
+                        <span class="badge badge-new">NEW</span>
+                    </div>
+                    <p class="showcase-description">
+                        Visualize how SOPs connect and depend on each other. See impact analysis in real-time: "If I change this SOP, what breaks?" Built with Cytoscape.js for smooth interaction with 1000+ nodes.
+                    </p>
+                    <div class="showcase-stats">
+                        <span class="stat">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/>
+                            </svg>
+                            5 Layout Algorithms
+                        </span>
+                        <span class="stat">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"/>
+                            </svg>
+                            Real-Time Updates
+                        </span>
+                    </div>
+                </div>
             </div>
-            <div class="stat-card">
-                <div class="stat-value">7</div>
-                <div class="stat-label">Compliance Frameworks</div>
+
+            <!-- Atomic Design System -->
+            <div class="showcase-card">
+                <div class="showcase-visual">
+                    <div class="atomic-visual">
+                        <div class="atomic-level">
+                            <span class="atomic-label">Atoms</span>
+                            <div class="atomic-blocks">
+                                <div class="atomic-block"></div>
+                                <div class="atomic-block"></div>
+                                <div class="atomic-block"></div>
+                                <div class="atomic-block"></div>
+                            </div>
+                        </div>
+                        <div class="atomic-level">
+                            <span class="atomic-label">Molecules</span>
+                            <div class="atomic-blocks">
+                                <div class="atomic-block" style="flex: 2;"></div>
+                                <div class="atomic-block"></div>
+                            </div>
+                        </div>
+                        <div class="atomic-level">
+                            <span class="atomic-label">Organisms</span>
+                            <div class="atomic-blocks">
+                                <div class="atomic-block" style="flex: 3;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="showcase-content">
+                    <div class="showcase-title">Modular Component Architecture</div>
+                    <p class="showcase-description">
+                        Reusable content blocks following Atomic Design principles. Build complex SOPs from simple, tested components. Update once, change everywhere. Reduces duplication by 75%.
+                    </p>
+                    <div class="showcase-stats">
+                        <span class="stat">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"/>
+                            </svg>
+                            18 Components
+                        </span>
+                        <span class="stat">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z"/>
+                            </svg>
+                            75% Less Duplication
+                        </span>
+                    </div>
+                </div>
             </div>
-            <div class="stat-card">
-                <div class="stat-value">100%</div>
-                <div class="stat-label">Validation Pass</div>
+
+            <!-- Compliance Coverage -->
+            <div class="showcase-card">
+                <div class="showcase-visual" style="background: linear-gradient(135deg, #e6f7ed 0%, #d4f1df 100%);">
+                    <div style="text-align: center; width: 100%;">
+                        <div style="font-size: 72px; font-weight: 700; color: #00A86B; margin-bottom: 15px;">100%</div>
+                        <div style="font-size: 18px; font-weight: 600; color: #1a7857;">Compliance Coverage</div>
+                        <div style="margin-top: 20px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                            <span style="padding: 8px 16px; background: white; border-radius: 20px; font-size: 13px; font-weight: 600; color: #00A86B;">FHA</span>
+                            <span style="padding: 8px 16px; background: white; border-radius: 20px; font-size: 13px; font-weight: 600; color: #00A86B;">TRID</span>
+                            <span style="padding: 8px 16px; background: white; border-radius: 20px; font-size: 13px; font-weight: 600; color: #00A86B;">RESPA</span>
+                            <span style="padding: 8px 16px; background: white; border-radius: 20px; font-size: 13px; font-weight: 600; color: #00A86B;">SOX</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="showcase-content">
+                    <div class="showcase-title">Automated Compliance Tracking</div>
+                    <p class="showcase-description">
+                        AI automatically identifies which regulations apply to each SOP. Visual heat maps show coverage gaps instantly. W3C OWL/RDF ontology maps relationships between procedures and frameworks.
+                    </p>
+                    <div class="showcase-stats">
+                        <span class="stat">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z"/>
+                                <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"/>
+                            </svg>
+                            7 Frameworks
+                        </span>
+                        <span class="stat">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                            </svg>
+                            0 Gaps Detected
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- Quick Actions -->
-        <div class="section-header">
-            <h2>Quick Actions</h2>
-            <p>Common tasks and operations</p>
+        <div class="section-header" style="margin-top: 80px;">
+            <h2>Get Started</h2>
+            <p>Explore the system or contribute your knowledge</p>
         </div>
 
-        <div class="card-grid">
-            <div class="card" onclick="window.location='sops.html'">
-                <div class="card-header">
-                    <img src="icons/document.svg" alt="Browse SOPs" class="card-icon">
-                    <h3 class="card-title">Browse SOPs</h3>
-                </div>
-                <p class="card-description">
-                    View and search all standard operating procedures. Access mortgage finance, compliance, and operational documentation.
-                </p>
-                <a href="sops.html" class="card-action">
-                    View All SOPs
-                    <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </a>
+        <div class="quick-actions">
+            <div class="action-card" onclick="window.location='sops.html'">
+                <img src="icons/document.svg" alt="Browse" class="action-icon">
+                <div class="action-title">Browse SOPs</div>
+                <p class="action-description">Explore all procedures across mortgage finance, compliance, operations, and HR.</p>
             </div>
 
-            <div class="card" onclick="window.location='contribute.html'">
-                <div class="card-header">
-                    <img src="icons/plus.svg" alt="Contribute" class="card-icon">
-                    <h3 class="card-title">Contribute Content</h3>
-                </div>
-                <p class="card-description">
-                    Add new SOPs, create reusable components, or improve existing documentation. Follow our contribution guidelines.
-                </p>
-                <a href="contribute.html" class="card-action">
-                    Start Contributing
-                    <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </a>
+            <div class="action-card" onclick="window.location='search.html'">
+                <img src="icons/search.svg" alt="Search" class="action-icon">
+                <div class="action-title">Semantic Search</div>
+                <p class="action-description">Ask questions in natural language and get AI-powered answers with context.</p>
             </div>
 
-            <div class="card" onclick="window.location='search.html'">
-                <div class="card-header">
-                    <img src="icons/search.svg" alt="Search" class="card-icon">
-                    <h3 class="card-title">Semantic Search</h3>
-                </div>
-                <p class="card-description">
-                    AI-powered search across all documentation. Ask questions in natural language and get relevant answers.
-                </p>
-                <a href="search.html" class="card-action">
-                    Try Search
-                    <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </a>
-            </div>
-        </div>
-
-        <!-- Features -->
-        <div class="section-header">
-            <h2>System Features<span class="badge badge-primary">NEW</span></h2>
-            <p>Recently implemented strategic enhancements</p>
-        </div>
-
-        <div class="card-grid">
-            <div class="card">
-                <div class="card-header">
-                    <img src="icons/growth.svg" alt="Ontology" class="card-icon">
-                    <h3 class="card-title">Semantic Ontology</h3>
-                </div>
-                <p class="card-description">
-                    W3C-compliant OWL/RDF ontology with 20+ classes and SKOS taxonomy. Enables advanced semantic search with 40% better relevance.
-                </p>
-                <a href="../docs/SEMANTIC-ONTOLOGY-GOVERNANCE-FEATURES.md" class="card-action">
-                    Learn More
-                    <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </a>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <img src="icons/settings.svg" alt="Governance" class="card-icon">
-                    <h3 class="card-title">Governance Framework</h3>
-                </div>
-                <p class="card-description">
-                    NASA NPR 7123.1B aligned governance with 6 roles, 5 automated workflows, and formal change control procedures.
-                </p>
-                <a href="../governance/policies/governance-council.json" class="card-action">
-                    View Framework
-                    <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </a>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <img src="icons/check.svg" alt="Validation" class="card-icon">
-                    <h3 class="card-title">Automated Validation</h3>
-                </div>
-                <p class="card-description">
-                    Comprehensive validation suite including schema validation, link checking, markdown linting, and dependency analysis.
-                </p>
-                <a href="../tools/schema-validator.js" class="card-action">
-                    View Tools
-                    <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </a>
+            <div class="action-card" onclick="window.location='contribute.html'">
+                <img src="icons/plus.svg" alt="Contribute" class="action-icon">
+                <div class="action-title">Contribute</div>
+                <p class="action-description">Add new procedures using our AI-assisted form. No technical knowledge required.</p>
             </div>
         </div>
     </div>
@@ -448,20 +656,7 @@
     <!-- Footer -->
     <footer class="footer">
         <p>&copy; 2025 Pursuit Bank. SOP Management System v1.0.0</p>
-        <p style="margin-top: 10px;">Powered by semantic ontology, modular components, and intelligent governance</p>
+        <p style="margin-top: 10px;">Powered by RAG, semantic ontology, graph theory, and AI-assisted documentation</p>
     </footer>
-
-    <script>
-        // Add smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-    </script>
 </body>
 </html>
