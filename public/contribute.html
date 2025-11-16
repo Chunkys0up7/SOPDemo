@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contribute - Pursuit Bank SOP Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            color: #1a1a1a;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .logo-lockup {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+        }
+
+        .wordmark {
+            font-size: 24px;
+            font-weight: 600;
+            color: #0052CC;
+        }
+
+        .nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #0052CC;
+        }
+
+        .nav-link.active {
+            color: #0052CC;
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0052CC 0%, #003d99 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 18px;
+            font-weight: 400;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        /* Section Header */
+        .section-header {
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+
+        .section-header h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .section-header p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Process Steps */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .step {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            width: 40px;
+            height: 40px;
+            background: #0052CC;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            box-shadow: 0 2px 8px rgba(0,82,204,0.3);
+        }
+
+        .step h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Template Cards */
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .template-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .template-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,82,204,0.15);
+        }
+
+        .template-header {
+            background: #f0f4ff;
+            padding: 20px;
+            border-bottom: 2px solid #0052CC;
+        }
+
+        .template-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 12px;
+        }
+
+        .template-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 5px;
+        }
+
+        .template-type {
+            font-size: 12px;
+            font-weight: 600;
+            color: #0052CC;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .template-body {
+            padding: 20px;
+        }
+
+        .template-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .template-features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .template-features li {
+            font-size: 13px;
+            color: #666;
+            padding: 6px 0;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .template-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #0052CC;
+            font-weight: 700;
+        }
+
+        .template-action {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #0052CC;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .template-action:hover {
+            background: #003d99;
+            transform: translateY(-1px);
+        }
+
+        /* Code Block */
+        .code-block {
+            background: #1a1a1a;
+            color: #e0e0e0;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .code-block .comment {
+            color: #888;
+        }
+
+        .code-block .keyword {
+            color: #569cd6;
+        }
+
+        .code-block .string {
+            color: #ce9178;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: #f0f4ff;
+            border-left: 4px solid #0052CC;
+            padding: 20px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+
+        .info-box h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0052CC;
+            margin-bottom: 10px;
+        }
+
+        .info-box p, .info-box ul {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .info-box ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        /* Button */
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: #0052CC;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #003d99;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 82, 204, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px;
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .footer p {
+            font-size: 14px;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-lockup">
+            <img src="/assets/branding/pursuit-logo-primary.svg" alt="Pursuit Bank" class="logo">
+            <div class="wordmark">Pursuit</div>
+        </div>
+        <nav class="nav">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/sops" class="nav-link">SOPs</a>
+            <a href="/contribute" class="nav-link active">Contribute</a>
+            <a href="/docs" class="nav-link">Documentation</a>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Contribute to SOP Library</h1>
+        <p>Help build and improve our documentation. Create new SOPs, design reusable components, or enhance existing content.</p>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Contribution Process -->
+        <div class="section-header">
+            <h2>Contribution Process</h2>
+            <p>Follow these steps to contribute effectively</p>
+        </div>
+
+        <div class="process-steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Choose Your Contribution</h3>
+                <p>Select a template below based on what you want to create: a complete SOP, a reusable component, or an improvement to existing content.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Follow the Template</h3>
+                <p>Use the provided template structure. Include all required metadata, compliance references, and follow our style guide.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Validate Your Work</h3>
+                <p>Run validation tools locally to check markdown syntax, links, and schema compliance before submitting.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Submit for Review</h3>
+                <p>Create a pull request with a clear description. Your content will go through our governance review process.</p>
+            </div>
+        </div>
+
+        <!-- Templates -->
+        <div class="section-header">
+            <h2>Contribution Templates</h2>
+            <p>Start with these templates to ensure consistency</p>
+        </div>
+
+        <div class="template-grid">
+            <!-- Full SOP Template -->
+            <div class="template-card">
+                <div class="template-header">
+                    <img src="/icons/document.svg" alt="SOP" class="template-icon">
+                    <div class="template-type">Full SOP</div>
+                    <div class="template-title">Standard Operating Procedure</div>
+                </div>
+                <div class="template-body">
+                    <p class="template-description">
+                        Create a complete SOP for a business process. Includes metadata, compliance mapping, and modular component integration.
+                    </p>
+                    <ul class="template-features">
+                        <li>Front matter with full metadata</li>
+                        <li>Compliance framework references</li>
+                        <li>Component inclusion support</li>
+                        <li>Version control tracking</li>
+                        <li>Approval workflow integration</li>
+                    </ul>
+                    <a href="#sop-template" class="template-action">View Template</a>
+                </div>
+            </div>
+
+            <!-- Component Template -->
+            <div class="template-card">
+                <div class="template-header">
+                    <img src="/icons/plus.svg" alt="Component" class="template-icon">
+                    <div class="template-type">Reusable Component</div>
+                    <div class="template-title">Modular Component</div>
+                </div>
+                <div class="template-body">
+                    <p class="template-description">
+                        Design a reusable component following Atomic Design principles. Can be included in multiple SOPs.
+                    </p>
+                    <ul class="template-features">
+                        <li>Atom, Molecule, or Organism level</li>
+                        <li>Semantic tagging for search</li>
+                        <li>Compliance annotations</li>
+                        <li>Dependency tracking</li>
+                        <li>Usage documentation</li>
+                    </ul>
+                    <a href="#component-template" class="template-action">View Template</a>
+                </div>
+            </div>
+
+            <!-- Enhancement Template -->
+            <div class="template-card">
+                <div class="template-header">
+                    <img src="/icons/settings.svg" alt="Enhancement" class="template-icon">
+                    <div class="template-type">Enhancement</div>
+                    <div class="template-title">Improve Existing Content</div>
+                </div>
+                <div class="template-body">
+                    <p class="template-description">
+                        Update existing SOPs or components with improvements, corrections, or additional details.
+                    </p>
+                    <ul class="template-features">
+                        <li>Change control documentation</li>
+                        <li>Impact analysis requirements</li>
+                        <li>Version increment guidelines</li>
+                        <li>Approval routing rules</li>
+                        <li>Rollback procedures</li>
+                    </ul>
+                    <a href="#enhancement-template" class="template-action">View Template</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- SOP Template Details -->
+        <div id="sop-template" class="section-header">
+            <h2>Full SOP Template</h2>
+            <p>Complete structure for creating a new Standard Operating Procedure</p>
+        </div>
+
+        <div class="info-box">
+            <h4>Template Structure</h4>
+            <p>All SOPs must include the following sections in this order:</p>
+            <ul>
+                <li>Front Matter (YAML metadata)</li>
+                <li>Purpose statement</li>
+                <li>Scope definition</li>
+                <li>Compliance & regulatory requirements</li>
+                <li>Step-by-step procedure</li>
+                <li>Approval requirements</li>
+                <li>References & related documents</li>
+            </ul>
+        </div>
+
+        <div class="code-block">---
+<span class="comment"># Required Metadata</span>
+<span class="keyword">id:</span> <span class="string">sop-XX-YYY-description</span>
+<span class="keyword">title:</span> <span class="string">"Descriptive Title of the SOP"</span>
+<span class="keyword">category:</span> <span class="string">mortgage | compliance | operations | hr</span>
+<span class="keyword">version:</span> <span class="string">1.0.0</span>
+<span class="keyword">effective_date:</span> <span class="string">2025-01-15</span>
+<span class="keyword">review_date:</span> <span class="string">2026-01-15</span>
+<span class="keyword">owner:</span> <span class="string">Department Name</span>
+<span class="keyword">approvers:</span>
+  - <span class="string">Role/Name of Approver 1</span>
+  - <span class="string">Role/Name of Approver 2</span>
+
+<span class="comment"># Compliance Mapping</span>
+<span class="keyword">compliance:</span>
+  <span class="keyword">frameworks:</span>
+    - <span class="string">framework_id: FHA</span>
+      <span class="string">controls: [4155.1_4.A, 4155.1_4.B]</span>
+    - <span class="string">framework_id: TRID</span>
+      <span class="string">controls: [1026.19, 1026.37]</span>
+
+<span class="comment"># Semantic Tags</span>
+<span class="keyword">tags:</span>
+  - <span class="string">underwriting</span>
+  - <span class="string">mortgage</span>
+  - <span class="string">compliance</span>
+---
+
+## Purpose
+
+<span class="comment"># Clear statement of why this SOP exists</span>
+This SOP defines the process for...
+
+## Scope
+
+<span class="comment"># Who, what, when, where this applies</span>
+This procedure applies to...
+
+## Compliance & Regulatory Requirements
+
+{{<span class="keyword">include:</span> regulatory-framework-overview}}
+
+## Procedure
+
+### Step 1: [Action Name]
+
+**Responsible Role:** [Role Name]
+
+**Description:** [Detailed description of the step]
+
+**Components:**
+{{<span class="keyword">include:</span> component-name}}
+
+**Approval Required:** [Yes/No - if yes, specify role]
+
+### Step 2: [Action Name]
+
+...
+
+## References
+
+- Related SOP: [sop-XX-YYY-name](../path/to/sop.md)
+- Component: [component-name](../sop-components/type/component-name.md)
+- External: [Regulation Name](https://url.com)
+</div>
+
+        <!-- Component Template Details -->
+        <div id="component-template" class="section-header">
+            <h2>Reusable Component Template</h2>
+            <p>Structure for creating modular, reusable content blocks</p>
+        </div>
+
+        <div class="info-box">
+            <h4>Component Levels</h4>
+            <ul>
+                <li><strong>Atoms:</strong> Basic building blocks (definitions, single concepts, regulatory citations)</li>
+                <li><strong>Molecules:</strong> Simple processes (forms, checklists, validation steps)</li>
+                <li><strong>Organisms:</strong> Complex workflows (multi-step processes, approval chains)</li>
+            </ul>
+        </div>
+
+        <div class="code-block">---
+<span class="comment"># Component Metadata</span>
+<span class="keyword">id:</span> <span class="string">component-descriptive-name</span>
+<span class="keyword">type:</span> <span class="string">atom | molecule | organism</span>
+<span class="keyword">title:</span> <span class="string">"Component Title"</span>
+<span class="keyword">description:</span> <span class="string">"Brief description of what this component does"</span>
+<span class="keyword">version:</span> <span class="string">1.0.0</span>
+<span class="keyword">owner:</span> <span class="string">Department Name</span>
+
+<span class="comment"># Reusability Metadata</span>
+<span class="keyword">usage_contexts:</span>
+  - <span class="string">underwriting</span>
+  - <span class="string">compliance-review</span>
+<span class="keyword">dependencies:</span>
+  - <span class="string">other-component-id</span>
+
+<span class="comment"># Semantic Tags</span>
+<span class="keyword">semantic_tags:</span>
+  - <span class="string">process</span>
+  - <span class="string">validation</span>
+<span class="keyword">compliance_relevant:</span> <span class="string">true</span>
+<span class="keyword">frameworks:</span>
+  - <span class="string">FHA</span>
+  - <span class="string">TRID</span>
+---
+
+## Overview
+
+<span class="comment"># What this component does and when to use it</span>
+This component provides...
+
+## Content
+
+<span class="comment"># The actual reusable content</span>
+### [Section Title]
+
+[Content here - can include text, lists, tables, etc.]
+
+### [Another Section]
+
+[More content...]
+
+## Usage Notes
+
+<span class="comment"># Guidance for authors using this component</span>
+- Include this component when...
+- This component should appear in [section] of SOPs
+- Dependencies: Requires [other-component] to be included first
+
+## Compliance Notes
+
+<span class="comment"># If applicable</span>
+This component addresses the following regulatory requirements:
+- FHA 4155.1 Section 4.A: [Requirement]
+- TRID 1026.19: [Requirement]
+</div>
+
+        <!-- Enhancement Guidelines -->
+        <div id="enhancement-template" class="section-header">
+            <h2>Enhancement Guidelines</h2>
+            <p>How to improve existing content effectively</p>
+        </div>
+
+        <div class="info-box">
+            <h4>Change Types & Version Impact</h4>
+            <ul>
+                <li><strong>Patch (1.0.X):</strong> Typos, formatting, clarifications - no process changes</li>
+                <li><strong>Minor (1.X.0):</strong> Additional details, new optional steps - backward compatible</li>
+                <li><strong>Major (X.0.0):</strong> Process changes, new requirements - breaking changes</li>
+            </ul>
+        </div>
+
+        <div class="process-steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Analyze Impact</h3>
+                <p>Determine if your change affects compliance requirements, approval workflows, or dependent SOPs.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Update Version</h3>
+                <p>Increment version number according to semantic versioning based on change type.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Document Changes</h3>
+                <p>Add clear description in your pull request explaining what changed and why.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Update Dependencies</h3>
+                <p>If changing a component, identify and update all SOPs that include it.</p>
+            </div>
+        </div>
+
+        <!-- Validation -->
+        <div class="section-header">
+            <h2>Validation Before Submission</h2>
+            <p>Run these checks locally before creating a pull request</p>
+        </div>
+
+        <div class="code-block"><span class="comment"># Install dependencies</span>
+npm install
+
+<span class="comment"># Run markdown linting</span>
+npm run lint:md
+
+<span class="comment"># Check for broken links</span>
+npm run check:links
+
+<span class="comment"># Validate against schema</span>
+npm run validate:schema
+
+<span class="comment"># Run all checks</span>
+npm run check:all
+</div>
+
+        <div class="info-box">
+            <h4>Common Validation Issues</h4>
+            <ul>
+                <li>Missing required metadata fields in front matter</li>
+                <li>Broken internal links to components or other SOPs</li>
+                <li>Invalid compliance framework references</li>
+                <li>Incorrect semantic versioning</li>
+                <li>Missing approval workflow configuration</li>
+            </ul>
+        </div>
+
+        <!-- Get Started -->
+        <div class="section-header">
+            <h2>Ready to Contribute?</h2>
+            <p>Start building better documentation today</p>
+        </div>
+
+        <div style="text-align: center; margin: 40px 0;">
+            <a href="https://github.com/Chunkys0up7/SOPDemo" class="btn btn-primary">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                </svg>
+                View on GitHub
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Pursuit Bank. SOP Management System v1.0.0</p>
+        <p style="margin-top: 10px;">Powered by semantic ontology, modular components, and intelligent governance</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
