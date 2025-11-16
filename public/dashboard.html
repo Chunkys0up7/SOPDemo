@@ -3,94 +3,181 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Dashboard - Pursuit Bank SOP System</title>
+  <title>Pursuit Bank SOP Dashboard</title>
   <link rel="stylesheet" href="/public/assets/branding/pursuit-brand.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
       background: linear-gradient(135deg, #0052CC 0%, #003d99 100%);
       min-height: 100vh;
       padding: 20px;
     }
 
-    .container {
-      max-width: 1600px;
-      margin: 0 auto;
-    }
+    .container { max-width: 1800px; margin: 0 auto; }
 
+    /* Header */
     .header {
       background: white;
-      padding: 30px;
+      padding: 24px 32px;
       border-radius: 12px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      margin-bottom: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      margin-bottom: 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .welcome-section h1 {
-      font-size: 28px;
-      color: #2d3748;
-      margin-bottom: 6px;
-    }
-
-    .welcome-section p {
-      font-size: 15px;
-      color: #718096;
-    }
-
-    .quick-actions {
+    .logo-section {
       display: flex;
-      gap: 12px;
-    }
-
-    .btn {
-      padding: 12px 20px;
-      border: none;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 16px;
     }
 
-    .btn-primary {
-      background: #0052CC;
-      color: white;
+    .logo-section img { width: 50px; height: 50px; }
+
+    .brand-text h1 {
+      font-size: 24px;
+      color: #0052CC;
+      font-weight: 600;
+      margin-bottom: 2px;
     }
 
-    .btn-primary:hover {
-      background: #003d99;
-      transform: translateY(-1px);
+    .brand-text p {
+      font-size: 13px;
+      color: #666;
     }
 
-    .btn-secondary {
-      background: #e2e8f0;
-      color: #4a5568;
-    }
-
-    .btn-secondary:hover {
-      background: #cbd5e0;
-    }
-
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 30px;
+    /* Primary Action Section */
+    .action-hero {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       margin-bottom: 30px;
     }
 
-    .stats-row {
+    .action-hero h2 {
+      font-size: 22px;
+      color: #1a1a1a;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .action-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .action-card {
+      background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+      border: 2px solid transparent;
+      border-radius: 12px;
+      padding: 28px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .action-card:hover {
+      border-color: #0052CC;
+      background: white;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 82, 204, 0.2);
+    }
+
+    .action-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .action-card h3 {
+      font-size: 18px;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .action-card p {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .action-card.primary {
+      background: linear-gradient(135deg, #0052CC 0%, #003d99 100%);
+      color: white;
+    }
+
+    .action-card.primary h3,
+    .action-card.primary p {
+      color: white;
+    }
+
+    /* Template Showcase */
+    .templates-section {
+      background: white;
+      padding: 32px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      margin-bottom: 30px;
+    }
+
+    .templates-section h2 {
+      font-size: 20px;
+      color: #1a1a1a;
+      margin-bottom: 20px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .template-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .template-card {
+      background: #f7fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .template-card:hover {
+      border-color: #0052CC;
+      background: white;
+      transform: translateY(-2px);
+    }
+
+    .template-card .icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .template-card h4 {
+      font-size: 15px;
+      color: #1a1a1a;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .template-card p {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.4;
+    }
+
+    /* Stats */
+    .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 20px;
@@ -101,50 +188,35 @@
       background: white;
       padding: 24px;
       border-radius: 12px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
-
-    .stat-icon {
-      font-size: 32px;
-      margin-bottom: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
     .stat-value {
       font-size: 36px;
       font-weight: 700;
-      color: #2d3748;
-      margin-bottom: 6px;
+      color: #0052CC;
+      margin-bottom: 8px;
     }
 
     .stat-label {
       font-size: 13px;
-      color: #718096;
+      color: #666;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       font-weight: 600;
-      margin-bottom: 8px;
     }
 
-    .stat-change {
-      font-size: 12px;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .stat-change.positive {
-      color: #48bb78;
-    }
-
-    .stat-change.negative {
-      color: #ef4444;
+    /* Main Grid */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 30px;
     }
 
     .widget {
       background: white;
       border-radius: 12px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       overflow: hidden;
     }
 
@@ -156,52 +228,31 @@
       align-items: center;
     }
 
-    .widget-header h2 {
+    .widget-header h3 {
       font-size: 18px;
-      color: #2d3748;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .widget-action {
-      font-size: 13px;
-      color: #0052CC;
-      text-decoration: none;
+      color: #1a1a1a;
       font-weight: 600;
-    }
-
-    .widget-action:hover {
-      text-decoration: underline;
     }
 
     .widget-body {
       padding: 24px;
     }
 
-    .sop-list-item {
+    .sop-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 16px;
+      background: #f7fafc;
       border-radius: 8px;
       margin-bottom: 12px;
-      background: #f7fafc;
       cursor: pointer;
       transition: all 0.2s;
     }
 
-    .sop-list-item:hover {
+    .sop-item:hover {
       background: #ebf4ff;
       transform: translateX(4px);
-    }
-
-    .sop-list-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .sop-item-content {
-      flex: 1;
     }
 
     .sop-item-title {
@@ -216,252 +267,27 @@
       color: #a0aec0;
     }
 
-    .sop-item-badge {
+    .badge {
       padding: 4px 12px;
       border-radius: 12px;
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.3px;
     }
 
-    .badge-new {
-      background: #d1fae5;
-      color: #065f46;
-    }
-
-    .badge-updated {
-      background: #fef3c7;
-      color: #92400e;
-    }
-
-    .badge-critical {
-      background: #fee2e2;
-      color: #991b1b;
-    }
-
-    .notification-item {
-      padding: 16px;
-      border-left: 4px solid #0052CC;
-      background: #f7fafc;
-      border-radius: 8px;
-      margin-bottom: 12px;
-    }
-
-    .notification-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .notification-title {
-      font-size: 14px;
-      font-weight: 600;
-      color: #2d3748;
-      margin-bottom: 4px;
-    }
-
-    .notification-text {
-      font-size: 13px;
-      color: #4a5568;
-      line-height: 1.5;
-      margin-bottom: 8px;
-    }
-
-    .notification-time {
-      font-size: 11px;
-      color: #a0aec0;
-    }
-
-    .recommendation-card {
-      padding: 16px;
-      background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%);
-      border-radius: 8px;
-      margin-bottom: 12px;
-      border-left: 4px solid #f59e0b;
-    }
-
-    .recommendation-card:last-child {
-      margin-bottom: 0;
-    }
-
-    .recommendation-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: #78350f;
-      margin-bottom: 4px;
-    }
-
-    .recommendation-reason {
-      font-size: 12px;
-      color: #92400e;
-      margin-bottom: 8px;
-    }
-
-    .recommendation-action {
-      font-size: 12px;
-      color: #b45309;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .recommendation-action:hover {
-      text-decoration: underline;
-    }
-
-    .approval-item {
-      display: flex;
-      gap: 16px;
-      padding: 16px;
-      background: #fef5e7;
-      border-radius: 8px;
-      border-left: 4px solid #f59e0b;
-      margin-bottom: 12px;
-    }
-
-    .approval-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .approval-icon {
-      font-size: 32px;
-    }
-
-    .approval-content {
-      flex: 1;
-    }
-
-    .approval-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: #2d3748;
-      margin-bottom: 4px;
-    }
-
-    .approval-meta {
-      font-size: 12px;
-      color: #718096;
-      margin-bottom: 8px;
-    }
-
-    .approval-actions {
-      display: flex;
-      gap: 8px;
-    }
-
-    .approval-btn {
-      padding: 6px 14px;
-      border: none;
-      border-radius: 6px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .approval-btn.approve {
-      background: #48bb78;
-      color: white;
-    }
-
-    .approval-btn.review {
-      background: #e2e8f0;
-      color: #4a5568;
-    }
-
-    .training-progress {
-      padding: 16px;
-      background: #f7fafc;
-      border-radius: 8px;
-      margin-bottom: 12px;
-    }
-
-    .progress-header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 8px;
-    }
-
-    .progress-title {
-      font-size: 14px;
-      font-weight: 600;
-      color: #2d3748;
-    }
-
-    .progress-percentage {
-      font-size: 14px;
-      font-weight: 700;
-      color: #0052CC;
-    }
-
-    .progress-bar {
-      height: 8px;
-      background: #e2e8f0;
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #0052CC 0%, #003d99 100%);
-      border-radius: 4px;
-      transition: width 0.3s;
-    }
-
-    .quick-link-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    .quick-link {
-      padding: 16px;
-      background: #f7fafc;
-      border-radius: 8px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.2s;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .quick-link:hover {
-      background: #ebf4ff;
-      transform: translateY(-2px);
-    }
-
-    .quick-link-icon {
-      font-size: 32px;
-      margin-bottom: 8px;
-    }
-
-    .quick-link-label {
-      font-size: 13px;
-      font-weight: 600;
-      color: #4a5568;
-    }
+    .badge-new { background: #d1fae5; color: #065f46; }
+    .badge-updated { background: #fef3c7; color: #92400e; }
 
     @media (max-width: 1400px) {
-      .dashboard-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .stats-row {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .action-grid { grid-template-columns: repeat(2, 1fr); }
+      .template-grid { grid-template-columns: repeat(3, 1fr); }
+      .main-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 768px) {
-      .stats-row {
-        grid-template-columns: 1fr;
-      }
-
-      .quick-actions {
-        flex-direction: column;
-      }
-
-      .header {
-        flex-direction: column;
-        gap: 20px;
-        align-items: flex-start;
-      }
+      .action-grid { grid-template-columns: 1fr; }
+      .template-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
@@ -469,334 +295,236 @@
   <div class="container">
     <!-- Header -->
     <div class="header">
-      <div style="display: flex; align-items: center; gap: 20px;">
-        <img src="/public/assets/branding/pursuit-logo-mark-nobg.svg" alt="Pursuit Bank" style="width: 60px; height: 60px;">
-        <div class="welcome-section">
-          <h1>👋 Welcome back, Maria</h1>
-          <p>Loan Processor • Underwriting Department • <span style="color: #0052CC; font-weight: 600;">Pursuit Bank</span></p>
+      <div class="logo-section">
+        <img src="/public/assets/branding/pursuit-logo-mark-nobg.svg" alt="Pursuit Bank">
+        <div class="brand-text">
+          <h1>Pursuit Bank SOP System</h1>
+          <p>Documentation Management Platform</p>
         </div>
       </div>
-      <div class="quick-actions">
-        <button class="btn btn-primary" onclick="window.location.href='sop-search.html'">
-          🔍 Search SOPs
-        </button>
-        <button class="btn btn-secondary" onclick="window.location.href='templates.html'">
-          ✨ Create SOP
-        </button>
-        <button class="btn btn-secondary" onclick="window.location.href='sop-compare.html'">
-          ⚖️ Compare
-        </button>
+      <div>
+        <span style="color: #666; font-size: 14px;">Welcome, <strong>Maria Gonzalez</strong></span>
       </div>
     </div>
 
-    <!-- Stats Row -->
-    <div class="stats-row">
+    <!-- Primary Actions -->
+    <div class="action-hero">
+      <h2>🚀 What would you like to do?</h2>
+      <div class="action-grid">
+        <div class="action-card primary" onclick="window.location.href='templates.html'">
+          <span class="action-icon">✍️</span>
+          <h3>Create New SOP</h3>
+          <p>Start from a template or build your own standard operating procedure</p>
+        </div>
+
+        <div class="action-card" onclick="window.location.href='sop-assistant.html'">
+          <span class="action-icon">🤖</span>
+          <h3>AI Assistant</h3>
+          <p>Get instant answers and suggestions powered by LLM technology</p>
+        </div>
+
+        <div class="action-card" onclick="window.location.href='sop-search.html'">
+          <span class="action-icon">🔍</span>
+          <h3>Smart Search</h3>
+          <p>Find SOPs using natural language and semantic search</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOP Templates -->
+    <div class="templates-section">
+      <h2>📝 Start with a Template</h2>
+      <div class="template-grid">
+        <div class="template-card" onclick="createFromTemplate('mortgage-underwriting')">
+          <span class="icon">🏦</span>
+          <h4>Mortgage Underwriting</h4>
+          <p>FHA, VA, conventional loan procedures</p>
+        </div>
+
+        <div class="template-card" onclick="createFromTemplate('compliance')">
+          <span class="icon">✅</span>
+          <h4>Compliance Policy</h4>
+          <p>Regulatory requirements, audit trails</p>
+        </div>
+
+        <div class="template-card" onclick="createFromTemplate('quality-control')">
+          <span class="icon">🎯</span>
+          <h4>Quality Control</h4>
+          <p>Checklists, verification procedures</p>
+        </div>
+
+        <div class="template-card" onclick="createFromTemplate('training')">
+          <span class="icon">🎓</span>
+          <h4>Training Module</h4>
+          <p>Onboarding, skill development</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid">
       <div class="stat-card">
-        <div class="stat-icon">📊</div>
+        <div class="stat-value">127</div>
+        <div class="stat-label">Total SOPs</div>
+      </div>
+      <div class="stat-card">
         <div class="stat-value">23</div>
-        <div class="stat-label">SOPs This Week</div>
-        <div class="stat-change positive">
-          ↑ 12% vs last week
-        </div>
+        <div class="stat-label">Active This Week</div>
       </div>
-
       <div class="stat-card">
-        <div class="stat-icon">⏱️</div>
-        <div class="stat-value">4.2h</div>
-        <div class="stat-label">Time Saved</div>
-        <div class="stat-change positive">
-          ↑ 18% vs last week
-        </div>
-      </div>
-
-      <div class="stat-card">
-        <div class="stat-icon">🎓</div>
         <div class="stat-value">87%</div>
         <div class="stat-label">Training Complete</div>
-        <div class="stat-change positive">
-          ↑ 5% this month
-        </div>
       </div>
-
       <div class="stat-card">
-        <div class="stat-icon">✅</div>
         <div class="stat-value">98.7%</div>
         <div class="stat-label">Compliance Score</div>
-        <div class="stat-change positive">
-          ↑ 2.1% this quarter
-        </div>
       </div>
     </div>
 
-    <!-- Main Dashboard Grid -->
-    <div class="dashboard-grid">
+    <!-- Main Content -->
+    <div class="main-grid">
       <!-- Left Column -->
-      <div style="display: grid; gap: 30px;">
-        <!-- Recently Viewed SOPs -->
+      <div style="display: grid; gap: 24px;">
+        <!-- Recent SOPs -->
         <div class="widget">
           <div class="widget-header">
-            <h2>🕐 Recently Viewed</h2>
-            <a href="#" class="widget-action">View All →</a>
+            <h3>📋 Recent SOPs</h3>
+            <a href="sop-viewer.html" style="color: #0052CC; text-decoration: none; font-size: 14px; font-weight: 600;">View All →</a>
           </div>
           <div class="widget-body">
-            <div class="sop-list-item" onclick="openSOP('sop-mf-002')">
-              <div class="sop-item-content">
+            <div class="sop-item" onclick="openSOP('sop-mf-002')">
+              <div>
                 <div class="sop-item-title">AUS Processing (SOP-MF-002)</div>
-                <div class="sop-item-meta">Viewed 2 hours ago • v3.1.5</div>
+                <div class="sop-item-meta">Automated Underwriting • Updated 2 hours ago</div>
               </div>
             </div>
 
-            <div class="sop-list-item" onclick="openSOP('sop-mf-008')">
-              <div class="sop-item-content">
-                <div class="sop-item-title">Income Documentation (SOP-MF-008)</div>
-                <div class="sop-item-meta">Viewed yesterday • v4.3.1</div>
+            <div class="sop-item" onclick="openSOP('sop-mf-003')">
+              <div>
+                <div class="sop-item-title">FHA Underwriting (SOP-MF-003)</div>
+                <div class="sop-item-meta">Government Loans • 1,500 lines</div>
               </div>
-              <span class="sop-item-badge badge-updated">Updated</span>
+              <span class="badge badge-new">New</span>
             </div>
 
-            <div class="sop-list-item" onclick="openSOP('sop-mf-001')">
-              <div class="sop-item-content">
-                <div class="sop-item-title">Conventional Loan Processing (SOP-MF-001)</div>
-                <div class="sop-item-meta">Viewed 3 days ago • v4.2.0</div>
+            <div class="sop-item" onclick="openSOP('sop-mf-004')">
+              <div>
+                <div class="sop-item-title">Clear to Close (SOP-MF-004)</div>
+                <div class="sop-item-meta">Quality Control • 75-point checklist</div>
               </div>
+              <span class="badge badge-new">New</span>
             </div>
 
-            <div class="sop-list-item" onclick="openSOP('sop-mf-010')">
-              <div class="sop-item-content">
-                <div class="sop-item-title">TRID Compliance (SOP-MF-010)</div>
-                <div class="sop-item-meta">Viewed 4 days ago • v2.8.0</div>
+            <div class="sop-item" onclick="openSOP('sop-mf-005')">
+              <div>
+                <div class="sop-item-title">Wire Transfer Security (SOP-MF-005)</div>
+                <div class="sop-item-meta">Fraud Prevention • Dual approval required</div>
               </div>
-              <span class="sop-item-badge badge-critical">Critical</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Frequently Used -->
-        <div class="widget">
-          <div class="widget-header">
-            <h2>⭐ Frequently Used</h2>
-            <a href="#" class="widget-action">View All →</a>
-          </div>
-          <div class="widget-body">
-            <div class="sop-list-item" onclick="openSOP('sop-mf-002')">
-              <div class="sop-item-content">
-                <div class="sop-item-title">AUS Processing</div>
-                <div class="sop-item-meta">Used 47 times this month</div>
-              </div>
-            </div>
-
-            <div class="sop-list-item" onclick="openSOP('sop-mf-008')">
-              <div class="sop-item-content">
-                <div class="sop-item-title">Income Documentation</div>
-                <div class="sop-item-meta">Used 32 times this month</div>
-              </div>
-            </div>
-
-            <div class="sop-list-item" onclick="openSOP('sop-mf-001')">
-              <div class="sop-item-content">
-                <div class="sop-item-title">Conventional Loan Processing</div>
-                <div class="sop-item-meta">Used 28 times this month</div>
-              </div>
+              <span class="badge badge-updated">Updated</span>
             </div>
           </div>
         </div>
 
-        <!-- Recommended for You -->
+        <!-- AI Features -->
         <div class="widget">
           <div class="widget-header">
-            <h2>💡 Recommended for You</h2>
-            <a href="#" class="widget-action">View All →</a>
+            <h3>🤖 AI-Powered Features</h3>
           </div>
           <div class="widget-body">
-            <div class="recommendation-card">
-              <div class="recommendation-title">🏆 FHA Underwriting Standards</div>
-              <div class="recommendation-reason">
-                Based on your recent work with government loan processing
+            <div class="sop-item" onclick="window.location.href='sop-assistant.html'">
+              <div>
+                <div class="sop-item-title">💬 Ask AI Assistant</div>
+                <div class="sop-item-meta">Natural language Q&A about your SOPs</div>
               </div>
-              <span class="recommendation-action" onclick="openSOP('sop-mf-003')">
-                View SOP →
-              </span>
             </div>
 
-            <div class="recommendation-card">
-              <div class="recommendation-title">📝 Clear to Close Verification</div>
-              <div class="recommendation-reason">
-                Related to 3 SOPs you used this week
+            <div class="sop-item" onclick="window.location.href='sop-search.html'">
+              <div>
+                <div class="sop-item-title">🔍 Semantic Search</div>
+                <div class="sop-item-meta">Find SOPs by meaning, not just keywords</div>
               </div>
-              <span class="recommendation-action" onclick="openSOP('sop-mf-004')">
-                View SOP →
-              </span>
             </div>
 
-            <div class="recommendation-card">
-              <div class="recommendation-title">🎓 Take Quiz: AUS Processing</div>
-              <div class="recommendation-reason">
-                You've viewed this SOP 47 times - test your knowledge!
+            <div class="sop-item" onclick="window.location.href='sop-training.html'">
+              <div>
+                <div class="sop-item-title">🎓 Auto-Generated Quizzes</div>
+                <div class="sop-item-meta">AI creates training questions from your SOPs</div>
               </div>
-              <span class="recommendation-action" onclick="window.location.href='sop-training.html'">
-                Start Quiz →
-              </span>
+            </div>
+
+            <div class="sop-item" onclick="window.location.href='sop-compare.html'">
+              <div>
+                <div class="sop-item-title">⚖️ Version Comparison</div>
+                <div class="sop-item-meta">Smart diff showing what changed between versions</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Right Column -->
-      <div style="display: grid; gap: 30px;">
-        <!-- Recent Updates -->
-        <div class="widget">
-          <div class="widget-header">
-            <h2>🔔 Recent Updates</h2>
-            <a href="notifications.html" class="widget-action">View All →</a>
-          </div>
-          <div class="widget-body">
-            <div class="notification-item">
-              <div class="notification-title">🔄 AUS Processing Updated</div>
-              <div class="notification-text">
-                New Desktop Underwriter validation requirements effective immediately
-              </div>
-              <div class="notification-time">12 minutes ago</div>
-            </div>
-
-            <div class="notification-item">
-              <div class="notification-title">📝 Wire Transfer Protocol Change</div>
-              <div class="notification-text">
-                Dual-approval threshold updated from $10K to $15K
-              </div>
-              <div class="notification-time">1 hour ago</div>
-            </div>
-
-            <div class="notification-item">
-              <div class="notification-title">✅ Your Edit Approved</div>
-              <div class="notification-text">
-                Changes to SOP-MF-009 are now live in v1.4.0
-              </div>
-              <div class="notification-time">Yesterday</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Training Progress -->
-        <div class="widget">
-          <div class="widget-header">
-            <h2>🎓 Training Progress</h2>
-            <a href="sop-training.html" class="widget-action">View All →</a>
-          </div>
-          <div class="widget-body">
-            <div class="training-progress">
-              <div class="progress-header">
-                <span class="progress-title">Underwriting Certification</span>
-                <span class="progress-percentage">87%</span>
-              </div>
-              <div class="progress-bar">
-                <div class="progress-fill" style="width: 87%;"></div>
-              </div>
-            </div>
-
-            <div class="training-progress">
-              <div class="progress-header">
-                <span class="progress-title">TRID Compliance</span>
-                <span class="progress-percentage">100%</span>
-              </div>
-              <div class="progress-bar">
-                <div class="progress-fill" style="width: 100%;"></div>
-              </div>
-            </div>
-
-            <div class="training-progress">
-              <div class="progress-header">
-                <span class="progress-title">Fraud Prevention</span>
-                <span class="progress-percentage">45%</span>
-              </div>
-              <div class="progress-bar">
-                <div class="progress-fill" style="width: 45%;"></div>
-              </div>
-            </div>
-
-            <div style="margin-top: 16px; padding: 12px; background: #ebf4ff; border-radius: 6px; text-align: center;">
-              <div style="font-size: 12px; color: #4a5568; margin-bottom: 8px;">
-                Complete 2 more quizzes to earn your certification
-              </div>
-              <button class="btn btn-primary" style="padding: 8px 16px; font-size: 13px;" onclick="window.location.href='sop-training.html'">
-                Continue Training
-              </button>
-            </div>
-          </div>
-        </div>
-
+      <div style="display: grid; gap: 24px;">
         <!-- Quick Links -->
         <div class="widget">
           <div class="widget-header">
-            <h2>⚡ Quick Links</h2>
+            <h3>⚡ Quick Access</h3>
           </div>
           <div class="widget-body">
-            <div class="quick-link-grid">
-              <a href="sop-viewer.html" class="quick-link">
-                <div class="quick-link-icon">📄</div>
-                <div class="quick-link-label">Browse SOPs</div>
-              </a>
-
-              <a href="sop-dependencies.html" class="quick-link">
-                <div class="quick-link-icon">🔗</div>
-                <div class="quick-link-label">Dependencies</div>
-              </a>
-
-              <a href="sop-assistant.html" class="quick-link">
-                <div class="quick-link-icon">🤖</div>
-                <div class="quick-link-label">AI Assistant</div>
-              </a>
-
-              <a href="mortgage-analytics.html" class="quick-link">
-                <div class="quick-link-icon">📊</div>
-                <div class="quick-link-label">Analytics</div>
-              </a>
-
-              <a href="templates.html" class="quick-link">
-                <div class="quick-link-icon">📝</div>
-                <div class="quick-link-label">Templates</div>
-              </a>
-
-              <a href="sop-training.html" class="quick-link">
-                <div class="quick-link-icon">🎓</div>
-                <div class="quick-link-label">Training</div>
-              </a>
+            <div class="sop-item" onclick="window.location.href='sop-viewer.html'">
+              <div>
+                <div class="sop-item-title">📚 Browse All SOPs</div>
+                <div class="sop-item-meta">View complete catalog</div>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- Manager-Only Section (visible for managers) -->
-    <div class="widget" style="margin-bottom: 30px;" id="managerSection">
-      <div class="widget-header">
-        <h2>👥 Pending Approvals</h2>
-        <a href="#" class="widget-action">View All →</a>
-      </div>
-      <div class="widget-body">
-        <div class="approval-item">
-          <div class="approval-icon">📝</div>
-          <div class="approval-content">
-            <div class="approval-title">Wire Transfer Protocol Update</div>
-            <div class="approval-meta">
-              Submitted by Maria Gonzalez • SOP-MF-005 • 1 hour ago
+            <div class="sop-item" onclick="window.location.href='sop-dependencies.html'">
+              <div>
+                <div class="sop-item-title">🔗 Dependency Graph</div>
+                <div class="sop-item-meta">Visual SOP relationships</div>
+              </div>
             </div>
-            <div class="approval-actions">
-              <button class="approval-btn approve" onclick="approveEdit('sop-mf-005')">✓ Approve</button>
-              <button class="approval-btn review" onclick="reviewEdit('sop-mf-005')">👁️ Review</button>
+
+            <div class="sop-item" onclick="window.location.href='mortgage-analytics.html'">
+              <div>
+                <div class="sop-item-title">📊 Analytics Dashboard</div>
+                <div class="sop-item-meta">Usage metrics and insights</div>
+              </div>
+            </div>
+
+            <div class="sop-item" onclick="window.location.href='brand-guide.html'">
+              <div>
+                <div class="sop-item-title">🎨 Brand Guidelines</div>
+                <div class="sop-item-meta">Pursuit Bank visual identity</div>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="approval-item">
-          <div class="approval-icon">📝</div>
-          <div class="approval-content">
-            <div class="approval-title">Income Documentation Clarification</div>
-            <div class="approval-meta">
-              Submitted by David Kim • SOP-MF-008 • Yesterday
+        <!-- Documentation -->
+        <div class="widget">
+          <div class="widget-header">
+            <h3>📖 Documentation</h3>
+          </div>
+          <div class="widget-body">
+            <div class="sop-item" onclick="window.open('USE_CASE_GUIDE.md', '_blank')">
+              <div>
+                <div class="sop-item-title">📘 Use Case Guide</div>
+                <div class="sop-item-meta">End-to-end workflow examples</div>
+              </div>
             </div>
-            <div class="approval-actions">
-              <button class="approval-btn approve" onclick="approveEdit('sop-mf-008')">✓ Approve</button>
-              <button class="approval-btn review" onclick="reviewEdit('sop-mf-008')">👁️ Review</button>
+
+            <div class="sop-item" onclick="window.open('DOCS_AS_CODE_IMPROVEMENTS.md', '_blank')">
+              <div>
+                <div class="sop-item-title">🚀 Docs-as-Code Guide</div>
+                <div class="sop-item-meta">18 improvements, 605% ROI</div>
+              </div>
+            </div>
+
+            <div class="sop-item" onclick="window.open('QUICK_START_IMPROVEMENTS.md', '_blank')">
+              <div>
+                <div class="sop-item-title">⚡ Quick Start Guide</div>
+                <div class="sop-item-meta">4-week implementation plan</div>
+              </div>
             </div>
           </div>
         </div>
@@ -809,32 +537,9 @@
       window.location.href = `sop-viewer.html?sop=${sopId}`;
     }
 
-    function approveEdit(sopId) {
-      if (confirm(`Approve changes to ${sopId}?`)) {
-        alert(`✓ Changes approved and published to production`);
-        // Reload dashboard
-        setTimeout(() => window.location.reload(), 1000);
-      }
+    function createFromTemplate(templateType) {
+      window.location.href = `templates.html?template=${templateType}`;
     }
-
-    function reviewEdit(sopId) {
-      window.location.href = `sop-viewer.html?sop=${sopId}&mode=review`;
-    }
-
-    // Simulate role-based dashboard customization
-    // In production: fetch user role from backend
-    const userRole = 'processor'; // 'processor', 'underwriter', 'manager'
-
-    if (userRole !== 'manager') {
-      document.getElementById('managerSection').style.display = 'none';
-    }
-
-    // Simulate real-time updates
-    // In production: use WebSocket for live notifications
-    setInterval(() => {
-      // Mock: randomly update stats
-      console.log('Checking for updates...');
-    }, 30000);
   </script>
 </body>
 </html>
