@@ -333,30 +333,30 @@
 
     <!-- SOP Templates -->
     <div class="templates-section">
-      <h2>📝 Start with a Template</h2>
+      <h2>📝 Start with Enhanced Templates</h2>
       <div class="template-grid">
-        <div class="template-card" onclick="createFromTemplate('mortgage-underwriting')">
-          <span class="icon">🏦</span>
-          <h4>Mortgage Underwriting</h4>
-          <p>FHA, VA, conventional loan procedures</p>
+        <div class="template-card" onclick="useEnhancedTemplate('atom-template')">
+          <span class="icon">⚛️</span>
+          <h4>Atom Template</h4>
+          <p>Reusable component with rich metadata</p>
         </div>
 
-        <div class="template-card" onclick="createFromTemplate('compliance')">
-          <span class="icon">✅</span>
-          <h4>Compliance Policy</h4>
-          <p>Regulatory requirements, audit trails</p>
+        <div class="template-card" onclick="useEnhancedTemplate('molecule-template')">
+          <span class="icon">🧬</span>
+          <h4>Molecule Template</h4>
+          <p>Multi-step workflow combining atoms</p>
         </div>
 
-        <div class="template-card" onclick="createFromTemplate('quality-control')">
-          <span class="icon">🎯</span>
-          <h4>Quality Control</h4>
-          <p>Checklists, verification procedures</p>
+        <div class="template-card" onclick="useEnhancedTemplate('organism-template')">
+          <span class="icon">🦠</span>
+          <h4>Organism Template</h4>
+          <p>Complete end-to-end workflow</p>
         </div>
 
-        <div class="template-card" onclick="createFromTemplate('training')">
-          <span class="icon">🎓</span>
-          <h4>Training Module</h4>
-          <p>Onboarding, skill development</p>
+        <div class="template-card" onclick="useEnhancedTemplate('sop-template')">
+          <span class="icon">📄</span>
+          <h4>Complete SOP</h4>
+          <p>Production-ready SOP template</p>
         </div>
       </div>
     </div>
@@ -539,6 +539,62 @@
 
     function createFromTemplate(templateType) {
       window.location.href = `templates.html?template=${templateType}`;
+    }
+
+    // Use enhanced template - loads actual template file and creates new SOP
+    async function useEnhancedTemplate(templateId) {
+      try {
+        // Template mapping
+        const templateMap = {
+          'atom-template': {
+            file: '/templates/atom-template.md',
+            title: 'Atom Template - Reusable Component',
+            type: 'atom'
+          },
+          'molecule-template': {
+            file: '/templates/molecule-template.md',
+            title: 'Molecule Template - Multi-Step Workflow',
+            type: 'molecule'
+          },
+          'organism-template': {
+            file: '/templates/organism-template.md',
+            title: 'Organism Template - Complete Workflow',
+            type: 'organism'
+          },
+          'sop-template': {
+            file: '/templates/sop-template.md',
+            title: 'Complete SOP Template - Production Ready',
+            type: 'sop'
+          }
+        };
+
+        const template = templateMap[templateId];
+        if (!template) {
+          alert('Template not found!');
+          return;
+        }
+
+        // Load template file
+        const response = await fetch(template.file);
+        if (!response.ok) {
+          throw new Error(`Failed to load template: ${response.status}`);
+        }
+
+        const templateContent = await response.text();
+
+        // Store in sessionStorage
+        sessionStorage.setItem('newSOPTemplate', templateContent);
+        sessionStorage.setItem('newSOPTemplateId', templateId);
+        sessionStorage.setItem('newSOPTemplateType', template.type);
+        sessionStorage.setItem('newSOPTemplateTitle', template.title);
+
+        // Redirect to viewer in create mode
+        window.location.href = `/public/sop-viewer.html?mode=create&template=${templateId}`;
+
+      } catch (error) {
+        console.error('Error loading template:', error);
+        alert(`Failed to load template file. Please check console for details.\n\nError: ${error.message}`);
+      }
     }
 
     // Load live stats from API
