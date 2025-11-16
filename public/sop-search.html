@@ -476,64 +476,205 @@
         <div class="filter-section">
           <h3>Department</h3>
           <div class="filter-option">
-            <input type="checkbox" id="dept-underwriting" onchange="applyFilters()">
-            <label for="dept-underwriting">
-              <span>🏦 Underwriting</span>
-              <span class="filter-count">8</span>
+            <input type="checkbox" id="dept-it" onchange="applyFilters()">
+            <label for="dept-it">
+              <span>💻 IT</span>
+              <span class="filter-count" id="count-dept-it">0</span>
             </label>
           </div>
           <div class="filter-option">
-            <input type="checkbox" id="dept-processing" onchange="applyFilters()">
-            <label for="dept-processing">
-              <span>📊 Processing</span>
-              <span class="filter-count">5</span>
+            <input type="checkbox" id="dept-hr" onchange="applyFilters()">
+            <label for="dept-hr">
+              <span>👥 HR</span>
+              <span class="filter-count" id="count-dept-hr">0</span>
             </label>
           </div>
           <div class="filter-option">
-            <input type="checkbox" id="dept-closing" onchange="applyFilters()">
-            <label for="dept-closing">
-              <span>🏡 Closing</span>
-              <span class="filter-count">4</span>
+            <input type="checkbox" id="dept-finance" onchange="applyFilters()">
+            <label for="dept-finance">
+              <span>💰 Finance</span>
+              <span class="filter-count" id="count-dept-finance">0</span>
+            </label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="dept-operations" onchange="applyFilters()">
+            <label for="dept-operations">
+              <span>⚙️ Operations</span>
+              <span class="filter-count" id="count-dept-operations">0</span>
             </label>
           </div>
           <div class="filter-option">
             <input type="checkbox" id="dept-compliance" onchange="applyFilters()">
             <label for="dept-compliance">
               <span>⚖️ Compliance</span>
-              <span class="filter-count">3</span>
+              <span class="filter-count" id="count-dept-compliance">0</span>
+            </label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="dept-security" onchange="applyFilters()">
+            <label for="dept-security">
+              <span>🔒 Security</span>
+              <span class="filter-count" id="count-dept-security">0</span>
+            </label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="dept-multi-department" onchange="applyFilters()">
+            <label for="dept-multi-department">
+              <span>🏢 Multi-Department</span>
+              <span class="filter-count" id="count-dept-multi-department">0</span>
             </label>
           </div>
         </div>
 
-        <!-- Category Filter -->
+        <!-- Process Category Filter -->
         <div class="filter-section">
-          <h3>Category</h3>
+          <h3>Process Category</h3>
           <div class="filter-option">
-            <input type="checkbox" id="cat-origination" onchange="applyFilters()">
-            <label for="cat-origination">
-              <span>Loan Origination</span>
-              <span class="filter-count">3</span>
+            <input type="checkbox" id="cat-troubleshooting" onchange="applyFilters()">
+            <label for="cat-troubleshooting">
+              <span>Troubleshooting</span>
+              <span class="filter-count" id="count-cat-troubleshooting">0</span>
             </label>
           </div>
           <div class="filter-option">
-            <input type="checkbox" id="cat-underwriting" onchange="applyFilters()">
-            <label for="cat-underwriting">
-              <span>Underwriting</span>
-              <span class="filter-count">5</span>
+            <input type="checkbox" id="cat-compliance-audit" onchange="applyFilters()">
+            <label for="cat-compliance-audit">
+              <span>Compliance & Audit</span>
+              <span class="filter-count" id="count-cat-compliance-audit">0</span>
             </label>
           </div>
           <div class="filter-option">
-            <input type="checkbox" id="cat-closing" onchange="applyFilters()">
-            <label for="cat-closing">
-              <span>Closing & Funding</span>
-              <span class="filter-count">3</span>
+            <input type="checkbox" id="cat-system-config" onchange="applyFilters()">
+            <label for="cat-system-config">
+              <span>System Configuration</span>
+              <span class="filter-count" id="count-cat-system-config">0</span>
             </label>
           </div>
           <div class="filter-option">
-            <input type="checkbox" id="cat-compliance" onchange="applyFilters()">
-            <label for="cat-compliance">
-              <span>Quality & Compliance</span>
-              <span class="filter-count">3</span>
+            <input type="checkbox" id="cat-maintenance" onchange="applyFilters()">
+            <label for="cat-maintenance">
+              <span>Maintenance & Updates</span>
+              <span class="filter-count" id="count-cat-maintenance">0</span>
+            </label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="cat-risk-mgmt" onchange="applyFilters()">
+            <label for="cat-risk-mgmt">
+              <span>Risk Management</span>
+              <span class="filter-count" id="count-cat-risk-mgmt">0</span>
+            </label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="cat-training" onchange="applyFilters()">
+            <label for="cat-training">
+              <span>Training & Onboarding</span>
+              <span class="filter-count" id="count-cat-training">0</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Complexity Filter -->
+        <div class="filter-section">
+          <h3>Complexity</h3>
+          <div class="filter-option">
+            <input type="checkbox" id="complex-basic" onchange="applyFilters()">
+            <label for="complex-basic">
+              <span>⭐ Basic</span>
+              <span class="filter-count" id="count-complex-basic">0</span>
+            </label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="complex-intermediate" onchange="applyFilters()">
+            <label for="complex-intermediate">
+              <span>⭐⭐ Intermediate</span>
+              <span class="filter-count" id="count-complex-intermediate">0</span>
+            </label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="complex-advanced" onchange="applyFilters()">
+            <label for="complex-advanced">
+              <span>⭐⭐⭐ Advanced</span>
+              <span class="filter-count" id="count-complex-advanced">0</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Audience Filter -->
+        <div class="filter-section">
+          <h3>Audience</h3>
+          <div class="filter-option">
+            <input type="checkbox" id="aud-individual" onchange="applyFilters()">
+            <label for="aud-individual">
+              <span>Individual Contributor</span>
+              <span class="filter-count" id="count-aud-individual">0</span>
+            </label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="aud-technician" onchange="applyFilters()">
+            <label for="aud-technician">
+              <span>Technician/Specialist</span>
+              <span class="filter-count" id="count-aud-technician">0</span>
+            </label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="aud-manager" onchange="applyFilters()">
+            <label for="aud-manager">
+              <span>Manager/Supervisor</span>
+              <span class="filter-count" id="count-aud-manager">0</span>
+            </label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="aud-executive" onchange="applyFilters()">
+            <label for="aud-executive">
+              <span>C-Level Executive</span>
+              <span class="filter-count" id="count-aud-executive">0</span>
+            </label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="aud-customer" onchange="applyFilters()">
+            <label for="aud-customer">
+              <span>Customer/External User</span>
+              <span class="filter-count" id="count-aud-customer">0</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Compliance Frameworks Filter -->
+        <div class="filter-section">
+          <h3>Compliance Frameworks</h3>
+          <div class="filter-option">
+            <input type="checkbox" id="comp-sox" onchange="applyFilters()">
+            <label for="comp-sox">
+              <span>SOX</span>
+              <span class="filter-count" id="count-comp-sox">0</span>
+            </label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="comp-hipaa" onchange="applyFilters()">
+            <label for="comp-hipaa">
+              <span>HIPAA</span>
+              <span class="filter-count" id="count-comp-hipaa">0</span>
+            </label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="comp-soc2" onchange="applyFilters()">
+            <label for="comp-soc2">
+              <span>SOC 2</span>
+              <span class="filter-count" id="count-comp-soc2">0</span>
+            </label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="comp-iso9001" onchange="applyFilters()">
+            <label for="comp-iso9001">
+              <span>ISO 9001</span>
+              <span class="filter-count" id="count-comp-iso9001">0</span>
+            </label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="comp-gdpr" onchange="applyFilters()">
+            <label for="comp-gdpr">
+              <span>GDPR</span>
+              <span class="filter-count" id="count-comp-gdpr">0</span>
             </label>
           </div>
         </div>
@@ -639,107 +780,65 @@
   </div>
 
   <script>
-    // Mock SOP database
-    const allSOPs = [
-      {
-        id: 'sop-mf-001',
-        title: 'Conventional Loan Processing Workflow',
-        department: 'Processing',
-        category: 'Loan Origination',
-        status: 'active',
-        version: '4.2.0',
-        lastUpdated: '2025-11-01',
-        owner: 'Sarah Johnson',
-        usage: 847,
-        snippet: 'Standardized end-to-end workflow for processing conventional conforming mortgage loans from initial application through final closing.',
-        tags: ['processing', 'conventional', 'workflow']
-      },
-      {
-        id: 'sop-mf-002',
-        title: 'Automated Underwriting System (AUS) Processing',
-        department: 'Underwriting',
-        category: 'Underwriting',
-        status: 'active',
-        version: '3.1.5',
-        lastUpdated: '2025-10-28',
-        owner: 'Michael Chen',
-        usage: 1243,
-        snippet: 'Standardized process for submitting loan files to Automated Underwriting Systems (AUS), interpreting Desktop Underwriter findings, and managing conditions.',
-        tags: ['AUS', 'DU', 'underwriting', 'automation']
-      },
-      {
-        id: 'sop-mf-003',
-        title: 'FHA Underwriting Standards and Guidelines',
-        department: 'Underwriting',
-        category: 'Underwriting',
-        status: 'active',
-        version: '2.4.1',
-        lastUpdated: '2025-09-15',
-        owner: 'Michael Chen',
-        usage: 892,
-        snippet: 'Comprehensive guidelines for underwriting Federal Housing Administration (FHA) insured mortgage loans with minimum down payment requirements.',
-        tags: ['FHA', 'underwriting', 'government']
-      },
-      {
-        id: 'sop-mf-004',
-        title: 'Clear to Close (CTC) Verification Process',
-        department: 'Closing',
-        category: 'Closing & Funding',
-        status: 'active',
-        version: '5.1.2',
-        lastUpdated: '2025-10-22',
-        owner: 'Emily Patterson',
-        usage: 734,
-        snippet: 'Final verification checklist ensuring all underwriting conditions are satisfied and loan is ready for funding.',
-        tags: ['closing', 'verification', 'checklist']
-      },
-      {
-        id: 'sop-mf-005',
-        title: 'Wire Transfer Security and Dual Approval Protocol',
-        department: 'Closing',
-        category: 'Closing & Funding',
-        status: 'active',
-        version: '3.0.8',
-        lastUpdated: '2025-11-10',
-        owner: 'Emily Patterson',
-        usage: 456,
-        snippet: 'Security protocols for wire transfers including dual approval requirements and fraud prevention measures.',
-        tags: ['wire transfer', 'security', 'fraud prevention']
-      },
-      {
-        id: 'sop-mf-008',
-        title: 'Income Documentation and Verification Standards',
-        department: 'Processing',
-        category: 'Loan Origination',
-        status: 'active',
-        version: '4.3.1',
-        lastUpdated: '2025-10-18',
-        owner: 'Sarah Johnson',
-        usage: 967,
-        snippet: 'Comprehensive guide for documenting and verifying borrower income including W2, self-employed, and alternative income sources.',
-        tags: ['income', 'documentation', 'verification']
-      },
-      {
-        id: 'sop-mf-010',
-        title: 'TRID Compliance and Disclosure Timing',
-        department: 'Compliance',
-        category: 'Quality & Compliance',
-        status: 'active',
-        version: '2.8.0',
-        lastUpdated: '2025-11-14',
-        owner: 'Jessica Martinez',
-        usage: 623,
-        snippet: 'TILA-RESPA Integrated Disclosure (TRID) compliance requirements including 3-day waiting periods and changed circumstances.',
-        tags: ['TRID', 'compliance', 'disclosure', 'timing']
-      }
-    ];
-
-    let filteredResults = [...allSOPs];
+    let allSOPs = [];
+    let allComponents = [];
+    let filteredResults = [];
     let currentSearchQuery = '';
+
+    // Load graph data
+    async function loadGraphData() {
+      try {
+        const response = await fetch('/graph/sop-graph.json');
+        const graphData = await response.json();
+
+        // Extract all nodes (SOPs, atoms, molecules, organisms)
+        allComponents = Object.values(graphData.nodes || {});
+
+        // Filter to only include items with searchable metadata
+        allSOPs = allComponents.filter(node =>
+          node.type === 'sop' || node.type === 'atom' || node.type === 'molecule' || node.type === 'organism'
+        ).map(node => {
+          // Normalize data structure
+          return {
+            id: node.id,
+            type: node.type,
+            title: node.title,
+            department: node.department || node.owner || 'N/A',
+            processCategory: node.processCategory || 'N/A',
+            complexity: node.complexity || 'N/A',
+            audience: node.audience || [],
+            status: node.status || 'active',
+            version: node.version || '1.0.0',
+            lastUpdated: node.lastReviewed || node.metadata?.lastReviewed || '2025-01-01',
+            owner: node.owner || 'N/A',
+            maintainer: node.maintainer || node.owner || 'N/A',
+            approver: node.approver || node.metadata?.approver || 'N/A',
+            usage: Math.floor(Math.random() * 1000) + 100, // Mock usage data
+            snippet: `${node.title} - ${node.type}`,
+            tags: node.tags || [],
+            keywords: node.keywords || [],
+            complianceFrameworks: node.complianceFrameworks || [],
+            reusableIn: node.reusableIn || [],
+            variationCount: node.variationCount || 1
+          };
+        });
+
+        filteredResults = [...allSOPs];
+        updateFilterCounts();
+        renderResults(filteredResults);
+
+        console.log(`✅ Loaded ${allSOPs.length} components from graph`);
+      } catch (error) {
+        console.error('Error loading graph data:', error);
+        allSOPs = [];
+        filteredResults = [];
+        renderResults([]);
+      }
+    }
 
     // Initialize
     window.addEventListener('DOMContentLoaded', () => {
-      renderResults(filteredResults);
+      loadGraphData();
     });
 
     function performSearch() {
@@ -752,6 +851,9 @@
           return sop.title.toLowerCase().includes(currentSearchQuery) ||
                  sop.snippet.toLowerCase().includes(currentSearchQuery) ||
                  sop.tags.some(tag => tag.toLowerCase().includes(currentSearchQuery)) ||
+                 sop.keywords.some(kw => kw.toLowerCase().includes(currentSearchQuery)) ||
+                 sop.department.toLowerCase().includes(currentSearchQuery) ||
+                 sop.processCategory.toLowerCase().includes(currentSearchQuery) ||
                  sop.id.toLowerCase().includes(currentSearchQuery);
         });
       }
@@ -764,24 +866,69 @@
 
       // Department filters
       const deptFilters = [];
-      if (document.getElementById('dept-underwriting')?.checked) deptFilters.push('Underwriting');
-      if (document.getElementById('dept-processing')?.checked) deptFilters.push('Processing');
-      if (document.getElementById('dept-closing')?.checked) deptFilters.push('Closing');
+      if (document.getElementById('dept-it')?.checked) deptFilters.push('IT');
+      if (document.getElementById('dept-hr')?.checked) deptFilters.push('HR');
+      if (document.getElementById('dept-finance')?.checked) deptFilters.push('Finance');
+      if (document.getElementById('dept-operations')?.checked) deptFilters.push('Operations');
       if (document.getElementById('dept-compliance')?.checked) deptFilters.push('Compliance');
+      if (document.getElementById('dept-security')?.checked) deptFilters.push('Security');
+      if (document.getElementById('dept-multi-department')?.checked) deptFilters.push('Multi-Department');
 
       if (deptFilters.length > 0) {
         results = results.filter(sop => deptFilters.includes(sop.department));
       }
 
-      // Category filters
+      // Process Category filters
       const catFilters = [];
-      if (document.getElementById('cat-origination')?.checked) catFilters.push('Loan Origination');
-      if (document.getElementById('cat-underwriting')?.checked) catFilters.push('Underwriting');
-      if (document.getElementById('cat-closing')?.checked) catFilters.push('Closing & Funding');
-      if (document.getElementById('cat-compliance')?.checked) catFilters.push('Quality & Compliance');
+      if (document.getElementById('cat-troubleshooting')?.checked) catFilters.push('Troubleshooting');
+      if (document.getElementById('cat-compliance-audit')?.checked) catFilters.push('Compliance & Audit');
+      if (document.getElementById('cat-system-config')?.checked) catFilters.push('System Configuration');
+      if (document.getElementById('cat-maintenance')?.checked) catFilters.push('Maintenance & Updates');
+      if (document.getElementById('cat-risk-mgmt')?.checked) catFilters.push('Risk Management');
+      if (document.getElementById('cat-training')?.checked) catFilters.push('Training & Onboarding');
 
       if (catFilters.length > 0) {
-        results = results.filter(sop => catFilters.includes(sop.category));
+        results = results.filter(sop => catFilters.includes(sop.processCategory));
+      }
+
+      // Complexity filters
+      const complexFilters = [];
+      if (document.getElementById('complex-basic')?.checked) complexFilters.push('Basic');
+      if (document.getElementById('complex-intermediate')?.checked) complexFilters.push('Intermediate');
+      if (document.getElementById('complex-advanced')?.checked) complexFilters.push('Advanced');
+
+      if (complexFilters.length > 0) {
+        results = results.filter(sop => complexFilters.includes(sop.complexity));
+      }
+
+      // Audience filters
+      const audFilters = [];
+      if (document.getElementById('aud-individual')?.checked) audFilters.push('Individual Contributor');
+      if (document.getElementById('aud-technician')?.checked) audFilters.push('Technician/Specialist');
+      if (document.getElementById('aud-manager')?.checked) audFilters.push('Manager/Supervisor');
+      if (document.getElementById('aud-executive')?.checked) audFilters.push('C-Level Executive');
+      if (document.getElementById('aud-customer')?.checked) audFilters.push('Customer/External User');
+
+      if (audFilters.length > 0) {
+        results = results.filter(sop => {
+          if (!sop.audience || sop.audience.length === 0) return false;
+          return audFilters.some(filter => sop.audience.includes(filter));
+        });
+      }
+
+      // Compliance Framework filters
+      const compFilters = [];
+      if (document.getElementById('comp-sox')?.checked) compFilters.push('SOX');
+      if (document.getElementById('comp-hipaa')?.checked) compFilters.push('HIPAA');
+      if (document.getElementById('comp-soc2')?.checked) compFilters.push('SOC 2');
+      if (document.getElementById('comp-iso9001')?.checked) compFilters.push('ISO 9001');
+      if (document.getElementById('comp-gdpr')?.checked) compFilters.push('GDPR');
+
+      if (compFilters.length > 0) {
+        results = results.filter(sop => {
+          if (!sop.complianceFrameworks || sop.complianceFrameworks.length === 0) return false;
+          return compFilters.some(filter => sop.complianceFrameworks.includes(filter));
+        });
       }
 
       // Status filter
@@ -792,11 +939,89 @@
       // Owner filters
       if (document.getElementById('owner-me')?.checked) {
         // In production: filter by current user
-        results = results.filter(sop => sop.owner === 'Sarah Johnson');
+        results = results.filter(sop => sop.owner === 'IT Department' || sop.owner === 'Sarah Johnson');
       }
 
       filteredResults = results;
+      updateFilterCounts();
       renderResults(results);
+    }
+
+    // Update filter counts based on current data
+    function updateFilterCounts() {
+      const data = allSOPs;
+
+      // Count by department
+      const deptCounts = {};
+      data.forEach(sop => {
+        const dept = sop.department;
+        deptCounts[dept] = (deptCounts[dept] || 0) + 1;
+      });
+
+      document.getElementById('count-dept-it').textContent = deptCounts['IT'] || 0;
+      document.getElementById('count-dept-hr').textContent = deptCounts['HR'] || 0;
+      document.getElementById('count-dept-finance').textContent = deptCounts['Finance'] || 0;
+      document.getElementById('count-dept-operations').textContent = deptCounts['Operations'] || 0;
+      document.getElementById('count-dept-compliance').textContent = deptCounts['Compliance'] || 0;
+      document.getElementById('count-dept-security').textContent = deptCounts['Security'] || 0;
+      document.getElementById('count-dept-multi-department').textContent = deptCounts['Multi-Department'] || 0;
+
+      // Count by process category
+      const catCounts = {};
+      data.forEach(sop => {
+        const cat = sop.processCategory;
+        catCounts[cat] = (catCounts[cat] || 0) + 1;
+      });
+
+      document.getElementById('count-cat-troubleshooting').textContent = catCounts['Troubleshooting'] || 0;
+      document.getElementById('count-cat-compliance-audit').textContent = catCounts['Compliance & Audit'] || 0;
+      document.getElementById('count-cat-system-config').textContent = catCounts['System Configuration'] || 0;
+      document.getElementById('count-cat-maintenance').textContent = catCounts['Maintenance & Updates'] || 0;
+      document.getElementById('count-cat-risk-mgmt').textContent = catCounts['Risk Management'] || 0;
+      document.getElementById('count-cat-training').textContent = catCounts['Training & Onboarding'] || 0;
+
+      // Count by complexity
+      const complexCounts = {};
+      data.forEach(sop => {
+        const complex = sop.complexity;
+        complexCounts[complex] = (complexCounts[complex] || 0) + 1;
+      });
+
+      document.getElementById('count-complex-basic').textContent = complexCounts['Basic'] || 0;
+      document.getElementById('count-complex-intermediate').textContent = complexCounts['Intermediate'] || 0;
+      document.getElementById('count-complex-advanced').textContent = complexCounts['Advanced'] || 0;
+
+      // Count by audience (counts items that include this audience)
+      const audCounts = {};
+      data.forEach(sop => {
+        if (sop.audience && Array.isArray(sop.audience)) {
+          sop.audience.forEach(aud => {
+            audCounts[aud] = (audCounts[aud] || 0) + 1;
+          });
+        }
+      });
+
+      document.getElementById('count-aud-individual').textContent = audCounts['Individual Contributor'] || 0;
+      document.getElementById('count-aud-technician').textContent = audCounts['Technician/Specialist'] || 0;
+      document.getElementById('count-aud-manager').textContent = audCounts['Manager/Supervisor'] || 0;
+      document.getElementById('count-aud-executive').textContent = audCounts['C-Level Executive'] || 0;
+      document.getElementById('count-aud-customer').textContent = audCounts['Customer/External User'] || 0;
+
+      // Count by compliance frameworks
+      const compCounts = {};
+      data.forEach(sop => {
+        if (sop.complianceFrameworks && Array.isArray(sop.complianceFrameworks)) {
+          sop.complianceFrameworks.forEach(comp => {
+            compCounts[comp] = (compCounts[comp] || 0) + 1;
+          });
+        }
+      });
+
+      document.getElementById('count-comp-sox').textContent = compCounts['SOX'] || 0;
+      document.getElementById('count-comp-hipaa').textContent = compCounts['HIPAA'] || 0;
+      document.getElementById('count-comp-soc2').textContent = compCounts['SOC 2'] || 0;
+      document.getElementById('count-comp-iso9001').textContent = compCounts['ISO 9001'] || 0;
+      document.getElementById('count-comp-gdpr').textContent = compCounts['GDPR'] || 0;
     }
 
     function renderResults(results) {
@@ -819,6 +1044,28 @@
       resultsList.innerHTML = results.map(sop => {
         const snippet = highlightSearchTerms(sop.snippet, currentSearchQuery);
 
+        // Build tags display
+        let tagsHTML = `<span class="tag tag-department">${sop.type.toUpperCase()}</span>`;
+
+        if (sop.department && sop.department !== 'N/A') {
+          tagsHTML += `<span class="tag tag-department">${sop.department}</span>`;
+        }
+
+        if (sop.processCategory && sop.processCategory !== 'N/A') {
+          tagsHTML += `<span class="tag tag-category">${sop.processCategory}</span>`;
+        }
+
+        if (sop.complexity && sop.complexity !== 'N/A') {
+          const stars = { 'Basic': '⭐', 'Intermediate': '⭐⭐', 'Advanced': '⭐⭐⭐' };
+          tagsHTML += `<span class="tag tag-category">${stars[sop.complexity] || ''} ${sop.complexity}</span>`;
+        }
+
+        if (sop.complianceFrameworks && sop.complianceFrameworks.length > 0) {
+          sop.complianceFrameworks.slice(0, 3).forEach(fw => {
+            tagsHTML += `<span class="tag tag-status">${fw}</span>`;
+          });
+        }
+
         return `
           <div class="result-card" onclick="openSOP('${sop.id}')">
             <div class="result-header">
@@ -839,9 +1086,15 @@
                 ${sop.owner}
               </span>
               <span class="meta-item">
-                <span>📊</span>
-                ${sop.usage} uses/month
+                <span>♻️</span>
+                Used in ${(sop.reusableIn || []).length} places
               </span>
+              ${sop.audience && sop.audience.length > 0 ? `
+              <span class="meta-item">
+                <span>👥</span>
+                ${sop.audience[0]}${sop.audience.length > 1 ? ` +${sop.audience.length - 1}` : ''}
+              </span>
+              ` : ''}
             </div>
 
             <div class="result-snippet">
@@ -849,9 +1102,7 @@
             </div>
 
             <div class="result-tags">
-              <span class="tag tag-department">${sop.department}</span>
-              <span class="tag tag-category">${sop.category}</span>
-              <span class="tag tag-status active">${sop.status}</span>
+              ${tagsHTML}
             </div>
           </div>
         `;

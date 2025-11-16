@@ -1315,31 +1315,71 @@
       <!-- Metadata Sidebar -->
       <aside class="metadata-sidebar">
         <div class="metadata-card">
-          <h3>Document Info</h3>
+          <h3>📋 Document Info</h3>
           <div class="metadata-item">
-            <span class="metadata-label">Created:</span>
-            <span class="metadata-value">2024-01-15</span>
+            <span class="metadata-label">Type:</span>
+            <span class="metadata-value" id="doc-type">SOP</span>
+          </div>
+          <div class="metadata-item">
+            <span class="metadata-label">Department:</span>
+            <span class="metadata-value" id="doc-department">Finance</span>
+          </div>
+          <div class="metadata-item">
+            <span class="metadata-label">Category:</span>
+            <span class="metadata-value" id="doc-category">N/A</span>
+          </div>
+          <div class="metadata-item">
+            <span class="metadata-label">Complexity:</span>
+            <span class="metadata-value" id="doc-complexity">N/A</span>
           </div>
           <div class="metadata-item">
             <span class="metadata-label">Last Review:</span>
-            <span class="metadata-value">2025-10-15</span>
+            <span class="metadata-value" id="doc-last-review">2025-10-15</span>
           </div>
           <div class="metadata-item">
             <span class="metadata-label">Next Review:</span>
-            <span class="metadata-value">2026-10-15</span>
+            <span class="metadata-value" id="doc-next-review">2026-10-15</span>
           </div>
           <div class="metadata-item">
             <span class="metadata-label">Approver:</span>
-            <span class="metadata-value">Jane Smith</span>
+            <span class="metadata-value" id="doc-approver">Jane Smith</span>
           </div>
           <div class="metadata-item">
-            <span class="metadata-label">Contributors:</span>
-            <span class="metadata-value">3</span>
+            <span class="metadata-label">Maintainer:</span>
+            <span class="metadata-value" id="doc-maintainer">N/A</span>
           </div>
         </div>
 
         <div class="metadata-card">
-          <h3>Dependencies</h3>
+          <h3>👥 Audience</h3>
+          <div id="audience-list" style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="font-size: 13px; color: #718096;">Loading...</div>
+          </div>
+        </div>
+
+        <div class="metadata-card">
+          <h3>⚖️ Compliance</h3>
+          <div id="compliance-list" style="display: flex; flex-wrap: wrap; gap: 6px;">
+            <div style="font-size: 13px; color: #718096;">Loading...</div>
+          </div>
+        </div>
+
+        <div class="metadata-card">
+          <h3>♻️ Reusability</h3>
+          <div class="metadata-item">
+            <span class="metadata-label">Used In:</span>
+            <span class="metadata-value" id="used-in-count">0</span>
+          </div>
+          <div class="metadata-item">
+            <span class="metadata-label">Variations:</span>
+            <span class="metadata-value" id="variation-count">1</span>
+          </div>
+          <div id="used-in-list" style="margin-top: 12px; display: flex; flex-direction: column; gap: 4px;">
+          </div>
+        </div>
+
+        <div class="metadata-card">
+          <h3>🔗 Dependencies</h3>
           <ul class="dependency-list">
             <li class="dependency-item">
               <a href="/public/sop-viewer.html?id=sop-002">SOP-002: IT System Access</a>
@@ -1358,7 +1398,7 @@
         </div>
 
         <div class="metadata-card">
-          <h3>Usage Stats</h3>
+          <h3>📊 Usage Stats</h3>
           <div class="metadata-item">
             <span class="metadata-label">Views:</span>
             <span class="metadata-value">1,247</span>
@@ -1374,7 +1414,7 @@
         </div>
 
         <div class="metadata-card">
-          <h3>Quick Actions</h3>
+          <h3>⚡ Quick Actions</h3>
           <div class="action-buttons">
             <button class="btn btn-secondary" onclick="downloadPDF()">
               📄 Download PDF
@@ -1524,12 +1564,91 @@
   </div>
 
   <script>
+    // Load enhanced metadata from graph
+    async function loadEnhancedMetadata() {
+      try {
+        // Get SOP ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const sopId = urlParams.get('sop') || urlParams.get('id') || 'sop-it-001';
+
+        // Load graph data
+        const response = await fetch('/graph/sop-graph.json');
+        const graphData = await response.json();
+
+        // Find the SOP in the graph
+        const sopData = graphData.nodes[sopId];
+
+        if (sopData) {
+          // Update document info
+          document.getElementById('doc-type').textContent = sopData.type?.toUpperCase() || 'SOP';
+          document.getElementById('doc-department').textContent = sopData.department || sopData.owner || 'N/A';
+          document.getElementById('doc-category').textContent = sopData.processCategory || 'N/A';
+          document.getElementById('doc-complexity').textContent = sopData.complexity || 'N/A';
+          document.getElementById('doc-last-review').textContent = sopData.lastReviewed || sopData.metadata?.lastReviewed || 'N/A';
+          document.getElementById('doc-next-review').textContent = sopData.nextReview || 'N/A';
+          document.getElementById('doc-approver').textContent = sopData.approver || sopData.metadata?.approver || 'N/A';
+          document.getElementById('doc-maintainer').textContent = sopData.maintainer || 'N/A';
+
+          // Update audience
+          const audienceList = document.getElementById('audience-list');
+          if (sopData.audience && sopData.audience.length > 0) {
+            audienceList.innerHTML = sopData.audience.map(aud => `
+              <div style="font-size: 13px; color: #4a5568; padding: 6px 12px; background: #f7fafc; border-radius: 6px;">
+                👤 ${aud}
+              </div>
+            `).join('');
+          } else {
+            audienceList.innerHTML = '<div style="font-size: 13px; color: #a0aec0;">No audience specified</div>';
+          }
+
+          // Update compliance frameworks
+          const complianceList = document.getElementById('compliance-list');
+          if (sopData.complianceFrameworks && sopData.complianceFrameworks.length > 0) {
+            complianceList.innerHTML = sopData.complianceFrameworks.map(fw => `
+              <span style="padding: 4px 10px; background: #fef3c7; color: #92400e; border-radius: 12px; font-size: 11px; font-weight: 600;">
+                ${fw}
+              </span>
+            `).join('');
+          } else {
+            complianceList.innerHTML = '<div style="font-size: 13px; color: #a0aec0;">No compliance frameworks</div>';
+          }
+
+          // Update reusability info
+          const reusableIn = sopData.reusableIn || [];
+          document.getElementById('used-in-count').textContent = reusableIn.length;
+          document.getElementById('variation-count').textContent = sopData.variationCount || 1;
+
+          const usedInList = document.getElementById('used-in-list');
+          if (reusableIn.length > 0) {
+            usedInList.innerHTML = reusableIn.slice(0, 5).map(id => `
+              <a href="/public/sop-viewer.html?id=${id}" style="font-size: 12px; color: #0052CC; text-decoration: none; padding: 4px 8px; background: #ebf4ff; border-radius: 6px; display: block;">
+                → ${id}
+              </a>
+            `).join('');
+          } else {
+            usedInList.innerHTML = '<div style="font-size: 12px; color: #a0aec0;">Not reused</div>';
+          }
+
+          console.log(`✅ Loaded enhanced metadata for ${sopId}`);
+        } else {
+          console.warn(`SOP ${sopId} not found in graph`);
+        }
+      } catch (error) {
+        console.error('Error loading enhanced metadata:', error);
+      }
+    }
+
     // Load global navigation
     fetch('/public/components/global-nav.html')
       .then(response => response.text())
       .then(html => {
         document.getElementById('global-nav-container').innerHTML = html;
       });
+
+    // Load enhanced metadata when page loads
+    window.addEventListener('DOMContentLoaded', () => {
+      loadEnhancedMetadata();
+    });
 
     // TOC scroll spy
     const sections = document.querySelectorAll('.section');
