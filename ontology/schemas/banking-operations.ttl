@@ -1,0 +1,384 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix bop: <http://pursuit-bank.com/ontology/banking-operations#> .
+@prefix reg: <http://pursuit-bank.com/ontology/regulatory#> .
+@prefix proc: <http://pursuit-bank.com/ontology/process#> .
+
+# ======================================================================
+# Banking Operations Ontology
+# Version: 1.0.0
+# Domain: Mortgage Banking, Compliance, Operations
+# Standards: W3C OWL 2, RDF/RDFS, SKOS
+# Aligned with: NASA MBSE, Knowledge Graph Best Practices
+# ======================================================================
+
+bop:BankingOperationsOntology a owl:Ontology ;
+    dc:title "Pursuit Bank - Banking Operations Domain Ontology" ;
+    dc:description "Formal ontology for banking operations, regulatory compliance, and process management" ;
+    dcterms:created "2025-11-16"^^xsd:date ;
+    owl:versionInfo "1.0.0" ;
+    dc:creator "Pursuit Bank Semantic Governance Team" ;
+    rdfs:comment "This ontology defines classes, properties, and relationships for banking operations including underwriting, wire transfers, compliance frameworks, and process workflows" .
+
+# ======================================================================
+# TOP-LEVEL CLASSES
+# ======================================================================
+
+bop:BankingOperation a owl:Class ;
+    rdfs:label "Banking Operation" ;
+    rdfs:comment "Abstract superclass for all banking operations" ;
+    skos:definition "Any formal business process or transaction conducted in banking operations" .
+
+bop:ComplianceFramework a owl:Class ;
+    rdfs:label "Compliance Framework" ;
+    rdfs:comment "Regulatory or compliance framework governing banking operations" ;
+    skos:definition "A regulatory framework, guideline, or standard that governs banking practices" .
+
+bop:Process a owl:Class ;
+    rdfs:label "Process" ;
+    rdfs:comment "Business process or workflow" ;
+    skos:definition "A structured sequence of activities with defined inputs, outputs, and decision points" .
+
+bop:Role a owl:Class ;
+    rdfs:label "Role" ;
+    rdfs:comment "Organizational role or position" ;
+    skos:definition "A role or position within the organizational structure with specific responsibilities" .
+
+bop:Document a owl:Class ;
+    rdfs:label "Document" ;
+    rdfs:comment "Business document or record" ;
+    skos:definition "A formal document used in banking operations, including SOPs, forms, and records" .
+
+# ======================================================================
+# BANKING OPERATION SUBCLASSES
+# ======================================================================
+
+bop:Underwriting a owl:Class ;
+    rdfs:subClassOf bop:BankingOperation ;
+    rdfs:label "Underwriting" ;
+    rdfs:comment "Loan underwriting and credit evaluation operations" ;
+    skos:definition "The process of evaluating loan applications and determining creditworthiness" .
+
+bop:WireTransfer a owl:Class ;
+    rdfs:subClassOf bop:BankingOperation ;
+    rdfs:label "Wire Transfer" ;
+    rdfs:comment "Electronic fund transfer operations" ;
+    skos:definition "Electronic transfer of funds between financial institutions" .
+
+bop:ClosingOperation a owl:Class ;
+    rdfs:subClassOf bop:BankingOperation ;
+    rdfs:label "Closing Operation" ;
+    rdfs:comment "Loan closing and settlement operations" ;
+    skos:definition "The final steps in a mortgage transaction including documentation and fund disbursement" .
+
+bop:ComplianceCheck a owl:Class ;
+    rdfs:subClassOf bop:BankingOperation ;
+    rdfs:label "Compliance Check" ;
+    rdfs:comment "Regulatory compliance verification" ;
+    skos:definition "Verification that operations comply with applicable regulatory requirements" .
+
+# ======================================================================
+# UNDERWRITING SUBCLASSES
+# ======================================================================
+
+bop:ManualUnderwriting a owl:Class ;
+    rdfs:subClassOf bop:Underwriting ;
+    rdfs:label "Manual Underwriting" ;
+    rdfs:comment "Manual underwriting review by underwriters" .
+
+bop:AutomatedUnderwriting a owl:Class ;
+    rdfs:subClassOf bop:Underwriting ;
+    rdfs:label "Automated Underwriting" ;
+    rdfs:comment "Automated underwriting using AUS systems" .
+
+bop:FHAUnderwriting a owl:Class ;
+    rdfs:subClassOf bop:Underwriting ;
+    rdfs:label "FHA Underwriting" ;
+    rdfs:comment "FHA-specific underwriting procedures" ;
+    bop:requiresCompliance reg:FHA .
+
+bop:ConventionalUnderwriting a owl:Class ;
+    rdfs:subClassOf bop:Underwriting ;
+    rdfs:label "Conventional Underwriting" ;
+    rdfs:comment "Conventional loan underwriting (Fannie Mae/Freddie Mac)" .
+
+# ======================================================================
+# REGULATORY FRAMEWORK CLASSES
+# ======================================================================
+
+reg:FHA a bop:ComplianceFramework ;
+    rdfs:label "FHA (Federal Housing Administration)" ;
+    skos:prefLabel "FHA" ;
+    skos:altLabel "Federal Housing Administration" ;
+    rdfs:comment "FHA lending guidelines and requirements" ;
+    bop:regulatoryAuthority "Department of Housing and Urban Development (HUD)" ;
+    bop:primaryReference "FHA Handbook 4000.1" .
+
+reg:TRID a bop:ComplianceFramework ;
+    rdfs:label "TRID (TILA-RESPA Integrated Disclosure)" ;
+    skos:prefLabel "TRID" ;
+    skos:altLabel "TILA-RESPA Integrated Disclosure" ;
+    rdfs:comment "Combined Truth in Lending and RESPA disclosure requirements" ;
+    bop:regulatoryAuthority "Consumer Financial Protection Bureau (CFPB)" ;
+    bop:effectiveDate "2015-10-03"^^xsd:date .
+
+reg:RESPA a bop:ComplianceFramework ;
+    rdfs:label "RESPA (Real Estate Settlement Procedures Act)" ;
+    skos:prefLabel "RESPA" ;
+    rdfs:comment "Real estate settlement and disclosure requirements" ;
+    bop:regulatoryAuthority "Consumer Financial Protection Bureau (CFPB)" .
+
+reg:SOX a bop:ComplianceFramework ;
+    rdfs:label "SOX (Sarbanes-Oxley Act)" ;
+    skos:prefLabel "SOX" ;
+    skos:altLabel "Sarbanes-Oxley Act" ;
+    rdfs:comment "Financial reporting and internal controls requirements" ;
+    bop:regulatoryAuthority "Securities and Exchange Commission (SEC)" ;
+    bop:effectiveDate "2002-07-30"^^xsd:date .
+
+reg:TILA a bop:ComplianceFramework ;
+    rdfs:label "TILA (Truth in Lending Act)" ;
+    skos:prefLabel "TILA" ;
+    rdfs:comment "Consumer credit disclosure requirements" ;
+    bop:regulatoryAuthority "Consumer Financial Protection Bureau (CFPB)" .
+
+reg:FannieMae a bop:ComplianceFramework ;
+    rdfs:label "Fannie Mae Selling Guide" ;
+    skos:prefLabel "Fannie Mae Guidelines" ;
+    rdfs:comment "Fannie Mae conventional loan requirements" ;
+    bop:regulatoryAuthority "Federal National Mortgage Association (Fannie Mae)" .
+
+# ======================================================================
+# PROCESS CLASSES AND RELATIONSHIPS
+# ======================================================================
+
+proc:Prerequisite a owl:ObjectProperty ;
+    rdfs:label "prerequisite" ;
+    rdfs:domain bop:Process ;
+    rdfs:range bop:Process ;
+    rdfs:comment "Indicates that one process must be completed before another can begin" .
+
+proc:ParallelActivity a owl:Class ;
+    rdfs:subClassOf bop:Process ;
+    rdfs:label "Parallel Activity" ;
+    rdfs:comment "Activities that can be executed concurrently" .
+
+proc:DecisionPoint a owl:Class ;
+    rdfs:subClassOf bop:Process ;
+    rdfs:label "Decision Point" ;
+    rdfs:comment "A point in the process requiring a decision or approval" .
+
+proc:ApprovalThreshold a owl:Class ;
+    rdfs:label "Approval Threshold" ;
+    rdfs:comment "Monetary or risk threshold requiring specific approval levels" .
+
+# ======================================================================
+# PROPERTIES - OBJECT PROPERTIES
+# ======================================================================
+
+bop:requiresCompliance a owl:ObjectProperty ;
+    rdfs:label "requires compliance" ;
+    rdfs:domain bop:BankingOperation ;
+    rdfs:range bop:ComplianceFramework ;
+    rdfs:comment "Links an operation to its required compliance frameworks" .
+
+bop:performedBy a owl:ObjectProperty ;
+    rdfs:label "performed by" ;
+    rdfs:domain bop:BankingOperation ;
+    rdfs:range bop:Role ;
+    rdfs:comment "Indicates which role performs an operation" .
+
+bop:requiresApproval a owl:ObjectProperty ;
+    rdfs:label "requires approval" ;
+    rdfs:domain bop:BankingOperation ;
+    rdfs:range bop:Role ;
+    rdfs:comment "Indicates which role must approve an operation" .
+
+bop:hasPrerequisite a owl:ObjectProperty ;
+    rdfs:label "has prerequisite" ;
+    rdfs:domain bop:Process ;
+    rdfs:range bop:Process ;
+    rdfs:comment "Indicates required prerequisite processes" .
+
+bop:dependsOn a owl:ObjectProperty ;
+    rdfs:label "depends on" ;
+    rdfs:domain bop:Process ;
+    rdfs:range bop:Process ;
+    rdfs:comment "Indicates process dependencies" .
+
+bop:canRunParallelWith a owl:ObjectProperty ;
+    rdfs:label "can run parallel with" ;
+    rdfs:domain bop:Process ;
+    rdfs:range bop:Process ;
+    owl:propertyType owl:SymmetricProperty ;
+    rdfs:comment "Indicates processes that can execute concurrently" .
+
+bop:governedBy a owl:ObjectProperty ;
+    rdfs:label "governed by" ;
+    rdfs:domain bop:Document ;
+    rdfs:range bop:ComplianceFramework ;
+    rdfs:comment "Links documents to governing compliance frameworks" .
+
+# ======================================================================
+# PROPERTIES - DATATYPE PROPERTIES
+# ======================================================================
+
+bop:minimumCreditScore a owl:DatatypeProperty ;
+    rdfs:label "minimum credit score" ;
+    rdfs:domain bop:Underwriting ;
+    rdfs:range xsd:integer ;
+    rdfs:comment "Minimum FICO credit score required" .
+
+bop:approvalThresholdAmount a owl:DatatypeProperty ;
+    rdfs:label "approval threshold amount" ;
+    rdfs:domain bop:WireTransfer ;
+    rdfs:range xsd:decimal ;
+    rdfs:comment "Dollar amount triggering approval requirements" .
+
+bop:requiresManualReview a owl:DatatypeProperty ;
+    rdfs:label "requires manual review" ;
+    rdfs:domain bop:BankingOperation ;
+    rdfs:range xsd:boolean ;
+    rdfs:comment "Indicates if manual review is required" .
+
+bop:riskLevel a owl:DatatypeProperty ;
+    rdfs:label "risk level" ;
+    rdfs:domain bop:BankingOperation ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Risk classification: low, medium, high, critical" .
+
+bop:version a owl:DatatypeProperty ;
+    rdfs:label "version" ;
+    rdfs:domain bop:Document ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Version number using semantic versioning (MAJOR.MINOR.PATCH)" .
+
+bop:effectiveDate a owl:DatatypeProperty ;
+    rdfs:label "effective date" ;
+    rdfs:range xsd:date ;
+    rdfs:comment "Date when a rule or document becomes effective" .
+
+bop:expirationDate a owl:DatatypeProperty ;
+    rdfs:label "expiration date" ;
+    rdfs:range xsd:date ;
+    rdfs:comment "Date when a rule or document expires" .
+
+# ======================================================================
+# ROLE INDIVIDUALS
+# ======================================================================
+
+bop:LoanOfficer a bop:Role ;
+    rdfs:label "Loan Officer" ;
+    rdfs:comment "Originates and processes loan applications" .
+
+bop:Underwriter a bop:Role ;
+    rdfs:label "Underwriter" ;
+    rdfs:comment "Evaluates loan applications and makes credit decisions" .
+
+bop:ClosingAgent a bop:Role ;
+    rdfs:label "Closing Agent" ;
+    rdfs:comment "Manages loan closing and settlement" .
+
+bop:ComplianceOfficer a bop:Role ;
+    rdfs:label "Compliance Officer" ;
+    rdfs:comment "Ensures regulatory compliance" .
+
+bop:Manager a bop:Role ;
+    rdfs:label "Manager" ;
+    rdfs:comment "Departmental manager with approval authority" .
+
+bop:VicePresident a bop:Role ;
+    rdfs:label "Vice President" ;
+    rdfs:comment "Vice President with elevated approval authority" .
+
+bop:CFO a bop:Role ;
+    rdfs:label "Chief Financial Officer" ;
+    rdfs:comment "Highest financial authority, approves critical transactions" .
+
+# ======================================================================
+# WIRE TRANSFER APPROVAL RULES (OWL RESTRICTIONS)
+# ======================================================================
+
+bop:WireTransfer_0_15K a owl:Class ;
+    rdfs:subClassOf bop:WireTransfer ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty bop:approvalThresholdAmount ;
+        owl:hasValue "15000"^^xsd:decimal
+    ] ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty bop:requiresApproval ;
+        owl:someValuesFrom bop:ClosingAgent
+    ] ;
+    rdfs:label "Wire Transfer $0-15K" ;
+    rdfs:comment "Requires 1 Closing Agent approval" .
+
+bop:WireTransfer_15K_100K a owl:Class ;
+    rdfs:subClassOf bop:WireTransfer ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty bop:approvalThresholdAmount ;
+        owl:hasValue "100000"^^xsd:decimal
+    ] ;
+    rdfs:label "Wire Transfer $15K-100K" ;
+    rdfs:comment "Requires Closing Agent + Manager approval" .
+
+bop:WireTransfer_100K_500K a owl:Class ;
+    rdfs:subClassOf bop:WireTransfer ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty bop:approvalThresholdAmount ;
+        owl:hasValue "500000"^^xsd:decimal
+    ] ;
+    rdfs:label "Wire Transfer $100K-500K" ;
+    rdfs:comment "Requires Closing Agent + Manager + VP approval" .
+
+bop:WireTransfer_Above_500K a owl:Class ;
+    rdfs:subClassOf bop:WireTransfer ;
+    rdfs:label "Wire Transfer $500K+" ;
+    rdfs:comment "Requires 2 VPs + CFO approval" .
+
+# ======================================================================
+# FHA UNDERWRITING RULES
+# ======================================================================
+
+bop:FHA_CreditScore_580_Plus a owl:Class ;
+    rdfs:subClassOf bop:FHAUnderwriting ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty bop:minimumCreditScore ;
+        owl:hasValue "580"^^xsd:integer
+    ] ;
+    rdfs:label "FHA - Credit Score 580+" ;
+    rdfs:comment "Qualifies for 3.5% down payment" .
+
+bop:FHA_CreditScore_500_579 a owl:Class ;
+    rdfs:subClassOf bop:FHAUnderwriting ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty bop:minimumCreditScore ;
+        owl:hasValue "500"^^xsd:integer
+    ] ;
+    rdfs:label "FHA - Credit Score 500-579" ;
+    rdfs:comment "Requires 10% down payment" .
+
+bop:FHA_ManualUnderwriting a owl:Class ;
+    rdfs:subClassOf bop:ManualUnderwriting ;
+    rdfs:subClassOf bop:FHAUnderwriting ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty bop:requiresManualReview ;
+        owl:hasValue "true"^^xsd:boolean
+    ] ;
+    rdfs:label "FHA Manual Underwriting" ;
+    rdfs:comment "Required for credit scores below 620" .
+
+# ======================================================================
+# END OF ONTOLOGY
+# ======================================================================

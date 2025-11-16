@@ -7,6 +7,7 @@
   "scripts": {
     "build": "node tools/build.js",
     "validate": "node tools/validate.js",
+    "validate:schema": "node tools/schema-validator.js",
     "impact": "node tools/impact-analysis.js",
     "visualize": "node tools/visualize.js",
     "serve": "node tools/serve.js",
@@ -16,7 +17,7 @@
     "lint:md:fix": "markdownlint --fix 'sops/**/*.md' '*.md' --ignore node_modules --ignore dist",
     "spellcheck": "cspell 'sops/**/*.md' '*.md'",
     "check:links": "node tools/check-links.js",
-    "check:all": "npm run lint:md && npm run spellcheck && npm run validate",
+    "check:all": "npm run lint:md && npm run spellcheck && npm run validate && npm run validate:schema",
     "pdf:generate": "node tools/generate-pdf.js",
     "compliance:report": "node tools/compliance-report.js",
     "training:generate": "node tools/generate-training-quiz.js",

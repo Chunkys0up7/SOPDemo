@@ -1,0 +1,575 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Automated Approval Workflows",
+  "description": "Workflow definitions for automated SOP approval routing with decision rules and escalation paths",
+  "version": "1.0.0",
+  "effectiveDate": "2025-11-16",
+
+  "workflowTypes": {
+    "sop_creation": {
+      "name": "SOP Creation and Initial Approval",
+      "description": "Workflow for creating and approving new SOPs",
+      "trigger": "SOP draft marked as 'ready for review'",
+      "stages": [
+        {
+          "stage": 1,
+          "name": "Department Steward Review",
+          "assignedTo": "sopSteward",
+          "actions": ["review", "approve", "reject", "request_changes"],
+          "sla": {
+            "duration": 2,
+            "unit": "business_days"
+          },
+          "automatedChecks": [
+            {
+              "check": "metadata_completeness",
+              "description": "Verify all required metadata fields are populated",
+              "failAction": "auto_reject"
+            },
+            {
+              "check": "component_validation",
+              "description": "Validate all referenced components exist",
+              "failAction": "auto_reject"
+            },
+            {
+              "check": "schema_compliance",
+              "description": "Verify SOP follows current schema version",
+              "failAction": "request_changes"
+            }
+          ],
+          "onApprove": "advance_to_stage_2",
+          "onReject": "return_to_author",
+          "onTimeout": "escalate_to_data_governance_officer"
+        },
+        {
+          "stage": 2,
+          "name": "Compliance Review",
+          "assignedTo": "complianceReviewer",
+          "routingRules": {
+            "condition": "sopCategory",
+            "mapping": {
+              "Underwriting": "complianceReviewer_mortgage",
+              "Wire Transfers": "complianceReviewer_financial",
+              "Closing": "complianceReviewer_mortgage",
+              "Technology": "complianceReviewer_it",
+              "default": "complianceReviewer_general"
+            }
+          },
+          "actions": ["review", "approve", "reject", "request_changes"],
+          "sla": {
+            "duration": 3,
+            "unit": "business_days"
+          },
+          "automatedChecks": [
+            {
+              "check": "regulatory_framework_mapping",
+              "description": "Verify applicable regulatory frameworks are identified",
+              "failAction": "request_changes"
+            },
+            {
+              "check": "compliance_keywords",
+              "description": "Flag missing compliance-related terms (e.g., audit, controls)",
+              "failAction": "add_comment"
+            }
+          ],
+          "parallelReview": false,
+          "onApprove": "advance_to_stage_3",
+          "onReject": "return_to_steward",
+          "onTimeout": "escalate_to_chief_compliance_officer"
+        },
+        {
+          "stage": 3,
+          "name": "Technical Review",
+          "assignedTo": "technicalApprover",
+          "condition": {
+            "field": "requiresTechnicalReview",
+            "operator": "equals",
+            "value": true
+          },
+          "skipIf": {
+            "field": "requiresTechnicalReview",
+            "operator": "equals",
+            "value": false,
+            "action": "advance_to_stage_4"
+          },
+          "actions": ["review", "approve", "reject", "request_changes"],
+          "sla": {
+            "duration": 2,
+            "unit": "business_days"
+          },
+          "automatedChecks": [
+            {
+              "check": "system_references",
+              "description": "Validate referenced systems exist in IT inventory",
+              "failAction": "add_comment"
+            }
+          ],
+          "onApprove": "advance_to_stage_4",
+          "onReject": "return_to_steward",
+          "onTimeout": "escalate_to_cto"
+        },
+        {
+          "stage": 4,
+          "name": "Data Governance Officer Final Approval",
+          "assignedTo": "dataGovernanceOfficer",
+          "actions": ["approve", "reject"],
+          "sla": {
+            "duration": 1,
+            "unit": "business_days"
+          },
+          "automatedChecks": [
+            {
+              "check": "all_prior_approvals",
+              "description": "Verify all required approvals obtained",
+              "failAction": "auto_reject"
+            },
+            {
+              "check": "version_number",
+              "description": "Assign appropriate version number",
+              "failAction": "auto_assign_version"
+            }
+          ],
+          "onApprove": "publish_sop",
+          "onReject": "return_to_steward",
+          "onTimeout": "escalate_to_governance_council"
+        }
+      ],
+      "notifications": {
+        "onSubmit": ["sopSteward", "author"],
+        "onApproval": ["author", "nextApprover"],
+        "onRejection": ["author", "sopSteward"],
+        "onPublish": ["all_stakeholders", "affected_departments"]
+      }
+    },
+
+    "sop_update_minor": {
+      "name": "Minor SOP Update (PATCH version)",
+      "description": "Workflow for minor updates (typos, clarifications, formatting)",
+      "trigger": "SOP update with changeType='PATCH'",
+      "fastTrack": true,
+      "stages": [
+        {
+          "stage": 1,
+          "name": "Department Steward Review",
+          "assignedTo": "sopSteward",
+          "actions": ["approve", "reject"],
+          "sla": {
+            "duration": 1,
+            "unit": "business_days"
+          },
+          "automatedChecks": [
+            {
+              "check": "change_magnitude",
+              "description": "Verify changes are truly minor (< 5% content change)",
+              "failAction": "reroute_to_major_update_workflow"
+            }
+          ],
+          "onApprove": "advance_to_stage_2",
+          "onReject": "return_to_author"
+        },
+        {
+          "stage": 2,
+          "name": "Data Governance Officer Approval",
+          "assignedTo": "dataGovernanceOfficer",
+          "actions": ["approve", "reject"],
+          "sla": {
+            "duration": 1,
+            "unit": "business_days"
+          },
+          "onApprove": "publish_sop_increment_patch",
+          "onReject": "return_to_steward"
+        }
+      ],
+      "notifications": {
+        "onSubmit": ["sopSteward"],
+        "onPublish": ["sopSteward", "author"]
+      }
+    },
+
+    "sop_update_major": {
+      "name": "Major SOP Update (MAJOR/MINOR version)",
+      "description": "Workflow for significant updates affecting procedures or compliance",
+      "trigger": "SOP update with changeType='MAJOR' or 'MINOR'",
+      "stages": [
+        {
+          "stage": 1,
+          "name": "Impact Analysis",
+          "assignedTo": "sopSteward",
+          "actions": ["analyze", "document_impact", "submit"],
+          "sla": {
+            "duration": 3,
+            "unit": "business_days"
+          },
+          "automatedChecks": [
+            {
+              "check": "dependency_analysis",
+              "description": "Identify all dependent SOPs and processes",
+              "failAction": "generate_impact_report"
+            },
+            {
+              "check": "training_impact",
+              "description": "Determine if retraining is required",
+              "failAction": "flag_for_training_update"
+            }
+          ],
+          "onSubmit": "advance_to_stage_2"
+        },
+        {
+          "stage": 2,
+          "name": "Compliance Review",
+          "assignedTo": "complianceReviewer",
+          "actions": ["review", "approve", "reject", "request_changes"],
+          "sla": {
+            "duration": 5,
+            "unit": "business_days"
+          },
+          "automatedChecks": [
+            {
+              "check": "regulatory_change_check",
+              "description": "Verify update reflects current regulatory requirements",
+              "failAction": "request_changes"
+            }
+          ],
+          "onApprove": "advance_to_stage_3",
+          "onReject": "return_to_steward"
+        },
+        {
+          "stage": 3,
+          "name": "Technical Review",
+          "assignedTo": "technicalApprover",
+          "condition": {
+            "field": "affectsTechnicalSystems",
+            "operator": "equals",
+            "value": true
+          },
+          "skipIf": {
+            "field": "affectsTechnicalSystems",
+            "operator": "equals",
+            "value": false,
+            "action": "advance_to_stage_4"
+          },
+          "actions": ["review", "approve", "reject"],
+          "sla": {
+            "duration": 3,
+            "unit": "business_days"
+          },
+          "onApprove": "advance_to_stage_4",
+          "onReject": "return_to_steward"
+        },
+        {
+          "stage": 4,
+          "name": "Parallel SME Reviews",
+          "assignedTo": "subjectMatterExperts",
+          "parallelReview": true,
+          "reviewerCount": {
+            "min": 2,
+            "max": 5
+          },
+          "consensusRequired": "majority",
+          "actions": ["review", "approve", "reject", "abstain"],
+          "sla": {
+            "duration": 5,
+            "unit": "business_days"
+          },
+          "onConsensusApprove": "advance_to_stage_5",
+          "onConsensusReject": "return_to_steward",
+          "onTimeout": "escalate_to_governance_council"
+        },
+        {
+          "stage": 5,
+          "name": "Data Governance Officer Approval",
+          "assignedTo": "dataGovernanceOfficer",
+          "actions": ["approve", "reject"],
+          "sla": {
+            "duration": 2,
+            "unit": "business_days"
+          },
+          "condition": {
+            "field": "changeType",
+            "operator": "equals",
+            "value": "MINOR"
+          },
+          "onApprove": "advance_to_stage_6",
+          "onReject": "return_to_steward"
+        },
+        {
+          "stage": 6,
+          "name": "Governance Council Approval",
+          "assignedTo": "governanceCouncil",
+          "condition": {
+            "field": "changeType",
+            "operator": "equals",
+            "value": "MAJOR"
+          },
+          "skipIf": {
+            "field": "changeType",
+            "operator": "equals",
+            "value": "MINOR",
+            "action": "publish_sop_increment_minor"
+          },
+          "actions": ["vote_approve", "vote_reject"],
+          "votingRules": {
+            "quorumRequired": 0.6,
+            "approvalThreshold": 0.6
+          },
+          "sla": {
+            "duration": 10,
+            "unit": "business_days"
+          },
+          "onApprove": "publish_sop_increment_major",
+          "onReject": "return_to_steward"
+        }
+      ],
+      "notifications": {
+        "onSubmit": ["all_approvers", "governance_council"],
+        "onStageComplete": ["nextApprovers", "author"],
+        "onPublish": ["all_employees", "training_department", "affected_stakeholders"]
+      },
+      "postPublishActions": [
+        "schedule_training_updates",
+        "notify_dependent_sop_owners",
+        "update_knowledge_base"
+      ]
+    },
+
+    "emergency_sop_update": {
+      "name": "Emergency SOP Update",
+      "description": "Expedited workflow for urgent regulatory or security updates",
+      "trigger": "SOP update with priority='EMERGENCY'",
+      "requiresJustification": true,
+      "stages": [
+        {
+          "stage": 1,
+          "name": "Emergency Justification Review",
+          "assignedTo": "dataGovernanceOfficer",
+          "actions": ["approve_emergency", "downgrade_to_standard"],
+          "sla": {
+            "duration": 4,
+            "unit": "hours"
+          },
+          "automatedChecks": [
+            {
+              "check": "emergency_criteria",
+              "description": "Verify update meets emergency criteria",
+              "criteria": [
+                "Regulatory deadline < 5 days",
+                "Critical security vulnerability",
+                "Legal/compliance risk",
+                "Executive directive"
+              ]
+            }
+          ],
+          "onApprove": "advance_to_stage_2",
+          "onDowngrade": "reroute_to_standard_workflow"
+        },
+        {
+          "stage": 2,
+          "name": "Rapid Compliance Check",
+          "assignedTo": "complianceReviewer",
+          "actions": ["approve", "reject"],
+          "sla": {
+            "duration": 8,
+            "unit": "hours"
+          },
+          "onApprove": "advance_to_stage_3",
+          "onReject": "escalate_to_chief_compliance_officer"
+        },
+        {
+          "stage": 3,
+          "name": "Executive Approval",
+          "assignedTo": ["dataGovernanceOfficer", "chiefOperationsOfficer"],
+          "parallelReview": false,
+          "actions": ["approve", "reject"],
+          "sla": {
+            "duration": 4,
+            "unit": "hours"
+          },
+          "onApprove": "publish_sop_emergency",
+          "onReject": "return_to_author"
+        }
+      ],
+      "notifications": {
+        "onSubmit": ["dataGovernanceOfficer", "chiefComplianceOfficer", "chiefOperationsOfficer"],
+        "onPublish": ["all_employees_immediate", "governance_council"]
+      },
+      "postPublishActions": [
+        "log_emergency_approval",
+        "schedule_governance_council_review",
+        "mandate_immediate_training"
+      ]
+    },
+
+    "schema_version_update": {
+      "name": "Schema Version Update Workflow",
+      "description": "Workflow for updating ontology schemas with version control",
+      "trigger": "Schema update submitted",
+      "stages": [
+        {
+          "stage": 1,
+          "name": "Automated Schema Validation",
+          "assignedTo": "automated_system",
+          "actions": ["validate"],
+          "automatedChecks": [
+            {
+              "check": "owl_syntax_validation",
+              "description": "Validate OWL/RDF syntax using schema-validator tool",
+              "failAction": "auto_reject"
+            },
+            {
+              "check": "skos_validation",
+              "description": "Validate SKOS vocabulary structure",
+              "failAction": "auto_reject"
+            },
+            {
+              "check": "backward_compatibility",
+              "description": "Check compatibility with previous version",
+              "failAction": "flag_breaking_changes"
+            }
+          ],
+          "onPass": "advance_to_stage_2",
+          "onFail": "return_to_author"
+        },
+        {
+          "stage": 2,
+          "name": "Technical Review",
+          "assignedTo": "technicalApprover",
+          "actions": ["review", "approve", "reject"],
+          "sla": {
+            "duration": 3,
+            "unit": "business_days"
+          },
+          "onApprove": "advance_to_stage_3",
+          "onReject": "return_to_author"
+        },
+        {
+          "stage": 3,
+          "name": "Data Governance Officer Approval",
+          "assignedTo": "dataGovernanceOfficer",
+          "actions": ["approve", "reject"],
+          "condition": {
+            "field": "versionChangeType",
+            "operator": "in",
+            "value": ["MINOR", "PATCH"]
+          },
+          "sla": {
+            "duration": 2,
+            "unit": "business_days"
+          },
+          "onApprove": "publish_schema_version",
+          "onReject": "return_to_author"
+        },
+        {
+          "stage": 4,
+          "name": "Governance Council Approval",
+          "assignedTo": "governanceCouncil",
+          "condition": {
+            "field": "versionChangeType",
+            "operator": "equals",
+            "value": "MAJOR"
+          },
+          "skipIf": {
+            "field": "versionChangeType",
+            "operator": "in",
+            "value": ["MINOR", "PATCH"],
+            "action": "end_workflow"
+          },
+          "actions": ["vote_approve", "vote_reject"],
+          "votingRules": {
+            "quorumRequired": 0.6,
+            "approvalThreshold": 0.75
+          },
+          "sla": {
+            "duration": 10,
+            "unit": "business_days"
+          },
+          "onApprove": "publish_schema_major_version",
+          "onReject": "return_to_author"
+        }
+      ],
+      "notifications": {
+        "onSubmit": ["technicalApprovers", "dataGovernanceOfficer"],
+        "onPublish": ["all_stewards", "technical_teams", "integration_teams"]
+      }
+    }
+  },
+
+  "routingRules": {
+    "departmentMapping": {
+      "mortgage_finance": "sopSteward_mortgage",
+      "compliance": "sopSteward_compliance",
+      "operations": "sopSteward_operations",
+      "technology": "sopSteward_technology",
+      "risk_management": "sopSteward_risk"
+    },
+    "complexityBasedRouting": {
+      "simple": {
+        "criteria": "singleDepartment && noComplianceImpact",
+        "workflow": "sop_update_minor"
+      },
+      "moderate": {
+        "criteria": "singleDepartment && complianceImpact",
+        "workflow": "sop_creation"
+      },
+      "complex": {
+        "criteria": "multiDepartment || majorProcessChange",
+        "workflow": "sop_update_major"
+      },
+      "critical": {
+        "criteria": "regulatoryDeadline || securityImpact",
+        "workflow": "emergency_sop_update"
+      }
+    }
+  },
+
+  "slaManagement": {
+    "warningThresholds": {
+      "yellow": "80% of SLA elapsed",
+      "red": "100% of SLA elapsed"
+    },
+    "escalationActions": {
+      "yellow": ["send_reminder", "notify_manager"],
+      "red": ["escalate_to_next_level", "notify_governance_officer"]
+    },
+    "businessDays": {
+      "excludeWeekends": true,
+      "excludeHolidays": true,
+      "holidayCalendar": "US_Federal_Holidays"
+    }
+  },
+
+  "auditLogging": {
+    "logAllActions": true,
+    "requiredFields": [
+      "timestamp",
+      "user",
+      "action",
+      "sopId",
+      "stage",
+      "decision",
+      "comments",
+      "ipAddress"
+    ],
+    "retention": "7 years",
+    "complianceFrameworks": ["SOX", "GLBA", "Internal Audit Requirements"]
+  },
+
+  "integrations": {
+    "notificationChannels": ["email", "slack", "teams", "dashboard"],
+    "externalSystems": {
+      "hr_system": "Employee role verification",
+      "training_system": "Trigger training updates",
+      "document_management": "Version control integration",
+      "compliance_system": "Regulatory tracking"
+    }
+  },
+
+  "metadata": {
+    "documentOwner": "Data Governance Officers",
+    "approvedBy": "Governance Council",
+    "approvalDate": "2025-11-16",
+    "nextReview": "2026-05-16",
+    "version": "1.0.0",
+    "status": "Active",
+    "alignedWith": "NPR 7123.1B - Systems Engineering Process Requirements"
+  }
+}
