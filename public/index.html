@@ -65,6 +65,71 @@
             color: #0052CC;
         }
 
+        .help-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            text-decoration: none;
+            padding: 8px 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .help-link:hover {
+            background: #f0f4ff;
+            border-color: #0052CC;
+            color: #0052CC;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted #999;
+            cursor: help;
+        }
+
+        .tooltip-content {
+            visibility: hidden;
+            position: absolute;
+            z-index: 1000;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a1a;
+            color: white;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            line-height: 1.5;
+            white-space: normal;
+            width: 250px;
+            text-align: left;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .tooltip-content::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #1a1a1a transparent transparent transparent;
+        }
+
+        .tooltip:hover .tooltip-content {
+            visibility: visible;
+            opacity: 1;
+        }
+
         /* Page Title */
         .page-title {
             padding: 30px 40px 20px;
@@ -309,12 +374,18 @@
             <a href="workspace.html" class="nav-link">Workspace</a>
             <a href="graph.html" class="nav-link">Graph</a>
             <a href="contribute.html" class="nav-link">Contribute</a>
+            <a href="help.html" class="help-link">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+                </svg>
+                Help
+            </a>
         </nav>
     </header>
 
     <!-- Page Title -->
     <div class="page-title">
-        <h1>SOP Management Dashboard</h1>
+        <h1><span class="tooltip">SOP<span class="tooltip-content">Standard Operating Procedure - documented step-by-step processes for consistent operations</span></span> Management Dashboard</h1>
         <p>Welcome back. Here's what's happening with your SOPs.</p>
     </div>
 
@@ -332,7 +403,9 @@
             </div>
             <div class="stat-card">
                 <div class="stat-value">98%</div>
-                <div class="stat-label">Compliance Rate</div>
+                <div class="stat-label">
+                    <span class="tooltip">Compliance Rate<span class="tooltip-content">Percentage of SOPs meeting all regulatory and framework requirements (FHA, TRID, RESPA, etc.)</span></span>
+                </div>
             </div>
             <div class="stat-card">
                 <div class="stat-value">5</div>
@@ -350,21 +423,21 @@
             <a href="workspace.html" class="action-card">
                 <div class="action-icon">📋</div>
                 <div class="action-title">My Workspace</div>
-                <div class="action-desc">View SOPs, generate processes, and manage dependencies</div>
+                <div class="action-desc">View SOPs, generate processes, and manage <span class="tooltip">dependencies<span class="tooltip-content">Relationships between SOPs where one procedure requires or references another</span></span></div>
             </a>
             <a href="graph.html" class="action-card">
                 <div class="action-icon">🕸️</div>
-                <div class="action-title">Dependency Graph</div>
-                <div class="action-desc">Visualize SOP relationships and impact analysis</div>
+                <div class="action-title"><span class="tooltip">Dependency Graph<span class="tooltip-content">Visual representation showing how SOPs connect and depend on each other</span></span></div>
+                <div class="action-desc">Visualize SOP relationships and <span class="tooltip">impact analysis<span class="tooltip-content">Shows what will be affected if you change or delete an SOP</span></span></div>
             </a>
             <a href="contribute.html" class="action-card">
                 <div class="action-icon">➕</div>
                 <div class="action-title">Create SOP</div>
-                <div class="action-desc">Add new procedures with AI-assisted metadata</div>
+                <div class="action-desc">Add new procedures with <span class="tooltip">AI-assisted metadata<span class="tooltip-content">System automatically generates version numbers, tags, compliance frameworks, and technical details</span></span></div>
             </a>
             <a href="search.html" class="action-card">
                 <div class="action-icon">🔍</div>
-                <div class="action-title">Semantic Search</div>
+                <div class="action-title"><span class="tooltip">Semantic Search<span class="tooltip-content">AI-powered search that understands meaning, not just exact keywords (uses RAG technology)</span></span></div>
                 <div class="action-desc">Find SOPs using natural language queries</div>
             </a>
         </div>
