@@ -21,11 +21,11 @@ complianceFrameworks: []  # ISO 9001, HIPAA, SOX, GDPR, FDA, etc.
 
 # Component Composition
 composedOf:
-  - atom-id-1
-  - molecule-id-1
-  - molecule-id-2
+  - PLACEHOLDER-atom-01
+  - PLACEHOLDER-molecule-01
+  - PLACEHOLDER-molecule-02
 dependencies:
-  - sop-xxx (Related SOP)
+  - PLACEHOLDER-sop-xxx (Related SOP)
 
 # Reusability Tracking
 reusable: true
@@ -99,11 +99,11 @@ Before starting this workflow, ensure:
 This organism combines the following components:
 
 ### Atoms
-- **{{atom-id-1}}**: [Purpose in this workflow]
+- **{{PLACEHOLDER-atom-01}}**: [Purpose in this workflow]
 
 ### Molecules
-- **{{molecule-id-1}}**: [Purpose in this workflow]
-- **{{molecule-id-2}}**: [Purpose in this workflow]
+- **{{PLACEHOLDER-molecule-01}}**: [Purpose in this workflow]
+- **{{PLACEHOLDER-molecule-02}}**: [Purpose in this workflow]
 
 ## Phases
 
@@ -113,7 +113,7 @@ This organism combines the following components:
 **Owner:** [Role]
 **Success Criteria:** [What defines success for this phase]
 
-{{include: molecule-id-1}}
+{{include: PLACEHOLDER-molecule-01}}
 
 **Additional context for this workflow:**
 
@@ -135,7 +135,7 @@ This organism combines the following components:
 **Owner:** [Role]
 **Success Criteria:** [What defines success for this phase]
 
-{{include: molecule-id-2}}
+{{include: PLACEHOLDER-molecule-02}}
 
 **Additional context for this workflow:**
 

@@ -20,10 +20,10 @@ estimatedDuration: [X minutes/hours]
 complianceFrameworks: []  # ISO 9001, HIPAA, SOX, GDPR, FDA, etc.
 
 # Component Composition
-composedOf: [atom-id-1, atom-id-2]
+composedOf: [PLACEHOLDER-atom-01, PLACEHOLDER-atom-02]
 dependencies:
-  - atom-id-1 (v1.0.0+)
-  - atom-id-2 (v1.0.0+)
+  - PLACEHOLDER-atom-01 (v1.0.0+)
+  - PLACEHOLDER-atom-02 (v1.0.0+)
 
 # Reusability Tracking
 reusable: true
@@ -76,11 +76,11 @@ Before starting, verify:
 
 This molecule combines the following atoms:
 
-### {{include: atom-id-1}}
+### {{include: PLACEHOLDER-atom-01}}
 
 **Usage in this procedure:** [How this atom is used]
 
-### {{include: atom-id-2}}
+### {{include: PLACEHOLDER-atom-02}}
 
 **Usage in this procedure:** [How this atom is used]
 
