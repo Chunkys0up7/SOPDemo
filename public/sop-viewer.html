@@ -1564,11 +1564,193 @@
   </div>
 
   <script>
+    // Display template content in create mode
+    function displayTemplateContent(templateContent, templateTitle, templateType) {
+      // Parse the template markdown
+      const lines = templateContent.split('\n');
+      let inFrontmatter = false;
+      let frontmatterLines = [];
+      let contentLines = [];
+
+      // Separate frontmatter from content
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        if (line.trim() === '---') {
+          if (!inFrontmatter && i === 0) {
+            inFrontmatter = true;
+            continue;
+          } else if (inFrontmatter) {
+            inFrontmatter = false;
+            continue;
+          }
+        }
+        if (inFrontmatter) {
+          frontmatterLines.push(line);
+        } else {
+          contentLines.push(line);
+        }
+      }
+
+      // Update the SOP title
+      const titleElement = document.querySelector('.sop-title');
+      if (titleElement) {
+        titleElement.textContent = `New ${templateType.toUpperCase()}: ${templateTitle}`;
+      }
+
+      // Display the template content in the main area
+      const sopContent = document.querySelector('.sop-content');
+      if (sopContent) {
+        // Convert markdown to HTML (simple conversion for display)
+        const contentHtml = contentLines.join('\n')
+          .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+          .replace(/^## (.+)$/gm, '<h2 class="section-title">$1</h2>')
+          .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+          .replace(/^\*\*(.+?)\*\*$/gm, '<strong>$1</strong>')
+          .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+          .replace(/^- (.+)$/gm, '<li>$1</li>')
+          .replace(/(<li>.*<\/li>\n?)+/gs, '<ul>$&</ul>')
+          .replace(/\n\n/g, '</p><p>')
+          .replace(/^(?!<[hul])/gm, '<p>')
+          .replace(/(?<!>)$/gm, '</p>')
+          .replace(/<p><\/p>/g, '')
+          .replace(/<p>(<[hul])/g, '$1')
+          .replace(/(<\/[hul][^>]*>)<\/p>/g, '$1');
+
+        sopContent.innerHTML = `
+          <div class="sop-header">
+            <h1 class="sop-title">New ${templateType.toUpperCase()}: ${templateTitle}</h1>
+            <div class="sop-meta-row">
+              <div class="sop-meta-item">
+                <span class="sop-meta-label">Type:</span>
+                <span>${templateType.toUpperCase()}</span>
+              </div>
+              <div class="sop-meta-item">
+                <span class="sop-meta-label">Template:</span>
+                <span>${templateTitle}</span>
+              </div>
+              <div class="sop-meta-item">
+                <span class="sop-meta-label">Status:</span>
+                <span class="status-badge" style="background: #fef3c7; color: #92400e;">Draft</span>
+              </div>
+              <div class="sop-meta-item">
+                <span class="sop-meta-label">Created:</span>
+                <span>${new Date().toISOString().split('T')[0]}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="section" id="template-content">
+            <div class="section-header">
+              <h2 class="section-title">Template Content</h2>
+              <button class="edit-section-btn" onclick="editTemplateContent()">
+                ✏️ Edit & Customize
+              </button>
+            </div>
+            <div class="section-content" id="template-preview">
+              <div style="background: #fef3c7; padding: 16px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #f59e0b;">
+                <strong>📝 Template Loaded Successfully!</strong><br>
+                <span style="font-size: 14px; color: #78350f;">
+                  This is a template for creating a new ${templateType}. Review the structure below, then click "Edit & Customize" to fill in your specific details.
+                </span>
+              </div>
+
+              <div style="white-space: pre-wrap; font-family: monospace; background: #f7fafc; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0; overflow-x: auto;">
+${templateContent}
+              </div>
+            </div>
+          </div>
+
+          <div class="section" id="frontmatter-section">
+            <div class="section-header">
+              <h2 class="section-title">Metadata & Configuration</h2>
+            </div>
+            <div class="section-content">
+              <p><strong>Template Frontmatter (YAML):</strong></p>
+              <div style="background: #f7fafc; padding: 16px; border-radius: 8px; border: 1px solid #e2e8f0; margin-top: 12px;">
+                <pre style="margin: 0; font-family: monospace; font-size: 13px; line-height: 1.6; white-space: pre-wrap;">${frontmatterLines.join('\n')}</pre>
+              </div>
+              <p style="margin-top: 16px; font-size: 14px; color: #718096;">
+                💡 <strong>Tip:</strong> Fill in the metadata fields above with your specific information. This enables searchability, reusability, and compliance tracking.
+              </p>
+            </div>
+          </div>
+
+          <div class="section" id="next-steps">
+            <div class="section-header">
+              <h2 class="section-title">Next Steps</h2>
+            </div>
+            <div class="section-content">
+              <ol style="line-height: 1.8;">
+                <li>Review the template structure and sections</li>
+                <li>Click "Edit & Customize" to personalize the content</li>
+                <li>Fill in all metadata fields (department, complexity, audience, etc.)</li>
+                <li>Add compliance frameworks if applicable</li>
+                <li>Define the procedure steps and decision logic</li>
+                <li>Add quality checkpoints and troubleshooting guidance</li>
+                <li>Save and publish your new ${templateType}</li>
+              </ol>
+            </div>
+          </div>
+        `;
+      }
+
+      // Add edit functionality
+      window.editTemplateContent = function() {
+        alert('Edit mode would open here with the full template content in a markdown editor.\n\nIn production, this would:\n• Open a rich markdown editor\n• Allow inline editing of all sections\n• Auto-save changes\n• Validate metadata fields\n• Preview the formatted output\n• Save to graph database');
+      };
+    }
+
     // Load enhanced metadata from graph
     async function loadEnhancedMetadata() {
       try {
-        // Get SOP ID from URL
+        // Get URL parameters
         const urlParams = new URLSearchParams(window.location.search);
+        const mode = urlParams.get('mode');
+        const templateId = urlParams.get('template');
+
+        // Handle CREATE MODE - Load template from sessionStorage
+        if (mode === 'create' && templateId) {
+          const templateContent = sessionStorage.getItem('newSOPTemplate');
+          const templateType = sessionStorage.getItem('newSOPTemplateType');
+          const templateTitle = sessionStorage.getItem('newSOPTemplateTitle');
+
+          if (templateContent) {
+            // Display template in the main content area
+            displayTemplateContent(templateContent, templateTitle, templateType);
+
+            // Set metadata for new SOP
+            document.getElementById('doc-type').textContent = templateType?.toUpperCase() || 'NEW';
+            document.getElementById('doc-department').textContent = 'To Be Defined';
+            document.getElementById('doc-category').textContent = 'To Be Defined';
+            document.getElementById('doc-complexity').textContent = 'To Be Defined';
+            document.getElementById('doc-last-review').textContent = new Date().toISOString().split('T')[0];
+            document.getElementById('doc-next-review').textContent = 'To Be Defined';
+            document.getElementById('doc-approver').textContent = 'To Be Defined';
+            document.getElementById('doc-maintainer').textContent = 'To Be Defined';
+
+            // Clear audience and compliance
+            document.getElementById('audience-list').innerHTML = '<div style="font-size: 13px; color: #a0aec0;">Define audience in template metadata</div>';
+            document.getElementById('compliance-list').innerHTML = '<div style="font-size: 13px; color: #a0aec0;">Define compliance frameworks in template metadata</div>';
+            document.getElementById('used-in-count').textContent = '0';
+
+            // Update breadcrumb
+            const breadcrumb = document.querySelector('.breadcrumb');
+            if (breadcrumb) {
+              breadcrumb.innerHTML = `
+                <a href="/public/index.html">Dashboard</a> /
+                <a href="/public/templates.html">Templates</a> /
+                <span>Create from ${templateTitle}</span>
+              `;
+            }
+
+            // Update page title
+            document.title = `Create New SOP - ${templateTitle}`;
+
+            return; // Exit early for create mode
+          }
+        }
+
+        // NORMAL MODE - Load existing SOP from graph
         const sopId = urlParams.get('sop') || urlParams.get('id') || 'sop-it-001';
 
         // Load graph data

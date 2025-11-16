@@ -334,16 +334,118 @@
   </div>
 
   <script>
-    // Template database
+    // Enhanced template database - now loading from actual template files
     const templates = [
       {
-        id: 'standard-sop',
-        title: 'Standard Operating Procedure',
+        id: 'atom-template',
+        templateFile: '/templates/atom-template.md',
+        title: 'Atom Template - Reusable Component',
         category: 'standard',
-        icon: '📄',
-        description: 'Comprehensive template for documenting standard processes with step-by-step instructions, prerequisites, and quality checks.',
+        icon: '⚛️',
+        description: 'Create a single-purpose reusable component with rich metadata for searchability, reusability, and adaptability. Perfect for procedures that can be reused across multiple SOPs.',
         uses: 342,
         rating: 4.8,
+        features: [
+          'Rich metadata (department, category, complexity, audience)',
+          'Compliance framework tracking (SOX, HIPAA, SOC 2, etc.)',
+          'Reusability tracking (used in, variations)',
+          'Decision logic with if-then statements',
+          'Quality checkpoints with recovery paths',
+          'Troubleshooting matrix',
+          'Version history with detailed changelog'
+        ],
+        popular: true,
+        metadata: {
+          type: 'atom',
+          hasCompliance: true,
+          hasDecisionLogic: true,
+          hasQualityCheckpoints: true
+        }
+      },
+      {
+        id: 'molecule-template',
+        templateFile: '/templates/molecule-template.md',
+        title: 'Molecule Template - Multi-Step Workflow',
+        category: 'standard',
+        icon: '🧬',
+        description: 'Create a multi-step procedure that combines multiple atoms. Includes estimated duration, component composition, and workflow management.',
+        uses: 289,
+        rating: 4.9,
+        features: [
+          'All Atom template features',
+          'Component composition (embeds atoms)',
+          'Estimated duration tracking',
+          'Multi-step procedure with checkpoints',
+          'Exception handling with approval requirements',
+          'Workflow state management'
+        ],
+        popular: true,
+        metadata: {
+          type: 'molecule',
+          composesAtoms: true,
+          hasWorkflow: true,
+          hasEstimatedDuration: true
+        }
+      },
+      {
+        id: 'organism-template',
+        templateFile: '/templates/organism-template.md',
+        title: 'Organism Template - Complete Workflow',
+        category: 'standard',
+        icon: '🦠',
+        description: 'Create an end-to-end workflow that orchestrates multiple molecules and atoms. Includes roles, timeline, escalation matrix, and communication plan.',
+        uses: 156,
+        rating: 4.8,
+        features: [
+          'All Molecule template features',
+          'Roles & responsibilities matrix',
+          'Timeline overview with milestones',
+          'Success metrics & KPIs',
+          'Escalation matrix with severity levels',
+          'Communication & stakeholder management plan'
+        ],
+        popular: false,
+        metadata: {
+          type: 'organism',
+          orchestratesWorkflow: true,
+          hasRolesMatrix: true,
+          hasTimeline: true
+        }
+      },
+      {
+        id: 'sop-template',
+        templateFile: '/templates/sop-template.md',
+        title: 'Complete SOP Template - Production Ready',
+        category: 'standard',
+        icon: '📄',
+        description: 'Comprehensive production-ready SOP with all features. Includes metadata summary, business value, appendices, and machine-readable JSON-LD.',
+        uses: 412,
+        rating: 4.9,
+        features: [
+          'All Organism template features',
+          'Metadata summary table',
+          'Purpose & business value section',
+          'Complete troubleshooting matrix',
+          'Exception handling with approval matrix',
+          'Appendices (glossary, workflows, forms, FAQ)',
+          'Machine-readable JSON-LD metadata'
+        ],
+        popular: true,
+        metadata: {
+          type: 'sop',
+          isProductionReady: true,
+          hasAppendices: true,
+          hasJsonLD: true
+        }
+      },
+      {
+        id: 'standard-sop',
+        title: 'Legacy Standard Operating Procedure',
+        category: 'reference',
+        icon: '📋',
+        description: 'Basic SOP template without enhanced metadata (legacy format). Use enhanced templates above for better searchability and reusability.',
+        uses: 203,
+        rating: 4.6,
         features: [
           'Overview & scope section',
           'Prerequisites with dependencies',
@@ -352,7 +454,7 @@
           'Troubleshooting guide',
           'Cross-reference support'
         ],
-        popular: true
+        popular: false
       },
       {
         id: 'policy-document',
@@ -572,21 +674,48 @@
       renderTemplates();
     }
 
-    // Use template
-    function useTemplate(event, templateId) {
+    // Use template - loads actual template file and creates new SOP
+    async function useTemplate(event, templateId) {
       if (event) event.stopPropagation();
 
       const template = templates.find(t => t.id === templateId);
 
-      // In production, this would:
-      // 1. Create new SOP from template
-      // 2. Pre-fill sections
-      // 3. Redirect to editor
+      if (!template) {
+        alert('Template not found!');
+        return;
+      }
 
-      alert(`🎉 Creating new SOP from template: "${template.title}"\n\nThis will:\n• Copy template structure\n• Pre-fill standard sections\n• Open in editor for customization\n• Set up dependencies\n\nRedirecting to editor...`);
+      // Enhanced templates load from actual files
+      if (template.templateFile) {
+        try {
+          const response = await fetch(template.templateFile);
 
-      // Simulate redirect to editor
-      // window.location.href = `/public/sop-viewer.html?template=${templateId}&mode=edit`;
+          if (!response.ok) {
+            throw new Error(`Failed to load template: ${response.status}`);
+          }
+
+          const templateContent = await response.text();
+
+          // Store template data in sessionStorage for the create page
+          sessionStorage.setItem('newSOPTemplate', templateContent);
+          sessionStorage.setItem('newSOPTemplateId', templateId);
+          sessionStorage.setItem('newSOPTemplateType', template.metadata?.type || 'sop');
+          sessionStorage.setItem('newSOPTemplateTitle', template.title);
+
+          // Redirect to viewer in create mode
+          window.location.href = `/public/sop-viewer.html?mode=create&template=${templateId}`;
+
+        } catch (error) {
+          console.error('Error loading template:', error);
+          alert(`Failed to load template file. Please check console for details.\n\nError: ${error.message}`);
+        }
+      } else {
+        // Legacy templates - show alert for now
+        alert(`🎉 Creating new SOP from template: "${template.title}"\n\nThis will:\n• Copy template structure\n• Pre-fill standard sections\n• Open in editor for customization\n• Set up dependencies\n\nNote: Legacy template format - consider using enhanced templates (Atom, Molecule, Organism, or Complete SOP) for better searchability and reusability.`);
+
+        // For legacy templates, redirect without template content
+        window.location.href = `/public/sop-viewer.html?mode=create&template=${templateId}`;
+      }
     }
 
     // Preview template
