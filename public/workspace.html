@@ -446,6 +446,71 @@
             font-size: 11px;
             color: #666;
         }
+
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted #999;
+            cursor: help;
+        }
+
+        .tooltip-content {
+            visibility: hidden;
+            position: absolute;
+            z-index: 1000;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a1a;
+            color: white;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            line-height: 1.5;
+            white-space: normal;
+            width: 280px;
+            text-align: left;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .tooltip-content::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #1a1a1a transparent transparent transparent;
+        }
+
+        .tooltip:hover .tooltip-content {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .help-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            text-decoration: none;
+            padding: 8px 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .help-link:hover {
+            background: #f0f4ff;
+            border-color: #0052CC;
+            color: #0052CC;
+        }
     </style>
 </head>
 <body>
@@ -456,10 +521,16 @@
             <div class="wordmark">Pursuit</div>
         </div>
         <nav class="nav">
-            <a href="index.html" class="nav-link">Home</a>
+            <a href="index.html" class="nav-link">Dashboard</a>
             <a href="workspace.html" class="nav-link active">Workspace</a>
             <a href="graph.html" class="nav-link">Graph</a>
             <a href="contribute.html" class="nav-link">Contribute</a>
+            <a href="help.html" class="help-link">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+                </svg>
+                Help
+            </a>
         </nav>
     </header>
 
@@ -468,7 +539,7 @@
         <!-- Left Panel: SOP List -->
         <div class="sop-panel">
             <div class="panel-header">
-                <h2>SOPs</h2>
+                <h2><span class="tooltip">SOPs<span class="tooltip-content">Standard Operating Procedures - documented step-by-step processes for consistent operations across the organization</span></span></h2>
                 <input type="text" class="search-box" placeholder="Search SOPs..." id="sop-search">
             </div>
             <div class="sop-list" id="sop-list">
@@ -481,8 +552,12 @@
             <div class="process-header">
                 <div class="process-title" id="process-title">My Workspace</div>
                 <div class="process-actions">
-                    <button class="btn btn-secondary" id="btn-view-graph">View in Graph</button>
-                    <button class="btn btn-primary" id="btn-generate">Generate Process</button>
+                    <button class="btn btn-secondary" id="btn-view-graph">
+                        <span class="tooltip">View in Graph<span class="tooltip-content">Open this SOP in the visual dependency graph to see all connections and relationships</span></span>
+                    </button>
+                    <button class="btn btn-primary" id="btn-generate">
+                        <span class="tooltip">Generate Process<span class="tooltip-content">AI creates a step-by-step workflow based on this SOP and its dependencies for your specific use case</span></span>
+                    </button>
                 </div>
             </div>
             <div class="process-content" id="process-content">
@@ -513,7 +588,9 @@
                     <div class="quick-action-desc">Find SOPs by description</div>
                 </div>
 
-                <div class="deps-title" style="margin-top: 20px;">Dependencies</div>
+                <div class="deps-title" style="margin-top: 20px;">
+                    <span class="tooltip">Dependencies<span class="tooltip-content">SOPs that this procedure requires or references. Changes to dependencies may affect this SOP's functionality.</span></span>
+                </div>
                 <div id="deps-list">
                     <p style="font-size: 13px; color: #999;">Select an SOP to view dependencies</p>
                 </div>
@@ -720,14 +797,24 @@
 
                     ${currentSOP.components.length > 0 ? `
                     <div class="section">
-                        <div class="section-title">Reusable Components</div>
+                        <div class="section-title">
+                            <span class="tooltip">Reusable Components<span class="tooltip-content">Modular building blocks following Atomic Design - small pieces that can be reused across multiple SOPs to eliminate duplication</span></span>
+                        </div>
                         <div class="component-grid">
-                            ${currentSOP.components.map(comp => `
+                            ${currentSOP.components.map(comp => {
+                                const tooltips = {
+                                    'atom': 'Basic reusable element (forms, checklists, templates) that cannot be broken down further',
+                                    'molecule': 'Simple process combining multiple atoms into a single function or workflow',
+                                    'organism': 'Complete end-to-end workflow combining atoms and molecules into a full procedure'
+                                };
+                                return `
                                 <div class="component-card">
-                                    <div class="component-type">${comp.type}</div>
+                                    <div class="component-type">
+                                        <span class="tooltip">${comp.type}<span class="tooltip-content">${tooltips[comp.type]}</span></span>
+                                    </div>
                                     <div class="component-name">${comp.name}</div>
                                 </div>
-                            `).join('')}
+                            `}).join('')}
                         </div>
                     </div>
                     ` : ''}
@@ -746,12 +833,20 @@
                 return;
             }
 
-            depsEl.innerHTML = currentSOP.dependencies.map(dep => `
+            depsEl.innerHTML = currentSOP.dependencies.map(dep => {
+                const typeTooltips = {
+                    'depends-on': 'This SOP requires the referenced procedure to function correctly',
+                    'related-to': 'This SOP has connections or shared concepts with the referenced procedure',
+                    'component-of': 'This SOP uses components from the referenced procedure'
+                };
+                return `
                 <div class="dep-item" onclick="selectSOPById('${dep.id}')">
                     <div class="dep-item-title">${dep.title}</div>
-                    <div class="dep-item-type">${dep.type}</div>
+                    <div class="dep-item-type">
+                        <span class="tooltip">${dep.type}<span class="tooltip-content">${typeTooltips[dep.type] || dep.type}</span></span>
+                    </div>
                 </div>
-            `).join('');
+            `}).join('');
         }
 
         // Select SOP by ID

@@ -421,6 +421,71 @@
             color: #666;
             margin-top: 2px;
         }
+
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted #999;
+            cursor: help;
+        }
+
+        .tooltip-content {
+            visibility: hidden;
+            position: absolute;
+            z-index: 1000;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a1a;
+            color: white;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            line-height: 1.5;
+            white-space: normal;
+            width: 280px;
+            text-align: left;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .tooltip-content::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #1a1a1a transparent transparent transparent;
+        }
+
+        .tooltip:hover .tooltip-content {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .help-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            text-decoration: none;
+            padding: 8px 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .help-link:hover {
+            background: #f0f4ff;
+            border-color: #0052CC;
+            color: #0052CC;
+        }
     </style>
 </head>
 <body>
@@ -435,6 +500,12 @@
             <a href="workspace.html" class="nav-link">Workspace</a>
             <a href="graph.html" class="nav-link active">Graph</a>
             <a href="contribute.html" class="nav-link">Contribute</a>
+            <a href="help.html" class="help-link">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+                </svg>
+                Help
+            </a>
         </nav>
     </header>
 
@@ -446,14 +517,16 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <div class="sidebar-header">
-                <h2>Dependency Graph</h2>
-                <p>Interactive SOP visualization</p>
+                <h2><span class="tooltip">Dependency Graph<span class="tooltip-content">Visual representation showing how SOPs and components connect. Click nodes to see details, edges show dependencies.</span></span></h2>
+                <p>Interactive <span class="tooltip">SOP<span class="tooltip-content">Standard Operating Procedure - documented step-by-step processes</span></span> visualization</p>
             </div>
 
             <!-- Controls -->
             <div class="controls">
                 <div class="control-group">
-                    <label class="control-label">Layout</label>
+                    <label class="control-label">
+                        <span class="tooltip">Layout<span class="tooltip-content">Changes how nodes are arranged. Hierarchical shows dependencies top-to-bottom, Organic groups related nodes, Circle arranges in a ring, Grid aligns in rows/columns.</span></span>
+                    </label>
                     <div class="control-buttons">
                         <button class="control-btn active" data-layout="breadthfirst">Hierarchical</button>
                         <button class="control-btn" data-layout="cose">Organic</button>
@@ -490,23 +563,33 @@
 
                 <!-- Legend -->
                 <div class="legend">
-                    <div class="legend-title">NODE TYPES</div>
+                    <div class="legend-title">
+                        <span class="tooltip">NODE TYPES<span class="tooltip-content">Visual coding by atomic design hierarchy - from simple reusable pieces to complete procedures</span></span>
+                    </div>
                     <div class="legend-items">
                         <div class="legend-item">
                             <div class="legend-color sop"></div>
-                            <span>SOP - Standard Operating Procedure</span>
+                            <span>
+                                <span class="tooltip">SOP<span class="tooltip-content">Standard Operating Procedure - complete documented process</span></span> - Standard Operating Procedure
+                            </span>
                         </div>
                         <div class="legend-item">
                             <div class="legend-color atom"></div>
-                            <span>Atom - Basic Component</span>
+                            <span>
+                                <span class="tooltip">Atom<span class="tooltip-content">Basic reusable element like forms, checklists, or templates that cannot be broken down further</span></span> - Basic Component
+                            </span>
                         </div>
                         <div class="legend-item">
                             <div class="legend-color molecule"></div>
-                            <span>Molecule - Combined Components</span>
+                            <span>
+                                <span class="tooltip">Molecule<span class="tooltip-content">Simple process combining multiple atoms into a single function or workflow</span></span> - Combined Components
+                            </span>
                         </div>
                         <div class="legend-item">
                             <div class="legend-color organism"></div>
-                            <span>Organism - Complex Workflow</span>
+                            <span>
+                                <span class="tooltip">Organism<span class="tooltip-content">Complete end-to-end workflow combining atoms and molecules into a full procedure</span></span> - Complex Workflow
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -538,7 +621,9 @@
                     </div>
 
                     <div class="section" id="impact-section">
-                        <div class="section-title">Impact Analysis</div>
+                        <div class="section-title">
+                            <span class="tooltip">Impact Analysis<span class="tooltip-content">Shows all nodes that will be affected if you change or delete this SOP or component</span></span>
+                        </div>
                         <div id="impact-analysis"></div>
                     </div>
                 </div>
