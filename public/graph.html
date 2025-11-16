@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Dependency Graph - Pursuit Bank SOP Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            color: #1a1a1a;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 100;
+        }
+
+        .logo-lockup {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+        }
+
+        .wordmark {
+            font-size: 20px;
+            font-weight: 600;
+            color: #0052CC;
+        }
+
+        .nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-link {
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #0052CC;
+        }
+
+        /* Graph Container */
+        .graph-wrapper {
+            display: flex;
+            height: calc(100vh - 71px);
+        }
+
+        #cy {
+            flex: 1;
+            background: white;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 350px;
+            background: white;
+            border-left: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .sidebar-header h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .sidebar-header p {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .sidebar-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        /* Controls */
+        .controls {
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .control-group {
+            margin-bottom: 15px;
+        }
+
+        .control-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .control-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .control-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            padding: 8px 14px;
+            border: 1px solid #e0e0e0;
+            background: white;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .control-btn:hover {
+            background: #f0f4ff;
+            border-color: #0052CC;
+            color: #0052CC;
+        }
+
+        .control-btn.active {
+            background: #0052CC;
+            border-color: #0052CC;
+            color: white;
+        }
+
+        .filter-btn {
+            padding: 6px 12px;
+            border: 1px solid #e0e0e0;
+            background: white;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            background: #f0f4ff;
+            border-color: #0052CC;
+            color: #0052CC;
+        }
+
+        .filter-btn.active {
+            background: #0052CC;
+            border-color: #0052CC;
+            color: white;
+        }
+
+        /* Node Details */
+        .node-details {
+            display: none;
+        }
+
+        .node-details.visible {
+            display: block;
+        }
+
+        .node-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .node-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+        }
+
+        .meta-label {
+            font-weight: 600;
+            color: #666;
+            min-width: 80px;
+        }
+
+        .meta-value {
+            color: #1a1a1a;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-sop {
+            background: #e3f2fd;
+            color: #0052CC;
+        }
+
+        .badge-atom {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .badge-molecule {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .badge-organism {
+            background: #f3e5f5;
+            color: #6a1b9a;
+        }
+
+        .badge-active {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .section {
+            margin-top: 20px;
+        }
+
+        .section-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .dependency-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .dependency-item {
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        .dependency-title {
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 2px;
+        }
+
+        .dependency-desc {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .impact-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 600;
+            margin-left: 6px;
+        }
+
+        .impact-high {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .impact-normal {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .impact-low {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .empty-state-text {
+            font-size: 14px;
+        }
+
+        /* Legend */
+        .legend {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .legend-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .legend-items {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 0 1px #e0e0e0;
+        }
+
+        .legend-color.sop {
+            background: #0052CC;
+        }
+
+        .legend-color.atom {
+            background: #4caf50;
+        }
+
+        .legend-color.molecule {
+            background: #ff9800;
+        }
+
+        .legend-color.organism {
+            background: #9c27b0;
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .stat-box {
+            padding: 12px;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0052CC;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #666;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-lockup">
+            <img src="assets/branding/pursuit-logo-primary.svg" alt="Pursuit Bank" class="logo">
+            <div class="wordmark">Pursuit</div>
+        </div>
+        <nav class="nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="sops.html" class="nav-link">SOPs</a>
+            <a href="contribute.html" class="nav-link">Contribute</a>
+            <a href="docs.html" class="nav-link">Documentation</a>
+        </nav>
+    </header>
+
+    <!-- Graph Wrapper -->
+    <div class="graph-wrapper">
+        <!-- Cytoscape Graph -->
+        <div id="cy"></div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Dependency Graph</h2>
+                <p>Interactive SOP visualization</p>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls">
+                <div class="control-group">
+                    <label class="control-label">Layout</label>
+                    <div class="control-buttons">
+                        <button class="control-btn active" data-layout="cose">Organic</button>
+                        <button class="control-btn" data-layout="breadthfirst">Hierarchical</button>
+                        <button class="control-btn" data-layout="circle">Circle</button>
+                        <button class="control-btn" data-layout="grid">Grid</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Filter by Type</label>
+                    <div class="control-buttons">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="sop">SOPs</button>
+                        <button class="filter-btn" data-filter="atom">Atoms</button>
+                        <button class="filter-btn" data-filter="molecule">Molecules</button>
+                        <button class="filter-btn" data-filter="organism">Organisms</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar Content -->
+            <div class="sidebar-content">
+                <!-- Stats -->
+                <div class="stats">
+                    <div class="stat-box">
+                        <div class="stat-value" id="stat-nodes">0</div>
+                        <div class="stat-label">NODES</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="stat-edges">0</div>
+                        <div class="stat-label">EDGES</div>
+                    </div>
+                </div>
+
+                <!-- Legend -->
+                <div class="legend">
+                    <div class="legend-title">NODE TYPES</div>
+                    <div class="legend-items">
+                        <div class="legend-item">
+                            <div class="legend-color sop"></div>
+                            <span>SOP - Standard Operating Procedure</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color atom"></div>
+                            <span>Atom - Basic Component</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color molecule"></div>
+                            <span>Molecule - Combined Components</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color organism"></div>
+                            <span>Organism - Complex Workflow</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Empty State -->
+                <div class="empty-state" id="empty-state">
+                    <div class="empty-state-icon">👆</div>
+                    <div class="empty-state-text">Click on a node to see details</div>
+                </div>
+
+                <!-- Node Details -->
+                <div class="node-details" id="node-details">
+                    <div class="node-title" id="detail-title"></div>
+                    <div class="node-meta" id="detail-meta"></div>
+
+                    <div class="section" id="dependencies-section" style="display: none;">
+                        <div class="section-title">Dependencies</div>
+                        <div class="dependency-list" id="dependencies-list"></div>
+                    </div>
+
+                    <div class="section" id="dependents-section" style="display: none;">
+                        <div class="section-title">Dependent SOPs</div>
+                        <div class="dependency-list" id="dependents-list"></div>
+                    </div>
+
+                    <div class="section" id="components-section" style="display: none;">
+                        <div class="section-title">Components</div>
+                        <div class="dependency-list" id="components-list"></div>
+                    </div>
+
+                    <div class="section" id="impact-section">
+                        <div class="section-title">Impact Analysis</div>
+                        <div id="impact-analysis"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let cy;
+        let graphData;
+        let currentFilter = 'all';
+
+        // Fetch graph data
+        fetch('../graph/sop-graph.json')
+            .then(response => response.json())
+            .then(data => {
+                graphData = data;
+                initializeGraph(data);
+            })
+            .catch(error => {
+                console.error('Error loading graph data:', error);
+            });
+
+        function initializeGraph(data) {
+            // Convert graph data to Cytoscape format
+            const elements = [];
+
+            // Add nodes
+            Object.values(data.nodes).forEach(node => {
+                elements.push({
+                    data: {
+                        id: node.id,
+                        label: node.title,
+                        type: node.type,
+                        ...node
+                    }
+                });
+            });
+
+            // Add edges
+            data.edges.forEach(edge => {
+                elements.push({
+                    data: {
+                        id: edge.id,
+                        source: edge.source,
+                        target: edge.target,
+                        type: edge.type,
+                        description: edge.description,
+                        strength: edge.strength
+                    }
+                });
+            });
+
+            // Color mapping for node types
+            const colorMap = {
+                'sop': '#0052CC',
+                'atom': '#4caf50',
+                'molecule': '#ff9800',
+                'organism': '#9c27b0'
+            };
+
+            // Initialize Cytoscape
+            cy = cytoscape({
+                container: document.getElementById('cy'),
+                elements: elements,
+                style: [
+                    {
+                        selector: 'node',
+                        style: {
+                            'background-color': function(ele) {
+                                return colorMap[ele.data('type')] || '#999';
+                            },
+                            'label': 'data(label)',
+                            'color': '#fff',
+                            'text-valign': 'center',
+                            'text-halign': 'center',
+                            'font-size': '12px',
+                            'font-weight': '600',
+                            'width': function(ele) {
+                                return ele.data('type') === 'sop' ? 60 : 40;
+                            },
+                            'height': function(ele) {
+                                return ele.data('type') === 'sop' ? 60 : 40;
+                            },
+                            'text-wrap': 'wrap',
+                            'text-max-width': '80px',
+                            'border-width': 3,
+                            'border-color': '#fff',
+                            'box-shadow': '0 4px 8px rgba(0,0,0,0.1)'
+                        }
+                    },
+                    {
+                        selector: 'node:selected',
+                        style: {
+                            'border-color': '#FFD700',
+                            'border-width': 4
+                        }
+                    },
+                    {
+                        selector: 'edge',
+                        style: {
+                            'width': function(ele) {
+                                const strength = ele.data('strength');
+                                if (strength === 'strong') return 3;
+                                if (strength === 'normal') return 2;
+                                return 1;
+                            },
+                            'line-color': function(ele) {
+                                const type = ele.data('type');
+                                if (type === 'depends-on') return '#e53935';
+                                if (type === 'component-of') return '#43a047';
+                                return '#999';
+                            },
+                            'target-arrow-color': function(ele) {
+                                const type = ele.data('type');
+                                if (type === 'depends-on') return '#e53935';
+                                if (type === 'component-of') return '#43a047';
+                                return '#999';
+                            },
+                            'target-arrow-shape': 'triangle',
+                            'curve-style': 'bezier',
+                            'opacity': 0.7
+                        }
+                    },
+                    {
+                        selector: 'edge:selected',
+                        style: {
+                            'line-color': '#FFD700',
+                            'target-arrow-color': '#FFD700',
+                            'opacity': 1
+                        }
+                    },
+                    {
+                        selector: '.highlighted',
+                        style: {
+                            'border-color': '#FFD700',
+                            'border-width': 4
+                        }
+                    },
+                    {
+                        selector: '.dimmed',
+                        style: {
+                            'opacity': 0.3
+                        }
+                    }
+                ],
+                layout: {
+                    name: 'cose',
+                    idealEdgeLength: 100,
+                    nodeOverlap: 20,
+                    refresh: 20,
+                    fit: true,
+                    padding: 30,
+                    randomize: false,
+                    componentSpacing: 100,
+                    nodeRepulsion: 400000,
+                    edgeElasticity: 100,
+                    nestingFactor: 5,
+                    gravity: 80,
+                    numIter: 1000,
+                    initialTemp: 200,
+                    coolingFactor: 0.95,
+                    minTemp: 1.0
+                }
+            });
+
+            // Update stats
+            updateStats();
+
+            // Node click handler
+            cy.on('tap', 'node', function(evt) {
+                const node = evt.target;
+                showNodeDetails(node);
+                highlightConnections(node);
+            });
+
+            // Background click handler
+            cy.on('tap', function(evt) {
+                if (evt.target === cy) {
+                    hideNodeDetails();
+                    clearHighlights();
+                }
+            });
+        }
+
+        function updateStats() {
+            const nodeCount = cy.nodes().length;
+            const edgeCount = cy.edges().length;
+            document.getElementById('stat-nodes').textContent = nodeCount;
+            document.getElementById('stat-edges').textContent = edgeCount;
+        }
+
+        function showNodeDetails(node) {
+            const data = node.data();
+
+            // Hide empty state
+            document.getElementById('empty-state').style.display = 'none';
+
+            // Show details
+            const detailsEl = document.getElementById('node-details');
+            detailsEl.classList.add('visible');
+
+            // Title
+            document.getElementById('detail-title').textContent = data.title || data.label;
+
+            // Meta information
+            const metaEl = document.getElementById('detail-meta');
+            let metaHTML = '';
+
+            metaHTML += `<div class="meta-item"><span class="meta-label">Type:</span><span class="badge badge-${data.type}">${data.type.toUpperCase()}</span></div>`;
+
+            if (data.version) {
+                metaHTML += `<div class="meta-item"><span class="meta-label">Version:</span><span class="meta-value">${data.version}</span></div>`;
+            }
+
+            if (data.status) {
+                metaHTML += `<div class="meta-item"><span class="meta-label">Status:</span><span class="badge badge-${data.status}">${data.status}</span></div>`;
+            }
+
+            if (data.owner) {
+                metaHTML += `<div class="meta-item"><span class="meta-label">Owner:</span><span class="meta-value">${data.owner}</span></div>`;
+            }
+
+            metaEl.innerHTML = metaHTML;
+
+            // Dependencies (incoming edges with type 'depends-on')
+            const dependencies = cy.edges(`[target = "${data.id}"][type = "depends-on"]`);
+            const depsSection = document.getElementById('dependencies-section');
+            const depsList = document.getElementById('dependencies-list');
+
+            if (dependencies.length > 0) {
+                depsSection.style.display = 'block';
+                let depsHTML = '';
+                dependencies.forEach(edge => {
+                    const sourceNode = edge.source();
+                    const strength = edge.data('strength') || 'normal';
+                    const impactClass = strength === 'strong' ? 'impact-high' : (strength === 'normal' ? 'impact-normal' : 'impact-low');
+
+                    depsHTML += `
+                        <div class="dependency-item">
+                            <div class="dependency-title">
+                                ${sourceNode.data('title')}
+                                <span class="impact-badge ${impactClass}">${strength}</span>
+                            </div>
+                            <div class="dependency-desc">${edge.data('description')}</div>
+                        </div>
+                    `;
+                });
+                depsList.innerHTML = depsHTML;
+            } else {
+                depsSection.style.display = 'none';
+            }
+
+            // Dependents (outgoing edges with type 'depends-on')
+            const dependents = cy.edges(`[source = "${data.id}"][type = "depends-on"]`);
+            const depsentsSection = document.getElementById('dependents-section');
+            const depsentsList = document.getElementById('dependents-list');
+
+            if (dependents.length > 0) {
+                depsentsSection.style.display = 'block';
+                let depsentsHTML = '';
+                dependents.forEach(edge => {
+                    const targetNode = edge.target();
+                    const strength = edge.data('strength') || 'normal';
+                    const impactClass = strength === 'strong' ? 'impact-high' : (strength === 'normal' ? 'impact-normal' : 'impact-low');
+
+                    depsentsHTML += `
+                        <div class="dependency-item">
+                            <div class="dependency-title">
+                                ${targetNode.data('title')}
+                                <span class="impact-badge ${impactClass}">${strength}</span>
+                            </div>
+                            <div class="dependency-desc">${edge.data('description')}</div>
+                        </div>
+                    `;
+                });
+                depsentsList.innerHTML = depsentsHTML;
+            } else {
+                depsentsSection.style.display = 'none';
+            }
+
+            // Components (for organisms and molecules)
+            if (data.components && data.components.length > 0) {
+                const componentsSection = document.getElementById('components-section');
+                const componentsList = document.getElementById('components-list');
+                componentsSection.style.display = 'block';
+
+                let componentsHTML = '';
+                data.components.forEach(componentId => {
+                    const componentNode = cy.getElementById(componentId);
+                    if (componentNode.length > 0) {
+                        componentsHTML += `
+                            <div class="dependency-item">
+                                <div class="dependency-title">${componentNode.data('title')}</div>
+                                <div class="dependency-desc">Type: ${componentNode.data('type')}</div>
+                            </div>
+                        `;
+                    }
+                });
+                componentsList.innerHTML = componentsHTML;
+            } else {
+                document.getElementById('components-section').style.display = 'none';
+            }
+
+            // Impact Analysis
+            const impactEl = document.getElementById('impact-analysis');
+            const allDependents = node.successors('node');
+            const impactCount = allDependents.length;
+
+            let impactHTML = `
+                <div class="dependency-item">
+                    <div class="dependency-title">Impact Scope: ${impactCount} nodes</div>
+                    <div class="dependency-desc">
+                        Changing this ${data.type} will affect ${impactCount} connected component${impactCount !== 1 ? 's' : ''}.
+                    </div>
+                </div>
+            `;
+            impactEl.innerHTML = impactHTML;
+        }
+
+        function hideNodeDetails() {
+            document.getElementById('empty-state').style.display = 'block';
+            document.getElementById('node-details').classList.remove('visible');
+        }
+
+        function highlightConnections(node) {
+            // Dim all nodes and edges
+            cy.elements().addClass('dimmed');
+
+            // Highlight selected node
+            node.removeClass('dimmed');
+            node.addClass('highlighted');
+
+            // Highlight connected nodes and edges
+            const connectedEdges = node.connectedEdges();
+            const connectedNodes = node.neighborhood('node');
+
+            connectedEdges.removeClass('dimmed');
+            connectedNodes.removeClass('dimmed');
+        }
+
+        function clearHighlights() {
+            cy.elements().removeClass('dimmed highlighted');
+        }
+
+        // Layout controls
+        document.querySelectorAll('[data-layout]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Update active state
+                document.querySelectorAll('[data-layout]').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                // Apply layout
+                const layoutName = this.getAttribute('data-layout');
+                const layout = cy.layout({
+                    name: layoutName,
+                    fit: true,
+                    padding: 30,
+                    animate: true,
+                    animationDuration: 500
+                });
+                layout.run();
+            });
+        });
+
+        // Filter controls
+        document.querySelectorAll('[data-filter]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Update active state
+                document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                // Apply filter
+                const filterType = this.getAttribute('data-filter');
+                currentFilter = filterType;
+
+                if (filterType === 'all') {
+                    cy.nodes().style('display', 'element');
+                    cy.edges().style('display', 'element');
+                } else {
+                    // Hide all nodes first
+                    cy.nodes().style('display', 'none');
+
+                    // Show nodes of selected type
+                    cy.nodes(`[type = "${filterType}"]`).style('display', 'element');
+
+                    // Show edges between visible nodes
+                    cy.edges().forEach(edge => {
+                        const source = edge.source();
+                        const target = edge.target();
+                        if (source.style('display') === 'element' && target.style('display') === 'element') {
+                            edge.style('display', 'element');
+                        } else {
+                            edge.style('display', 'none');
+                        }
+                    });
+                }
+
+                // Update stats
+                const visibleNodes = cy.nodes('[style = "display: element"]').length || cy.nodes().length;
+                const visibleEdges = cy.edges('[style = "display: element"]').length || cy.edges().length;
+                document.getElementById('stat-nodes').textContent = visibleNodes;
+                document.getElementById('stat-edges').textContent = visibleEdges;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -476,6 +476,7 @@ function startServer(port) {
     log(`📚 Browse SOPs:   http://localhost:${port}/public/sops.html`, 'green');
     log(`➕ Contribute:    http://localhost:${port}/public/contribute.html`, 'green');
     log(`🔍 Search:        http://localhost:${port}/public/search.html`, 'green');
+    log(`🕸️  Graph Viewer:  http://localhost:${port}/public/graph.html`, 'green');
     log(`📖 Documentation: http://localhost:${port}/public/docs.html\n`, 'green');
 
     log('🔌 API Endpoints:', 'blue');
