@@ -3,7 +3,9 @@
 
 # Organizations and Agencies
 Fannie
+FNMA
 Freddie
+FHLMC
 TRID
 RESPA
 TILA
@@ -11,6 +13,9 @@ CFPB
 HUD
 OFAC
 USDA
+NACHA
+USPAP
+FIRREA
 
 # Mortgage Terms
 AUS
@@ -42,6 +47,8 @@ USDA
 conv
 refi
 refinance
+HELOC
+HELOCs
 
 # Documentation
 paystub
@@ -59,6 +66,11 @@ CAIVRS
 HECM
 APXM
 GLBA
+Gramm
+Leach
+Bliley
+PITIA
+Dodd
 WCAG
 CCMS
 markdownlintrc

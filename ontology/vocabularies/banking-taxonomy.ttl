@@ -1,0 +1,418 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix tax: <http://pursuit-bank.com/taxonomy#> .
+
+# ======================================================================
+# SKOS Vocabulary for Banking Taxonomy Management
+# Version: 1.0.0
+# Standard: W3C SKOS (Simple Knowledge Organization System)
+# Purpose: Controlled vocabularies for banking operations classification
+# ======================================================================
+
+tax:BankingTaxonomy a skos:ConceptScheme ;
+    dc:title "Pursuit Bank - Banking Operations Taxonomy" ;
+    dc:description "Controlled vocabulary for classifying banking operations, processes, and compliance requirements" ;
+    dcterms:created "2025-11-16"^^xsd:date ;
+    dcterms:modified "2025-11-16"^^xsd:date ;
+    skos:hasTopConcept tax:Operations, tax:Compliance, tax:Processes, tax:Roles .
+
+# ======================================================================
+# TOP CONCEPTS
+# ======================================================================
+
+tax:Operations a skos:Concept ;
+    skos:prefLabel "Operations"@en ;
+    skos:definition "Banking operations and transactions"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:topConceptOf tax:BankingTaxonomy ;
+    skos:narrower tax:Underwriting, tax:WireTransfers, tax:Closing, tax:Processing .
+
+tax:Compliance a skos:Concept ;
+    skos:prefLabel "Compliance"@en ;
+    skos:definition "Regulatory compliance frameworks and requirements"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:topConceptOf tax:BankingTaxonomy ;
+    skos:narrower tax:FederalRegulations, tax:StateRegulations, tax:IndustryStandards .
+
+tax:Processes a skos:Concept ;
+    skos:prefLabel "Processes"@en ;
+    skos:definition "Business processes and workflows"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:topConceptOf tax:BankingTaxonomy ;
+    skos:narrower tax:Sequential, tax:Parallel, tax:ConditionalProcesses .
+
+tax:Roles a skos:Concept ;
+    skos:prefLabel "Roles"@en ;
+    skos:definition "Organizational roles and responsibilities"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:topConceptOf tax:BankingTaxonomy ;
+    skos:narrower tax:OperationalRoles, tax:ManagementRoles, tax:ExecutiveRoles .
+
+# ======================================================================
+# OPERATIONS TAXONOMY
+# ======================================================================
+
+tax:Underwriting a skos:Concept ;
+    skos:prefLabel "Underwriting"@en ;
+    skos:altLabel "Credit Evaluation"@en ;
+    skos:definition "Process of evaluating loan applications and creditworthiness"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:Operations ;
+    skos:narrower tax:ManualUnderwriting, tax:AutomatedUnderwriting, tax:FHAUnderwriting, tax:ConventionalUnderwriting ;
+    skos:related tax:CreditAnalysis, tax:RiskAssessment .
+
+tax:ManualUnderwriting a skos:Concept ;
+    skos:prefLabel "Manual Underwriting"@en ;
+    skos:definition "Manual review and evaluation by underwriters"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:Underwriting ;
+    skos:scopeNote "Required for non-conforming loans or when AUS returns Refer decision"@en .
+
+tax:AutomatedUnderwriting a skos:Concept ;
+    skos:prefLabel "Automated Underwriting"@en ;
+    skos:altLabel "AUS"@en, "Automated Underwriting System"@en ;
+    skos:definition "Computer-based underwriting decision system"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:Underwriting ;
+    skos:narrower tax:DesktopUnderwriter, tax:LoanProspector ;
+    skos:scopeNote "Includes Desktop Underwriter (DU) and Loan Prospector (LP)"@en .
+
+tax:DesktopUnderwriter a skos:Concept ;
+    skos:prefLabel "Desktop Underwriter"@en ;
+    skos:altLabel "DU"@en ;
+    skos:definition "Fannie Mae's automated underwriting system"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:AutomatedUnderwriting ;
+    skos:related tax:FannieMaeGuidelines .
+
+tax:LoanProspector a skos:Concept ;
+    skos:prefLabel "Loan Prospector"@en ;
+    skos:altLabel "LP"@en ;
+    skos:definition "Freddie Mac's automated underwriting system"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:AutomatedUnderwriting ;
+    skos:related tax:FreddieMacGuidelines .
+
+tax:FHAUnderwriting a skos:Concept ;
+    skos:prefLabel "FHA Underwriting"@en ;
+    skos:definition "Underwriting according to FHA guidelines"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:Underwriting ;
+    skos:related tax:FHARegulations, tax:HUDRequirements .
+
+tax:ConventionalUnderwriting a skos:Concept ;
+    skos:prefLabel "Conventional Underwriting"@en ;
+    skos:definition "Underwriting for conventional (non-government) loans"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:Underwriting ;
+    skos:related tax:FannieMaeGuidelines, tax:FreddieMacGuidelines .
+
+tax:WireTransfers a skos:Concept ;
+    skos:prefLabel "Wire Transfers"@en ;
+    skos:altLabel "Electronic Fund Transfers"@en ;
+    skos:definition "Electronic transfer of funds between financial institutions"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:Operations ;
+    skos:narrower tax:DomesticWire, tax:InternationalWire ;
+    skos:related tax:FraudPrevention, tax:SOXCompliance .
+
+tax:DomesticWire a skos:Concept ;
+    skos:prefLabel "Domestic Wire Transfer"@en ;
+    skos:definition "Wire transfers within the United States"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:WireTransfers .
+
+tax:InternationalWire a skos:Concept ;
+    skos:prefLabel "International Wire Transfer"@en ;
+    skos:altLabel "SWIFT Transfer"@en ;
+    skos:definition "Wire transfers to foreign financial institutions"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:WireTransfers ;
+    skos:related tax:AMLCompliance, tax:OFACCompliance .
+
+tax:Closing a skos:Concept ;
+    skos:prefLabel "Closing Operations"@en ;
+    skos:altLabel "Settlement"@en ;
+    skos:definition "Final steps in mortgage transaction including documentation and fund disbursement"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:Operations ;
+    skos:narrower tax:ClearToClose, tax:Funding, tax:PostClosing ;
+    skos:related tax:TRIDCompliance, tax:RESPACompliance .
+
+tax:ClearToClose a skos:Concept ;
+    skos:prefLabel "Clear to Close"@en ;
+    skos:altLabel "CTC"@en ;
+    skos:definition "Final approval to proceed with loan closing"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:Closing ;
+    skos:scopeNote "Requires completion of quality checklist and all conditions"@en .
+
+tax:Funding a skos:Concept ;
+    skos:prefLabel "Funding"@en ;
+    skos:definition "Disbursement of loan funds to complete transaction"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:Closing .
+
+tax:PostClosing a skos:Concept ;
+    skos:prefLabel "Post-Closing"@en ;
+    skos:definition "Activities after loan closing including file audit and delivery"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:Closing ;
+    skos:narrower tax:FileAudit, tax:LoanDelivery .
+
+# ======================================================================
+# COMPLIANCE TAXONOMY
+# ======================================================================
+
+tax:FederalRegulations a skos:Concept ;
+    skos:prefLabel "Federal Regulations"@en ;
+    skos:definition "Federal regulatory requirements for banking operations"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:Compliance ;
+    skos:narrower tax:FHARegulations, tax:TRIDRegulations, tax:RESPARegulations, tax:TILARegulations, tax:SOXRegulations .
+
+tax:FHARegulations a skos:Concept ;
+    skos:prefLabel "FHA Regulations"@en ;
+    skos:altLabel "Federal Housing Administration Guidelines"@en ;
+    skos:definition "FHA lending and underwriting requirements"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:FederalRegulations ;
+    skos:related tax:HUDRequirements ;
+    skos:scopeNote "Governed by FHA Handbook 4000.1"@en ;
+    skos:notation "FHA-REG"^^xsd:string .
+
+tax:TRIDRegulations a skos:Concept ;
+    skos:prefLabel "TRID Regulations"@en ;
+    skos:altLabel "TILA-RESPA Integrated Disclosure"@en ;
+    skos:definition "Integrated disclosure requirements combining TILA and RESPA"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:FederalRegulations ;
+    skos:related tax:CFPBRequirements ;
+    skos:scopeNote "Effective October 3, 2015"@en ;
+    skos:notation "TRID"^^xsd:string .
+
+tax:RESPARegulations a skos:Concept ;
+    skos:prefLabel "RESPA Regulations"@en ;
+    skos:altLabel "Real Estate Settlement Procedures Act"@en ;
+    skos:definition "Real estate settlement and disclosure requirements"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:FederalRegulations ;
+    skos:related tax:CFPBRequirements ;
+    skos:notation "RESPA"^^xsd:string .
+
+tax:TILARegulations a skos:Concept ;
+    skos:prefLabel "TILA Regulations"@en ;
+    skos:altLabel "Truth in Lending Act"@en ;
+    skos:definition "Consumer credit disclosure requirements"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:FederalRegulations ;
+    skos:related tax:CFPBRequirements ;
+    skos:notation "TILA"^^xsd:string .
+
+tax:SOXRegulations a skos:Concept ;
+    skos:prefLabel "SOX Regulations"@en ;
+    skos:altLabel "Sarbanes-Oxley Act"@en ;
+    skos:definition "Financial reporting and internal controls requirements"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:FederalRegulations ;
+    skos:related tax:SECRequirements ;
+    skos:scopeNote "Applies to publicly traded companies and financial institutions"@en ;
+    skos:notation "SOX"^^xsd:string .
+
+tax:IndustryStandards a skos:Concept ;
+    skos:prefLabel "Industry Standards"@en ;
+    skos:definition "Industry-specific guidelines and best practices"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:Compliance ;
+    skos:narrower tax:FannieMaeGuidelines, tax:FreddieMacGuidelines, tax:QMStandards .
+
+tax:FannieMaeGuidelines a skos:Concept ;
+    skos:prefLabel "Fannie Mae Guidelines"@en ;
+    skos:altLabel "Fannie Mae Selling Guide"@en ;
+    skos:definition "Fannie Mae's conventional loan requirements and standards"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:IndustryStandards ;
+    skos:notation "FNMA"^^xsd:string .
+
+tax:FreddieMacGuidelines a skos:Concept ;
+    skos:prefLabel "Freddie Mac Guidelines"@en ;
+    skos:altLabel "Freddie Mac Seller/Servicer Guide"@en ;
+    skos:definition "Freddie Mac's conventional loan requirements and standards"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:IndustryStandards ;
+    skos:notation "FHLMC"^^xsd:string .
+
+tax:QMStandards a skos:Concept ;
+    skos:prefLabel "Qualified Mortgage Standards"@en ;
+    skos:altLabel "QM"@en ;
+    skos:definition "Standards for qualified mortgage loans under CFPB regulations"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:IndustryStandards ;
+    skos:related tax:CFPBRequirements .
+
+# ======================================================================
+# PROCESS TAXONOMY
+# ======================================================================
+
+tax:Sequential a skos:Concept ;
+    skos:prefLabel "Sequential Processes"@en ;
+    skos:definition "Processes that must be executed in order"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:Processes .
+
+tax:Parallel a skos:Concept ;
+    skos:prefLabel "Parallel Processes"@en ;
+    skos:definition "Processes that can be executed concurrently"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:Processes .
+
+tax:ConditionalProcesses a skos:Concept ;
+    skos:prefLabel "Conditional Processes"@en ;
+    skos:definition "Processes with decision points and conditional execution"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:Processes ;
+    skos:narrower tax:ApprovalWorkflow, tax:ExceptionHandling .
+
+tax:ApprovalWorkflow a skos:Concept ;
+    skos:prefLabel "Approval Workflow"@en ;
+    skos:definition "Multi-tier approval processes based on thresholds"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:ConditionalProcesses .
+
+tax:ExceptionHandling a skos:Concept ;
+    skos:prefLabel "Exception Handling"@en ;
+    skos:definition "Processes for handling exceptions and special cases"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:ConditionalProcesses .
+
+# ======================================================================
+# ROLE TAXONOMY
+# ======================================================================
+
+tax:OperationalRoles a skos:Concept ;
+    skos:prefLabel "Operational Roles"@en ;
+    skos:definition "Front-line operational positions"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:Roles ;
+    skos:narrower tax:LoanOfficer, tax:Processor, tax:Underwriter, tax:ClosingAgent .
+
+tax:LoanOfficer a skos:Concept ;
+    skos:prefLabel "Loan Officer"@en ;
+    skos:altLabel "LO"@en, "Originator"@en ;
+    skos:definition "Originates and submits loan applications"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:OperationalRoles .
+
+tax:Processor a skos:Concept ;
+    skos:prefLabel "Loan Processor"@en ;
+    skos:definition "Processes loan applications and orders verifications"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:OperationalRoles .
+
+tax:Underwriter a skos:Concept ;
+    skos:prefLabel "Underwriter"@en ;
+    skos:altLabel "UW"@en ;
+    skos:definition "Evaluates loan applications and makes credit decisions"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:OperationalRoles .
+
+tax:ClosingAgent a skos:Concept ;
+    skos:prefLabel "Closing Agent"@en ;
+    skos:altLabel "Closer"@en ;
+    skos:definition "Manages loan closing and settlement"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:OperationalRoles .
+
+tax:ManagementRoles a skos:Concept ;
+    skos:prefLabel "Management Roles"@en ;
+    skos:definition "Supervisory and management positions"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:Roles ;
+    skos:narrower tax:TeamLead, tax:Manager, tax:Director .
+
+tax:TeamLead a skos:Concept ;
+    skos:prefLabel "Team Lead"@en ;
+    skos:definition "Leads operational team"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:ManagementRoles .
+
+tax:Manager a skos:Concept ;
+    skos:prefLabel "Manager"@en ;
+    skos:definition "Departmental manager with approval authority"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:ManagementRoles .
+
+tax:Director a skos:Concept ;
+    skos:prefLabel "Director"@en ;
+    skos:definition "Senior director overseeing multiple departments"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:ManagementRoles .
+
+tax:ExecutiveRoles a skos:Concept ;
+    skos:prefLabel "Executive Roles"@en ;
+    skos:definition "C-level executive positions"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:Roles ;
+    skos:narrower tax:VicePresident, tax:CFO, tax:CEO .
+
+tax:VicePresident a skos:Concept ;
+    skos:prefLabel "Vice President"@en ;
+    skos:altLabel "VP"@en ;
+    skos:definition "Vice President with elevated approval authority"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:ExecutiveRoles .
+
+tax:CFO a skos:Concept ;
+    skos:prefLabel "Chief Financial Officer"@en ;
+    skos:altLabel "CFO"@en ;
+    skos:definition "Chief Financial Officer with highest financial approval authority"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:ExecutiveRoles .
+
+tax:CEO a skos:Concept ;
+    skos:prefLabel "Chief Executive Officer"@en ;
+    skos:altLabel "CEO"@en ;
+    skos:definition "Chief Executive Officer"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:broader tax:ExecutiveRoles .
+
+# ======================================================================
+# COLLECTION: APPROVAL THRESHOLDS
+# ======================================================================
+
+tax:ApprovalThresholds a skos:Collection ;
+    skos:prefLabel "Approval Thresholds"@en ;
+    skos:definition "Collection of monetary thresholds for approvals"@en ;
+    skos:member tax:Tier1Approval, tax:Tier2Approval, tax:Tier3Approval, tax:Tier4Approval .
+
+tax:Tier1Approval a skos:Concept ;
+    skos:prefLabel "Tier 1 Approval ($0-15K)"@en ;
+    skos:definition "Single closing agent approval for transactions up to $15,000"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:notation "T1"^^xsd:string .
+
+tax:Tier2Approval a skos:Concept ;
+    skos:prefLabel "Tier 2 Approval ($15K-100K)"@en ;
+    skos:definition "Closing agent + manager approval for transactions $15K-$100K"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:notation "T2"^^xsd:string .
+
+tax:Tier3Approval a skos:Concept ;
+    skos:prefLabel "Tier 3 Approval ($100K-500K)"@en ;
+    skos:definition "Closing agent + manager + VP approval for transactions $100K-$500K"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:notation "T3"^^xsd:string .
+
+tax:Tier4Approval a skos:Concept ;
+    skos:prefLabel "Tier 4 Approval ($500K+)"@en ;
+    skos:definition "2 VPs + CFO approval for transactions over $500K"@en ;
+    skos:inScheme tax:BankingTaxonomy ;
+    skos:notation "T4"^^xsd:string .
+
+# ======================================================================
+# END OF TAXONOMY
+# ======================================================================

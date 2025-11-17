@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semantic Search - Pursuit Bank SOP Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            color: #1a1a1a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .logo-lockup {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+        }
+
+        .wordmark {
+            font-size: 24px;
+            font-weight: 600;
+            color: #0052CC;
+        }
+
+        .nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #0052CC;
+        }
+
+        .nav-link.active {
+            color: #0052CC;
+            font-weight: 600;
+        }
+
+        /* Search Hero */
+        .search-hero {
+            background: linear-gradient(135deg, #0052CC 0%, #003d99 100%);
+            color: white;
+            padding: 80px 40px 60px;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .search-hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.1;
+        }
+
+        .search-hero p {
+            font-size: 18px;
+            font-weight: 400;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        /* Main Search Bar */
+        .main-search-container {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+
+        .main-search-input {
+            width: 100%;
+            padding: 24px 60px 24px 24px;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+
+        .main-search-input:focus {
+            outline: none;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #0052CC;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            background: #003d99;
+        }
+
+        /* Example Queries */
+        .examples {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .examples-label {
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0.8;
+            margin-bottom: 12px;
+        }
+
+        .example-chips {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .example-chip {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .example-chip:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+        }
+
+        /* Results Container */
+        .results-container {
+            max-width: 1200px;
+            margin: -40px auto 0;
+            padding: 0 40px 80px;
+            display: none;
+        }
+
+        .results-container.show {
+            display: block;
+        }
+
+        /* Results Header */
+        .results-header {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 8px 8px 0 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .results-query {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .results-query strong {
+            color: #1a1a1a;
+        }
+
+        .results-stats {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Result Card */
+        .result-card {
+            background: white;
+            padding: 30px;
+            border-bottom: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .result-card:hover {
+            background: #f8f9fa;
+            padding-left: 35px;
+        }
+
+        .result-card:last-child {
+            border-bottom: none;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .result-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .result-icon {
+            width: 32px;
+            height: 32px;
+            opacity: 0.7;
+        }
+
+        .result-type {
+            font-size: 12px;
+            font-weight: 600;
+            color: #0052CC;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .result-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #0052CC;
+            margin-bottom: 10px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .result-title:hover {
+            text-decoration: underline;
+        }
+
+        .result-excerpt {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .result-excerpt mark {
+            background: #fff3cd;
+            color: #1a1a1a;
+            padding: 2px 4px;
+            border-radius: 2px;
+            font-weight: 500;
+        }
+
+        .result-meta {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .meta-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .relevance-score {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1a7857;
+        }
+
+        .score-bar {
+            width: 60px;
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .score-fill {
+            height: 100%;
+            background: #1a7857;
+            border-radius: 3px;
+        }
+
+        /* Features */
+        .features-section {
+            background: white;
+            padding: 60px 40px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-header h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 20px;
+        }
+
+        .feature-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .feature-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .footer p {
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            display: none;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e0e0e0;
+            border-top-color: #0052CC;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-lockup">
+            <img src="assets/branding/pursuit-logo-primary.svg" alt="Pursuit Bank" class="logo">
+            <div class="wordmark">Pursuit</div>
+        </div>
+        <nav class="nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="sops.html" class="nav-link">SOPs</a>
+            <a href="contribute.html" class="nav-link">Contribute</a>
+            <a href="docs.html" class="nav-link">Documentation</a>
+        </nav>
+    </header>
+
+    <!-- Search Hero -->
+    <section class="search-hero">
+        <h1>AI-Powered Semantic Search</h1>
+        <p>Ask questions in natural language. Our AI understands context, relationships, and compliance requirements to find exactly what you need.</p>
+
+        <div class="main-search-container">
+            <input
+                type="text"
+                class="main-search-input"
+                id="mainSearchInput"
+                placeholder="Ask a question or search for procedures..."
+            >
+            <button class="search-btn" id="searchBtn">Search</button>
+        </div>
+
+        <div class="examples">
+            <div class="examples-label">Try asking:</div>
+            <div class="example-chips">
+                <span class="example-chip" data-query="What are the FHA credit score requirements?">What are the FHA credit score requirements?</span>
+                <span class="example-chip" data-query="How do I process a clear to close?">How do I process a clear to close?</span>
+                <span class="example-chip" data-query="AML suspicious activity reporting">AML suspicious activity reporting</span>
+                <span class="example-chip" data-query="Employee onboarding checklist">Employee onboarding checklist</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Container -->
+    <div class="results-container" id="resultsContainer">
+        <div class="results-header">
+            <div class="results-query">Results for: <strong id="searchQueryText"></strong></div>
+            <div class="results-stats" id="resultsStats">Found 4 relevant results in 0.3 seconds</div>
+        </div>
+
+        <div id="resultsContent">
+            <!-- Example results (populated by JavaScript in production) -->
+            <div class="result-card" onclick="window.location='../sops/mortgage/sop-mf-002-fha-underwriting.md'">
+                <div class="result-header">
+                    <img src="icons/document.svg" alt="SOP" class="result-icon">
+                    <span class="result-type">Standard Operating Procedure</span>
+                </div>
+                <a href="../sops/mortgage/sop-mf-002-fha-underwriting.md" class="result-title">
+                    FHA Underwriting Process (SOP-MF-002)
+                </a>
+                <p class="result-excerpt">
+                    FHA loans require a minimum <mark>credit score</mark> of 580 for borrowers seeking maximum financing. Borrowers with credit scores between 500-579 may qualify with a higher down payment...
+                </p>
+                <div class="result-meta">
+                    <div class="relevance-score">
+                        95% Relevant
+                        <div class="score-bar">
+                            <div class="score-fill" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <span class="meta-badge">Category: Mortgage Finance</span>
+                    <span class="meta-badge">Version: 1.2.0</span>
+                </div>
+            </div>
+
+            <div class="result-card" onclick="window.location='../sop-components/atoms/fha-requirements.md'">
+                <div class="result-header">
+                    <img src="icons/plus.svg" alt="Component" class="result-icon">
+                    <span class="result-type">Reusable Component</span>
+                </div>
+                <a href="../sop-components/atoms/fha-requirements.md" class="result-title">
+                    FHA Loan Requirements
+                </a>
+                <p class="result-excerpt">
+                    Detailed breakdown of <mark>FHA requirements</mark> including credit score thresholds, debt-to-income ratios, property standards, and appraisal criteria...
+                </p>
+                <div class="result-meta">
+                    <div class="relevance-score">
+                        88% Relevant
+                        <div class="score-bar">
+                            <div class="score-fill" style="width: 88%"></div>
+                        </div>
+                    </div>
+                    <span class="meta-badge">Type: Atom Component</span>
+                    <span class="meta-badge">Used in 3 SOPs</span>
+                </div>
+            </div>
+
+            <div class="result-card" onclick="window.location='../docs/SEMANTIC-ONTOLOGY-GOVERNANCE-FEATURES.md'">
+                <div class="result-header">
+                    <img src="icons/document.svg" alt="Documentation" class="result-icon">
+                    <span class="result-type">Documentation</span>
+                </div>
+                <a href="../docs/SEMANTIC-ONTOLOGY-GOVERNANCE-FEATURES.md" class="result-title">
+                    Semantic Ontology & Governance Features
+                </a>
+                <p class="result-excerpt">
+                    The semantic ontology maps relationships between SOPs, compliance frameworks, and processes. <mark>Credit score</mark> requirements are defined as OWL restrictions in the banking operations ontology...
+                </p>
+                <div class="result-meta">
+                    <div class="relevance-score">
+                        72% Relevant
+                        <div class="score-bar">
+                            <div class="score-fill" style="width: 72%"></div>
+                        </div>
+                    </div>
+                    <span class="meta-badge">Type: Technical Documentation</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="loading" id="loadingIndicator">
+            <div class="spinner"></div>
+            <p>Searching knowledge base...</p>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>How Semantic Search Works</h2>
+                <p>Advanced AI technology that understands your intent, not just keywords</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <img src="icons/growth.svg" alt="Ontology" class="feature-icon">
+                    <h3 class="feature-title">Semantic Understanding</h3>
+                    <p class="feature-description">
+                        Uses OWL/RDF ontology to understand relationships between concepts, processes, and regulations. Finds relevant content even if it uses different terminology.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <img src="icons/search.svg" alt="Context" class="feature-icon">
+                    <h3 class="feature-title">Context-Aware Results</h3>
+                    <p class="feature-description">
+                        Analyzes your query context to determine if you need procedures, compliance requirements, or definitions. Returns the most relevant content type.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <img src="icons/check.svg" alt="Compliance" class="feature-icon">
+                    <h3 class="feature-title">Compliance Mapping</h3>
+                    <p class="feature-description">
+                        Automatically identifies related regulatory frameworks and compliance requirements. See which regulations apply to each procedure.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Pursuit Bank. SOP Management System v1.0.0</p>
+        <p style="margin-top: 10px;">Powered by semantic ontology, modular components, and intelligent governance</p>
+    </footer>
+
+    <script>
+        const searchInput = document.getElementById('mainSearchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const searchQueryText = document.getElementById('searchQueryText');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const resultsContent = document.getElementById('resultsContent');
+
+        // Example chips
+        document.querySelectorAll('.example-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                const query = chip.getAttribute('data-query');
+                searchInput.value = query;
+                performSearch(query);
+            });
+        });
+
+        // Search button
+        searchBtn.addEventListener('click', () => {
+            const query = searchInput.value.trim();
+            if (query) {
+                performSearch(query);
+            }
+        });
+
+        // Enter key
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const query = searchInput.value.trim();
+                if (query) {
+                    performSearch(query);
+                }
+            }
+        });
+
+        function performSearch(query) {
+            // Update UI
+            searchQueryText.textContent = query;
+            resultsContainer.classList.add('show');
+
+            // Smooth scroll to results
+            setTimeout(() => {
+                resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+
+            // In production, this would make an API call to the semantic search backend
+            // For now, we show the example results with a loading indicator
+
+            resultsContent.style.display = 'none';
+            loadingIndicator.classList.add('show');
+
+            setTimeout(() => {
+                loadingIndicator.classList.remove('show');
+                resultsContent.style.display = 'block';
+            }, 800);
+        }
+    </script>
+</body>
+</html>

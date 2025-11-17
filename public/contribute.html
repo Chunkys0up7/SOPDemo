@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contribute - Pursuit Bank SOP Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            color: #1a1a1a;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .logo-lockup {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+        }
+
+        .wordmark {
+            font-size: 24px;
+            font-weight: 600;
+            color: #0052CC;
+        }
+
+        .nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #0052CC;
+        }
+
+        .nav-link.active {
+            color: #0052CC;
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0052CC 0%, #003d99 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 18px;
+            font-weight: 400;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: white;
+            border-left: 4px solid #0052CC;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .info-box h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0052CC;
+            margin-bottom: 12px;
+        }
+
+        .info-box p {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Form Section */
+        .form-section {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .form-section h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .form-section p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .form-hint {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: #0052CC;
+        }
+
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-textarea.large {
+            min-height: 300px;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: #0052CC;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #003d99;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 82, 204, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #0052CC;
+            border: 2px solid #0052CC;
+        }
+
+        .btn-secondary:hover {
+            background: #f0f4ff;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        /* Magic Badge */
+        .magic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        /* Example */
+        .example-box {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        .example-box strong {
+            font-size: 13px;
+            color: #0052CC;
+        }
+
+        .example-box p {
+            font-size: 13px;
+            color: #666;
+            margin-top: 5px;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px;
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .footer p {
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        /* Steps */
+        .steps {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .step-number {
+            width: 36px;
+            height: 36px;
+            background: #0052CC;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .step-text {
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+        }
+
+        .step-arrow {
+            color: #e0e0e0;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-lockup">
+            <img src="assets/branding/pursuit-logo-primary.svg" alt="Pursuit Bank" class="logo">
+            <div class="wordmark">Pursuit</div>
+        </div>
+        <nav class="nav">
+            <a href="index.html" class="nav-link">Dashboard</a>
+            <a href="workspace.html" class="nav-link">Workspace</a>
+            <a href="graph.html" class="nav-link">Graph</a>
+            <a href="contribute.html" class="nav-link active">Contribute</a>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Contribute a Procedure</h1>
+        <p>Just write your procedure in plain language. Our AI will handle all the technical details, metadata, and compliance tagging for you.</p>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Info Box -->
+        <div class="info-box">
+            <h3>✨ AI-Powered Documentation</h3>
+            <p>
+                Don't worry about metadata, YAML, or technical formatting. Simply describe your procedure in your own words, and our AI will automatically:
+                generate all required metadata, identify relevant compliance frameworks, create semantic tags for search, format everything correctly, and validate all links and references.
+            </p>
+        </div>
+
+        <!-- Simple Steps -->
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-text">Write</div>
+            </div>
+            <div class="step-arrow">→</div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-text">AI Generates</div>
+            </div>
+            <div class="step-arrow">→</div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-text">Review & Submit</div>
+            </div>
+        </div>
+
+        <!-- Contribution Form -->
+        <form id="contributionForm" class="form-section">
+            <h2>Tell Us About Your Procedure</h2>
+            <p>Fill out this simple form and we'll take care of the rest</p>
+
+            <!-- Basic Info -->
+            <div class="form-group">
+                <label class="form-label" for="title">What is this procedure about?</label>
+                <p class="form-hint">Give it a clear, descriptive title</p>
+                <input type="text" id="title" class="form-input" placeholder="e.g., How to Process a Wire Transfer" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="department">Which department does this belong to?</label>
+                <select id="department" class="form-select" required>
+                    <option value="">Select a department...</option>
+                    <option value="mortgage">Mortgage Finance</option>
+                    <option value="compliance">Compliance</option>
+                    <option value="operations">Operations</option>
+                    <option value="hr">Human Resources</option>
+                    <option value="it">IT & Technology</option>
+                    <option value="customer-service">Customer Service</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="purpose">Why does this procedure exist?</label>
+                <p class="form-hint">Explain the goal or problem this solves</p>
+                <textarea id="purpose" class="form-textarea" placeholder="e.g., This procedure ensures wire transfers are processed securely and comply with fraud prevention requirements..." required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="procedure">
+                    Write out the steps
+                    <span class="magic-badge">✨ AI will enhance this</span>
+                </label>
+                <p class="form-hint">Just write the steps in plain language. You can use simple numbered lists or paragraphs. Our AI will format it properly and add all technical details.</p>
+                <textarea id="procedure" class="form-textarea large" placeholder="1. Review the wire transfer request form&#10;2. Verify the amount and recipient details&#10;3. Check that proper approvals are in place&#10;4. Submit to the wire transfer system&#10;5. Confirm with the customer&#10;&#10;Write as much detail as you'd like - the AI will organize it!" required></textarea>
+
+                <div class="example-box">
+                    <strong>Example of what you might write:</strong>
+                    <p>"First, open the customer's file and check their account status. Then verify the loan amount doesn't exceed their pre-approval. Call the underwriter if you have questions. Finally, submit the file for review."</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="who">Who needs to follow this procedure?</label>
+                <p class="form-hint">Which roles or job titles use this?</p>
+                <input type="text" id="who" class="form-input" placeholder="e.g., Loan Officers, Closers, Operations Managers" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="notes">Anything else we should know?</label>
+                <p class="form-hint">Special cases, exceptions, or additional context (optional)</p>
+                <textarea id="notes" class="form-textarea" placeholder="e.g., For amounts over $100K, two approvals are required..."></textarea>
+            </div>
+
+            <!-- Submit Buttons -->
+            <div class="btn-group">
+                <button type="submit" class="btn btn-primary">
+                    ✨ Generate SOP with AI
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 2l6 6-6 6-1.5-1.5L10.2 9H2V7h8.2L6.5 3.5 8 2z"/>
+                    </svg>
+                </button>
+                <button type="button" class="btn btn-secondary" onclick="document.getElementById('contributionForm').reset()">
+                    Clear Form
+                </button>
+            </div>
+        </form>
+
+        <!-- What Happens Next -->
+        <div class="info-box">
+            <h3>What Happens After You Submit?</h3>
+            <p>
+                <strong>1. AI Processing (instant):</strong> Our AI analyzes your content and automatically generates all metadata, compliance tags, semantic labels, and proper formatting.<br><br>
+                <strong>2. Preview & Edit (you review):</strong> You'll see a formatted preview and can make any changes you'd like.<br><br>
+                <strong>3. Approval Workflow (automatic routing):</strong> The system routes it to the right approvers based on your department and content.<br><br>
+                <strong>4. Publication (once approved):</strong> Your procedure goes live and becomes searchable for everyone.
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Pursuit Bank. SOP Management System v1.0.0</p>
+        <p style="margin-top: 10px;">Powered by AI-assisted documentation and intelligent governance</p>
+    </footer>
+
+    <script>
+        document.getElementById('contributionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Collect form data
+            const formData = {
+                title: document.getElementById('title').value,
+                department: document.getElementById('department').value,
+                purpose: document.getElementById('purpose').value,
+                procedure: document.getElementById('procedure').value,
+                who: document.getElementById('who').value,
+                notes: document.getElementById('notes').value
+            };
+
+            // In production, this would send to an API endpoint that:
+            // 1. Uses LLM to generate metadata, compliance tags, semantic labels
+            // 2. Formats the content properly
+            // 3. Creates the SOP with all technical details
+            // 4. Returns a preview for user review
+
+            // For now, show a success message
+            alert('✨ Great! Your procedure is being processed by AI.\n\nIn production, this would:\n• Generate all metadata automatically\n• Identify compliance requirements\n• Create semantic tags\n• Format everything properly\n• Show you a preview to review\n\nYou would just write the content - AI handles the rest!');
+        });
+    </script>
+</body>
+</html>
