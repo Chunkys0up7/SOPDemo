@@ -21,7 +21,6 @@ This comprehensive workflow covers all HR-related onboarding activities for new 
 ## Pre-Start (Week Before Start Date)
 
 ### HR Preparation Checklist
-
 - [ ] Offer letter signed and returned
 - [ ] Background check completed
 - [ ] Reference checks completed
@@ -40,7 +39,6 @@ This comprehensive workflow covers all HR-related onboarding activities for new 
 **9:00 - 9:30: Welcome and Paperwork**
 
 HR reviews and collects:
-
 - [ ] I-9 documentation (original documents)
 - [ ] W-4 federal tax withholding
 - [ ] State tax withholding forms
@@ -49,12 +47,11 @@ HR reviews and collects:
 
 #### Emergency Contact Form
 
-{{include: emergency-contact}}
+{{include: atom-emergency-contact}}
 
 **9:30 - 10:00: Legal Agreements**
 
 Employee reviews and signs:
-
 - [ ] Employee handbook acknowledgment
 - [ ] Confidentiality agreement
 - [ ] Code of conduct
@@ -63,14 +60,13 @@ Employee reviews and signs:
 
 #### Confidentiality Agreement
 
-{{include: confidentiality-agreement}}
+{{include: atom-confidentiality-agreement}}
 
 **10:00 - 10:15: Break**
 
 **10:15 - 11:00: Company Overview**
 
 Presentation covering:
-
 - Company history and mission
 - Organizational structure
 - Products and services
@@ -80,12 +76,11 @@ Presentation covering:
 
 **11:00 - 11:45: Benefits Overview**
 
-{{include: benefits-overview}}
+{{include: atom-benefits-overview}}
 
 **11:45 - 12:00: Benefits Q&A**
 
 ### Lunch (12:00 - 1:00 PM)
-
 - Hosted lunch with team
 - Informal getting-to-know-you time
 - Manager or team lead attends
@@ -95,7 +90,6 @@ Presentation covering:
 **1:00 - 2:00: Workplace Policies**
 
 Review of:
-
 - Working hours and attendance
 - PTO request procedures
 - Sick leave policies
@@ -107,7 +101,6 @@ Review of:
 **2:00 - 3:00: HRIS and Payroll Systems**
 
 Hands-on training:
-
 - [ ] Login to employee self-service portal
 - [ ] Review personal information
 - [ ] Set up direct deposit
@@ -120,12 +113,11 @@ Hands-on training:
 
 **3:15 - 4:30: Start Compliance Training**
 
-{{include: compliance-training}}
+{{include: molecule-compliance-training}}
 
 **Note**: Complete remaining training by end of Week 1
 
 **4:30 - 5:00: Day 1 Wrap-up**
-
 - Review completed checklist
 - Address any questions
 - Provide access credentials
@@ -137,10 +129,9 @@ Hands-on training:
 
 ### Days 2-5: Benefits Enrollment
 
-{{include: benefits-enrollment}}
+{{include: molecule-benefits-enrollment}}
 
 **Daily Goals**:
-
 - **Day 2**: Research and compare benefit options
 - **Day 3**: Complete medical, dental, vision enrollment
 - **Day 4**: Set up 401(k) and other financial benefits
@@ -149,7 +140,6 @@ Hands-on training:
 ### Days 2-5: Compliance Training Completion
 
 Continue working on compliance training modules:
-
 - [ ] Module 1: Code of Conduct
 - [ ] Module 2: Confidentiality & Data Protection
 - [ ] Module 3: Anti-Discrimination & Harassment
@@ -161,7 +151,6 @@ Continue working on compliance training modules:
 ### End of Week Meeting (Friday, Week 1)
 
 **30-minute HR check-in**:
-
 - [ ] Verify benefits enrollment completed
 - [ ] Confirm training modules finished
 - [ ] Review any outstanding paperwork
@@ -175,14 +164,12 @@ Continue working on compliance training modules:
 ### Week 2
 
 **HR Activities**:
-
 - [ ] Benefits confirmation meeting (15 mins)
 - [ ] Verify insurance cards received
 - [ ] Check 401(k) deduction on first paycheck
 - [ ] Department-specific training assigned (if applicable)
 
 **Employee Activities**:
-
 - [ ] Attend team meetings
 - [ ] Complete role-specific training
 - [ ] Shadow team members
@@ -191,7 +178,6 @@ Continue working on compliance training modules:
 ### Week 3
 
 **HR Activities**:
-
 - [ ] Mid-point check-in (15 mins)
 - [ ] Address any benefit or payroll issues
 - [ ] Verify training completion in system
@@ -200,7 +186,6 @@ Continue working on compliance training modules:
 ### Week 4
 
 **HR Activities**:
-
 - [ ] 30-day review meeting (30 mins)
 - [ ] Performance expectations review
 - [ ] Goal setting for 90-day review
@@ -208,7 +193,6 @@ Continue working on compliance training modules:
 - [ ] Update employee file with completed documents
 
 **Manager Activities**:
-
 - [ ] Formal 30-day performance discussion
 - [ ] Set clear goals and expectations
 - [ ] Provide feedback
@@ -221,13 +205,11 @@ Continue working on compliance training modules:
 ### Employee Must Provide
 
 **Day 1 (Critical)**:
-
 - [ ] I-9 documentation (unexpired, original documents)
 - [ ] Government-issued photo ID
 - [ ] Social Security card or birth certificate
 
 **Week 1**:
-
 - [ ] Void check or bank account information
 - [ ] Dependent documentation (if enrolling in benefits)
   - [ ] Marriage certificate
@@ -237,7 +219,6 @@ Continue working on compliance training modules:
 ### HR Provides to Employee
 
 **Day 1**:
-
 - [ ] Employee handbook (physical or digital)
 - [ ] Benefits summary
 - [ ] Company policies
@@ -245,7 +226,6 @@ Continue working on compliance training modules:
 - [ ] Building access badge
 
 **Week 1**:
-
 - [ ] Health insurance cards
 - [ ] 401(k) enrollment confirmation
 - [ ] Training certificates
@@ -256,13 +236,11 @@ Continue working on compliance training modules:
 ## System Access and Training
 
 ### Day 1
-
 - [ ] Email account activated
 - [ ] Employee portal access
 - [ ] Building badge activated
 
 ### Week 1
-
 - [ ] All required system access provisioned
 - [ ] Training platform access
 - [ ] HRIS self-service portal
@@ -287,7 +265,6 @@ Continue working on compliance training modules:
 ## Success Metrics
 
 We measure onboarding success by:
-
 - **Paperwork completion**: 100% by Day 1
 - **Benefits enrollment**: 100% by end of Week 1
 - **Training completion**: 100% by end of Week 1

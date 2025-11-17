@@ -21,24 +21,21 @@ This procedure guides new employees through the benefits enrollment process duri
 
 ## Step 1: Review Benefits Information
 
-{{include: benefits-overview}}
+{{include: atom-benefits-overview}}
 
 ## Step 2: Determine Your Needs
 
 ### Medical Insurance Decision Tree
 
 **Do you have dependents?**
-
 - **Yes** → Consider family plan coverage
 - **No** → Individual coverage may be sufficient
 
 **Do you have existing coverage?**
-
 - **Yes** → Compare plans, consider waiving if better coverage exists
 - **No** → Enrollment required
 
 **Expected medical needs**:
-
 - **High** (chronic conditions, planned procedures) → Low deductible plan
 - **Medium** (occasional visits) → Mid-tier plan
 - **Low** (young, healthy) → High deductible plan with HSA
@@ -48,7 +45,6 @@ This procedure guides new employees through the benefits enrollment process duri
 **Minimum recommended**: Contribute at least **6%** to receive full company match
 
 Example:
-
 - Salary: $60,000
 - Your contribution (6%): $3,600/year
 - Company match (3%): $1,800/year
@@ -57,7 +53,6 @@ Example:
 ### Additional Coverage
 
 Consider opting in for:
-
 - Life insurance beyond company-provided (if you have dependents)
 - Short-term disability (if savings < 6 months expenses)
 - FSA/HSA for tax-advantaged healthcare savings
@@ -71,36 +66,30 @@ Consider opting in for:
 ## Step 4: Complete Enrollment
 
 ### Medical Insurance
-
 - [ ] Select plan tier (individual or family)
 - [ ] Choose coverage level (low/mid/high deductible)
 - [ ] Add dependents (spouse, children)
 - [ ] Upload dependent documentation (marriage cert, birth certificates)
 
 ### Dental & Vision
-
 - [ ] Confirm automatic enrollment
 - [ ] Add dependents if applicable
 
 ### 401(k) Retirement
-
 - [ ] Set contribution percentage (minimum 6% recommended)
 - [ ] Select investment allocation
 - [ ] Designate beneficiaries
 
 ### Life Insurance
-
 - [ ] Review company-provided amount (2x salary)
 - [ ] Add optional coverage if needed
 - [ ] Designate beneficiaries
 
 ### Disability Insurance
-
 - [ ] Confirm short-term disability enrollment
 - [ ] Confirm long-term disability enrollment
 
 ### Additional Benefits
-
 - [ ] Enroll in FSA or HSA if desired
 - [ ] Set annual contribution amount
 - [ ] Select commuter benefits if applicable
@@ -108,13 +97,11 @@ Consider opting in for:
 ## Step 5: Designate Beneficiaries
 
 **Critical**: Ensure beneficiaries are up-to-date for:
-
 - Life insurance
 - 401(k)
 - Any additional coverage
 
 **Required information**:
-
 - Full legal name
 - Relationship to you
 - Date of birth
@@ -132,7 +119,6 @@ Consider opting in for:
 ## Step 7: Provide Documentation
 
 Submit to HR within 5 business days:
-
 - [ ] Marriage certificate (if enrolling spouse)
 - [ ] Birth certificates (if enrolling children)
 - [ ] Copy of beneficiary designations
@@ -144,7 +130,6 @@ Submit to HR within 5 business days:
 ## Step 8: Confirmation Meeting
 
 HR will schedule a 15-minute meeting to:
-
 - Confirm enrollment processed correctly
 - Review coverage start dates
 - Provide insurance cards
@@ -153,7 +138,6 @@ HR will schedule a 15-minute meeting to:
 ## Common Mistakes to Avoid
 
 ❌ **Don't**:
-
 - Miss the 30-day deadline
 - Forget to add dependents
 - Skip beneficiary designations
@@ -161,7 +145,6 @@ HR will schedule a 15-minute meeting to:
 - Forget to submit dependent documentation
 
 ✓ **Do**:
-
 - Enroll early (don't wait until day 30)
 - Read plan details carefully
 - Compare total costs (premium + deductible + co-pays)

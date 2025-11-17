@@ -39,8 +39,9 @@ tags:
 
 This SOP establishes the comprehensive verification process to issue "Clear to Close" (CTC) status for mortgage loans. CTC is the final quality control checkpoint before scheduling closing and funding, ensuring all underwriting conditions are satisfied, documentation is complete, and the loan complies with investor, regulatory, and internal requirements. **No loan shall proceed to closing without documented CTC approval.**
 
-### Scope
+###
 
+ Scope
 **Applies to:**
 
 - All loan types before closing (conventional, FHA, VA, USDA, jumbo)

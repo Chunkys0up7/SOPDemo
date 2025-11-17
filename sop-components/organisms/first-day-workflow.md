@@ -41,7 +41,6 @@ This comprehensive workflow orchestrates all activities for an employee's first 
 **Timeline**: 2 days before first day
 
 ### HR Checklist
-
 - [ ] Welcome email sent to new hire
 - [ ] First day schedule shared
 - [ ] Parking/building access instructions provided
@@ -49,7 +48,6 @@ This comprehensive workflow orchestrates all activities for an employee's first 
 - [ ] Manager notified of start date
 
 ### IT Checklist
-
 - [ ] Workstation prepared and tested
 - [ ] Phone/extension configured
 - [ ] Desk equipment delivered (monitor, keyboard, mouse)
@@ -62,12 +60,11 @@ This comprehensive workflow orchestrates all activities for an employee's first 
 
 ### Component: Welcome Message
 
-{{include: welcome-message}}
+{{include: atom-welcome-message}}
 
 ### Building Orientation
 
 **Security Office Visit**:
-
 - Take employee photo for badge
 - Issue building access card
 - Explain entry/exit procedures
@@ -75,7 +72,6 @@ This comprehensive workflow orchestrates all activities for an employee's first 
 - After-hours access policy
 
 **Facilities Tour**:
-
 - Restrooms
 - Break rooms / Cafeteria
 - Copy/print stations
@@ -89,7 +85,6 @@ This comprehensive workflow orchestrates all activities for an employee's first 
 ### Workstation Introduction
 
 IT team member will:
-
 1. Walk employee to assigned workstation
 2. Verify all equipment present and working
 3. Explain phone system
@@ -98,12 +93,11 @@ IT team member will:
 
 ### Account Setup Process
 
-{{include: account-setup}}
+{{include: molecule-account-setup}}
 
 ### System Access Verification
 
 Test access to all required systems:
-
 - [ ] Email (send/receive test)
 - [ ] CRM (if applicable)
 - [ ] Project management tools
@@ -116,7 +110,6 @@ Test access to all required systems:
 ### Critical System Training
 
 IT provides overview of:
-
 - Email best practices and calendar
 - File storage and sharing (OneDrive/SharePoint)
 - Communication tools (Teams/Slack)
@@ -128,7 +121,6 @@ IT provides overview of:
 ## Phase 4: Lunch & Team Integration (12:00 PM - 1:30 PM)
 
 ### Team Lunch
-
 - Manager or team lead hosts lunch
 - Informal setting for getting to know team
 - Opportunity to ask questions
@@ -151,7 +143,6 @@ New hire must complete all required security training modules.
 ### Compliance Acknowledgments
 
 Employee must read and acknowledge:
-
 - [ ] Code of Conduct
 - [ ] Information Security Policy
 - [ ] Acceptable Use Policy
@@ -167,7 +158,6 @@ All acknowledgments recorded in HR system.
 ### Manager One-on-One
 
 **Discussion Topics**:
-
 - Role expectations and responsibilities
 - 30-60-90 day goals
 - Team structure and dynamics
@@ -185,7 +175,6 @@ All acknowledgments recorded in HR system.
 ### Project/Task Assignment
 
 Manager assigns initial tasks:
-
 - Onboarding checklist completion
 - Training courses to complete
 - Shadowing opportunities scheduled
@@ -198,7 +187,6 @@ Manager assigns initial tasks:
 ### HR Check-in
 
 HR reviews:
-
 - How did the day go?
 - Any issues or concerns?
 - Remaining paperwork needed
@@ -208,7 +196,6 @@ HR reviews:
 ### End of Day Checklist
 
 **Employee Confirms**:
-
 - [ ] Can access all required systems
 - [ ] Understands how to reach team/manager
 - [ ] Knows schedule for rest of week
@@ -217,7 +204,6 @@ HR reviews:
 - [ ] Knows parking/building access procedures
 
 **Manager Confirms**:
-
 - [ ] Employee has clear schedule for week
 - [ ] First assignment clearly communicated
 - [ ] Employee knows how to ask for help
@@ -228,21 +214,18 @@ HR reviews:
 ## Post-First Day Follow-up
 
 ### Day 2-5 Activities
-
 - Complete remaining onboarding training
 - Shadow team members
 - Begin initial assignments
 - Daily check-ins with manager
 
 ### Week 2 Milestones
-
 - All access provisioned and verified
 - Core training modules completed
 - Contributing to team projects
 - Understands processes and workflows
 
 ### 30-Day Review
-
 - Manager conducts formal 30-day review
 - Address any challenges or concerns
 - Adjust goals if needed
@@ -253,7 +236,6 @@ HR reviews:
 ## Dependencies & Related SOPs
 
 This workflow depends on:
-
 - **sop-001**: User Onboarding Process (parent SOP)
 - **sop-002**: IT System Access Provisioning
 - **sop-003**: Security Training Completion
@@ -262,20 +244,16 @@ This workflow depends on:
 ## Troubleshooting Common Issues
 
 ### Issue: Accounts not ready on Day 1
-
 **Prevention**: IT should pre-provision 2 days before start date
 **Resolution**: IT prioritizes activation, temporary access provided if needed
 
 ### Issue: Security training platform access problems
-
 **Resolution**: HR provides guest access or extends deadline to Day 2
 
 ### Issue: Manager unavailable on Day 1
-
 **Resolution**: Department head or designated backup conducts onboarding
 
 ### Issue: Workstation not ready
-
 **Resolution**: Temporary workstation provided, permanent setup completed same day
 
 ---
