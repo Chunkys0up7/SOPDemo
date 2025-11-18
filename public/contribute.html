@@ -88,9 +88,26 @@
 
         /* Container */
         .container {
-            max-width: 1200px;
+            max-width: 1600px;
             margin: 0 auto;
             padding: 40px;
+        }
+
+        /* Two-column layout */
+        .form-layout {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .form-column {
+            min-width: 0;
+        }
+
+        .ai-assistant-column {
+            position: sticky;
+            top: 20px;
         }
 
         /* Info Banner */
@@ -439,6 +456,154 @@
             line-height: 1.5;
         }
 
+        /* AI Assistant Panel */
+        .ai-panel {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            overflow: hidden;
+        }
+
+        .ai-panel-header {
+            background: linear-gradient(135deg, #0052CC 0%, #003d99 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ai-panel-header h3 {
+            font-size: 16px;
+            font-weight: 600;
+            flex: 1;
+        }
+
+        .ai-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .ai-panel-content {
+            padding: 20px;
+        }
+
+        .ai-suggestion {
+            background: #f8f9fa;
+            border-left: 3px solid #0052CC;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+
+        .ai-suggestion-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .ai-suggestion-content {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .ai-suggestion-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .ai-chip {
+            background: white;
+            border: 1px solid #e0e0e0;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .ai-chip:hover {
+            background: #0052CC;
+            color: white;
+            border-color: #0052CC;
+        }
+
+        .ai-action-btn {
+            width: 100%;
+            padding: 12px;
+            background: white;
+            border: 2px dashed #0052CC;
+            border-radius: 4px;
+            color: #0052CC;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 10px;
+        }
+
+        .ai-action-btn:hover {
+            background: #f0f4ff;
+        }
+
+        .ai-loading {
+            text-align: center;
+            padding: 20px;
+            color: #999;
+            font-size: 13px;
+        }
+
+        .ai-loading::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        .ai-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .ai-stat {
+            background: #f0f4ff;
+            padding: 12px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .ai-stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0052CC;
+            margin-bottom: 4px;
+        }
+
+        .ai-stat-label {
+            font-size: 11px;
+            color: #666;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
         /* Footer */
         .footer {
             background: #1a1a1a;
@@ -451,6 +616,18 @@
         .footer p {
             font-size: 14px;
             opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .form-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .ai-assistant-column {
+                position: static;
+                order: -1;
+            }
         }
     </style>
 </head>
@@ -477,7 +654,7 @@
 
     <!-- Main Content -->
     <div class="container">
-        <!-- Info Banner -->
+        <!-- Info Banner (Full Width) -->
         <div class="info-banner">
             <h3>📋 Enterprise SOP Template System</h3>
             <p>Our SOP system uses a modular atomic design approach for maximum searchability, reusability, and adaptability:</p>
@@ -491,7 +668,7 @@
             <p><a href="../TEMPLATE_CONFIGURATION_GUIDE.md" style="color: #0052CC; font-weight: 600;">📖 View Template Configuration Guide</a></p>
         </div>
 
-        <!-- Template Selection -->
+        <!-- Template Selection (Full Width) -->
         <h2 style="margin-bottom: 20px;">Step 1: Choose Component Type</h2>
         <div class="template-selection">
             <div class="template-card" onclick="selectTemplate('atom')">
@@ -523,8 +700,11 @@
             </div>
         </div>
 
-        <!-- Form (Initially Hidden) -->
-        <form id="contributionForm" style="display: none;">
+        <!-- Two-Column Layout: Form + AI Assistant -->
+        <div class="form-layout" id="formLayout" style="display: none;">
+            <!-- Left Column: Form -->
+            <div class="form-column">
+                <form id="contributionForm">
             <!-- Template Selection Banner -->
             <div id="templateBanner" class="info-banner" style="margin-bottom: 30px;">
                 <h3 id="templateBannerTitle">📋 Template Selected</h3>
@@ -792,12 +972,91 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
                 </div>
             </div>
 
-            <!-- Submit -->
-            <div class="btn-group">
-                <button type="submit" class="btn btn-primary">Submit for Review</button>
-                <button type="button" class="btn btn-secondary" onclick="saveDraft()">Save as Draft</button>
+                    <!-- Submit -->
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-primary">Submit for Review</button>
+                        <button type="button" class="btn btn-secondary" onclick="saveDraft()">Save as Draft</button>
+                    </div>
+                </form>
             </div>
-        </form>
+
+            <!-- Right Column: AI Assistant -->
+            <div class="ai-assistant-column">
+                <div class="ai-panel">
+                    <div class="ai-panel-header">
+                        <h3>✨ AI Writing Assistant</h3>
+                        <span class="ai-badge">Beta</span>
+                    </div>
+                    <div class="ai-panel-content">
+                        <!-- AI Stats -->
+                        <div class="ai-stats">
+                            <div class="ai-stat">
+                                <div class="ai-stat-value" id="aiFieldsCompleted">0</div>
+                                <div class="ai-stat-label">Fields Done</div>
+                            </div>
+                            <div class="ai-stat">
+                                <div class="ai-stat-value" id="aiCompletionPercent">0%</div>
+                                <div class="ai-stat-label">Complete</div>
+                            </div>
+                        </div>
+
+                        <!-- Suggested Keywords -->
+                        <div class="ai-suggestion" id="aiKeywordsSuggestion" style="display: none;">
+                            <div class="ai-suggestion-title">
+                                <span>💡</span> Suggested Keywords
+                            </div>
+                            <div class="ai-suggestion-content">
+                                Based on your title, these keywords may help searchability:
+                            </div>
+                            <div class="ai-suggestion-chips" id="aiKeywordsChips"></div>
+                            <button class="ai-action-btn" onclick="applyAIKeywords()">Apply All Keywords</button>
+                        </div>
+
+                        <!-- Suggested Compliance -->
+                        <div class="ai-suggestion" id="aiComplianceSuggestion" style="display: none;">
+                            <div class="ai-suggestion-title">
+                                <span>⚖️</span> Suggested Compliance
+                            </div>
+                            <div class="ai-suggestion-content">
+                                Recommended frameworks based on content:
+                            </div>
+                            <div class="ai-suggestion-chips" id="aiComplianceChips"></div>
+                            <button class="ai-action-btn" onclick="applyAICompliance()">Apply Recommendations</button>
+                        </div>
+
+                        <!-- Department Suggestion -->
+                        <div class="ai-suggestion" id="aiDepartmentSuggestion" style="display: none;">
+                            <div class="ai-suggestion-title">
+                                <span>🏢</span> Department Suggestion
+                            </div>
+                            <div class="ai-suggestion-content" id="aiDepartmentText"></div>
+                            <button class="ai-action-btn" onclick="applyAIDepartment()">Apply Suggestion</button>
+                        </div>
+
+                        <!-- Writing Tips -->
+                        <div class="ai-suggestion">
+                            <div class="ai-suggestion-title">
+                                <span>📝</span> Writing Tips
+                            </div>
+                            <div class="ai-suggestion-content">
+                                <ul style="margin-left: 16px; font-size: 12px; line-height: 1.8;">
+                                    <li>Be specific and actionable</li>
+                                    <li>Use active voice</li>
+                                    <li>Include decision logic (IF-THEN)</li>
+                                    <li>Add quality checkpoints</li>
+                                    <li>Focus on "why" not just "what"</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Improve Content Button -->
+                        <button class="ai-action-btn" onclick="improveWithAI()" style="margin-top: 20px;">
+                            ✨ Improve Content with AI
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Footer -->
@@ -818,20 +1077,23 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
             });
             event.currentTarget.classList.add('selected');
 
-            // Show form
-            document.getElementById('contributionForm').style.display = 'block';
+            // Show form layout (both form and AI assistant)
+            document.getElementById('formLayout').style.display = 'grid';
 
             // Configure form sections based on template type
             configureFormSections(type);
 
             // Scroll to form
-            document.getElementById('contributionForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            document.getElementById('formLayout').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
             // Initialize with one step (only if procedure steps section is visible)
             const stepsSection = document.querySelector('.form-section:nth-of-type(4)');
             if (stepCount === 0 && stepsSection && stepsSection.style.display !== 'none') {
                 addStep();
             }
+
+            // Setup AI assistance
+            setupAIAssistance();
         }
 
         function updateTemplateBanner(type) {
@@ -1127,6 +1389,243 @@ Expected outcome: [What should be true after this step]"></textarea>
             console.log('Form submitted:', formData);
             alert('SOP submitted for review! (This would send to approval workflow)');
         });
+
+        // ==================== AI ASSISTANCE FUNCTIONS ====================
+
+        let aiSuggestedKeywords = [];
+        let aiSuggestedDepartment = '';
+        let aiSuggestedCompliance = [];
+
+        function setupAIAssistance() {
+            // Add listeners for title input to trigger AI suggestions
+            const titleInput = document.getElementById('title');
+            if (titleInput) {
+                titleInput.addEventListener('input', debounce(generateAISuggestions, 800));
+            }
+
+            // Add listeners to track completion
+            trackFormCompletion();
+        }
+
+        function debounce(func, wait) {
+            let timeout;
+            return function(...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+        }
+
+        function generateAISuggestions() {
+            const title = document.getElementById('title')?.value || '';
+            if (title.length < 5) return;
+
+            // Simulate AI keyword extraction
+            const keywords = extractKeywordsFromTitle(title);
+            aiSuggestedKeywords = keywords;
+
+            // Show keyword suggestions
+            const keywordsChips = document.getElementById('aiKeywordsChips');
+            keywordsChips.innerHTML = keywords.map(kw =>
+                `<span class="ai-chip" onclick="addKeyword('${kw}')">${kw}</span>`
+            ).join('');
+            document.getElementById('aiKeywordsSuggestion').style.display = 'block';
+
+            // Suggest department based on title
+            const department = suggestDepartment(title);
+            if (department) {
+                aiSuggestedDepartment = department;
+                document.getElementById('aiDepartmentText').textContent =
+                    `Based on your title, this seems like a ${department} procedure.`;
+                document.getElementById('aiDepartmentSuggestion').style.display = 'block';
+            }
+
+            // Suggest compliance frameworks
+            const compliance = suggestComplianceFrameworks(title);
+            if (compliance.length > 0) {
+                aiSuggestedCompliance = compliance;
+                const complianceChips = document.getElementById('aiComplianceChips');
+                complianceChips.innerHTML = compliance.map(fw =>
+                    `<span class="ai-chip" onclick="addCompliance('${fw}')">${fw}</span>`
+                ).join('');
+                document.getElementById('aiComplianceSuggestion').style.display = 'block';
+            }
+        }
+
+        function extractKeywordsFromTitle(title) {
+            // Simple AI simulation - extract meaningful words
+            const stopWords = ['the', 'a', 'an', 'and', 'or', 'but', 'for', 'to', 'of', 'in', 'on', 'at'];
+            const words = title.toLowerCase()
+                .replace(/[^\w\s]/g, ' ')
+                .split(/\s+/)
+                .filter(w => w.length > 3 && !stopWords.includes(w));
+
+            // Add related terms based on keywords
+            const relatedTerms = {
+                'user': ['account', 'authentication', 'access'],
+                'password': ['security', 'credentials', 'reset'],
+                'wire': ['transfer', 'payment', 'banking'],
+                'employee': ['hr', 'onboarding', 'staff'],
+                'customer': ['client', 'service', 'support'],
+                'security': ['access', 'authentication', 'audit'],
+                'compliance': ['regulatory', 'audit', 'framework'],
+                'data': ['information', 'database', 'records']
+            };
+
+            const keywords = [...new Set(words)];
+            words.forEach(word => {
+                if (relatedTerms[word]) {
+                    keywords.push(...relatedTerms[word].filter(t => !keywords.includes(t)).slice(0, 2));
+                }
+            });
+
+            return keywords.slice(0, 8);
+        }
+
+        function suggestDepartment(title) {
+            const titleLower = title.toLowerCase();
+            const deptKeywords = {
+                'IT': ['password', 'login', 'system', 'server', 'network', 'database', 'software'],
+                'HR': ['employee', 'onboarding', 'payroll', 'hiring', 'recruitment', 'performance'],
+                'Finance': ['wire', 'payment', 'invoice', 'budget', 'expense', 'accounting'],
+                'Compliance': ['audit', 'regulatory', 'compliance', 'risk', 'policy'],
+                'Security': ['security', 'access', 'authentication', 'firewall', 'breach'],
+                'Customer Service': ['customer', 'client', 'support', 'ticket', 'complaint'],
+                'Operations': ['process', 'workflow', 'operations', 'procedure', 'task']
+            };
+
+            for (const [dept, keywords] of Object.entries(deptKeywords)) {
+                if (keywords.some(kw => titleLower.includes(kw))) {
+                    return dept;
+                }
+            }
+            return '';
+        }
+
+        function suggestComplianceFrameworks(title) {
+            const titleLower = title.toLowerCase();
+            const frameworks = [];
+
+            if (titleLower.includes('data') || titleLower.includes('privacy') || titleLower.includes('gdpr')) {
+                frameworks.push('GDPR');
+            }
+            if (titleLower.includes('payment') || titleLower.includes('credit') || titleLower.includes('card')) {
+                frameworks.push('PCI-DSS');
+            }
+            if (titleLower.includes('health') || titleLower.includes('medical') || titleLower.includes('patient')) {
+                frameworks.push('HIPAA');
+            }
+            if (titleLower.includes('financial') || titleLower.includes('audit') || titleLower.includes('sox')) {
+                frameworks.push('SOX');
+            }
+            if (titleLower.includes('quality') || titleLower.includes('iso')) {
+                frameworks.push('ISO 9001');
+            }
+
+            return frameworks;
+        }
+
+        function addKeyword(keyword) {
+            const keywordsInput = document.getElementById('keywords');
+            const current = keywordsInput.value;
+            const keywords = current ? current.split(',').map(k => k.trim()) : [];
+
+            if (!keywords.includes(keyword)) {
+                keywords.push(keyword);
+                keywordsInput.value = keywords.join(', ');
+                keywordsInput.dispatchEvent(new Event('input'));
+
+                // Visual feedback
+                event.target.style.opacity = '0.5';
+                setTimeout(() => { event.target.style.opacity = '1'; }, 200);
+            }
+        }
+
+        function applyAIKeywords() {
+            const keywordsInput = document.getElementById('keywords');
+            keywordsInput.value = aiSuggestedKeywords.join(', ');
+            keywordsInput.dispatchEvent(new Event('input'));
+
+            // Hide suggestion
+            document.getElementById('aiKeywordsSuggestion').style.display = 'none';
+            updateCompletionStats();
+        }
+
+        function applyAIDepartment() {
+            const deptSelect = document.getElementById('department');
+            deptSelect.value = aiSuggestedDepartment;
+            deptSelect.dispatchEvent(new Event('change'));
+
+            // Hide suggestion
+            document.getElementById('aiDepartmentSuggestion').style.display = 'none';
+            updateCompletionStats();
+        }
+
+        function addCompliance(framework) {
+            const checkbox = Array.from(document.querySelectorAll('input[name="compliance"]'))
+                .find(cb => cb.value === framework);
+            if (checkbox && !checkbox.checked) {
+                checkbox.checked = true;
+
+                // Visual feedback
+                event.target.style.opacity = '0.5';
+                setTimeout(() => { event.target.style.opacity = '1'; }, 200);
+            }
+        }
+
+        function applyAICompliance() {
+            aiSuggestedCompliance.forEach(framework => {
+                const checkbox = Array.from(document.querySelectorAll('input[name="compliance"]'))
+                    .find(cb => cb.value === framework);
+                if (checkbox) {
+                    checkbox.checked = true;
+                }
+            });
+
+            // Hide suggestion
+            document.getElementById('aiComplianceSuggestion').style.display = 'none';
+            updateCompletionStats();
+        }
+
+        function improveWithAI() {
+            // Simulate AI improvement (in real app, this would call an API)
+            alert('AI Content Improvement\n\nThis feature would:\n• Improve clarity and grammar\n• Enhance technical accuracy\n• Add relevant details\n• Optimize for searchability\n\nConnect to an AI API like OpenAI to enable this feature.');
+        }
+
+        function trackFormCompletion() {
+            // Add listeners to all required fields
+            const requiredFields = document.querySelectorAll('[required]');
+            requiredFields.forEach(field => {
+                field.addEventListener('input', updateCompletionStats);
+                field.addEventListener('change', updateCompletionStats);
+            });
+        }
+
+        function updateCompletionStats() {
+            const visibleSections = Array.from(document.querySelectorAll('.form-section'))
+                .filter(s => s.style.display !== 'none');
+
+            const requiredFields = Array.from(document.querySelectorAll('[required]'))
+                .filter(field => {
+                    const section = field.closest('.form-section');
+                    return section && section.style.display !== 'none';
+                });
+
+            const completedFields = requiredFields.filter(field => {
+                if (field.type === 'checkbox') {
+                    const name = field.getAttribute('name');
+                    return document.querySelectorAll(`input[name="${name}"]:checked`).length > 0;
+                }
+                return field.value.trim() !== '';
+            });
+
+            const uniqueCompleted = new Set(completedFields.map(f => f.id || f.name)).size;
+            const totalRequired = new Set(requiredFields.map(f => f.id || f.name)).size;
+
+            const percentage = totalRequired > 0 ? Math.round((uniqueCompleted / totalRequired) * 100) : 0;
+
+            document.getElementById('aiFieldsCompleted').textContent = `${uniqueCompleted}/${totalRequired}`;
+            document.getElementById('aiCompletionPercent').textContent = `${percentage}%`;
+        }
     </script>
 </body>
 </html>
