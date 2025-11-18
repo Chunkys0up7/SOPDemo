@@ -525,6 +525,13 @@
 
         <!-- Form (Initially Hidden) -->
         <form id="contributionForm" style="display: none;">
+            <!-- Template Selection Banner -->
+            <div id="templateBanner" class="info-banner" style="margin-bottom: 30px;">
+                <h3 id="templateBannerTitle">📋 Template Selected</h3>
+                <p id="templateBannerDescription"></p>
+                <ul id="templateBannerSections"></ul>
+            </div>
+
             <!-- Section 1: Core Metadata -->
             <div class="form-section">
                 <h2><span class="form-section-number">1</span> Core Information</h2>
@@ -814,13 +821,229 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
             // Show form
             document.getElementById('contributionForm').style.display = 'block';
 
+            // Configure form sections based on template type
+            configureFormSections(type);
+
             // Scroll to form
             document.getElementById('contributionForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-            // Initialize with one step
-            if (stepCount === 0) {
+            // Initialize with one step (only if procedure steps section is visible)
+            const stepsSection = document.querySelector('.form-section:nth-of-type(4)');
+            if (stepCount === 0 && stepsSection && stepsSection.style.display !== 'none') {
                 addStep();
             }
+        }
+
+        function updateTemplateBanner(type) {
+            const bannerTitle = document.getElementById('templateBannerTitle');
+            const bannerDescription = document.getElementById('templateBannerDescription');
+            const bannerSections = document.getElementById('templateBannerSections');
+
+            const templates = {
+                atom: {
+                    icon: '🔵',
+                    title: 'Atom - Simple Component',
+                    description: 'You\'re creating a single-purpose, reusable component (~128 lines). This is the simplest template with basic fields only.',
+                    sections: [
+                        'Core Information (simplified - no duration estimate)',
+                        'Purpose & Description (brief, focused)',
+                        '<s>Compliance Section (skipped for atoms)</s>',
+                        '<s>Procedure Steps (atoms are single-purpose)</s>',
+                        'Basic Troubleshooting (simple table)',
+                        'Basic Ownership (owner and maintainer only)'
+                    ]
+                },
+                molecule: {
+                    icon: '🟣',
+                    title: 'Molecule - Multi-Step Procedure',
+                    description: 'You\'re creating a multi-step procedure combining atoms (~201 lines). Moderate complexity with optional compliance.',
+                    sections: [
+                        'Core Information (includes duration estimate)',
+                        'Purpose & Scope (with prerequisites)',
+                        'Compliance (optional - only if applicable)',
+                        'Procedure Steps (multiple steps)',
+                        'Detailed Troubleshooting (comprehensive matrix)',
+                        'Ownership (includes approver)'
+                    ]
+                },
+                organism: {
+                    icon: '🟢',
+                    title: 'Organism - Complete Workflow',
+                    description: 'You\'re creating a complete workflow combining molecules and atoms (~297 lines). Complex template with required compliance tracking.',
+                    sections: [
+                        'Core Information (comprehensive)',
+                        'Purpose & Scope (detailed with roles)',
+                        'Compliance & Regulatory (required)',
+                        'Workflow Steps (multi-phase)',
+                        'Comprehensive Troubleshooting (with escalation)',
+                        'Governance (full ownership and reviewers)'
+                    ]
+                },
+                sop: {
+                    icon: '🟠',
+                    title: 'Full SOP - Complete Documentation',
+                    description: 'You\'re creating a full SOP with complete governance (~646 lines). All fields and sections are required for comprehensive documentation.',
+                    sections: [
+                        'Core Information (all 20+ metadata fields)',
+                        'Purpose & Scope (strategic alignment)',
+                        'Compliance & Regulatory (detailed tracking)',
+                        'Procedure Steps (comprehensive with decision logic)',
+                        'Troubleshooting Matrix (full escalation paths)',
+                        'Governance (complete ownership chain)'
+                    ]
+                }
+            };
+
+            const templateConfig = templates[type];
+            if (templateConfig) {
+                bannerTitle.innerHTML = `${templateConfig.icon} ${templateConfig.title}`;
+                bannerDescription.textContent = templateConfig.description;
+                bannerSections.innerHTML = templateConfig.sections.map(s => `<li>${s}</li>`).join('');
+            }
+        }
+
+        function configureFormSections(type) {
+            // Get all form sections
+            const section1 = document.querySelector('.form-section:nth-of-type(1)'); // Core Info
+            const section2 = document.querySelector('.form-section:nth-of-type(2)'); // Purpose & Scope
+            const section3 = document.querySelector('.form-section:nth-of-type(3)'); // Compliance
+            const section4 = document.querySelector('.form-section:nth-of-type(4)'); // Procedure Steps
+            const section5 = document.querySelector('.form-section:nth-of-type(5)'); // Troubleshooting
+            const section6 = document.querySelector('.form-section:nth-of-type(6)'); // Ownership
+
+            // Get specific fields
+            const estimatedDuration = document.getElementById('estimatedDuration');
+            const approver = document.getElementById('approver');
+            const reviewers = document.getElementById('reviewers');
+            const auditFrequency = document.getElementById('auditFrequency');
+            const reviewFrequency = document.getElementById('reviewFrequency');
+
+            // Reset all sections to visible first
+            [section1, section2, section3, section4, section5, section6].forEach(s => {
+                if (s) s.style.display = 'block';
+            });
+
+            // Update template banner
+            updateTemplateBanner(type);
+
+            // Update section titles and configure based on template type
+            if (type === 'atom') {
+                // ATOM: Simple component
+                section2.querySelector('h2').innerHTML = '<span class="form-section-number">2</span> Purpose & Description';
+                section2.querySelector('.subtitle').textContent = 'Simple description of what this component does';
+
+                // Hide compliance section
+                section3.style.display = 'none';
+
+                // Hide procedure steps (atoms are single-purpose)
+                section4.style.display = 'none';
+
+                // Simplify troubleshooting
+                section5.querySelector('.subtitle').textContent = 'Basic troubleshooting table for common issues';
+
+                // Simplify ownership
+                section6.querySelector('.subtitle').textContent = 'Basic ownership information';
+
+                // Hide/disable certain fields
+                estimatedDuration.parentElement.style.display = 'none';
+                approver.parentElement.parentElement.style.display = 'none'; // Hide the whole row
+                reviewers.parentElement.style.display = 'none';
+
+                // Make compliance fields optional
+                auditFrequency.removeAttribute('required');
+                reviewFrequency.removeAttribute('required');
+
+            } else if (type === 'molecule') {
+                // MOLECULE: Multi-step procedure
+                section2.querySelector('h2').innerHTML = '<span class="form-section-number">2</span> Purpose & Scope';
+                section2.querySelector('.subtitle').textContent = 'Define the multi-step procedure and prerequisites';
+
+                // Make compliance optional
+                section3.querySelector('.subtitle').textContent = 'Optional: Only if compliance frameworks apply';
+                section3.style.backgroundColor = '#fffef0';
+                section3.style.borderLeft = '4px solid #FFA726';
+
+                // Show procedure steps
+                section4.querySelector('h2').innerHTML = '<span class="form-section-number">4</span> Procedure Steps';
+                section4.querySelector('.subtitle').textContent = 'Multiple steps combining atoms';
+
+                // Show moderate troubleshooting
+                section5.querySelector('.subtitle').textContent = 'Detailed troubleshooting matrix';
+
+                // Show fields
+                estimatedDuration.parentElement.style.display = 'block';
+                approver.parentElement.parentElement.style.display = 'flex';
+                reviewers.parentElement.style.display = 'none'; // Still hide reviewers
+
+                // Make compliance optional
+                auditFrequency.removeAttribute('required');
+                reviewFrequency.setAttribute('required', 'required');
+
+            } else if (type === 'organism') {
+                // ORGANISM: Complete workflow
+                section2.querySelector('h2').innerHTML = '<span class="form-section-number">2</span> Purpose & Scope';
+                section2.querySelector('.subtitle').textContent = 'Detailed workflow description with roles and responsibilities';
+
+                // Compliance is required
+                section3.querySelector('.subtitle').textContent = 'Required: Identify all regulatory requirements';
+                section3.style.backgroundColor = '#fff';
+                section3.style.borderLeft = 'none';
+
+                // Show workflow steps
+                section4.querySelector('h2').innerHTML = '<span class="form-section-number">4</span> Workflow Steps';
+                section4.querySelector('.subtitle').textContent = 'Multi-phase workflow combining molecules and atoms';
+
+                // Show comprehensive troubleshooting
+                section5.querySelector('.subtitle').textContent = 'Comprehensive troubleshooting with escalation';
+
+                // Show all governance fields
+                estimatedDuration.parentElement.style.display = 'block';
+                approver.parentElement.parentElement.style.display = 'flex';
+                reviewers.parentElement.style.display = 'block';
+
+                // Make compliance required
+                auditFrequency.setAttribute('required', 'required');
+                reviewFrequency.setAttribute('required', 'required');
+
+            } else if (type === 'sop') {
+                // SOP: Full comprehensive documentation
+                section2.querySelector('h2').innerHTML = '<span class="form-section-number">2</span> Purpose & Scope';
+                section2.querySelector('.subtitle').textContent = 'Comprehensive documentation with business value and strategic alignment';
+
+                // Compliance is required
+                section3.querySelector('.subtitle').textContent = 'Required: Detailed regulatory and compliance tracking';
+                section3.style.backgroundColor = '#fff';
+                section3.style.borderLeft = 'none';
+
+                // Show comprehensive steps
+                section4.querySelector('h2').innerHTML = '<span class="form-section-number">4</span> Procedure Steps';
+                section4.querySelector('.subtitle').textContent = 'Comprehensive steps with full decision logic and quality controls';
+
+                // Show comprehensive troubleshooting
+                section5.querySelector('.subtitle').textContent = 'Comprehensive troubleshooting matrix with escalation paths';
+
+                // Show all fields
+                estimatedDuration.parentElement.style.display = 'block';
+                approver.parentElement.parentElement.style.display = 'flex';
+                reviewers.parentElement.style.display = 'block';
+
+                // All fields required
+                auditFrequency.setAttribute('required', 'required');
+                reviewFrequency.setAttribute('required', 'required');
+            }
+
+            // Update section numbers for visible sections
+            updateSectionNumbers();
+        }
+
+        function updateSectionNumbers() {
+            const visibleSections = Array.from(document.querySelectorAll('.form-section')).filter(s => s.style.display !== 'none');
+            visibleSections.forEach((section, index) => {
+                const numberSpan = section.querySelector('.form-section-number');
+                if (numberSpan) {
+                    numberSpan.textContent = index + 1;
+                }
+            });
         }
 
         function addStep() {
