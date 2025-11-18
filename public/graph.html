@@ -26,7 +26,7 @@
         .header {
             background: white;
             border-bottom: 1px solid #e0e0e0;
-            padding: 15px 30px;
+            padding: 20px 40px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -38,16 +38,16 @@
         .logo-lockup {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
 
         .logo {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
         }
 
         .wordmark {
-            font-size: 20px;
+            font-size: 24px;
             font-weight: 600;
             color: #0052CC;
         }
@@ -65,14 +65,35 @@
             transition: color 0.3s;
         }
 
-        .nav-link:hover {
+        .nav-link:hover, .nav-link.active {
             color: #0052CC;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #0052CC 0%, #003d99 100%);
+            color: white;
+            padding: 40px 40px 30px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
         /* Graph Container */
         .graph-wrapper {
             display: flex;
-            height: calc(100vh - 71px);
+            height: calc(100vh - 71px - 120px);
         }
 
         #cy {
@@ -116,12 +137,12 @@
         /* Controls */
         .controls {
             padding: 20px;
-            background: #f8f9fa;
+            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
             border-bottom: 1px solid #e0e0e0;
         }
 
         .control-group {
-            margin-bottom: 15px;
+            margin-bottom: 18px;
         }
 
         .control-group:last-child {
@@ -130,12 +151,10 @@
 
         .control-label {
             display: block;
-            font-size: 12px;
-            font-weight: 600;
-            color: #666;
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 10px;
         }
 
         .control-buttons {
@@ -344,38 +363,42 @@
 
         /* Legend */
         .legend {
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 4px;
-            margin-bottom: 15px;
+            padding: 18px;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 20px;
         }
 
         .legend-title {
-            font-size: 12px;
-            font-weight: 600;
-            color: #666;
-            margin-bottom: 10px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 14px;
         }
 
         .legend-items {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
         }
 
         .legend-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 12px;
+            gap: 10px;
+            font-size: 13px;
+            color: #1a1a1a;
+            font-weight: 500;
         }
 
         .legend-color {
-            width: 16px;
-            height: 16px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
-            border: 2px solid white;
-            box-shadow: 0 0 0 1px #e0e0e0;
+            border: 3px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+            flex-shrink: 0;
         }
 
         .legend-color.sop {
@@ -398,28 +421,37 @@
         .stats {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-bottom: 15px;
+            gap: 12px;
+            margin-bottom: 20px;
         }
 
         .stat-box {
-            padding: 12px;
-            background: white;
-            border: 1px solid #e0e0e0;
-            border-radius: 4px;
+            padding: 16px;
+            background: linear-gradient(135deg, #f0f4ff 0%, #ffffff 100%);
+            border: 2px solid #e3f2fd;
+            border-radius: 8px;
             text-align: center;
+            transition: all 0.3s;
+        }
+
+        .stat-box:hover {
+            border-color: #0052CC;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,82,204,0.15);
         }
 
         .stat-value {
-            font-size: 24px;
+            font-size: 32px;
             font-weight: 700;
             color: #0052CC;
+            margin-bottom: 4px;
         }
 
         .stat-label {
-            font-size: 11px;
+            font-size: 12px;
             color: #666;
-            margin-top: 2px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
         /* Tooltip */
@@ -509,6 +541,12 @@
         </nav>
     </header>
 
+    <!-- Hero -->
+    <section class="hero">
+        <h1>SOP Dependency Graph</h1>
+        <p>Visualize how your procedures connect. Click nodes to explore dependencies and understand the impact of changes across your documentation.</p>
+    </section>
+
     <!-- Graph Wrapper -->
     <div class="graph-wrapper">
         <!-- Cytoscape Graph -->
@@ -517,16 +555,14 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <div class="sidebar-header">
-                <h2><span class="tooltip">Dependency Graph<span class="tooltip-content">Visual representation showing how SOPs and components connect. Click nodes to see details, edges show dependencies.</span></span></h2>
-                <p>Interactive <span class="tooltip">SOP<span class="tooltip-content">Standard Operating Procedure - documented step-by-step processes</span></span> visualization</p>
+                <h2>Graph Controls</h2>
+                <p>Explore connections and dependencies</p>
             </div>
 
             <!-- Controls -->
             <div class="controls">
                 <div class="control-group">
-                    <label class="control-label">
-                        <span class="tooltip">Layout<span class="tooltip-content">Changes how nodes are arranged. Hierarchical shows dependencies top-to-bottom, Organic groups related nodes, Circle arranges in a ring, Grid aligns in rows/columns.</span></span>
-                    </label>
+                    <label class="control-label">Layout</label>
                     <div class="control-buttons">
                         <button class="control-btn active" data-layout="breadthfirst">Hierarchical</button>
                         <button class="control-btn" data-layout="cose">Organic</button>
@@ -563,33 +599,23 @@
 
                 <!-- Legend -->
                 <div class="legend">
-                    <div class="legend-title">
-                        <span class="tooltip">NODE TYPES<span class="tooltip-content">Visual coding by atomic design hierarchy - from simple reusable pieces to complete procedures</span></span>
-                    </div>
+                    <div class="legend-title">NODE TYPES</div>
                     <div class="legend-items">
                         <div class="legend-item">
                             <div class="legend-color sop"></div>
-                            <span>
-                                <span class="tooltip">SOP<span class="tooltip-content">Standard Operating Procedure - complete documented process</span></span> - Standard Operating Procedure
-                            </span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color atom"></div>
-                            <span>
-                                <span class="tooltip">Atom<span class="tooltip-content">Basic reusable element like forms, checklists, or templates that cannot be broken down further</span></span> - Basic Component
-                            </span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color molecule"></div>
-                            <span>
-                                <span class="tooltip">Molecule<span class="tooltip-content">Simple process combining multiple atoms into a single function or workflow</span></span> - Combined Components
-                            </span>
+                            <span>Full Procedure</span>
                         </div>
                         <div class="legend-item">
                             <div class="legend-color organism"></div>
-                            <span>
-                                <span class="tooltip">Organism<span class="tooltip-content">Complete end-to-end workflow combining atoms and molecules into a full procedure</span></span> - Complex Workflow
-                            </span>
+                            <span>Complex Workflow</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color molecule"></div>
+                            <span>Multi-Step Process</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color atom"></div>
+                            <span>Basic Component</span>
                         </div>
                     </div>
                 </div>
@@ -621,9 +647,7 @@
                     </div>
 
                     <div class="section" id="impact-section">
-                        <div class="section-title">
-                            <span class="tooltip">Impact Analysis<span class="tooltip-content">Shows all nodes that will be affected if you change or delete this SOP or component</span></span>
-                        </div>
+                        <div class="section-title">Impact Analysis</div>
                         <div id="impact-analysis"></div>
                     </div>
                 </div>

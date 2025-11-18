@@ -475,8 +475,10 @@ function startServer(port) {
     log(`🏠 Dashboard:     http://localhost:${port}/public/index.html`, 'green');
     log(`📋 Workspace:     http://localhost:${port}/public/workspace.html`, 'green');
     log(`🕸️  Graph Viewer:  http://localhost:${port}/public/graph.html`, 'green');
-    log(`➕ Contribute:    http://localhost:${port}/public/contribute.html`, 'green');
+    log(`📚 Browse SOPs:   http://localhost:${port}/public/sops.html`, 'green');
+    log(`📖 Documentation: http://localhost:${port}/public/docs.html`, 'green');
     log(`🔍 Search:        http://localhost:${port}/public/search.html`, 'green');
+    log(`➕ Contribute:    http://localhost:${port}/public/contribute.html`, 'green');
     log(`❓ Help & Guide:  http://localhost:${port}/public/help.html\n`, 'green');
 
     log('🔌 API Endpoints:', 'blue');
