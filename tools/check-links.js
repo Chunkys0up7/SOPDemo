@@ -69,6 +69,8 @@ async function checkIncludeReferences(content, filePath) {
       relativePath === 'README.md' ||
       relativePath === 'BUILD_SUMMARY.md' ||
       relativePath === 'USE_CASE_GUIDE.md' ||
+      relativePath === 'TEST_DATA_EXAMPLES.md' ||
+      relativePath === 'TEMPLATE_CONFIGURATION_GUIDE.md' ||
       relativePath.startsWith('DOCS_AS_CODE') ||
       relativePath.startsWith('INGESTION_PIPELINE') ||
       relativePath.startsWith('MORTGAGE_DEMO')) {
@@ -101,16 +103,27 @@ async function checkIncludeReferences(content, filePath) {
 
     // Check for components in sop-components/ directory
     if (!found && (sopId.includes('-') || sopId.match(/^(atom|molecule|organism)-/))) {
-      // Strip prefix if present (atom-, molecule-, organism-)
-      const componentId = sopId.replace(/^(atom|molecule|organism)-/, '');
-
+      // Try exact match first (e.g., atom-password-reset.md)
       try {
-        const { stdout } = await execAsync(`find ${ROOT_DIR}/sop-components -name "${componentId}.md" 2>/dev/null || true`);
+        const { stdout } = await execAsync(`find ${ROOT_DIR}/sop-components -name "${sopId}.md" 2>/dev/null || true`);
         if (stdout.trim()) {
           found = true;
         }
       } catch (error) {
         // Ignore find errors
+      }
+
+      // If not found, try with molecule- or organism- prefixes
+      if (!found) {
+        const componentId = sopId.replace(/^(atom|molecule|organism)-/, '');
+        try {
+          const { stdout } = await execAsync(`find ${ROOT_DIR}/sop-components -name "*${componentId}.md" 2>/dev/null || true`);
+          if (stdout.trim()) {
+            found = true;
+          }
+        } catch (error) {
+          // Ignore find errors
+        }
       }
     }
 
