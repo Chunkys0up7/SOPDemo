@@ -577,6 +577,7 @@
                     <div class="control-buttons">
                         <button class="filter-btn active" data-filter="all">All</button>
                         <button class="filter-btn" data-filter="sop">SOPs</button>
+                        <button class="filter-btn" data-filter="requirement">Requirements</button>
                         <button class="filter-btn" data-filter="atom">Atoms</button>
                         <button class="filter-btn" data-filter="molecule">Molecules</button>
                         <button class="filter-btn" data-filter="organism">Organisms</button>
@@ -604,7 +605,11 @@
                     <div class="legend-items">
                         <div class="legend-item">
                             <div class="legend-color sop"></div>
-                            <span>Full Procedure</span>
+                            <span>SOP (Procedure)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color requirement" style="background: #2196F3;"></div>
+                            <span>Compliance Requirement</span>
                         </div>
                         <div class="legend-item">
                             <div class="legend-color organism"></div>
@@ -619,6 +624,36 @@
                             <span>Basic Component</span>
                         </div>
                     </div>
+                </div>
+
+                <!-- AI Query Panel -->
+                <div style="margin-top: 20px; padding: 18px; background: linear-gradient(135deg, #f0f4ff 0%, #ffffff 100%); border: 2px solid #0052CC; border-radius: 8px;">
+                    <div style="font-size: 14px; font-weight: 700; color: #0052CC; margin-bottom: 12px;">
+                        🤖 AI-Powered Insights
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <button class="control-btn" onclick="runAIQuery('attention')" style="width: 100%; text-align: left;">
+                            📋 What Needs Attention?
+                        </button>
+                        <button class="control-btn" onclick="runAIQuery('similar')" style="width: 100%; text-align: left;">
+                            🔍 Find Similar SOPs
+                        </button>
+                        <button class="control-btn" onclick="runAIQuery('compliance')" style="width: 100%; text-align: left;">
+                            ⚠️ Compliance Gaps
+                        </button>
+                        <button class="control-btn" onclick="runAIQuery('impact')" style="width: 100%; text-align: left;">
+                            💥 Impact Analysis
+                        </button>
+                    </div>
+                </div>
+
+                <!-- AI Results Display -->
+                <div id="ai-results" style="display: none; margin-top: 20px; padding: 16px; background: white; border: 1px solid #e0e0e0; border-radius: 8px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <h3 style="font-size: 14px; font-weight: 600; color: #1a1a1a; margin: 0;">AI Analysis</h3>
+                        <button onclick="closeAIResults()" style="border: none; background: none; cursor: pointer; font-size: 18px; color: #666;">&times;</button>
+                    </div>
+                    <div id="ai-results-content" style="font-size: 13px; line-height: 1.6; color: #333;"></div>
                 </div>
 
                 <!-- Empty State -->
@@ -662,7 +697,7 @@
         let currentFilter = 'all';
 
         // Fetch graph data
-        fetch('../graph/sop-graph.json')
+        fetch('../graph/mortgage-sop-graph.json')
             .then(response => response.json())
             .then(data => {
                 graphData = data;
@@ -707,7 +742,8 @@
                 'sop': '#0052CC',
                 'atom': '#4caf50',
                 'molecule': '#ff9800',
-                'organism': '#9c27b0'
+                'organism': '#9c27b0',
+                'requirement': '#2196F3'  // Blue for compliance requirements
             };
 
             // Initialize Cytoscape
@@ -1026,6 +1062,261 @@
                 layout.run();
             });
         });
+
+        // ============================================================================
+        // AI Query Functions
+        // ============================================================================
+
+        function runAIQuery(queryType) {
+            let results = '';
+
+            switch(queryType) {
+                case 'attention':
+                    results = analyzeAttentionNeeded();
+                    break;
+                case 'similar':
+                    results = findSimilarSOPs();
+                    break;
+                case 'compliance':
+                    results = analyzeComplianceGaps();
+                    break;
+                case 'impact':
+                    results = analyzeImpact();
+                    break;
+            }
+
+            // Show results
+            document.getElementById('ai-results').style.display = 'block';
+            document.getElementById('ai-results-content').innerHTML = results;
+        }
+
+        function closeAIResults() {
+            document.getElementById('ai-results').style.display = 'none';
+        }
+
+        function analyzeAttentionNeeded() {
+            const today = new Date();
+            const sops = Object.values(graphData.nodes).filter(n => n.type === 'sop');
+
+            // Find SOPs needing review
+            const needsReview = sops.filter(sop => {
+                if (!sop.lastReviewed || !sop.reviewFrequency) return false;
+                const lastReview = new Date(sop.lastReviewed);
+                const daysSince = Math.floor((today - lastReview) / (1000 * 60 * 60 * 24));
+
+                // Calculate review threshold
+                const thresholds = { 'quarterly': 90, 'monthly': 30, 'annual': 365, 'biannual': 180 };
+                const threshold = thresholds[sop.reviewFrequency] || 90;
+
+                return daysSince >= threshold - 30; // Due within 30 days
+            });
+
+            // Find high criticality SOPs
+            const highCriticality = sops.filter(s => s.criticality === 'high');
+
+            // Find draft SOPs
+            const drafts = sops.filter(s => s.status === 'draft');
+
+            let html = '<div style="line-height: 1.8;">';
+            html += '<h4 style="color: #0052CC; margin-bottom: 10px;">📊 Overview</h4>';
+            html += `<p><strong>Total SOPs:</strong> ${sops.length}</p>`;
+            html += `<p><strong>High Criticality:</strong> ${highCriticality.length}</p>`;
+            html += `<p><strong>Draft Status:</strong> ${drafts.length}</p>`;
+
+            html += '<h4 style="color: #e65100; margin-top: 16px; margin-bottom: 10px;">⚠️ Needs Attention</h4>';
+            if (needsReview.length > 0) {
+                html += '<p><strong>Due for Review:</strong></p><ul style="margin-left: 20px; margin-top: 8px;">';
+                needsReview.forEach(sop => {
+                    const lastReview = new Date(sop.lastReviewed);
+                    html += `<li><strong>${sop.title}</strong><br/>`;
+                    html += `<span style="font-size: 12px; color: #666;">Owner: ${sop.owner} | Last: ${lastReview.toLocaleDateString()} | Freq: ${sop.reviewFrequency}</span></li>`;
+                });
+                html += '</ul>';
+            } else {
+                html += '<p style="color: #4caf50;">✓ All SOPs are up to date with reviews</p>';
+            }
+
+            if (drafts.length > 0) {
+                html += '<p style="margin-top: 12px;"><strong>Draft SOPs needing approval:</strong></p><ul style="margin-left: 20px; margin-top: 8px;">';
+                drafts.forEach(sop => {
+                    html += `<li><strong>${sop.title}</strong> (${sop.owner})</li>`;
+                });
+                html += '</ul>';
+            }
+
+            html += '</div>';
+            return html;
+        }
+
+        function findSimilarSOPs() {
+            // Simple similarity based on shared compliance frameworks and keywords
+            const sops = Object.values(graphData.nodes).filter(n => n.type === 'sop');
+            const similarities = [];
+
+            for (let i = 0; i < sops.length; i++) {
+                for (let j = i + 1; j < sops.length; j++) {
+                    const sop1 = sops[i];
+                    const sop2 = sops[j];
+
+                    // Calculate similarity score
+                    const sharedFrameworks = (sop1.complianceFrameworks || []).filter(f =>
+                        (sop2.complianceFrameworks || []).includes(f)
+                    );
+                    const sharedTags = (sop1.tags || []).filter(t =>
+                        (sop2.tags || []).includes(t)
+                    );
+                    const sameDepartment = sop1.department === sop2.department;
+
+                    const score = (sharedFrameworks.length * 20) + (sharedTags.length * 10) + (sameDepartment ? 15 : 0);
+
+                    if (score >= 30) {
+                        similarities.push({
+                            sop1: sop1.title,
+                            sop2: sop2.title,
+                            score,
+                            sharedFrameworks,
+                            sharedTags
+                        });
+                    }
+                }
+            }
+
+            similarities.sort((a, b) => b.score - a.score);
+
+            let html = '<div style="line-height: 1.8;">';
+            html += '<h4 style="color: #0052CC; margin-bottom: 10px;">🔍 Similar SOPs Detected</h4>';
+
+            if (similarities.length > 0) {
+                html += '<p>These SOPs share significant overlap and may benefit from consolidation:</p>';
+                html += '<ul style="margin-left: 20px; margin-top: 12px;">';
+                similarities.slice(0, 5).forEach(sim => {
+                    html += `<li style="margin-bottom: 12px;"><strong>${sim.sop1}</strong> ↔ <strong>${sim.sop2}</strong><br/>`;
+                    html += `<span style="font-size: 12px; color: #666;">Similarity: ${sim.score}% | `;
+                    if (sim.sharedFrameworks.length > 0) {
+                        html += `Shared frameworks: ${sim.sharedFrameworks.length} | `;
+                    }
+                    if (sim.sharedTags.length > 0) {
+                        html += `Shared tags: ${sim.sharedTags.length}`;
+                    }
+                    html += '</span></li>';
+                });
+                html += '</ul>';
+                html += '<p style="margin-top: 16px; padding: 12px; background: #fff3e0; border-left: 3px solid #ff9800; font-size: 12px;">';
+                html += '💡 <strong>Recommendation:</strong> Review these pairs for potential consolidation to reduce maintenance burden and ensure consistency.';
+                html += '</p>';
+            } else {
+                html += '<p style="color: #4caf50;">✓ No significant overlaps detected. SOPs appear well-differentiated.</p>';
+            }
+
+            html += '</div>';
+            return html;
+        }
+
+        function analyzeComplianceGaps() {
+            const requirements = Object.values(graphData.nodes).filter(n => n.type === 'requirement');
+            const sops = Object.values(graphData.nodes).filter(n => n.type === 'sop');
+            const implementsEdges = graphData.edges.filter(e => e.type === 'implements');
+
+            // Count SOPs per requirement
+            const coverage = {};
+            requirements.forEach(req => {
+                const implementers = implementsEdges.filter(e => e.target === req.id);
+                coverage[req.id] = {
+                    title: req.title || req.framework,
+                    count: implementers.length,
+                    implementers: implementers.map(e => {
+                        const sop = sops.find(s => s.id === e.source);
+                        return sop ? sop.title : e.source;
+                    })
+                };
+            });
+
+            const gaps = Object.values(coverage).filter(c => c.count < 2);
+            const good = Object.values(coverage).filter(c => c.count >= 3);
+
+            let html = '<div style="line-height: 1.8;">';
+            html += '<h4 style="color: #0052CC; margin-bottom: 10px;">📋 Compliance Coverage Analysis</h4>';
+
+            html += `<p><strong>Total Frameworks:</strong> ${requirements.length}</p>`;
+            html += `<p><strong>Well Covered (3+ SOPs):</strong> ${good.length}</p>`;
+            html += `<p><strong>Gaps (< 2 SOPs):</strong> ${gaps.length}</p>`;
+
+            if (gaps.length > 0) {
+                html += '<h4 style="color: #c62828; margin-top: 16px; margin-bottom: 10px;">🔴 Critical Gaps</h4>';
+                html += '<ul style="margin-left: 20px; margin-top: 8px;">';
+                gaps.forEach(gap => {
+                    const status = gap.count === 0 ? '❌ No coverage' : '⚠️ Minimal coverage';
+                    html += `<li><strong>${gap.title}</strong> - ${status}<br/>`;
+                    if (gap.count > 0) {
+                        html += `<span style="font-size: 12px; color: #666;">Implemented by: ${gap.implementers.join(', ')}</span>`;
+                    }
+                    html += '</li>';
+                });
+                html += '</ul>';
+
+                html += '<p style="margin-top: 16px; padding: 12px; background: #ffebee; border-left: 3px solid #c62828; font-size: 12px;">';
+                html += '⚠️ <strong>Action Required:</strong> These frameworks require additional SOP coverage to ensure regulatory compliance.';
+                html += '</p>';
+            } else {
+                html += '<p style="color: #4caf50; margin-top: 12px;">✓ Excellent coverage! All frameworks are adequately documented.</p>';
+            }
+
+            html += '</div>';
+            return html;
+        }
+
+        function analyzeImpact() {
+            const sops = Object.values(graphData.nodes).filter(n => n.type === 'sop');
+            const depends = graphData.edges.filter(e => e.type === 'depends-on');
+
+            // Calculate impact scores
+            const impacts = sops.map(sop => {
+                const dependents = depends.filter(e => e.target === sop.id);
+                const dependencies = depends.filter(e => e.source === sop.id);
+
+                return {
+                    id: sop.id,
+                    title: sop.title,
+                    owner: sop.owner,
+                    criticality: sop.criticality,
+                    dependentCount: dependents.length,
+                    dependencyCount: dependencies.length,
+                    impactScore: (dependents.length * 10) + (sop.criticality === 'high' ? 20 : 0)
+                };
+            }).sort((a, b) => b.impactScore - a.impactScore);
+
+            const highImpact = impacts.filter(i => i.impactScore >= 20);
+
+            let html = '<div style="line-height: 1.8;">';
+            html += '<h4 style="color: #0052CC; margin-bottom: 10px;">💥 Impact Analysis</h4>';
+            html += '<p>SOPs ranked by potential impact of changes:</p>';
+
+            html += '<h4 style="color: #e65100; margin-top: 16px; margin-bottom: 10px;">🔥 High Impact SOPs</h4>';
+            if (highImpact.length > 0) {
+                html += '<ul style="margin-left: 20px; margin-top: 8px;">';
+                highImpact.slice(0, 5).forEach(item => {
+                    html += `<li style="margin-bottom: 10px;"><strong>${item.title}</strong><br/>`;
+                    html += `<span style="font-size: 12px; color: #666;">`;
+                    html += `Impact Score: ${item.impactScore} | `;
+                    html += `Dependents: ${item.dependentCount} SOPs | `;
+                    html += `Dependencies: ${item.dependencyCount} | `;
+                    html += `Owner: ${item.owner} | `;
+                    html += `Criticality: ${item.criticality}`;
+                    html += '</span></li>';
+                });
+                html += '</ul>';
+
+                html += '<p style="margin-top: 16px; padding: 12px; background: #fff3e0; border-left: 3px solid #ff9800; font-size: 12px;">';
+                html += '⚠️ <strong>Warning:</strong> Changes to these SOPs will have cascading effects. ';
+                html += 'Notify dependent SOP owners and allow extra review time.';
+                html += '</p>';
+            } else {
+                html += '<p>No high-impact SOPs detected.</p>';
+            }
+
+            html += '</div>';
+            return html;
+        }
 
         // Filter controls
         document.querySelectorAll('[data-filter]').forEach(btn => {
