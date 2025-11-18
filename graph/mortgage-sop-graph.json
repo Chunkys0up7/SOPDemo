@@ -1,0 +1,794 @@
+{
+  "metadata": {
+    "version": "3.0.0",
+    "lastUpdated": "2025-11-18",
+    "description": "Mortgage SOP knowledge graph built from markdown frontmatter",
+    "nodeCount": 23,
+    "edgeCount": 45
+  },
+  "nodes": {
+    "sop-mf-012": {
+      "id": "sop-mf-012",
+      "type": "sop",
+      "title": "ACH Transfer Procedures for Mortgage Transactions",
+      "version": "1.5.0",
+      "status": "draft",
+      "owner": "Director of Closing Operations",
+      "department": "Mortgage Lending - Closing & Funding",
+      "category": "General",
+      "criticality": "medium",
+      "complianceFrameworks": [],
+      "lastReviewed": "",
+      "reviewFrequency": "",
+      "approver": "VP of Mortgage Operations",
+      "effectiveDate": "",
+      "tags": [
+        "ACH",
+        "funding",
+        "electronic-transfer",
+        "disbursement",
+        "compliance"
+      ],
+      "dependencies": [
+        "sop-mf-004",
+        "sop-mf-005",
+        "sop-mf-011",
+        "sop-mf-013"
+      ],
+      "file_path": "sops/mortgage/sop-mf-012-ach-procedures.md"
+    },
+    "sop-mf-003": {
+      "id": "sop-mf-003",
+      "type": "sop",
+      "title": "FHA Underwriting Standards and Guidelines",
+      "version": "2.4.1",
+      "status": "active",
+      "owner": "Michael Chen",
+      "department": "Underwriting",
+      "category": "Underwriting",
+      "criticality": "high",
+      "complianceFrameworks": [
+        "FHA Handbook 4000.1 (SF Handbook)",
+        "HUD Mortgagee Letter Guidelines",
+        "Equal Credit Opportunity Act (ECOA)",
+        "Fair Housing Act (FHA)",
+        "Ability to Repay (ATR) Rule"
+      ],
+      "lastReviewed": "2025-09-15",
+      "reviewFrequency": "quarterly",
+      "approver": "Michael Chen (Chief Underwriter)",
+      "effectiveDate": "2025-09-15",
+      "tags": [
+        "FHA",
+        "government-lending",
+        "underwriting",
+        "manual-underwriting",
+        "compensating-factors"
+      ],
+      "dependencies": [
+        "sop-mf-002",
+        "sop-mf-008",
+        "sop-mf-009",
+        "sop-mf-013"
+      ],
+      "file_path": "sops/mortgage/sop-mf-003-fha-underwriting.md"
+    },
+    "sop-mf-011": {
+      "id": "sop-mf-011",
+      "type": "sop",
+      "title": "Fraud Detection and Exception Approval Matrix",
+      "version": "2.0.0",
+      "status": "draft",
+      "owner": "Chief Risk Officer",
+      "department": "Mortgage Lending - Compliance & Risk",
+      "category": "General",
+      "criticality": "medium",
+      "complianceFrameworks": [],
+      "lastReviewed": "",
+      "reviewFrequency": "",
+      "approver": "VP of Mortgage Operations",
+      "effectiveDate": "",
+      "tags": [
+        "fraud-detection",
+        "risk-management",
+        "exception-approval",
+        "compliance",
+        "SAR",
+        "red-flags"
+      ],
+      "dependencies": [
+        "sop-mf-002",
+        "sop-mf-005",
+        "sop-mf-008",
+        "sop-mf-013"
+      ],
+      "file_path": "sops/mortgage/sop-mf-011-fraud-detection.md"
+    },
+    "sop-mf-004": {
+      "id": "sop-mf-004",
+      "type": "sop",
+      "title": "Clear to Close (CTC) Verification Process",
+      "version": "5.1.2",
+      "status": "active",
+      "owner": "Emily Patterson",
+      "department": "Closing",
+      "category": "Closing & Funding",
+      "criticality": "critical",
+      "complianceFrameworks": [
+        "TRID (TILA-RESPA Integrated Disclosure)",
+        "Quality Control Standards",
+        "Investor Guidelines (Fannie Mae, Freddie Mac, FHA, VA)",
+        "State Licensing Requirements"
+      ],
+      "lastReviewed": "2025-10-22",
+      "reviewFrequency": "monthly",
+      "approver": "Jennifer Rodriguez (VP Operations)",
+      "effectiveDate": "2025-10-22",
+      "tags": [
+        "closing",
+        "quality-control",
+        "final-verification",
+        "TRID",
+        "clear-to-close"
+      ],
+      "dependencies": [
+        "sop-mf-002",
+        "sop-mf-003",
+        "sop-mf-005",
+        "sop-mf-008",
+        "sop-mf-009",
+        "sop-mf-010"
+      ],
+      "file_path": "sops/mortgage/sop-mf-004-clear-to-close.md"
+    },
+    "sop-mf-013": {
+      "id": "sop-mf-013",
+      "type": "sop",
+      "title": "Borrower Identity Verification Standards",
+      "version": "2.0.0",
+      "status": "draft",
+      "owner": "Chief Compliance Officer",
+      "department": "Mortgage Lending - Compliance",
+      "category": "General",
+      "criticality": "medium",
+      "complianceFrameworks": [],
+      "lastReviewed": "",
+      "reviewFrequency": "",
+      "approver": "VP of Mortgage Operations",
+      "effectiveDate": "",
+      "tags": [
+        "identity-verification",
+        "compliance",
+        "fraud-prevention",
+        "KYC",
+        "CIP"
+      ],
+      "dependencies": [
+        "sop-mf-011",
+        "sop-mf-005"
+      ],
+      "file_path": "sops/mortgage/sop-mf-013-identity-verification.md"
+    },
+    "sop-mf-005": {
+      "id": "sop-mf-005",
+      "type": "sop",
+      "title": "Wire Transfer Security and Dual Approval Protocol",
+      "version": "3.0.8",
+      "status": "active",
+      "owner": "Emily Patterson",
+      "department": "Closing",
+      "category": "Closing & Funding",
+      "criticality": "critical",
+      "complianceFrameworks": [
+        "OFAC Compliance",
+        "BSA/AML Requirements",
+        "Cybersecurity Framework (NIST)",
+        "Wire Fraud Prevention Standards"
+      ],
+      "lastReviewed": "2025-11-10",
+      "reviewFrequency": "quarterly",
+      "approver": "Jennifer Rodriguez (Chief Compliance Officer)",
+      "effectiveDate": "2025-11-10",
+      "tags": [
+        "wire-transfer",
+        "security",
+        "fraud-prevention",
+        "dual-approval",
+        "closing",
+        "funding"
+      ],
+      "dependencies": [
+        "sop-mf-004",
+        "sop-mf-011",
+        "sop-mf-013"
+      ],
+      "file_path": "sops/mortgage/sop-mf-005-wire-transfer-security.md"
+    },
+    "sop-mf-010": {
+      "id": "sop-mf-010",
+      "type": "sop",
+      "title": "TRID Compliance and Disclosure Timing",
+      "version": "2.2.0",
+      "status": "draft",
+      "owner": "Chief Compliance Officer",
+      "department": "Mortgage Lending - Compliance",
+      "category": "General",
+      "criticality": "medium",
+      "complianceFrameworks": [],
+      "lastReviewed": "",
+      "reviewFrequency": "",
+      "approver": "VP of Mortgage Operations",
+      "effectiveDate": "",
+      "tags": [
+        "TRID",
+        "disclosure",
+        "compliance",
+        "loan-estimate",
+        "closing-disclosure",
+        "timing"
+      ],
+      "dependencies": [
+        "sop-mf-002",
+        "sop-mf-004",
+        "sop-mf-005"
+      ],
+      "file_path": "sops/mortgage/sop-mf-010-trid-compliance.md"
+    },
+    "sop-mf-008": {
+      "id": "sop-mf-008",
+      "type": "sop",
+      "title": "Income Documentation and Verification Standards",
+      "version": "2.1.0",
+      "status": "draft",
+      "owner": "Chief Underwriter",
+      "department": "Mortgage Lending - Underwriting",
+      "category": "General",
+      "criticality": "medium",
+      "complianceFrameworks": [],
+      "lastReviewed": "",
+      "reviewFrequency": "",
+      "approver": "VP of Mortgage Operations",
+      "effectiveDate": "",
+      "tags": [
+        "income-verification",
+        "documentation-standards",
+        "underwriting",
+        "compliance",
+        "quality-control"
+      ],
+      "dependencies": [
+        "sop-mf-002",
+        "sop-mf-003",
+        "sop-mf-004"
+      ],
+      "file_path": "sops/mortgage/sop-mf-008-income-documentation.md"
+    },
+    "sop-mf-002": {
+      "id": "sop-mf-002",
+      "type": "sop",
+      "title": "Automated Underwriting System (AUS) Processing",
+      "version": "3.1.5",
+      "status": "active",
+      "owner": "Underwriting Department",
+      "department": "Unknown",
+      "category": "Underwriting",
+      "criticality": "medium",
+      "complianceFrameworks": [],
+      "lastReviewed": "",
+      "reviewFrequency": "",
+      "approver": "Michael Chen (Chief Underwriter)",
+      "effectiveDate": "",
+      "tags": [],
+      "dependencies": [],
+      "file_path": "sops/mortgage/sop-mf-002-aus-processing.md"
+    },
+    "sop-mf-009": {
+      "id": "sop-mf-009",
+      "type": "sop",
+      "title": "Appraisal Review and Collateral Evaluation",
+      "version": "2.0.0",
+      "status": "draft",
+      "owner": "Chief Appraiser",
+      "department": "Mortgage Lending - Underwriting",
+      "category": "General",
+      "criticality": "medium",
+      "complianceFrameworks": [],
+      "lastReviewed": "",
+      "reviewFrequency": "",
+      "approver": "VP of Mortgage Operations",
+      "effectiveDate": "",
+      "tags": [
+        "appraisal",
+        "collateral",
+        "property-valuation",
+        "underwriting",
+        "compliance"
+      ],
+      "dependencies": [
+        "sop-mf-002",
+        "sop-mf-003",
+        "sop-mf-004"
+      ],
+      "file_path": "sops/mortgage/sop-mf-009-appraisal-review.md"
+    },
+    "req-001": {
+      "id": "req-001",
+      "type": "requirement",
+      "title": "FHA Handbook 4000.1 (SF Handbook)",
+      "framework": "FHA Handbook 4000.1 (SF Handbook)",
+      "implementing_sops": [
+        "sop-mf-003"
+      ]
+    },
+    "req-002": {
+      "id": "req-002",
+      "type": "requirement",
+      "title": "HUD Mortgagee Letter Guidelines",
+      "framework": "HUD Mortgagee Letter Guidelines",
+      "implementing_sops": [
+        "sop-mf-003"
+      ]
+    },
+    "req-003": {
+      "id": "req-003",
+      "type": "requirement",
+      "title": "Equal Credit Opportunity Act (ECOA)",
+      "framework": "Equal Credit Opportunity Act (ECOA)",
+      "implementing_sops": [
+        "sop-mf-003"
+      ]
+    },
+    "req-004": {
+      "id": "req-004",
+      "type": "requirement",
+      "title": "Fair Housing Act (FHA)",
+      "framework": "Fair Housing Act (FHA)",
+      "implementing_sops": [
+        "sop-mf-003"
+      ]
+    },
+    "req-005": {
+      "id": "req-005",
+      "type": "requirement",
+      "title": "Ability to Repay (ATR) Rule",
+      "framework": "Ability to Repay (ATR) Rule",
+      "implementing_sops": [
+        "sop-mf-003"
+      ]
+    },
+    "req-006": {
+      "id": "req-006",
+      "type": "requirement",
+      "title": "TRID (TILA-RESPA Integrated Disclosure)",
+      "framework": "TRID (TILA-RESPA Integrated Disclosure)",
+      "implementing_sops": [
+        "sop-mf-004"
+      ]
+    },
+    "req-007": {
+      "id": "req-007",
+      "type": "requirement",
+      "title": "Quality Control Standards",
+      "framework": "Quality Control Standards",
+      "implementing_sops": [
+        "sop-mf-004"
+      ]
+    },
+    "req-008": {
+      "id": "req-008",
+      "type": "requirement",
+      "title": "Investor Guidelines (Fannie Mae, Freddie Mac, FHA, VA)",
+      "framework": "Investor Guidelines (Fannie Mae, Freddie Mac, FHA, VA)",
+      "implementing_sops": [
+        "sop-mf-004"
+      ]
+    },
+    "req-009": {
+      "id": "req-009",
+      "type": "requirement",
+      "title": "State Licensing Requirements",
+      "framework": "State Licensing Requirements",
+      "implementing_sops": [
+        "sop-mf-004"
+      ]
+    },
+    "req-010": {
+      "id": "req-010",
+      "type": "requirement",
+      "title": "OFAC Compliance",
+      "framework": "OFAC Compliance",
+      "implementing_sops": [
+        "sop-mf-005"
+      ]
+    },
+    "req-011": {
+      "id": "req-011",
+      "type": "requirement",
+      "title": "BSA/AML Requirements",
+      "framework": "BSA/AML Requirements",
+      "implementing_sops": [
+        "sop-mf-005"
+      ]
+    },
+    "req-012": {
+      "id": "req-012",
+      "type": "requirement",
+      "title": "Cybersecurity Framework (NIST)",
+      "framework": "Cybersecurity Framework (NIST)",
+      "implementing_sops": [
+        "sop-mf-005"
+      ]
+    },
+    "req-013": {
+      "id": "req-013",
+      "type": "requirement",
+      "title": "Wire Fraud Prevention Standards",
+      "framework": "Wire Fraud Prevention Standards",
+      "implementing_sops": [
+        "sop-mf-005"
+      ]
+    }
+  },
+  "edges": [
+    {
+      "id": "edge-001",
+      "source": "sop-mf-012",
+      "target": "sop-mf-004",
+      "type": "depends-on",
+      "description": "sop-mf-012 depends on sop-mf-004",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-002",
+      "source": "sop-mf-012",
+      "target": "sop-mf-005",
+      "type": "depends-on",
+      "description": "sop-mf-012 depends on sop-mf-005",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-003",
+      "source": "sop-mf-012",
+      "target": "sop-mf-011",
+      "type": "depends-on",
+      "description": "sop-mf-012 depends on sop-mf-011",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-004",
+      "source": "sop-mf-012",
+      "target": "sop-mf-013",
+      "type": "depends-on",
+      "description": "sop-mf-012 depends on sop-mf-013",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-005",
+      "source": "sop-mf-003",
+      "target": "sop-mf-002",
+      "type": "depends-on",
+      "description": "sop-mf-003 depends on sop-mf-002",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-006",
+      "source": "sop-mf-003",
+      "target": "sop-mf-008",
+      "type": "depends-on",
+      "description": "sop-mf-003 depends on sop-mf-008",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-007",
+      "source": "sop-mf-003",
+      "target": "sop-mf-009",
+      "type": "depends-on",
+      "description": "sop-mf-003 depends on sop-mf-009",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-008",
+      "source": "sop-mf-003",
+      "target": "sop-mf-013",
+      "type": "depends-on",
+      "description": "sop-mf-003 depends on sop-mf-013",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-009",
+      "source": "sop-mf-011",
+      "target": "sop-mf-002",
+      "type": "depends-on",
+      "description": "sop-mf-011 depends on sop-mf-002",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-010",
+      "source": "sop-mf-011",
+      "target": "sop-mf-005",
+      "type": "depends-on",
+      "description": "sop-mf-011 depends on sop-mf-005",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-011",
+      "source": "sop-mf-011",
+      "target": "sop-mf-008",
+      "type": "depends-on",
+      "description": "sop-mf-011 depends on sop-mf-008",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-012",
+      "source": "sop-mf-011",
+      "target": "sop-mf-013",
+      "type": "depends-on",
+      "description": "sop-mf-011 depends on sop-mf-013",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-013",
+      "source": "sop-mf-004",
+      "target": "sop-mf-002",
+      "type": "depends-on",
+      "description": "sop-mf-004 depends on sop-mf-002",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-014",
+      "source": "sop-mf-004",
+      "target": "sop-mf-003",
+      "type": "depends-on",
+      "description": "sop-mf-004 depends on sop-mf-003",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-015",
+      "source": "sop-mf-004",
+      "target": "sop-mf-005",
+      "type": "depends-on",
+      "description": "sop-mf-004 depends on sop-mf-005",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-016",
+      "source": "sop-mf-004",
+      "target": "sop-mf-008",
+      "type": "depends-on",
+      "description": "sop-mf-004 depends on sop-mf-008",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-017",
+      "source": "sop-mf-004",
+      "target": "sop-mf-009",
+      "type": "depends-on",
+      "description": "sop-mf-004 depends on sop-mf-009",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-018",
+      "source": "sop-mf-004",
+      "target": "sop-mf-010",
+      "type": "depends-on",
+      "description": "sop-mf-004 depends on sop-mf-010",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-019",
+      "source": "sop-mf-013",
+      "target": "sop-mf-011",
+      "type": "depends-on",
+      "description": "sop-mf-013 depends on sop-mf-011",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-020",
+      "source": "sop-mf-013",
+      "target": "sop-mf-005",
+      "type": "depends-on",
+      "description": "sop-mf-013 depends on sop-mf-005",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-021",
+      "source": "sop-mf-005",
+      "target": "sop-mf-004",
+      "type": "depends-on",
+      "description": "sop-mf-005 depends on sop-mf-004",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-022",
+      "source": "sop-mf-005",
+      "target": "sop-mf-011",
+      "type": "depends-on",
+      "description": "sop-mf-005 depends on sop-mf-011",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-023",
+      "source": "sop-mf-005",
+      "target": "sop-mf-013",
+      "type": "depends-on",
+      "description": "sop-mf-005 depends on sop-mf-013",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-024",
+      "source": "sop-mf-010",
+      "target": "sop-mf-002",
+      "type": "depends-on",
+      "description": "sop-mf-010 depends on sop-mf-002",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-025",
+      "source": "sop-mf-010",
+      "target": "sop-mf-004",
+      "type": "depends-on",
+      "description": "sop-mf-010 depends on sop-mf-004",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-026",
+      "source": "sop-mf-010",
+      "target": "sop-mf-005",
+      "type": "depends-on",
+      "description": "sop-mf-010 depends on sop-mf-005",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-027",
+      "source": "sop-mf-008",
+      "target": "sop-mf-002",
+      "type": "depends-on",
+      "description": "sop-mf-008 depends on sop-mf-002",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-028",
+      "source": "sop-mf-008",
+      "target": "sop-mf-003",
+      "type": "depends-on",
+      "description": "sop-mf-008 depends on sop-mf-003",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-029",
+      "source": "sop-mf-008",
+      "target": "sop-mf-004",
+      "type": "depends-on",
+      "description": "sop-mf-008 depends on sop-mf-004",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-030",
+      "source": "sop-mf-009",
+      "target": "sop-mf-002",
+      "type": "depends-on",
+      "description": "sop-mf-009 depends on sop-mf-002",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-031",
+      "source": "sop-mf-009",
+      "target": "sop-mf-003",
+      "type": "depends-on",
+      "description": "sop-mf-009 depends on sop-mf-003",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-032",
+      "source": "sop-mf-009",
+      "target": "sop-mf-004",
+      "type": "depends-on",
+      "description": "sop-mf-009 depends on sop-mf-004",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-033",
+      "source": "sop-mf-003",
+      "target": "req-001",
+      "type": "implements",
+      "description": "sop-mf-003 implements FHA Handbook 4000.1 (SF Handbook)",
+      "strength": "normal"
+    },
+    {
+      "id": "edge-034",
+      "source": "sop-mf-003",
+      "target": "req-002",
+      "type": "implements",
+      "description": "sop-mf-003 implements HUD Mortgagee Letter Guidelines",
+      "strength": "normal"
+    },
+    {
+      "id": "edge-035",
+      "source": "sop-mf-003",
+      "target": "req-003",
+      "type": "implements",
+      "description": "sop-mf-003 implements Equal Credit Opportunity Act (ECOA)",
+      "strength": "normal"
+    },
+    {
+      "id": "edge-036",
+      "source": "sop-mf-003",
+      "target": "req-004",
+      "type": "implements",
+      "description": "sop-mf-003 implements Fair Housing Act (FHA)",
+      "strength": "normal"
+    },
+    {
+      "id": "edge-037",
+      "source": "sop-mf-003",
+      "target": "req-005",
+      "type": "implements",
+      "description": "sop-mf-003 implements Ability to Repay (ATR) Rule",
+      "strength": "normal"
+    },
+    {
+      "id": "edge-038",
+      "source": "sop-mf-004",
+      "target": "req-006",
+      "type": "implements",
+      "description": "sop-mf-004 implements TRID (TILA-RESPA Integrated Disclosure)",
+      "strength": "normal"
+    },
+    {
+      "id": "edge-039",
+      "source": "sop-mf-004",
+      "target": "req-007",
+      "type": "implements",
+      "description": "sop-mf-004 implements Quality Control Standards",
+      "strength": "normal"
+    },
+    {
+      "id": "edge-040",
+      "source": "sop-mf-004",
+      "target": "req-008",
+      "type": "implements",
+      "description": "sop-mf-004 implements Investor Guidelines (Fannie Mae, Freddie Mac, FHA, VA)",
+      "strength": "normal"
+    },
+    {
+      "id": "edge-041",
+      "source": "sop-mf-004",
+      "target": "req-009",
+      "type": "implements",
+      "description": "sop-mf-004 implements State Licensing Requirements",
+      "strength": "normal"
+    },
+    {
+      "id": "edge-042",
+      "source": "sop-mf-005",
+      "target": "req-010",
+      "type": "implements",
+      "description": "sop-mf-005 implements OFAC Compliance",
+      "strength": "normal"
+    },
+    {
+      "id": "edge-043",
+      "source": "sop-mf-005",
+      "target": "req-011",
+      "type": "implements",
+      "description": "sop-mf-005 implements BSA/AML Requirements",
+      "strength": "normal"
+    },
+    {
+      "id": "edge-044",
+      "source": "sop-mf-005",
+      "target": "req-012",
+      "type": "implements",
+      "description": "sop-mf-005 implements Cybersecurity Framework (NIST)",
+      "strength": "normal"
+    },
+    {
+      "id": "edge-045",
+      "source": "sop-mf-005",
+      "target": "req-013",
+      "type": "implements",
+      "description": "sop-mf-005 implements Wire Fraud Prevention Standards",
+      "strength": "normal"
+    }
+  ]
+}
