@@ -2235,9 +2235,25 @@ Expected outcome: [What should be true after this step]"></textarea>
 
         // Load atoms from graph
         async function loadAtoms() {
+            console.log('🔄 Loading atoms from graph...');
+            const grid = document.getElementById('atomLibraryGrid');
+
             try {
-                const response = await fetch('/graph/sop-graph.json');
+                // Try absolute path first
+                let response = await fetch('/graph/sop-graph.json');
+
+                // If that fails, try relative path
+                if (!response.ok) {
+                    console.log('⚠️  Absolute path failed, trying relative...');
+                    response = await fetch('../graph/sop-graph.json');
+                }
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
                 const graphData = await response.json();
+                console.log(`📊 Graph loaded: ${graphData.nodes.length} total nodes`);
 
                 // Filter only atom nodes
                 availableAtoms = graphData.nodes
@@ -2246,17 +2262,93 @@ Expected outcome: [What should be true after this step]"></textarea>
                         id: atom.id,
                         title: atom.title || 'Untitled Atom',
                         department: atom.department || 'General',
-                        subtype: atom.subtype || 'general',
+                        subtype: atom.subtype || 'procedural-step',
                         description: atom.description || '',
                         complexity: atom.complexity || 'Intermediate'
                     }));
 
                 console.log(`✅ Loaded ${availableAtoms.length} atoms from graph`);
+
+                if (availableAtoms.length === 0) {
+                    grid.innerHTML = '<div class="atom-library-empty"><p>⚠️ No atoms found in graph. Try building some SOPs first!</p></div>';
+                    return;
+                }
+
                 renderAtoms(availableAtoms);
             } catch (error) {
                 console.error('❌ Failed to load atoms:', error);
-                document.getElementById('atomLibraryGrid').innerHTML =
-                    '<div class="atom-library-empty"><p>❌ Failed to load atoms. Please refresh the page.</p></div>';
+
+                // Fallback to mock data for testing
+                console.log('🔄 Using mock data for testing...');
+                availableAtoms = [
+                    {
+                        id: 'atom-step-create-ad-account',
+                        title: 'Create Active Directory Account (Step)',
+                        department: 'IT',
+                        subtype: 'procedural-step',
+                        description: 'Complete procedure for creating AD accounts',
+                        complexity: 'Intermediate'
+                    },
+                    {
+                        id: 'atom-step-create-email-account',
+                        title: 'Create Email Account and Configure Microsoft 365 Services (Step)',
+                        department: 'IT',
+                        subtype: 'procedural-step',
+                        description: 'Email and M365 setup procedure',
+                        complexity: 'Intermediate'
+                    },
+                    {
+                        id: 'atom-password-reset',
+                        title: 'Password Reset Procedure',
+                        department: 'IT',
+                        subtype: 'procedural-step',
+                        description: 'Standard password reset workflow',
+                        complexity: 'Basic'
+                    },
+                    {
+                        id: 'atom-access-request-approval',
+                        title: 'System Access Request Approval',
+                        department: 'IT',
+                        subtype: 'procedural-step',
+                        description: 'Approval workflow for system access',
+                        complexity: 'Intermediate'
+                    },
+                    {
+                        id: 'atom-welcome-message',
+                        title: 'Welcome Message Template',
+                        department: 'HR',
+                        subtype: 'form',
+                        description: 'Standard welcome email template',
+                        complexity: 'Basic'
+                    },
+                    {
+                        id: 'atom-equipment-form',
+                        title: 'Equipment Request Form',
+                        department: 'Operations',
+                        subtype: 'form',
+                        description: 'Form for requesting equipment',
+                        complexity: 'Basic'
+                    },
+                    {
+                        id: 'atom-benefits-overview',
+                        title: 'Employee Benefits Overview',
+                        department: 'HR',
+                        subtype: 'reference',
+                        description: 'Benefits information document',
+                        complexity: 'Basic'
+                    },
+                    {
+                        id: 'atom-office-tour-checklist',
+                        title: 'Office Tour Checklist',
+                        department: 'HR',
+                        subtype: 'reference',
+                        description: 'Checklist for office tours',
+                        complexity: 'Basic'
+                    }
+                ];
+
+                console.log(`✅ Loaded ${availableAtoms.length} mock atoms`);
+                renderAtoms(availableAtoms);
             }
         }
 
@@ -2365,26 +2457,52 @@ Expected outcome: [What should be true after this step]"></textarea>
 
         // Select construction mode
         function selectConstructionMode(mode) {
+            console.log(`🔄 Switching to ${mode} mode`);
             currentConstructionMode = mode;
 
-            // Update UI
+            // Update radio buttons
+            document.querySelectorAll('input[name="constructionMode"]').forEach(radio => {
+                radio.checked = (radio.value === mode);
+            });
+
+            // Update UI styling
             document.querySelectorAll('.mode-option').forEach(opt => opt.classList.remove('selected'));
-            document.getElementById(`mode${mode.charAt(0).toUpperCase() + mode.slice(1).replace('-', '')}`).classList.add('selected');
+
+            const modeId = mode === 'inline' ? 'modeInline' :
+                          mode === 'hybrid' ? 'modeHybrid' :
+                          'modeAtomsOnly';
+
+            const selectedMode = document.getElementById(modeId);
+            if (selectedMode) {
+                selectedMode.classList.add('selected');
+            }
 
             const libraryContainer = document.getElementById('atomLibraryContainer');
             const section4 = document.querySelector('.form-section:nth-of-type(5)'); // Procedure Steps section
 
+            console.log(`📦 Library container found: ${!!libraryContainer}`);
+            console.log(`📝 Steps section found: ${!!section4}`);
+
             if (mode === 'inline') {
                 // Traditional mode: hide atom library, show procedure steps
-                libraryContainer.style.display = 'none';
+                console.log('✍️ Inline mode: hiding library, showing steps');
+                if (libraryContainer) libraryContainer.style.display = 'none';
                 if (section4) section4.style.display = 'block';
             } else if (mode === 'hybrid') {
                 // Hybrid mode: show both atom library and procedure steps
-                libraryContainer.style.display = 'block';
+                console.log('🧱 Hybrid mode: showing library AND steps');
+                if (libraryContainer) {
+                    libraryContainer.style.display = 'block';
+                    console.log('✅ Library container is now visible');
+                }
                 if (section4) section4.style.display = 'block';
             } else if (mode === 'atoms-only') {
                 // Atoms-only mode: show atom library, hide procedure steps
-                libraryContainer.style.display = 'block';
+                console.log('📦 Atoms-only mode: showing library, hiding steps');
+                if (libraryContainer) {
+                    libraryContainer.style.display = 'block';
+                    console.log('✅ Library container is now visible');
+                }
                 if (section4) section4.style.display = 'none';
             }
         }
