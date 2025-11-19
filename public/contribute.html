@@ -933,28 +933,28 @@
         <!-- Template Selection (Full Width) -->
         <h2 style="margin-bottom: 20px;">Step 1: Choose Component Type</h2>
         <div class="template-selection">
-            <div class="template-card" onclick="selectTemplate('atom')">
+            <div class="template-card" onclick="selectTemplate('atom', event)">
                 <div class="badge atom">Atom</div>
                 <h3>Single Component</h3>
                 <p>Create a reusable, single-purpose procedure step.</p>
                 <div class="examples">Examples: Login, Submit Form, Verify Data</div>
             </div>
 
-            <div class="template-card" onclick="selectTemplate('molecule')">
+            <div class="template-card" onclick="selectTemplate('molecule', event)">
                 <div class="badge molecule">Molecule</div>
                 <h3>Multi-Step Procedure</h3>
                 <p>Combine multiple atoms into a cohesive procedure.</p>
                 <div class="examples">Examples: Account Setup, Approval Chain</div>
             </div>
 
-            <div class="template-card" onclick="selectTemplate('organism')">
+            <div class="template-card" onclick="selectTemplate('organism', event)">
                 <div class="badge organism">Organism</div>
                 <h3>Complete Workflow</h3>
                 <p>Build complex workflows from molecules and atoms.</p>
                 <div class="examples">Examples: Onboarding, Wire Transfer</div>
             </div>
 
-            <div class="template-card" onclick="selectTemplate('sop')">
+            <div class="template-card" onclick="selectTemplate('sop', event)">
                 <div class="badge sop">Full SOP</div>
                 <h3>Full Documentation</h3>
                 <p>Complete SOP with metadata, compliance, and QA.</p>
@@ -1178,21 +1178,21 @@
 
                 <!-- Construction Mode Toggle -->
                 <div class="construction-mode-toggle">
-                    <div class="mode-option selected" id="modeInline" onclick="selectConstructionMode('inline')">
+                    <div class="mode-option selected" id="modeInline" onclick="event.stopPropagation(); event.preventDefault(); selectConstructionMode('inline'); return false;">
                         <div class="mode-option-title">
-                            <input type="radio" name="constructionMode" value="inline" checked> ✍️ Write Custom Steps
+                            <input type="radio" name="constructionMode" value="inline" checked onclick="event.stopPropagation(); event.preventDefault(); return false;"> ✍️ Write Custom Steps
                         </div>
                         <div class="mode-option-desc">Write all steps as inline content (traditional approach)</div>
                     </div>
-                    <div class="mode-option" id="modeHybrid" onclick="selectConstructionMode('hybrid')">
+                    <div class="mode-option" id="modeHybrid" onclick="event.stopPropagation(); event.preventDefault(); selectConstructionMode('hybrid'); return false;">
                         <div class="mode-option-title">
-                            <input type="radio" name="constructionMode" value="hybrid"> 🧱 Hybrid Construction
+                            <input type="radio" name="constructionMode" value="hybrid" onclick="event.stopPropagation(); event.preventDefault(); return false;"> 🧱 Hybrid Construction
                         </div>
                         <div class="mode-option-desc">Combine reusable atoms with custom inline steps (recommended)</div>
                     </div>
-                    <div class="mode-option" id="modeAtomsOnly" onclick="selectConstructionMode('atoms-only')">
+                    <div class="mode-option" id="modeAtomsOnly" onclick="event.stopPropagation(); event.preventDefault(); selectConstructionMode('atoms-only'); return false;">
                         <div class="mode-option-title">
-                            <input type="radio" name="constructionMode" value="atoms-only"> 📦 Build from Atoms
+                            <input type="radio" name="constructionMode" value="atoms-only" onclick="event.stopPropagation(); event.preventDefault(); return false;"> 📦 Build from Atoms
                         </div>
                         <div class="mode-option-desc">Assemble entirely from existing reusable components</div>
                     </div>
@@ -1419,17 +1419,41 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
         let selectedTemplate = null;
         let stepCount = 0;
 
-        function selectTemplate(type) {
+        function selectTemplate(type, event) {
+            // Check if we're switching templates (form already visible)
+            const formLayout = document.getElementById('formLayout');
+            const formWasVisible = formLayout.style.display === 'grid';
+            const switchingTemplates = formWasVisible && selectedTemplate && selectedTemplate !== type;
+
+            // Warn user if they're switching templates with data entered
+            if (switchingTemplates) {
+                const hasData = document.querySelectorAll('input:not([type="checkbox"]):not([type="radio"]), textarea, select').length > 0;
+                if (hasData) {
+                    const confirmed = confirm(
+                        `⚠️ Switching from ${selectedTemplate.toUpperCase()} to ${type.toUpperCase()} will reconfigure the form.\n\n` +
+                        `Your entered data will remain, but sections may change.\n\n` +
+                        `Continue?`
+                    );
+                    if (!confirmed) {
+                        console.log('❌ Template switch cancelled by user');
+                        return; // User cancelled, don't switch
+                    }
+                }
+                console.log(`🔄 Switching template: ${selectedTemplate} → ${type}`);
+            }
+
             selectedTemplate = type;
 
             // Update selected card styling
             document.querySelectorAll('.template-card').forEach(card => {
                 card.classList.remove('selected');
             });
-            event.currentTarget.classList.add('selected');
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('selected');
+            }
 
             // Show form layout (both form and AI assistant)
-            document.getElementById('formLayout').style.display = 'grid';
+            formLayout.style.display = 'grid';
 
             // Configure form sections based on template type
             configureFormSections(type);
@@ -1437,11 +1461,17 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
             // Show/hide hybrid construction section
             updateHybridConstructionVisibility(type);
 
-            // Scroll to form
-            document.getElementById('formLayout').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Only scroll if form was hidden (first time selection)
+            // Don't scroll if switching templates (prevents jarring reset feeling)
+            if (!formWasVisible) {
+                console.log('📜 Scrolling to form (first selection)');
+                formLayout.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                console.log('✅ Form already visible - staying in place (template switch)');
+            }
 
             // Initialize with one step (only if procedure steps section is visible)
-            const stepsSection = document.querySelector('.form-section:nth-of-type(4)');
+            const stepsSection = document.querySelector('.form-section:nth-of-type(5)'); // Shifted by hybrid construction section
             if (stepCount === 0 && stepsSection && stepsSection.style.display !== 'none') {
                 addStep();
             }
@@ -1520,12 +1550,14 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
 
         function configureFormSections(type) {
             // Get all form sections
+            // NOTE: Section 3.5 (Hybrid Construction) is inserted dynamically, so indexes are shifted
             const section1 = document.querySelector('.form-section:nth-of-type(1)'); // Core Info
             const section2 = document.querySelector('.form-section:nth-of-type(2)'); // Purpose & Scope
             const section3 = document.querySelector('.form-section:nth-of-type(3)'); // Compliance
-            const section4 = document.querySelector('.form-section:nth-of-type(4)'); // Procedure Steps
-            const section5 = document.querySelector('.form-section:nth-of-type(5)'); // Troubleshooting
-            const section6 = document.querySelector('.form-section:nth-of-type(6)'); // Ownership
+            const hybridSection = document.getElementById('hybridConstructionSection'); // Section 3.5 (Hybrid Construction)
+            const section4 = document.querySelector('.form-section:nth-of-type(5)'); // Procedure Steps (was 4, now 5 due to hybrid)
+            const section5 = document.querySelector('.form-section:nth-of-type(6)'); // Troubleshooting (was 5, now 6)
+            const section6 = document.querySelector('.form-section:nth-of-type(7)'); // Ownership (was 6, now 7)
 
             // Get specific fields
             const estimatedDuration = document.getElementById('estimatedDuration');
@@ -2235,9 +2267,25 @@ Expected outcome: [What should be true after this step]"></textarea>
 
         // Load atoms from graph
         async function loadAtoms() {
+            console.log('🔄 Loading atoms from graph...');
+            const grid = document.getElementById('atomLibraryGrid');
+
             try {
-                const response = await fetch('/graph/sop-graph.json');
+                // Try absolute path first
+                let response = await fetch('/graph/sop-graph.json');
+
+                // If that fails, try relative path
+                if (!response.ok) {
+                    console.log('⚠️  Absolute path failed, trying relative...');
+                    response = await fetch('../graph/sop-graph.json');
+                }
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
                 const graphData = await response.json();
+                console.log(`📊 Graph loaded: ${graphData.nodes.length} total nodes`);
 
                 // Filter only atom nodes
                 availableAtoms = graphData.nodes
@@ -2246,17 +2294,93 @@ Expected outcome: [What should be true after this step]"></textarea>
                         id: atom.id,
                         title: atom.title || 'Untitled Atom',
                         department: atom.department || 'General',
-                        subtype: atom.subtype || 'general',
+                        subtype: atom.subtype || 'procedural-step',
                         description: atom.description || '',
                         complexity: atom.complexity || 'Intermediate'
                     }));
 
                 console.log(`✅ Loaded ${availableAtoms.length} atoms from graph`);
+
+                if (availableAtoms.length === 0) {
+                    grid.innerHTML = '<div class="atom-library-empty"><p>⚠️ No atoms found in graph. Try building some SOPs first!</p></div>';
+                    return;
+                }
+
                 renderAtoms(availableAtoms);
             } catch (error) {
                 console.error('❌ Failed to load atoms:', error);
-                document.getElementById('atomLibraryGrid').innerHTML =
-                    '<div class="atom-library-empty"><p>❌ Failed to load atoms. Please refresh the page.</p></div>';
+
+                // Fallback to mock data for testing
+                console.log('🔄 Using mock data for testing...');
+                availableAtoms = [
+                    {
+                        id: 'atom-step-create-ad-account',
+                        title: 'Create Active Directory Account (Step)',
+                        department: 'IT',
+                        subtype: 'procedural-step',
+                        description: 'Complete procedure for creating AD accounts',
+                        complexity: 'Intermediate'
+                    },
+                    {
+                        id: 'atom-step-create-email-account',
+                        title: 'Create Email Account and Configure Microsoft 365 Services (Step)',
+                        department: 'IT',
+                        subtype: 'procedural-step',
+                        description: 'Email and M365 setup procedure',
+                        complexity: 'Intermediate'
+                    },
+                    {
+                        id: 'atom-password-reset',
+                        title: 'Password Reset Procedure',
+                        department: 'IT',
+                        subtype: 'procedural-step',
+                        description: 'Standard password reset workflow',
+                        complexity: 'Basic'
+                    },
+                    {
+                        id: 'atom-access-request-approval',
+                        title: 'System Access Request Approval',
+                        department: 'IT',
+                        subtype: 'procedural-step',
+                        description: 'Approval workflow for system access',
+                        complexity: 'Intermediate'
+                    },
+                    {
+                        id: 'atom-welcome-message',
+                        title: 'Welcome Message Template',
+                        department: 'HR',
+                        subtype: 'form',
+                        description: 'Standard welcome email template',
+                        complexity: 'Basic'
+                    },
+                    {
+                        id: 'atom-equipment-form',
+                        title: 'Equipment Request Form',
+                        department: 'Operations',
+                        subtype: 'form',
+                        description: 'Form for requesting equipment',
+                        complexity: 'Basic'
+                    },
+                    {
+                        id: 'atom-benefits-overview',
+                        title: 'Employee Benefits Overview',
+                        department: 'HR',
+                        subtype: 'reference',
+                        description: 'Benefits information document',
+                        complexity: 'Basic'
+                    },
+                    {
+                        id: 'atom-office-tour-checklist',
+                        title: 'Office Tour Checklist',
+                        department: 'HR',
+                        subtype: 'reference',
+                        description: 'Checklist for office tours',
+                        complexity: 'Basic'
+                    }
+                ];
+
+                console.log(`✅ Loaded ${availableAtoms.length} mock atoms`);
+                renderAtoms(availableAtoms);
             }
         }
 
@@ -2365,40 +2489,168 @@ Expected outcome: [What should be true after this step]"></textarea>
 
         // Select construction mode
         function selectConstructionMode(mode) {
+            console.log(`🔄 Switching to ${mode} mode`);
+            console.log(`   Current mode before switch: ${currentConstructionMode}`);
+            console.log(`   Stack trace:`, new Error().stack);
+
             currentConstructionMode = mode;
 
-            // Update UI
+            // Update radio buttons
+            document.querySelectorAll('input[name="constructionMode"]').forEach(radio => {
+                radio.checked = (radio.value === mode);
+            });
+
+            // Update UI styling
             document.querySelectorAll('.mode-option').forEach(opt => opt.classList.remove('selected'));
-            document.getElementById(`mode${mode.charAt(0).toUpperCase() + mode.slice(1).replace('-', '')}`).classList.add('selected');
+
+            const modeId = mode === 'inline' ? 'modeInline' :
+                          mode === 'hybrid' ? 'modeHybrid' :
+                          'modeAtomsOnly';
+
+            const selectedMode = document.getElementById(modeId);
+            if (selectedMode) {
+                selectedMode.classList.add('selected');
+            }
 
             const libraryContainer = document.getElementById('atomLibraryContainer');
-            const section4 = document.querySelector('.form-section:nth-of-type(5)'); // Procedure Steps section
+            const section4 = document.querySelector('.form-section:nth-of-type(5)'); // Procedure Steps (shifted by hybrid construction section)
+
+            console.log(`📦 Library container found: ${!!libraryContainer}`);
+            console.log(`📝 Steps section found: ${!!section4}`);
 
             if (mode === 'inline') {
                 // Traditional mode: hide atom library, show procedure steps
-                libraryContainer.style.display = 'none';
+                console.log('✍️ Inline mode: hiding library, showing steps');
+                if (libraryContainer) libraryContainer.style.display = 'none';
                 if (section4) section4.style.display = 'block';
             } else if (mode === 'hybrid') {
                 // Hybrid mode: show both atom library and procedure steps
-                libraryContainer.style.display = 'block';
+                console.log('🧱 Hybrid mode: showing library AND steps');
+                if (libraryContainer) {
+                    libraryContainer.style.display = 'block';
+                    console.log('✅ Library container is now visible');
+                }
                 if (section4) section4.style.display = 'block';
+
+                // Load atoms if not already loaded
+                if (availableAtoms.length === 0) {
+                    console.log('📦 Loading atoms for hybrid mode...');
+                    loadAtoms();
+                } else {
+                    console.log(`✅ ${availableAtoms.length} atoms already available`);
+                    renderAtoms(availableAtoms);
+                }
             } else if (mode === 'atoms-only') {
                 // Atoms-only mode: show atom library, hide procedure steps
-                libraryContainer.style.display = 'block';
+                console.log('📦 Atoms-only mode: showing library, hiding steps');
+                if (libraryContainer) {
+                    libraryContainer.style.display = 'block';
+                    console.log('✅ Library container is now visible');
+                }
                 if (section4) section4.style.display = 'none';
+
+                // Load atoms if not already loaded
+                if (availableAtoms.length === 0) {
+                    console.log('📦 Loading atoms for atoms-only mode...');
+                    loadAtoms();
+                } else {
+                    console.log(`✅ ${availableAtoms.length} atoms already available`);
+                    renderAtoms(availableAtoms);
+                }
             }
+
+            console.log(`✅ Construction mode switch complete: ${mode}`);
         }
 
         // Show/hide hybrid construction section based on template type
         function updateHybridConstructionVisibility(templateType) {
+            console.log(`🔄 updateHybridConstructionVisibility called with: ${templateType}`);
+            console.log(`   Current mode before update: ${currentConstructionMode}`);
+            console.log(`   Stack trace:`, new Error().stack);
+
             const hybridSection = document.getElementById('hybridConstructionSection');
+            const libraryContainer = document.getElementById('atomLibraryContainer');
+            const section4 = document.querySelector('.form-section:nth-of-type(5)'); // Procedure Steps
 
             // Show for molecules, organisms, and SOPs only (not for atoms)
             if (templateType === 'molecule' || templateType === 'organism' || templateType === 'sop') {
-                hybridSection.style.display = 'block';
-                loadAtoms(); // Load atoms when section becomes visible
+                console.log('✅ Template supports hybrid construction - showing section');
+
+                // Show hybrid construction section
+                if (hybridSection) {
+                    hybridSection.style.display = 'block';
+                }
+
+                // Only reset to inline mode if we're switching templates
+                // Don't reset if user is actively using a different mode
+                const isInitialSetup = currentConstructionMode === null || currentConstructionMode === undefined || currentConstructionMode === 'inline';
+
+                if (isInitialSetup) {
+                    console.log('🔄 Initial setup - setting inline mode as default');
+                    currentConstructionMode = 'inline';
+
+                    // Update UI to reflect inline mode
+                    document.querySelectorAll('.mode-option').forEach(opt => opt.classList.remove('selected'));
+                    const inlineOption = document.getElementById('modeInline');
+                    if (inlineOption) {
+                        inlineOption.classList.add('selected');
+                    }
+
+                    // Update radio buttons
+                    document.querySelectorAll('input[name="constructionMode"]').forEach(radio => {
+                        radio.checked = (radio.value === 'inline');
+                    });
+
+                    // Hide library, show procedure steps (inline mode default)
+                    if (libraryContainer) {
+                        libraryContainer.style.display = 'none';
+                    }
+                    if (section4) {
+                        section4.style.display = 'block';
+                    }
+                } else {
+                    console.log(`⚠️  User is in ${currentConstructionMode} mode - NOT resetting`);
+                    // Preserve the user's current mode selection
+                    // Just make sure the visibility is correct
+                    if (currentConstructionMode === 'hybrid' || currentConstructionMode === 'atoms-only') {
+                        if (libraryContainer) libraryContainer.style.display = 'block';
+                    }
+                    if (currentConstructionMode === 'atoms-only') {
+                        if (section4) section4.style.display = 'none';
+                    }
+                }
+
+                // Clear any previously selected atoms when switching templates
+                if (selectedAtomIds.length > 0) {
+                    console.log(`🧹 Clearing ${selectedAtomIds.length} previously selected atoms`);
+                    selectedAtomIds = [];
+                    updateSelectedAtomsPreview();
+                }
+
+                // Load atoms if not already loaded
+                if (availableAtoms.length === 0) {
+                    console.log('📦 Loading atoms for the first time...');
+                    loadAtoms();
+                } else {
+                    console.log(`✅ Atoms already loaded (${availableAtoms.length} available)`);
+                    // Re-render to clear selection highlighting
+                    renderAtoms(availableAtoms);
+                }
             } else {
-                hybridSection.style.display = 'none';
+                console.log('❌ Template does not support hybrid construction (atom selected) - hiding section');
+
+                // Hide hybrid construction section for atoms
+                if (hybridSection) {
+                    hybridSection.style.display = 'none';
+                }
+
+                // Always show procedure steps for atoms (they don't use the hybrid system)
+                if (section4) {
+                    section4.style.display = 'block';
+                }
+
+                // Reset construction mode
+                currentConstructionMode = 'inline';
             }
         }
 
