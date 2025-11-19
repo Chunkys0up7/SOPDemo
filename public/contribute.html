@@ -1178,21 +1178,21 @@
 
                 <!-- Construction Mode Toggle -->
                 <div class="construction-mode-toggle">
-                    <div class="mode-option selected" id="modeInline" onclick="event.stopPropagation(); selectConstructionMode('inline')">
+                    <div class="mode-option selected" id="modeInline" onclick="event.stopPropagation(); event.preventDefault(); selectConstructionMode('inline'); return false;">
                         <div class="mode-option-title">
-                            <input type="radio" name="constructionMode" value="inline" checked onclick="event.stopPropagation()"> ✍️ Write Custom Steps
+                            <input type="radio" name="constructionMode" value="inline" checked onclick="event.stopPropagation(); event.preventDefault(); return false;"> ✍️ Write Custom Steps
                         </div>
                         <div class="mode-option-desc">Write all steps as inline content (traditional approach)</div>
                     </div>
-                    <div class="mode-option" id="modeHybrid" onclick="event.stopPropagation(); selectConstructionMode('hybrid')">
+                    <div class="mode-option" id="modeHybrid" onclick="event.stopPropagation(); event.preventDefault(); selectConstructionMode('hybrid'); return false;">
                         <div class="mode-option-title">
-                            <input type="radio" name="constructionMode" value="hybrid" onclick="event.stopPropagation()"> 🧱 Hybrid Construction
+                            <input type="radio" name="constructionMode" value="hybrid" onclick="event.stopPropagation(); event.preventDefault(); return false;"> 🧱 Hybrid Construction
                         </div>
                         <div class="mode-option-desc">Combine reusable atoms with custom inline steps (recommended)</div>
                     </div>
-                    <div class="mode-option" id="modeAtomsOnly" onclick="event.stopPropagation(); selectConstructionMode('atoms-only')">
+                    <div class="mode-option" id="modeAtomsOnly" onclick="event.stopPropagation(); event.preventDefault(); selectConstructionMode('atoms-only'); return false;">
                         <div class="mode-option-title">
-                            <input type="radio" name="constructionMode" value="atoms-only" onclick="event.stopPropagation()"> 📦 Build from Atoms
+                            <input type="radio" name="constructionMode" value="atoms-only" onclick="event.stopPropagation(); event.preventDefault(); return false;"> 📦 Build from Atoms
                         </div>
                         <div class="mode-option-desc">Assemble entirely from existing reusable components</div>
                     </div>
@@ -2490,6 +2490,11 @@ Expected outcome: [What should be true after this step]"></textarea>
         // Select construction mode
         function selectConstructionMode(mode) {
             console.log(`🔄 Switching to ${mode} mode`);
+
+            // Save current scroll position to prevent page jump
+            const scrollY = window.scrollY;
+            const scrollX = window.scrollX;
+
             currentConstructionMode = mode;
 
             // Update radio buttons
@@ -2528,6 +2533,15 @@ Expected outcome: [What should be true after this step]"></textarea>
                     console.log('✅ Library container is now visible');
                 }
                 if (section4) section4.style.display = 'block';
+
+                // Load atoms if not already loaded
+                if (availableAtoms.length === 0) {
+                    console.log('📦 Loading atoms for hybrid mode...');
+                    loadAtoms();
+                } else {
+                    console.log(`✅ ${availableAtoms.length} atoms already available`);
+                    renderAtoms(availableAtoms);
+                }
             } else if (mode === 'atoms-only') {
                 // Atoms-only mode: show atom library, hide procedure steps
                 console.log('📦 Atoms-only mode: showing library, hiding steps');
@@ -2536,7 +2550,23 @@ Expected outcome: [What should be true after this step]"></textarea>
                     console.log('✅ Library container is now visible');
                 }
                 if (section4) section4.style.display = 'none';
+
+                // Load atoms if not already loaded
+                if (availableAtoms.length === 0) {
+                    console.log('📦 Loading atoms for atoms-only mode...');
+                    loadAtoms();
+                } else {
+                    console.log(`✅ ${availableAtoms.length} atoms already available`);
+                    renderAtoms(availableAtoms);
+                }
             }
+
+            // Restore scroll position after DOM updates (prevents page jump)
+            // Use setTimeout to ensure DOM has finished rendering
+            setTimeout(() => {
+                window.scrollTo(scrollX, scrollY);
+                console.log(`📍 Restored scroll position: ${scrollY}`);
+            }, 0);
         }
 
         // Show/hide hybrid construction section based on template type
