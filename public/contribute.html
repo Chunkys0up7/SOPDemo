@@ -1441,7 +1441,7 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
             document.getElementById('formLayout').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
             // Initialize with one step (only if procedure steps section is visible)
-            const stepsSection = document.querySelector('.form-section:nth-of-type(4)');
+            const stepsSection = document.querySelector('.form-section:nth-of-type(5)'); // Shifted by hybrid construction section
             if (stepCount === 0 && stepsSection && stepsSection.style.display !== 'none') {
                 addStep();
             }
@@ -1520,12 +1520,14 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
 
         function configureFormSections(type) {
             // Get all form sections
+            // NOTE: Section 3.5 (Hybrid Construction) is inserted dynamically, so indexes are shifted
             const section1 = document.querySelector('.form-section:nth-of-type(1)'); // Core Info
             const section2 = document.querySelector('.form-section:nth-of-type(2)'); // Purpose & Scope
             const section3 = document.querySelector('.form-section:nth-of-type(3)'); // Compliance
-            const section4 = document.querySelector('.form-section:nth-of-type(4)'); // Procedure Steps
-            const section5 = document.querySelector('.form-section:nth-of-type(5)'); // Troubleshooting
-            const section6 = document.querySelector('.form-section:nth-of-type(6)'); // Ownership
+            const hybridSection = document.getElementById('hybridConstructionSection'); // Section 3.5 (Hybrid Construction)
+            const section4 = document.querySelector('.form-section:nth-of-type(5)'); // Procedure Steps (was 4, now 5 due to hybrid)
+            const section5 = document.querySelector('.form-section:nth-of-type(6)'); // Troubleshooting (was 5, now 6)
+            const section6 = document.querySelector('.form-section:nth-of-type(7)'); // Ownership (was 6, now 7)
 
             // Get specific fields
             const estimatedDuration = document.getElementById('estimatedDuration');
@@ -2478,7 +2480,7 @@ Expected outcome: [What should be true after this step]"></textarea>
             }
 
             const libraryContainer = document.getElementById('atomLibraryContainer');
-            const section4 = document.querySelector('.form-section:nth-of-type(5)'); // Procedure Steps section
+            const section4 = document.querySelector('.form-section:nth-of-type(5)'); // Procedure Steps (shifted by hybrid construction section)
 
             console.log(`📦 Library container found: ${!!libraryContainer}`);
             console.log(`📝 Steps section found: ${!!section4}`);
@@ -2510,13 +2512,75 @@ Expected outcome: [What should be true after this step]"></textarea>
         // Show/hide hybrid construction section based on template type
         function updateHybridConstructionVisibility(templateType) {
             const hybridSection = document.getElementById('hybridConstructionSection');
+            const libraryContainer = document.getElementById('atomLibraryContainer');
+            const section4 = document.querySelector('.form-section:nth-of-type(5)'); // Procedure Steps
+
+            console.log(`🔄 Updating hybrid construction visibility for: ${templateType}`);
 
             // Show for molecules, organisms, and SOPs only (not for atoms)
             if (templateType === 'molecule' || templateType === 'organism' || templateType === 'sop') {
-                hybridSection.style.display = 'block';
-                loadAtoms(); // Load atoms when section becomes visible
+                console.log('✅ Template supports hybrid construction - showing section');
+
+                // Show hybrid construction section
+                if (hybridSection) {
+                    hybridSection.style.display = 'block';
+                }
+
+                // Reset to inline mode by default when switching templates
+                console.log('🔄 Resetting to inline mode');
+                currentConstructionMode = 'inline';
+
+                // Update UI to reflect inline mode
+                document.querySelectorAll('.mode-option').forEach(opt => opt.classList.remove('selected'));
+                const inlineOption = document.getElementById('modeInline');
+                if (inlineOption) {
+                    inlineOption.classList.add('selected');
+                }
+
+                // Update radio buttons
+                document.querySelectorAll('input[name="constructionMode"]').forEach(radio => {
+                    radio.checked = (radio.value === 'inline');
+                });
+
+                // Hide library, show procedure steps (inline mode default)
+                if (libraryContainer) {
+                    libraryContainer.style.display = 'none';
+                }
+                if (section4) {
+                    section4.style.display = 'block';
+                }
+
+                // Clear any previously selected atoms when switching templates
+                if (selectedAtomIds.length > 0) {
+                    console.log(`🧹 Clearing ${selectedAtomIds.length} previously selected atoms`);
+                    selectedAtomIds = [];
+                    updateSelectedAtomsPreview();
+                }
+
+                // Load atoms if not already loaded
+                if (availableAtoms.length === 0) {
+                    console.log('📦 Loading atoms for the first time...');
+                    loadAtoms();
+                } else {
+                    console.log(`✅ Atoms already loaded (${availableAtoms.length} available)`);
+                    // Re-render to clear selection highlighting
+                    renderAtoms(availableAtoms);
+                }
             } else {
-                hybridSection.style.display = 'none';
+                console.log('❌ Template does not support hybrid construction (atom selected) - hiding section');
+
+                // Hide hybrid construction section for atoms
+                if (hybridSection) {
+                    hybridSection.style.display = 'none';
+                }
+
+                // Always show procedure steps for atoms (they don't use the hybrid system)
+                if (section4) {
+                    section4.style.display = 'block';
+                }
+
+                // Reset construction mode
+                currentConstructionMode = 'inline';
             }
         }
 
