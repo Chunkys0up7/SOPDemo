@@ -933,28 +933,28 @@
         <!-- Template Selection (Full Width) -->
         <h2 style="margin-bottom: 20px;">Step 1: Choose Component Type</h2>
         <div class="template-selection">
-            <div class="template-card" onclick="selectTemplate('atom')">
+            <div class="template-card" onclick="selectTemplate('atom', event)">
                 <div class="badge atom">Atom</div>
                 <h3>Single Component</h3>
                 <p>Create a reusable, single-purpose procedure step.</p>
                 <div class="examples">Examples: Login, Submit Form, Verify Data</div>
             </div>
 
-            <div class="template-card" onclick="selectTemplate('molecule')">
+            <div class="template-card" onclick="selectTemplate('molecule', event)">
                 <div class="badge molecule">Molecule</div>
                 <h3>Multi-Step Procedure</h3>
                 <p>Combine multiple atoms into a cohesive procedure.</p>
                 <div class="examples">Examples: Account Setup, Approval Chain</div>
             </div>
 
-            <div class="template-card" onclick="selectTemplate('organism')">
+            <div class="template-card" onclick="selectTemplate('organism', event)">
                 <div class="badge organism">Organism</div>
                 <h3>Complete Workflow</h3>
                 <p>Build complex workflows from molecules and atoms.</p>
                 <div class="examples">Examples: Onboarding, Wire Transfer</div>
             </div>
 
-            <div class="template-card" onclick="selectTemplate('sop')">
+            <div class="template-card" onclick="selectTemplate('sop', event)">
                 <div class="badge sop">Full SOP</div>
                 <h3>Full Documentation</h3>
                 <p>Complete SOP with metadata, compliance, and QA.</p>
@@ -1178,21 +1178,21 @@
 
                 <!-- Construction Mode Toggle -->
                 <div class="construction-mode-toggle">
-                    <div class="mode-option selected" id="modeInline" onclick="selectConstructionMode('inline')">
+                    <div class="mode-option selected" id="modeInline" onclick="event.stopPropagation(); selectConstructionMode('inline')">
                         <div class="mode-option-title">
-                            <input type="radio" name="constructionMode" value="inline" checked> ✍️ Write Custom Steps
+                            <input type="radio" name="constructionMode" value="inline" checked onclick="event.stopPropagation()"> ✍️ Write Custom Steps
                         </div>
                         <div class="mode-option-desc">Write all steps as inline content (traditional approach)</div>
                     </div>
-                    <div class="mode-option" id="modeHybrid" onclick="selectConstructionMode('hybrid')">
+                    <div class="mode-option" id="modeHybrid" onclick="event.stopPropagation(); selectConstructionMode('hybrid')">
                         <div class="mode-option-title">
-                            <input type="radio" name="constructionMode" value="hybrid"> 🧱 Hybrid Construction
+                            <input type="radio" name="constructionMode" value="hybrid" onclick="event.stopPropagation()"> 🧱 Hybrid Construction
                         </div>
                         <div class="mode-option-desc">Combine reusable atoms with custom inline steps (recommended)</div>
                     </div>
-                    <div class="mode-option" id="modeAtomsOnly" onclick="selectConstructionMode('atoms-only')">
+                    <div class="mode-option" id="modeAtomsOnly" onclick="event.stopPropagation(); selectConstructionMode('atoms-only')">
                         <div class="mode-option-title">
-                            <input type="radio" name="constructionMode" value="atoms-only"> 📦 Build from Atoms
+                            <input type="radio" name="constructionMode" value="atoms-only" onclick="event.stopPropagation()"> 📦 Build from Atoms
                         </div>
                         <div class="mode-option-desc">Assemble entirely from existing reusable components</div>
                     </div>
@@ -1419,7 +1419,7 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
         let selectedTemplate = null;
         let stepCount = 0;
 
-        function selectTemplate(type) {
+        function selectTemplate(type, event) {
             // Check if we're switching templates (form already visible)
             const formLayout = document.getElementById('formLayout');
             const formWasVisible = formLayout.style.display === 'grid';
@@ -1448,7 +1448,9 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
             document.querySelectorAll('.template-card').forEach(card => {
                 card.classList.remove('selected');
             });
-            event.currentTarget.classList.add('selected');
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('selected');
+            }
 
             // Show form layout (both form and AI assistant)
             formLayout.style.display = 'grid';
