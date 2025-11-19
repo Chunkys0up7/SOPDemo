@@ -1,6 +1,6 @@
 # BEFORE BUILD: Source Molecule
 
-**File**: `sop-components/molecules/molecule-new-user-account-setup.md`
+**File**: `../../sop-components/molecules/molecule-new-user-account-setup.md`
 
 This is what the source molecule looks like BEFORE the build process.
 
@@ -220,7 +220,7 @@ This molecule uses a **hybrid construction approach** combining:
 
 **What the build tool will do:**
 1. See `{{include: atom-step-create-ad-account}}`
-2. Load `sop-components/atoms/atom-step-create-ad-account.md`
+2. Load `../../sop-components/atoms/atom-step-create-ad-account.md`
 3. Read entire atom file (500+ lines)
 4. Replace `{{include: ...}}` with full atom content
 5. Result: Step 3 now has complete AD procedure inline

@@ -1,10 +1,12 @@
 # AFTER BUILD: Assembled SOP
 
-**File**: `dist/sops/sop-it-001.md` (auto-generated)
+**File**: `../../dist/sops/sop-it-001.md` (auto-generated)
 
 This is what the complete SOP looks like AFTER the build process assembles all components.
 
 ---
+
+**Note**: This example shows the output in `../../dist/sops/sop-it-001.md` after running the build tool.
 
 ## Auto-Generated Header
 

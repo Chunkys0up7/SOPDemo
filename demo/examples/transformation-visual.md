@@ -484,6 +484,6 @@ The **benefits** of hybrid construction:
 ---
 
 **For more details**:
-- Run the demo: `./hybrid-construction-demo.sh`
-- Read the guide: `../docs/HYBRID-CONSTRUCTION-GUIDE.md`
+- Run the demo: `../hybrid-construction-demo.sh`
+- Read the guide: `../../docs/HYBRID-CONSTRUCTION-GUIDE.md`
 - View examples: `before-build.md` and `after-build.md`
