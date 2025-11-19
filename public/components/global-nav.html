@@ -379,20 +379,17 @@
 
     <!-- Center Section -->
     <div class="nav-center">
-      <a href="/public/browse.html" class="nav-link">Browse</a>
-      <a href="/public/status-dashboard.html" class="nav-link">My Dashboard</a>
-      <a href="/public/sop-metrics.html" class="nav-link">📊 Metrics</a>
-      <a href="/public/approvals.html" class="nav-link">
-        Approvals
-        <span class="badge">3</span>
-      </a>
-      <a href="/public/templates.html" class="nav-link">Templates</a>
-      <a href="/dist/visualizations/sop-graph.html" class="nav-link">Graph</a>
+      <a href="/public/index.html" class="nav-link">Dashboard</a>
+      <a href="/public/sops.html" class="nav-link">Browse SOPs</a>
+      <a href="/public/graphrag.html" class="nav-link">🔍 AI Search</a>
+      <a href="/public/contribute.html" class="nav-link">✏️ Create</a>
+      <a href="/public/graph.html" class="nav-link">📊 Graph</a>
+      <a href="/public/docs.html" class="nav-link">Docs</a>
     </div>
 
     <!-- Right Section -->
     <div class="nav-right">
-      <button class="btn-new-sop" onclick="window.location.href='/public/templates.html'">
+      <button class="btn-new-sop" onclick="window.location.href='/public/contribute.html'">
         <span>+</span>
         <span>New SOP</span>
       </button>
@@ -437,7 +434,18 @@
   });
 
   // Search functionality
-  document.getElementById('global-search')?.addEventListener('input', function(e) {
+  const searchInput = document.getElementById('global-search');
+
+  // Redirect to GraphRAG on Enter key
+  searchInput?.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter' && e.target.value.trim()) {
+      const query = encodeURIComponent(e.target.value.trim());
+      window.location.href = `/public/graphrag.html?q=${query}`;
+    }
+  });
+
+  // Show quick results on input
+  searchInput?.addEventListener('input', function(e) {
     const query = e.target.value.toLowerCase();
 
     if (query.length < 2) return;
@@ -457,10 +465,10 @@
       sop.dept.toLowerCase().includes(query)
     );
 
-    showSearchResults(results);
+    showSearchResults(results, query);
   });
 
-  function showSearchResults(results) {
+  function showSearchResults(results, query) {
     // Remove existing results dropdown
     const existing = document.querySelector('.search-results');
     if (existing) existing.remove();
@@ -503,6 +511,25 @@
       item.addEventListener('mouseleave', () => item.style.background = 'white');
       dropdown.appendChild(item);
     });
+
+    // Add "See all results" link
+    const seeAll = document.createElement('a');
+    seeAll.href = `/public/graphrag.html?q=${encodeURIComponent(query)}`;
+    seeAll.style.cssText = `
+      display: block;
+      padding: 12px 16px;
+      text-decoration: none;
+      color: #667eea;
+      border-top: 1px solid #e2e8f0;
+      font-weight: 600;
+      font-size: 14px;
+      text-align: center;
+      transition: background 0.2s;
+    `;
+    seeAll.innerHTML = `🔍 See all results in AI Search →`;
+    seeAll.addEventListener('mouseenter', () => seeAll.style.background = '#f7fafc');
+    seeAll.addEventListener('mouseleave', () => seeAll.style.background = 'white');
+    dropdown.appendChild(seeAll);
 
     // Position relative to search bar
     const searchBar = document.querySelector('.search-bar');
