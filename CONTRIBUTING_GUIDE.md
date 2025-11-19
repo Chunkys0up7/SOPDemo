@@ -356,7 +356,8 @@ Each component type (Atom, Molecule, Organism, SOP) has different complexity lev
 
 ⚠️ **Important:** The current contribute form shows ALL fields for ALL template types. Use this guide to know which sections to **skip** based on your template type:
 
-### For ATOM - Fill These Only:
+### For ATOM - Fill These Only
+
 1. ✅ Section 1: Core Information (simplified - skip businessFunction, volumeMetric, targetSLA)
 2. ✅ Section 2: Purpose & Scope (keep it simple)
 3. ❌ **SKIP Section 3: Compliance** (unless critical)
@@ -364,7 +365,8 @@ Each component type (Atom, Molecule, Organism, SOP) has different complexity lev
 5. ✅ Section 5: Troubleshooting (basic table only)
 6. ✅ Section 6: Ownership (basic - just owner and maintainer)
 
-### For MOLECULE - Fill These:
+### For MOLECULE - Fill These
+
 1. ✅ Section 1: Core Information (add estimatedDuration)
 2. ✅ Section 2: Purpose & Scope (add prerequisites)
 3. ⚠️ Section 3: Compliance (if applicable)
@@ -373,7 +375,8 @@ Each component type (Atom, Molecule, Organism, SOP) has different complexity lev
 6. ✅ Section 6: Ownership (add approver)
 7. ➕ **ADD:** List of atoms used (composedOf)
 
-### For ORGANISM - Fill These:
+### For ORGANISM - Fill These
+
 1. ✅ Section 1: Core Information (add businessFunction)
 2. ✅ Section 2: Purpose & Scope (detailed)
 3. ✅ Section 3: Compliance & Regulatory (required)
@@ -383,7 +386,7 @@ Each component type (Atom, Molecule, Organism, SOP) has different complexity lev
 7. ➕ **ADD:** List of molecules and atoms used (composedOf)
 8. ➕ **ADD:** Roles & Responsibilities
 
-### For FULL SOP - Fill Everything:
+### For FULL SOP - Fill Everything
 1. ✅ Section 1: Core Information (**all fields**)
 2. ✅ Section 2: Purpose & Scope (comprehensive)
 3. ✅ Section 3: Compliance & Regulatory (detailed)
@@ -442,12 +445,13 @@ A future version of the contribute form will **dynamically show/hide sections** 
 **Template:** Molecule
 **Purpose:** Account Setup Workflow
 **Fill Out:**
+
 - (All Atom fields above)
-- + Estimated Duration: "30 minutes"
-- + Composed Of: [atom-login, atom-verify-email, atom-set-password]
-- + Prerequisites: "- [ ] User has been approved\n- [ ] Email address verified"
-- + Steps: "Step 1: Login\nStep 2: Verify Email\nStep 3: Set Password"
-- + Approver: IT Manager
+- Estimated Duration: "30 minutes"
+- Composed Of: [atom-login, atom-verify-email, atom-set-password]
+- Prerequisites: "- [ ] User has been approved\n- [ ] Email address verified"
+- Steps: "Step 1: Login\nStep 2: Verify Email\nStep 3: Set Password"
+- Approver: IT Manager
 
 **Skip:** Detailed compliance, Escalation matrix, KPIs
 

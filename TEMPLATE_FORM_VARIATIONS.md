@@ -1,14 +1,14 @@
 # Template Form Variations - Implementation Summary
 
-**Date:** 2025-11-18
-**Feature:** Dynamic form sections based on template type selection
-**File:** `public/contribute.html`
+*_Date:_* 2025-11-18
+*_Feature:_* Dynamic form sections based on template type selection
+*_File:_* `public/contribute.html`
 
 ---
 
 ## Overview
 
-The contribute form now **dynamically shows/hides sections** based on the selected template type (Atom, Molecule, Organism, or SOP). This ensures users only see relevant fields for their chosen complexity level.
+The contribute form now *_dynamically shows/hides sections_* based on the selected template type (Atom, Molecule, Organism, or SOP). This ensures users only see relevant fields for their chosen complexity level.
 
 ---
 
@@ -22,7 +22,7 @@ This is the simplest template with basic fields only.
 ```
 
 ### Visible Sections
-1. ✅ **Core Information** (simplified)
+1. ✅ *_Core Information_* (simplified)
    - Title ✅
    - Department ✅
    - Process Category ✅
@@ -31,32 +31,32 @@ This is the simplest template with basic fields only.
    - Target Audience ✅
    - Search Keywords ✅
 
-2. ✅ **Purpose & Description**
+2. ✅ *_Purpose & Description_*
    - Purpose ✅
    - Scope - What IS Covered ✅
    - Scope - What is NOT Covered ✅
-   - *Subtitle:* "Simple description of what this component does"
+   - _Subtitle:_ "Simple description of what this component does"
 
-3. ❌ **Compliance Section** (completely hidden)
+3. ❌ *_Compliance Section_* (completely hidden)
 
-4. ❌ **Procedure Steps** (completely hidden - atoms are single-purpose)
+4. ❌ *_Procedure Steps_* (completely hidden - atoms are single-purpose)
 
-5. ✅ **Troubleshooting**
+5. ✅ *_Troubleshooting_*
    - Troubleshooting Matrix ✅
-   - *Subtitle:* "Basic troubleshooting table for common issues"
+   - _Subtitle:_ "Basic troubleshooting table for common issues"
 
-6. ✅ **Ownership** (basic)
+6. ✅ *_Ownership_* (basic)
    - Owner (Department) ✅
    - Maintainer (Person/Role) ✅
    - ❌ Approver (hidden)
    - ❌ Additional Reviewers (hidden)
-   - *Subtitle:* "Basic ownership information"
+   - _Subtitle:_ "Basic ownership information"
 
 ### Section Numbering
 - Section 1: Core Information
 - Section 2: Purpose & Description
-- Section 3: Troubleshooting *(renumbered from 5)*
-- Section 4: Ownership *(renumbered from 6)*
+- Section 3: Troubleshooting _(renumbered from 5)_
+- Section 4: Ownership _(renumbered from 6)_
 
 ### Required Fields: ~10 fields
 ### Estimated Output: ~128 lines
@@ -73,41 +73,41 @@ Moderate complexity with optional compliance.
 ```
 
 ### Visible Sections
-1. ✅ **Core Information**
+1. ✅ *_Core Information_*
    - Title ✅
    - Department ✅
    - Process Category ✅
    - Complexity Level ✅
-   - ✅ **Estimated Duration** (shown)
+   - ✅ *_Estimated Duration_* (shown)
    - Target Audience ✅
    - Search Keywords ✅
 
-2. ✅ **Purpose & Scope**
+2. ✅ *_Purpose & Scope_*
    - Purpose ✅
    - Scope - What IS Covered ✅
    - Scope - What is NOT Covered ✅
-   - *Subtitle:* "Define the multi-step procedure and prerequisites"
+   - _Subtitle:_ "Define the multi-step procedure and prerequisites"
 
-3. ⚠️ **Compliance** (optional - highlighted in yellow)
+3. ⚠️ *_Compliance_* (optional - highlighted in yellow)
    - Compliance Frameworks (checkboxes) ⚠️
    - ❌ Audit Frequency (not required)
    - ✅ Review Frequency (required)
-   - *Subtitle:* "Optional: Only if compliance frameworks apply"
-   - *Visual:* Yellow background (#fffef0) with orange border (#FFA726)
+   - _Subtitle:_ "Optional: Only if compliance frameworks apply"
+   - _Visual:_ Yellow background (#fffef0) with orange border (#FFA726)
 
-4. ✅ **Procedure Steps**
+4. ✅ *_Procedure Steps_*
    - Dynamic step builder ✅
    - Step name, actions, decision logic, quality checkpoints ✅
-   - *Subtitle:* "Multiple steps combining atoms"
+   - _Subtitle:_ "Multiple steps combining atoms"
 
-5. ✅ **Troubleshooting**
+5. ✅ *_Troubleshooting_*
    - Troubleshooting Matrix ✅
-   - *Subtitle:* "Detailed troubleshooting matrix"
+   - _Subtitle:_ "Detailed troubleshooting matrix"
 
-6. ✅ **Ownership**
+6. ✅ *_Ownership_*
    - Owner (Department) ✅
    - Maintainer (Person/Role) ✅
-   - ✅ **Approver** (shown)
+   - ✅ *_Approver_* (shown)
    - ❌ Additional Reviewers (hidden)
 
 ### Section Numbering
@@ -133,7 +133,7 @@ Complex template with required compliance tracking.
 ```
 
 ### Visible Sections
-1. ✅ **Core Information** (comprehensive)
+1. ✅ *_Core Information_* (comprehensive)
    - Title ✅
    - Department ✅
    - Process Category ✅
@@ -142,33 +142,33 @@ Complex template with required compliance tracking.
    - Target Audience ✅
    - Search Keywords ✅
 
-2. ✅ **Purpose & Scope**
+2. ✅ *_Purpose & Scope_*
    - Purpose ✅
    - Scope - What IS Covered ✅
    - Scope - What is NOT Covered ✅
-   - *Subtitle:* "Detailed workflow description with roles and responsibilities"
+   - _Subtitle:_ "Detailed workflow description with roles and responsibilities"
 
-3. ✅ **Compliance & Regulatory** (required)
+3. ✅ *_Compliance & Regulatory_* (required)
    - Compliance Frameworks (checkboxes) ✅
    - ✅ Audit Frequency (required)
    - ✅ Review Frequency (required)
-   - *Subtitle:* "Required: Identify all regulatory requirements"
-   - *Visual:* Normal white background
+   - _Subtitle:_ "Required: Identify all regulatory requirements"
+   - _Visual:_ Normal white background
 
-4. ✅ **Workflow Steps**
+4. ✅ *_Workflow Steps_*
    - Dynamic step builder ✅
    - Step name, actions, decision logic, quality checkpoints ✅
-   - *Subtitle:* "Multi-phase workflow combining molecules and atoms"
+   - _Subtitle:_ "Multi-phase workflow combining molecules and atoms"
 
-5. ✅ **Troubleshooting**
+5. ✅ *_Troubleshooting_*
    - Troubleshooting Matrix ✅
-   - *Subtitle:* "Comprehensive troubleshooting with escalation"
+   - _Subtitle:_ "Comprehensive troubleshooting with escalation"
 
-6. ✅ **Governance** (full details)
+6. ✅ *_Governance_* (full details)
    - Owner (Department) ✅
    - Maintainer (Person/Role) ✅
    - ✅ Approver ✅
-   - ✅ **Additional Reviewers** (shown)
+   - ✅ *_Additional Reviewers_* (shown)
 
 ### Section Numbering
 - Section 1: Core Information
@@ -193,7 +193,7 @@ All fields and sections are required for comprehensive documentation.
 ```
 
 ### Visible Sections
-1. ✅ **Core Information** (all 20+ metadata fields)
+1. ✅ *_Core Information_* (all 20+ metadata fields)
    - Title ✅
    - Department ✅
    - Process Category ✅
@@ -202,28 +202,28 @@ All fields and sections are required for comprehensive documentation.
    - Target Audience ✅
    - Search Keywords ✅
 
-2. ✅ **Purpose & Scope**
+2. ✅ *_Purpose & Scope_*
    - Purpose ✅
    - Scope - What IS Covered ✅
    - Scope - What is NOT Covered ✅
-   - *Subtitle:* "Comprehensive documentation with business value and strategic alignment"
+   - _Subtitle:_ "Comprehensive documentation with business value and strategic alignment"
 
-3. ✅ **Compliance & Regulatory** (required, detailed)
+3. ✅ *_Compliance & Regulatory_* (required, detailed)
    - Compliance Frameworks (checkboxes) ✅
    - ✅ Audit Frequency (required) ✅
    - ✅ Review Frequency (required) ✅
-   - *Subtitle:* "Required: Detailed regulatory and compliance tracking"
+   - _Subtitle:_ "Required: Detailed regulatory and compliance tracking"
 
-4. ✅ **Procedure Steps** (comprehensive)
+4. ✅ *_Procedure Steps_* (comprehensive)
    - Dynamic step builder ✅
    - Step name, actions, decision logic, quality checkpoints ✅
-   - *Subtitle:* "Comprehensive steps with full decision logic and quality controls"
+   - _Subtitle:_ "Comprehensive steps with full decision logic and quality controls"
 
-5. ✅ **Troubleshooting** (full matrix)
+5. ✅ *_Troubleshooting_* (full matrix)
    - Troubleshooting Matrix ✅
-   - *Subtitle:* "Comprehensive troubleshooting matrix with escalation paths"
+   - _Subtitle:_ "Comprehensive troubleshooting matrix with escalation paths"
 
-6. ✅ **Governance** (complete ownership chain)
+6. ✅ *_Governance_* (complete ownership chain)
    - Owner (Department) ✅
    - Maintainer (Person/Role) ✅
    - ✅ Approver ✅
@@ -246,16 +246,16 @@ All fields and sections are required for comprehensive documentation.
 
 | Feature | Atom | Molecule | Organism | SOP |
 |---------|------|----------|----------|-----|
-| **Sections Visible** | 4 | 6 | 6 | 6 |
-| **Sections Hidden** | 2 | 0 | 0 | 0 |
-| **Estimated Duration Field** | ❌ Hidden | ✅ Shown | ✅ Shown | ✅ Shown |
-| **Compliance Section** | ❌ Hidden | ⚠️ Optional | ✅ Required | ✅ Required |
-| **Procedure Steps** | ❌ Hidden | ✅ Shown | ✅ Shown | ✅ Shown |
-| **Approver Field** | ❌ Hidden | ✅ Shown | ✅ Shown | ✅ Shown |
-| **Reviewers Field** | ❌ Hidden | ❌ Hidden | ✅ Shown | ✅ Shown |
-| **Audit Frequency Required** | ❌ No | ❌ No | ✅ Yes | ✅ Yes |
-| **Review Frequency Required** | ❌ No | ✅ Yes | ✅ Yes | ✅ Yes |
-| **Section Renumbering** | ✅ Yes (1-4) | ❌ No (1-6) | ❌ No (1-6) | ❌ No (1-6) |
+| *_Sections Visible_* | 4 | 6 | 6 | 6 |
+| *_Sections Hidden_* | 2 | 0 | 0 | 0 |
+| *_Estimated Duration Field_* | ❌ Hidden | ✅ Shown | ✅ Shown | ✅ Shown |
+| *_Compliance Section_* | ❌ Hidden | ⚠️ Optional | ✅ Required | ✅ Required |
+| *_Procedure Steps_* | ❌ Hidden | ✅ Shown | ✅ Shown | ✅ Shown |
+| *_Approver Field_* | ❌ Hidden | ✅ Shown | ✅ Shown | ✅ Shown |
+| *_Reviewers Field_* | ❌ Hidden | ❌ Hidden | ✅ Shown | ✅ Shown |
+| *_Audit Frequency Required_* | ❌ No | ❌ No | ✅ Yes | ✅ Yes |
+| *_Review Frequency Required_* | ❌ No | ✅ Yes | ✅ Yes | ✅ Yes |
+| *_Section Renumbering_* | ✅ Yes (1-4) | ❌ No (1-6) | ❌ No (1-6) | ❌ No (1-6) |
 
 ---
 
@@ -296,11 +296,11 @@ All fields and sections are required for comprehensive documentation.
 
 ### Visual Indicators
 
-**Compliance Section Styling:**
-- **Molecule:** Yellow background (#fffef0) with orange left border (#FFA726) to indicate optional status
-- **Organism/SOP:** Normal white background to indicate required status
+*_Compliance Section Styling:_*
+- *_Molecule:_* Yellow background (#fffef0) with orange left border (#FFA726) to indicate optional status
+- *_Organism/SOP:_* Normal white background to indicate required status
 
-**Template Banner:**
+*_Template Banner:_*
 - Shows icon matching template card (🔵 🟣 🟢 🟠)
 - Lists all sections with strikethrough for hidden ones
 - Provides complexity estimate (~128, ~201, ~297, ~646 lines)
@@ -309,23 +309,23 @@ All fields and sections are required for comprehensive documentation.
 
 ## User Experience Flow
 
-1. **User visits contribute page**
+1. *_User visits contribute page_*
    - Sees 4 template cards (Atom, Molecule, Organism, SOP)
    - Each card shows complexity level and examples
 
-2. **User selects template type**
+2. *_User selects template type_*
    - Card highlights with blue border and light blue background
    - Template banner appears with icon, description, and section list
    - Form appears below with only relevant sections visible
    - Section numbers adjust dynamically (1-4 for Atom, 1-6 for others)
 
-3. **User fills out form**
+3. *_User fills out form_*
    - Only sees fields relevant to chosen complexity level
    - Required fields clearly marked with red asterisk
    - Optional compliance section highlighted in yellow (Molecule only)
    - Helpful hints and examples provided for each field
 
-4. **User submits or saves draft**
+4. *_User submits or saves draft_*
    - Form validates only visible required fields
    - Submission includes template type in formData
 
@@ -333,12 +333,12 @@ All fields and sections are required for comprehensive documentation.
 
 ## Benefits
 
-✅ **Reduced Cognitive Load:** Users only see fields relevant to their template type
-✅ **Faster Completion:** Atoms take minutes vs. hours for full SOPs
-✅ **Clearer Requirements:** Visual indicators show required vs. optional sections
-✅ **Progressive Complexity:** Start simple (Atom) and grow to complex (SOP)
-✅ **Consistent Structure:** All templates follow same atomic design principles
-✅ **Better UX:** Dynamic section numbering maintains logical flow
+✅ *_Reduced Cognitive Load:_* Users only see fields relevant to their template type
+✅ *_Faster Completion:_* Atoms take minutes vs. hours for full SOPs
+✅ *_Clearer Requirements:_* Visual indicators show required vs. optional sections
+✅ *_Progressive Complexity:_* Start simple (Atom) and grow to complex (SOP)
+✅ *_Consistent Structure:_* All templates follow same atomic design principles
+✅ *_Better UX:_* Dynamic section numbering maintains logical flow
 
 ---
 
@@ -390,11 +390,11 @@ All fields and sections are required for comprehensive documentation.
 
 ---
 
-**Implementation Status:** ✅ Complete
-**Testing Status:** ✅ Verified
-**Documentation:** ✅ Complete
+*_Implementation Status:_* ✅ Complete
+*_Testing Status:_* ✅ Verified
+*_Documentation:_* ✅ Complete
 
-**Ready for:**
+*_Ready for:_*
 - User testing
 - Commit and push
 - Pull request creation
