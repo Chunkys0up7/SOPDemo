@@ -606,7 +606,7 @@
 
         /* Footer */
         .footer {
-            background: #1a1a1a;
+            background: white;
             color: white;
             padding: 30px 40px;
             margin-top: 80px;
@@ -629,6 +629,268 @@
                 order: -1;
             }
         }
+        /* ============================================ */
+        /* HYBRID CONSTRUCTION - ATOM LIBRARY STYLES */
+        /* ============================================ */
+
+        .construction-mode-toggle {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .mode-option {
+            flex: 1;
+            padding: 20px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .mode-option:hover {
+            border-color: #0052CC;
+            box-shadow: 0 2px 8px rgba(0,82,204,0.1);
+        }
+
+        .mode-option.selected {
+            border-color: #0052CC;
+            background: #f0f7ff;
+        }
+
+        .mode-option input[type="radio"] {
+            margin-right: 8px;
+        }
+
+        .mode-option-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 5px;
+        }
+
+        .mode-option-desc {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .atom-library-container {
+            border: 2px solid #e3f2fd;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+
+        .atom-library-header {
+            background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+            color: white;
+            padding: 20px;
+        }
+
+        .atom-library-header h3 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+        }
+
+        .atom-library-header p {
+            margin: 0;
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .atom-library-controls {
+            padding: 20px;
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .atom-search {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .atom-search input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .atom-filter {
+            flex: 0 0 auto;
+        }
+
+        .atom-filter select {
+            padding: 10px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            background: white;
+        }
+
+        .atom-library-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+            padding: 20px;
+            background: #fafafa;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .atom-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .atom-card:hover {
+            border-color: #1976d2;
+            box-shadow: 0 4px 12px rgba(25,118,210,0.15);
+        }
+
+        .atom-card.selected {
+            border-color: #1976d2;
+            background: #f0f7ff;
+        }
+
+        .atom-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .atom-card-checkbox {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .atom-card-badge {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .atom-card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .atom-card-id {
+            font-size: 12px;
+            color: #666;
+            font-family: 'Courier New', monospace;
+            background: #f5f5f5;
+            padding: 3px 8px;
+            border-radius: 3px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .atom-card-meta {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .atom-card-meta-item {
+            font-size: 11px;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .atom-library-empty {
+            padding: 40px;
+            text-align: center;
+            color: #999;
+        }
+
+        .selected-atoms-preview {
+            background: #f8f9fa;
+            border: 2px dashed #1976d2;
+            border-radius: 6px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .selected-atoms-preview h4 {
+            margin: 0 0 15px 0;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1976d2;
+        }
+
+        .selected-atoms-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .selected-atom-item {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 4px;
+            border-left: 3px solid #1976d2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .selected-atom-code {
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #d32f2f;
+        }
+
+        .selected-atom-remove {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .selected-atom-remove:hover {
+            background: #d32f2f;
+        }
+
+        .atoms-count-badge {
+            background: #1976d2;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
     </style>
 </head>
 <body>
@@ -909,6 +1171,86 @@
                 </div>
             </div>
 
+            <!-- Section 3.5: Hybrid Construction - Atom Library (Only for Molecules/Organisms/SOPs) -->
+            <div class="form-section" id="hybridConstructionSection" style="display: none;">
+                <h2><span class="form-section-number">3.5</span> Build from Existing Components<span class="atoms-count-badge" id="selectedAtomsCount">0 selected</span></h2>
+                <p class="subtitle">Choose how to construct this procedure: use existing reusable atoms or write custom steps</p>
+
+                <!-- Construction Mode Toggle -->
+                <div class="construction-mode-toggle">
+                    <div class="mode-option selected" id="modeInline" onclick="selectConstructionMode('inline')">
+                        <div class="mode-option-title">
+                            <input type="radio" name="constructionMode" value="inline" checked> ✍️ Write Custom Steps
+                        </div>
+                        <div class="mode-option-desc">Write all steps as inline content (traditional approach)</div>
+                    </div>
+                    <div class="mode-option" id="modeHybrid" onclick="selectConstructionMode('hybrid')">
+                        <div class="mode-option-title">
+                            <input type="radio" name="constructionMode" value="hybrid"> 🧱 Hybrid Construction
+                        </div>
+                        <div class="mode-option-desc">Combine reusable atoms with custom inline steps (recommended)</div>
+                    </div>
+                    <div class="mode-option" id="modeAtomsOnly" onclick="selectConstructionMode('atoms-only')">
+                        <div class="mode-option-title">
+                            <input type="radio" name="constructionMode" value="atoms-only"> 📦 Build from Atoms
+                        </div>
+                        <div class="mode-option-desc">Assemble entirely from existing reusable components</div>
+                    </div>
+                </div>
+
+                <!-- Atom Library (shown when hybrid or atoms-only mode selected) -->
+                <div class="atom-library-container" id="atomLibraryContainer" style="display: none;">
+                    <div class="atom-library-header">
+                        <h3>🔍 Atom Library - Reusable Components</h3>
+                        <p>Browse and select existing atoms to include in your procedure. Each atom is a self-contained, tested procedure step.</p>
+                    </div>
+
+                    <!-- Search and Filters -->
+                    <div class="atom-library-controls">
+                        <div class="atom-search">
+                            <input type="text" id="atomSearch" placeholder="🔍 Search atoms by title, ID, or keyword..." oninput="filterAtoms()">
+                        </div>
+                        <div class="atom-filter">
+                            <select id="atomFilterDepartment" onchange="filterAtoms()">
+                                <option value="">All Departments</option>
+                                <option value="IT">IT & Technology</option>
+                                <option value="HR">Human Resources</option>
+                                <option value="Finance">Finance</option>
+                                <option value="Operations">Operations</option>
+                                <option value="Security">Security</option>
+                                <option value="Compliance">Compliance</option>
+                            </select>
+                        </div>
+                        <div class="atom-filter">
+                            <select id="atomFilterType" onchange="filterAtoms()">
+                                <option value="">All Types</option>
+                                <option value="procedural-step">Procedural Step</option>
+                                <option value="form">Form/Template</option>
+                                <option value="reference">Reference/Checklist</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Atom Grid -->
+                    <div class="atom-library-grid" id="atomLibraryGrid">
+                        <div class="atom-library-empty">
+                            <p>⏳ Loading atoms...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Selected Atoms Preview -->
+                <div class="selected-atoms-preview" id="selectedAtomsPreview" style="display: none;">
+                    <h4>📋 Selected Atoms - Build Preview</h4>
+                    <p style="font-size: 13px; color: #666; margin-bottom: 15px;">
+                        These atoms will be included in your procedure. During build, <code>{{"{{"}}include: atom-id{{"}}"}}</code> will expand to full content.
+                    </p>
+                    <div class="selected-atoms-list" id="selectedAtomsList">
+                        <!-- Selected atoms will appear here -->
+                    </div>
+                </div>
+            </div>
+
             <!-- Section 4: Procedure Steps -->
             <div class="form-section">
                 <h2><span class="form-section-number">4</span> Procedure Steps</h2>
@@ -1000,6 +1342,15 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
                             </div>
                         </div>
 
+                        <!-- Related SOPs -->
+                        <div class="ai-suggestion" id="aiRelatedSOPsSuggestion" style="display: none;">
+                            <div class="ai-suggestion-title">
+                                <span>🔗</span> Related SOPs Found
+                            </div>
+                            <div class="ai-suggestion-content" id="aiRelatedSOPsContent"></div>
+                            <button class="ai-action-btn" onclick="generateOutlineFromSimilar()">✨ Generate Outline from Similar SOPs</button>
+                        </div>
+
                         <!-- Suggested Keywords -->
                         <div class="ai-suggestion" id="aiKeywordsSuggestion" style="display: none;">
                             <div class="ai-suggestion-title">
@@ -1082,6 +1433,9 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
 
             // Configure form sections based on template type
             configureFormSections(type);
+
+            // Show/hide hybrid construction section
+            updateHybridConstructionVisibility(type);
 
             // Scroll to form
             document.getElementById('formLayout').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1395,8 +1749,18 @@ Expected outcome: [What should be true after this step]"></textarea>
         let aiSuggestedKeywords = [];
         let aiSuggestedDepartment = '';
         let aiSuggestedCompliance = [];
+        let sopGraphData = null; // Loaded from mortgage-sop-graph.json
 
         function setupAIAssistance() {
+            // Load SOP graph data for context-aware suggestions
+            fetch('../graph/mortgage-sop-graph.json')
+                .then(response => response.json())
+                .then(data => {
+                    sopGraphData = data;
+                    console.log('Loaded SOP graph for AI assistance:', data.metadata.nodeCount, 'nodes');
+                })
+                .catch(err => console.warn('Could not load SOP graph for AI assistance:', err));
+
             // Add listeners for title input to trigger AI suggestions
             const titleInput = document.getElementById('title');
             if (titleInput) {
@@ -1415,12 +1779,38 @@ Expected outcome: [What should be true after this step]"></textarea>
             };
         }
 
+        let currentSimilarSOPs = []; // Store for use in generation
+
         function generateAISuggestions() {
             const title = document.getElementById('title')?.value || '';
             if (title.length < 5) return;
 
-            // Simulate AI keyword extraction
-            const keywords = extractKeywordsFromTitle(title);
+            // Find similar SOPs for context-aware suggestions
+            const similarSOPs = findSimilarSOPsForTitle(title);
+            currentSimilarSOPs = similarSOPs;
+
+            // Show related SOPs if found
+            if (similarSOPs.length > 0) {
+                const relatedContent = document.getElementById('aiRelatedSOPsContent');
+                relatedContent.innerHTML = `
+                    <p style="margin-bottom: 10px;">Found ${similarSOPs.length} similar SOP(s) that can help guide your writing:</p>
+                    <ul style="margin-left: 16px; font-size: 12px; line-height: 1.8;">
+                        ${similarSOPs.map(sop => `
+                            <li><strong>${sop.title}</strong><br>
+                                <span style="color: #666; font-size: 11px;">
+                                    ${sop.department} | ${sop.complianceFrameworks?.length || 0} frameworks
+                                </span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                `;
+                document.getElementById('aiRelatedSOPsSuggestion').style.display = 'block';
+            } else {
+                document.getElementById('aiRelatedSOPsSuggestion').style.display = 'none';
+            }
+
+            // Extract keywords - enhanced with similar SOP data
+            const keywords = extractKeywordsFromTitle(title, similarSOPs);
             aiSuggestedKeywords = keywords;
 
             // Show keyword suggestions
@@ -1430,17 +1820,19 @@ Expected outcome: [What should be true after this step]"></textarea>
             ).join('');
             document.getElementById('aiKeywordsSuggestion').style.display = 'block';
 
-            // Suggest department based on title
-            const department = suggestDepartment(title);
+            // Suggest department - enhanced with similar SOP data
+            const department = suggestDepartment(title, similarSOPs);
             if (department) {
                 aiSuggestedDepartment = department;
-                document.getElementById('aiDepartmentText').textContent =
-                    `Based on your title, this seems like a ${department} procedure.`;
+                const reasoning = similarSOPs.length > 0
+                    ? `Based on your title and ${similarSOPs.length} similar SOP(s), this seems like a ${department} procedure.`
+                    : `Based on your title, this seems like a ${department} procedure.`;
+                document.getElementById('aiDepartmentText').textContent = reasoning;
                 document.getElementById('aiDepartmentSuggestion').style.display = 'block';
             }
 
-            // Suggest compliance frameworks
-            const compliance = suggestComplianceFrameworks(title);
+            // Suggest compliance frameworks - enhanced with similar SOP data
+            const compliance = suggestComplianceFrameworks(title, similarSOPs);
             if (compliance.length > 0) {
                 aiSuggestedCompliance = compliance;
                 const complianceChips = document.getElementById('aiComplianceChips');
@@ -1451,8 +1843,55 @@ Expected outcome: [What should be true after this step]"></textarea>
             }
         }
 
-        function extractKeywordsFromTitle(title) {
-            // Simple AI simulation - extract meaningful words
+        function findSimilarSOPsForTitle(title) {
+            if (!sopGraphData) return [];
+
+            const titleLower = title.toLowerCase();
+            const titleWords = titleLower.split(/\s+/).filter(w => w.length > 3);
+
+            const sops = Object.values(sopGraphData.nodes).filter(n => n.type === 'sop');
+
+            // Score each SOP by similarity
+            const scoredSOPs = sops.map(sop => {
+                let score = 0;
+                const sopTitle = (sop.title || '').toLowerCase();
+
+                // Title word overlap
+                titleWords.forEach(word => {
+                    if (sopTitle.includes(word)) score += 20;
+                });
+
+                // Category match
+                if (sop.category && titleLower.includes(sop.category.toLowerCase())) {
+                    score += 15;
+                }
+
+                // Department keywords
+                const deptKeywords = {
+                    'Underwriting': ['underwrite', 'credit', 'loan', 'qualify'],
+                    'Closing': ['close', 'closing', 'settlement', 'title'],
+                    'Compliance': ['compliance', 'regulatory', 'audit'],
+                    'Operations': ['process', 'procedure', 'workflow']
+                };
+
+                if (sop.department && deptKeywords[sop.department]) {
+                    deptKeywords[sop.department].forEach(kw => {
+                        if (titleLower.includes(kw)) score += 10;
+                    });
+                }
+
+                return { sop, score };
+            });
+
+            return scoredSOPs
+                .filter(s => s.score > 20)
+                .sort((a, b) => b.score - a.score)
+                .slice(0, 3)
+                .map(s => s.sop);
+        }
+
+        function extractKeywordsFromTitle(title, similarSOPs = []) {
+            // Extract meaningful words from title
             const stopWords = ['the', 'a', 'an', 'and', 'or', 'but', 'for', 'to', 'of', 'in', 'on', 'at'];
             const words = title.toLowerCase()
                 .replace(/[^\w\s]/g, ' ')
@@ -1468,7 +1907,10 @@ Expected outcome: [What should be true after this step]"></textarea>
                 'customer': ['client', 'service', 'support'],
                 'security': ['access', 'authentication', 'audit'],
                 'compliance': ['regulatory', 'audit', 'framework'],
-                'data': ['information', 'database', 'records']
+                'data': ['information', 'database', 'records'],
+                'underwriting': ['credit', 'loan', 'approval', 'qualify'],
+                'mortgage': ['loan', 'lending', 'property', 'financing'],
+                'closing': ['settlement', 'title', 'escrow']
             };
 
             const keywords = [...new Set(words)];
@@ -1478,10 +1920,25 @@ Expected outcome: [What should be true after this step]"></textarea>
                 }
             });
 
-            return keywords.slice(0, 8);
+            // Enhance with tags from similar SOPs
+            if (similarSOPs.length > 0) {
+                const sopTags = new Set();
+                similarSOPs.forEach(sop => {
+                    if (sop.tags && Array.isArray(sop.tags)) {
+                        sop.tags.forEach(tag => sopTags.add(tag.toLowerCase()));
+                    }
+                });
+                // Add most relevant tags
+                const relevantTags = Array.from(sopTags)
+                    .filter(tag => !keywords.includes(tag))
+                    .slice(0, 3);
+                keywords.push(...relevantTags);
+            }
+
+            return keywords.slice(0, 10);
         }
 
-        function suggestDepartment(title) {
+        function suggestDepartment(title, similarSOPs = []) {
             const titleLower = title.toLowerCase();
             const deptKeywords = {
                 'IT': ['password', 'login', 'system', 'server', 'network', 'database', 'software'],
@@ -1490,9 +1947,27 @@ Expected outcome: [What should be true after this step]"></textarea>
                 'Compliance': ['audit', 'regulatory', 'compliance', 'risk', 'policy'],
                 'Security': ['security', 'access', 'authentication', 'firewall', 'breach'],
                 'Customer Service': ['customer', 'client', 'support', 'ticket', 'complaint'],
-                'Operations': ['process', 'workflow', 'operations', 'procedure', 'task']
+                'Operations': ['process', 'workflow', 'operations', 'procedure', 'task'],
+                'Underwriting': ['underwriting', 'credit', 'loan', 'qualify', 'approval'],
+                'Closing': ['closing', 'settlement', 'title', 'escrow']
             };
 
+            // Check if similar SOPs have consistent department
+            if (similarSOPs.length > 0) {
+                const deptCounts = {};
+                similarSOPs.forEach(sop => {
+                    if (sop.department) {
+                        deptCounts[sop.department] = (deptCounts[sop.department] || 0) + 1;
+                    }
+                });
+                const topDept = Object.entries(deptCounts)
+                    .sort((a, b) => b[1] - a[1])[0];
+                if (topDept && topDept[1] >= 2) {
+                    return topDept[0];
+                }
+            }
+
+            // Fallback to keyword matching
             for (const [dept, keywords] of Object.entries(deptKeywords)) {
                 if (keywords.some(kw => titleLower.includes(kw))) {
                     return dept;
@@ -1501,27 +1976,51 @@ Expected outcome: [What should be true after this step]"></textarea>
             return '';
         }
 
-        function suggestComplianceFrameworks(title) {
+        function suggestComplianceFrameworks(title, similarSOPs = []) {
             const titleLower = title.toLowerCase();
-            const frameworks = [];
+            const frameworks = new Set();
 
+            // Keyword-based detection
             if (titleLower.includes('data') || titleLower.includes('privacy') || titleLower.includes('gdpr')) {
-                frameworks.push('GDPR');
+                frameworks.add('GDPR');
             }
             if (titleLower.includes('payment') || titleLower.includes('credit') || titleLower.includes('card')) {
-                frameworks.push('PCI-DSS');
+                frameworks.add('PCI-DSS');
             }
             if (titleLower.includes('health') || titleLower.includes('medical') || titleLower.includes('patient')) {
-                frameworks.push('HIPAA');
+                frameworks.add('HIPAA');
             }
             if (titleLower.includes('financial') || titleLower.includes('audit') || titleLower.includes('sox')) {
-                frameworks.push('SOX');
+                frameworks.add('SOX');
             }
             if (titleLower.includes('quality') || titleLower.includes('iso')) {
-                frameworks.push('ISO 9001');
+                frameworks.add('ISO 9001');
+            }
+            if (titleLower.includes('fha') || titleLower.includes('hud') || titleLower.includes('mortgage')) {
+                frameworks.add('FHA Handbook 4000.1');
+            }
+            if (titleLower.includes('trid') || titleLower.includes('disclosure')) {
+                frameworks.add('TRID');
             }
 
-            return frameworks;
+            // Enhance with frameworks from similar SOPs
+            if (similarSOPs.length > 0) {
+                const frameworkCounts = {};
+                similarSOPs.forEach(sop => {
+                    if (sop.complianceFrameworks && Array.isArray(sop.complianceFrameworks)) {
+                        sop.complianceFrameworks.forEach(fw => {
+                            frameworkCounts[fw] = (frameworkCounts[fw] || 0) + 1;
+                        });
+                    }
+                });
+
+                // Add frameworks that appear in 2+ similar SOPs
+                Object.entries(frameworkCounts)
+                    .filter(([fw, count]) => count >= 2)
+                    .forEach(([fw]) => frameworks.add(fw));
+            }
+
+            return Array.from(frameworks).slice(0, 5);
         }
 
         function addKeyword(keyword) {
@@ -1586,6 +2085,105 @@ Expected outcome: [What should be true after this step]"></textarea>
             updateCompletionStats();
         }
 
+        function generateOutlineFromSimilar() {
+            if (currentSimilarSOPs.length === 0) {
+                alert('No similar SOPs found to generate outline from.');
+                return;
+            }
+
+            // Analyze patterns in similar SOPs
+            const allDependencies = new Set();
+            const allTags = new Set();
+            const allFrameworks = new Set();
+            const departments = new Set();
+
+            currentSimilarSOPs.forEach(sop => {
+                if (sop.dependencies) {
+                    sop.dependencies.forEach(dep => allDependencies.add(dep));
+                }
+                if (sop.tags) {
+                    sop.tags.forEach(tag => allTags.add(tag));
+                }
+                if (sop.complianceFrameworks) {
+                    sop.complianceFrameworks.forEach(fw => allFrameworks.add(fw));
+                }
+                if (sop.department) {
+                    departments.add(sop.department);
+                }
+            });
+
+            // Find most common dependencies that should be referenced
+            const dependencyNames = Array.from(allDependencies).map(depId => {
+                const depNode = sopGraphData?.nodes[depId];
+                return depNode ? depNode.title : depId;
+            }).slice(0, 5);
+
+            // Generate outline suggestions
+            let outline = '🤖 AI-Generated Outline\n\n';
+            outline += '📋 SUGGESTED PURPOSE:\n';
+            outline += `This procedure provides guidance for ${document.getElementById('title').value.toLowerCase()}, `;
+            outline += `ensuring compliance with ${Array.from(allFrameworks).slice(0, 3).join(', ')} `;
+            outline += `and alignment with organizational standards.\n\n`;
+
+            outline += '🎯 SUGGESTED SCOPE - What IS Covered:\n';
+            outline += `Based on similar ${Array.from(departments).join('/')} procedures:\n`;
+            currentSimilarSOPs.forEach((sop, i) => {
+                outline += `${i + 1}. Procedures similar to "${sop.title}"\n`;
+            });
+            outline += '\n';
+
+            if (dependencyNames.length > 0) {
+                outline += '🔗 RELATED PROCEDURES TO REFERENCE:\n';
+                dependencyNames.forEach((name, i) => {
+                    outline += `${i + 1}. ${name}\n`;
+                });
+                outline += '\n';
+            }
+
+            if (allFrameworks.size > 0) {
+                outline += '⚖️ COMPLIANCE FRAMEWORKS TO ADDRESS:\n';
+                Array.from(allFrameworks).slice(0, 5).forEach((fw, i) => {
+                    outline += `${i + 1}. ${fw}\n`;
+                });
+                outline += '\n';
+            }
+
+            if (allTags.size > 0) {
+                outline += '🏷️ SUGGESTED TAGS:\n';
+                outline += Array.from(allTags).slice(0, 8).join(', ') + '\n\n';
+            }
+
+            outline += '💡 RECOMMENDED SECTIONS:\n';
+            outline += '1. Prerequisites and Required Access\n';
+            outline += '2. Step-by-Step Procedure\n';
+            outline += '3. Quality Checkpoints and Verification\n';
+            outline += '4. Common Issues and Troubleshooting\n';
+            outline += '5. Escalation Procedures\n\n';
+
+            outline += '✅ NEXT STEPS:\n';
+            outline += '• Fill in the Purpose field with suggested text\n';
+            outline += '• Apply suggested compliance frameworks\n';
+            outline += '• Add procedure steps based on your specific process\n';
+            outline += '• Reference related procedures where applicable\n\n';
+
+            outline += 'This outline is based on analysis of ' + currentSimilarSOPs.length + ' similar SOPs.';
+
+            // Apply some suggestions automatically
+            if (allFrameworks.size > 0) {
+                Array.from(allFrameworks).slice(0, 5).forEach(fw => {
+                    const checkbox = Array.from(document.querySelectorAll('input[name="compliance"]'))
+                        .find(cb => cb.value === fw || cb.value.includes(fw.split(' ')[0]));
+                    if (checkbox) checkbox.checked = true;
+                });
+            }
+
+            // Show outline
+            alert(outline);
+
+            // Update completion stats
+            updateCompletionStats();
+        }
+
         function improveWithAI() {
             // Simulate AI improvement (in real app, this would call an API)
             alert('AI Content Improvement\n\nThis feature would:\n• Improve clarity and grammar\n• Enhance technical accuracy\n• Add relevant details\n• Optimize for searchability\n\nConnect to an AI API like OpenAI to enable this feature.');
@@ -1626,6 +2224,189 @@ Expected outcome: [What should be true after this step]"></textarea>
             document.getElementById('aiFieldsCompleted').textContent = `${uniqueCompleted}/${totalRequired}`;
             document.getElementById('aiCompletionPercent').textContent = `${percentage}%`;
         }
+
+        // ====================================================================
+        // HYBRID CONSTRUCTION - ATOM LIBRARY FUNCTIONALITY
+        // ====================================================================
+
+        let availableAtoms = [];
+        let selectedAtomIds = [];
+        let currentConstructionMode = 'inline';
+
+        // Load atoms from graph
+        async function loadAtoms() {
+            try {
+                const response = await fetch('/graph/sop-graph.json');
+                const graphData = await response.json();
+
+                // Filter only atom nodes
+                availableAtoms = graphData.nodes
+                    .filter(node => node.type === 'atom')
+                    .map(atom => ({
+                        id: atom.id,
+                        title: atom.title || 'Untitled Atom',
+                        department: atom.department || 'General',
+                        subtype: atom.subtype || 'general',
+                        description: atom.description || '',
+                        complexity: atom.complexity || 'Intermediate'
+                    }));
+
+                console.log(`✅ Loaded ${availableAtoms.length} atoms from graph`);
+                renderAtoms(availableAtoms);
+            } catch (error) {
+                console.error('❌ Failed to load atoms:', error);
+                document.getElementById('atomLibraryGrid').innerHTML =
+                    '<div class="atom-library-empty"><p>❌ Failed to load atoms. Please refresh the page.</p></div>';
+            }
+        }
+
+        // Render atom cards
+        function renderAtoms(atoms) {
+            const grid = document.getElementById('atomLibraryGrid');
+
+            if (atoms.length === 0) {
+                grid.innerHTML = '<div class="atom-library-empty"><p>No atoms found matching your filters.</p></div>';
+                return;
+            }
+
+            grid.innerHTML = atoms.map(atom => {
+                const isSelected = selectedAtomIds.includes(atom.id);
+                return `
+                    <div class="atom-card ${isSelected ? 'selected' : ''}" data-atom-id="${atom.id}" onclick="toggleAtomSelection('${atom.id}')">
+                        <div class="atom-card-header">
+                            <input type="checkbox" class="atom-card-checkbox" ${isSelected ? 'checked' : ''} onclick="event.stopPropagation(); toggleAtomSelection('${atom.id}')">
+                            <span class="atom-card-badge">${atom.subtype || 'Atom'}</span>
+                        </div>
+                        <div class="atom-card-title">${atom.title}</div>
+                        <div class="atom-card-id">${atom.id}</div>
+                        <div class="atom-card-meta">
+                            <span class="atom-card-meta-item">📁 ${atom.department}</span>
+                            <span class="atom-card-meta-item">⚙️ ${atom.complexity}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Filter atoms by search and filters
+        function filterAtoms() {
+            const searchTerm = document.getElementById('atomSearch').value.toLowerCase();
+            const deptFilter = document.getElementById('atomFilterDepartment').value;
+            const typeFilter = document.getElementById('atomFilterType').value;
+
+            const filtered = availableAtoms.filter(atom => {
+                const matchesSearch = !searchTerm ||
+                    atom.title.toLowerCase().includes(searchTerm) ||
+                    atom.id.toLowerCase().includes(searchTerm) ||
+                    (atom.description && atom.description.toLowerCase().includes(searchTerm));
+
+                const matchesDept = !deptFilter || atom.department === deptFilter;
+                const matchesType = !typeFilter || atom.subtype === typeFilter;
+
+                return matchesSearch && matchesDept && matchesType;
+            });
+
+            renderAtoms(filtered);
+        }
+
+        // Toggle atom selection
+        function toggleAtomSelection(atomId) {
+            const index = selectedAtomIds.indexOf(atomId);
+            if (index > -1) {
+                selectedAtomIds.splice(index, 1);
+            } else {
+                selectedAtomIds.push(atomId);
+            }
+
+            updateSelectedAtomsPreview();
+            renderAtoms(availableAtoms); // Re-render to update selection state
+
+            // Re-apply filters if any are active
+            const searchTerm = document.getElementById('atomSearch').value;
+            const deptFilter = document.getElementById('atomFilterDepartment').value;
+            const typeFilter = document.getElementById('atomFilterType').value;
+            if (searchTerm || deptFilter || typeFilter) {
+                filterAtoms();
+            }
+        }
+
+        // Remove atom from selection
+        function removeAtom(atomId) {
+            toggleAtomSelection(atomId);
+        }
+
+        // Update selected atoms preview
+        function updateSelectedAtomsPreview() {
+            const preview = document.getElementById('selectedAtomsPreview');
+            const list = document.getElementById('selectedAtomsList');
+            const countBadge = document.getElementById('selectedAtomsCount');
+
+            countBadge.textContent = `${selectedAtomIds.length} selected`;
+
+            if (selectedAtomIds.length === 0) {
+                preview.style.display = 'none';
+                return;
+            }
+
+            preview.style.display = 'block';
+            list.innerHTML = selectedAtomIds.map(atomId => {
+                const atom = availableAtoms.find(a => a.id === atomId);
+                return `
+                    <div class="selected-atom-item">
+                        <div>
+                            <div style="font-weight: 600; margin-bottom: 4px;">${atom ? atom.title : atomId}</div>
+                            <div class="selected-atom-code">{{"{{"}}include: ${atomId}{{"}}"}}</div>
+                        </div>
+                        <button class="selected-atom-remove" onclick="removeAtom('${atomId}')">Remove</button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Select construction mode
+        function selectConstructionMode(mode) {
+            currentConstructionMode = mode;
+
+            // Update UI
+            document.querySelectorAll('.mode-option').forEach(opt => opt.classList.remove('selected'));
+            document.getElementById(`mode${mode.charAt(0).toUpperCase() + mode.slice(1).replace('-', '')}`).classList.add('selected');
+
+            const libraryContainer = document.getElementById('atomLibraryContainer');
+            const section4 = document.querySelector('.form-section:nth-of-type(5)'); // Procedure Steps section
+
+            if (mode === 'inline') {
+                // Traditional mode: hide atom library, show procedure steps
+                libraryContainer.style.display = 'none';
+                if (section4) section4.style.display = 'block';
+            } else if (mode === 'hybrid') {
+                // Hybrid mode: show both atom library and procedure steps
+                libraryContainer.style.display = 'block';
+                if (section4) section4.style.display = 'block';
+            } else if (mode === 'atoms-only') {
+                // Atoms-only mode: show atom library, hide procedure steps
+                libraryContainer.style.display = 'block';
+                if (section4) section4.style.display = 'none';
+            }
+        }
+
+        // Show/hide hybrid construction section based on template type
+        function updateHybridConstructionVisibility(templateType) {
+            const hybridSection = document.getElementById('hybridConstructionSection');
+
+            // Show for molecules, organisms, and SOPs only (not for atoms)
+            if (templateType === 'molecule' || templateType === 'organism' || templateType === 'sop') {
+                hybridSection.style.display = 'block';
+                loadAtoms(); // Load atoms when section becomes visible
+            } else {
+                hybridSection.style.display = 'none';
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Hybrid construction module initialized');
+        });
+
     </script>
 </body>
 </html>
