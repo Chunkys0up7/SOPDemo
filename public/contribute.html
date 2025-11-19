@@ -2490,10 +2490,8 @@ Expected outcome: [What should be true after this step]"></textarea>
         // Select construction mode
         function selectConstructionMode(mode) {
             console.log(`🔄 Switching to ${mode} mode`);
-
-            // Save current scroll position to prevent page jump
-            const scrollY = window.scrollY;
-            const scrollX = window.scrollX;
+            console.log(`   Current mode before switch: ${currentConstructionMode}`);
+            console.log(`   Stack trace:`, new Error().stack);
 
             currentConstructionMode = mode;
 
@@ -2561,21 +2559,18 @@ Expected outcome: [What should be true after this step]"></textarea>
                 }
             }
 
-            // Restore scroll position after DOM updates (prevents page jump)
-            // Use setTimeout to ensure DOM has finished rendering
-            setTimeout(() => {
-                window.scrollTo(scrollX, scrollY);
-                console.log(`📍 Restored scroll position: ${scrollY}`);
-            }, 0);
+            console.log(`✅ Construction mode switch complete: ${mode}`);
         }
 
         // Show/hide hybrid construction section based on template type
         function updateHybridConstructionVisibility(templateType) {
+            console.log(`🔄 updateHybridConstructionVisibility called with: ${templateType}`);
+            console.log(`   Current mode before update: ${currentConstructionMode}`);
+            console.log(`   Stack trace:`, new Error().stack);
+
             const hybridSection = document.getElementById('hybridConstructionSection');
             const libraryContainer = document.getElementById('atomLibraryContainer');
             const section4 = document.querySelector('.form-section:nth-of-type(5)'); // Procedure Steps
-
-            console.log(`🔄 Updating hybrid construction visibility for: ${templateType}`);
 
             // Show for molecules, organisms, and SOPs only (not for atoms)
             if (templateType === 'molecule' || templateType === 'organism' || templateType === 'sop') {
@@ -2586,28 +2581,43 @@ Expected outcome: [What should be true after this step]"></textarea>
                     hybridSection.style.display = 'block';
                 }
 
-                // Reset to inline mode by default when switching templates
-                console.log('🔄 Resetting to inline mode');
-                currentConstructionMode = 'inline';
+                // Only reset to inline mode if we're switching templates
+                // Don't reset if user is actively using a different mode
+                const isInitialSetup = currentConstructionMode === null || currentConstructionMode === undefined || currentConstructionMode === 'inline';
 
-                // Update UI to reflect inline mode
-                document.querySelectorAll('.mode-option').forEach(opt => opt.classList.remove('selected'));
-                const inlineOption = document.getElementById('modeInline');
-                if (inlineOption) {
-                    inlineOption.classList.add('selected');
-                }
+                if (isInitialSetup) {
+                    console.log('🔄 Initial setup - setting inline mode as default');
+                    currentConstructionMode = 'inline';
 
-                // Update radio buttons
-                document.querySelectorAll('input[name="constructionMode"]').forEach(radio => {
-                    radio.checked = (radio.value === 'inline');
-                });
+                    // Update UI to reflect inline mode
+                    document.querySelectorAll('.mode-option').forEach(opt => opt.classList.remove('selected'));
+                    const inlineOption = document.getElementById('modeInline');
+                    if (inlineOption) {
+                        inlineOption.classList.add('selected');
+                    }
 
-                // Hide library, show procedure steps (inline mode default)
-                if (libraryContainer) {
-                    libraryContainer.style.display = 'none';
-                }
-                if (section4) {
-                    section4.style.display = 'block';
+                    // Update radio buttons
+                    document.querySelectorAll('input[name="constructionMode"]').forEach(radio => {
+                        radio.checked = (radio.value === 'inline');
+                    });
+
+                    // Hide library, show procedure steps (inline mode default)
+                    if (libraryContainer) {
+                        libraryContainer.style.display = 'none';
+                    }
+                    if (section4) {
+                        section4.style.display = 'block';
+                    }
+                } else {
+                    console.log(`⚠️  User is in ${currentConstructionMode} mode - NOT resetting`);
+                    // Preserve the user's current mode selection
+                    // Just make sure the visibility is correct
+                    if (currentConstructionMode === 'hybrid' || currentConstructionMode === 'atoms-only') {
+                        if (libraryContainer) libraryContainer.style.display = 'block';
+                    }
+                    if (currentConstructionMode === 'atoms-only') {
+                        if (section4) section4.style.display = 'none';
+                    }
                 }
 
                 // Clear any previously selected atoms when switching templates
