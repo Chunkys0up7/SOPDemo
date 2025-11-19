@@ -1,5 +1,5 @@
 <!-- Global Navigation Component -->
-<!-- Include this in all pages with: <script src="/public/components/global-nav.js"></script> -->
+<!-- This is a self-contained component with inline CSS and JavaScript -->
 
 <style>
   :root {
@@ -379,20 +379,17 @@
 
     <!-- Center Section -->
     <div class="nav-center">
-      <a href="/public/browse.html" class="nav-link">Browse</a>
-      <a href="/public/status-dashboard.html" class="nav-link">My Dashboard</a>
-      <a href="/public/sop-metrics.html" class="nav-link">📊 Metrics</a>
-      <a href="/public/approvals.html" class="nav-link">
-        Approvals
-        <span class="badge">3</span>
-      </a>
-      <a href="/public/templates.html" class="nav-link">Templates</a>
-      <a href="/dist/visualizations/sop-graph.html" class="nav-link">Graph</a>
+      <a href="/public/index.html" class="nav-link">Dashboard</a>
+      <a href="/public/sops.html" class="nav-link">Browse SOPs</a>
+      <a href="/public/workspace.html" class="nav-link">Workspace</a>
+      <a href="/public/graph.html" class="nav-link">Graph</a>
+      <a href="/public/search.html" class="nav-link">Search</a>
+      <a href="/public/contribute.html" class="nav-link">Contribute</a>
     </div>
 
     <!-- Right Section -->
     <div class="nav-right">
-      <button class="btn-new-sop" onclick="window.location.href='/public/templates.html'">
+      <button class="btn-new-sop" onclick="window.location.href='/public/contribute.html'">
         <span>+</span>
         <span>New SOP</span>
       </button>
@@ -405,8 +402,8 @@
         </div>
 
         <div class="user-dropdown" id="userDropdown">
-          <a href="/public/profile.html">My Profile</a>
-          <a href="/public/settings.html">Settings</a>
+          <a href="/public/index.html">Dashboard</a>
+          <a href="/public/docs.html">Documentation</a>
           <a href="/public/help.html">Help</a>
           <a href="#" onclick="logout()">Logout</a>
         </div>
