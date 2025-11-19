@@ -518,8 +518,21 @@
             }
         }
 
-        // Auto-focus search input
-        document.getElementById('searchQuery').focus();
+        // Check for query parameter in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const queryParam = urlParams.get('q');
+
+        const searchInput = document.getElementById('searchQuery');
+
+        if (queryParam) {
+            // Pre-fill search input with query from URL
+            searchInput.value = decodeURIComponent(queryParam);
+            // Auto-execute search
+            performSearch();
+        } else {
+            // Just auto-focus if no query parameter
+            searchInput.focus();
+        }
 
         // Example queries
         const exampleQueries = [
