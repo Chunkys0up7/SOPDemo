@@ -1420,6 +1420,28 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
         let stepCount = 0;
 
         function selectTemplate(type) {
+            // Check if we're switching templates (form already visible)
+            const formLayout = document.getElementById('formLayout');
+            const formWasVisible = formLayout.style.display === 'grid';
+            const switchingTemplates = formWasVisible && selectedTemplate && selectedTemplate !== type;
+
+            // Warn user if they're switching templates with data entered
+            if (switchingTemplates) {
+                const hasData = document.querySelectorAll('input:not([type="checkbox"]):not([type="radio"]), textarea, select').length > 0;
+                if (hasData) {
+                    const confirmed = confirm(
+                        `⚠️ Switching from ${selectedTemplate.toUpperCase()} to ${type.toUpperCase()} will reconfigure the form.\n\n` +
+                        `Your entered data will remain, but sections may change.\n\n` +
+                        `Continue?`
+                    );
+                    if (!confirmed) {
+                        console.log('❌ Template switch cancelled by user');
+                        return; // User cancelled, don't switch
+                    }
+                }
+                console.log(`🔄 Switching template: ${selectedTemplate} → ${type}`);
+            }
+
             selectedTemplate = type;
 
             // Update selected card styling
@@ -1429,7 +1451,7 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
             event.currentTarget.classList.add('selected');
 
             // Show form layout (both form and AI assistant)
-            document.getElementById('formLayout').style.display = 'grid';
+            formLayout.style.display = 'grid';
 
             // Configure form sections based on template type
             configureFormSections(type);
@@ -1437,8 +1459,14 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
             // Show/hide hybrid construction section
             updateHybridConstructionVisibility(type);
 
-            // Scroll to form
-            document.getElementById('formLayout').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Only scroll if form was hidden (first time selection)
+            // Don't scroll if switching templates (prevents jarring reset feeling)
+            if (!formWasVisible) {
+                console.log('📜 Scrolling to form (first selection)');
+                formLayout.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                console.log('✅ Form already visible - staying in place (template switch)');
+            }
 
             // Initialize with one step (only if procedure steps section is visible)
             const stepsSection = document.querySelector('.form-section:nth-of-type(5)'); // Shifted by hybrid construction section
