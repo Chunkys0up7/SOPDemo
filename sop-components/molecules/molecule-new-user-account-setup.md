@@ -21,9 +21,11 @@ estimatedDuration: 45-60 minutes
 # Compliance & Regulatory
 complianceFrameworks: [SOX, HIPAA, SOC 2, ISO 9001]
 
-# Component Composition
-composedOf: [atom-access-request-approval, atom-password-reset]
+# Component Composition (Hybrid: Atoms + Inline Steps)
+composedOf: [atom-step-create-ad-account, atom-step-create-email-account, atom-access-request-approval, atom-password-reset]
 dependencies:
+  - atom-step-create-ad-account (v1.0.0+)
+  - atom-step-create-email-account (v1.0.0+)
   - atom-access-request-approval (v1.0.0+)
   - atom-password-reset (v2.0.0+)
 
@@ -97,15 +99,45 @@ Before starting, verify:
 
 ## Components Used
 
-This molecule combines the following atoms:
+This molecule uses a **hybrid construction approach** combining:
+- **Reusable step atoms**: Standardized procedures used across multiple workflows
+- **Inline prose steps**: Workflow-specific steps written directly in this molecule
 
-### {{include: atom-access-request-approval}}
+### Reusable Step Atoms
 
-**Usage in this procedure:** Determines and approves the appropriate system access levels based on the new employee's role. This component handles the approval workflow for all Level 1-3 access requests submitted during provisioning.
+**atom-step-create-ad-account** (Step 3)
+- **Purpose**: Standardized Active Directory account creation
+- **Reused in**: New hire onboarding, contractor provisioning, employee reinstatement
+- **Why reusable**: AD account creation process is identical across all user types
 
-### {{include: atom-password-reset}}
+**atom-step-create-email-account** (Step 4)
+- **Purpose**: Microsoft 365 license assignment and mailbox provisioning
+- **Reused in**: New hire onboarding, contractor provisioning (with different license)
+- **Why reusable**: Email provisioning follows same technical process for all users
 
-**Usage in this procedure:** Generates and securely delivers the initial temporary password. The new employee will use this to log in for the first time and will be forced to change it immediately per security policy.
+**atom-access-request-approval** (Step 6)
+- **Purpose**: Determines and approves system access based on role
+- **Reused in**: Access requests, role changes, new provisioning
+- **Why reusable**: Approval workflow is consistent across all access scenarios
+
+**atom-password-reset** (Step 5)
+- **Purpose**: Secure password generation and delivery
+- **Reused in**: Password resets, new accounts, account recovery
+- **Why reusable**: Password handling must follow same security procedure everywhere
+
+### Inline Prose Steps
+
+**Step 1: Gather New Hire Information**
+- **Why inline**: Highly specific to new hire workflow (collects HR system data)
+- **Not reused**: Contractor/reinstatement workflows gather different data
+
+**Step 2: Determine Standard Access Requirements**
+- **Why inline**: New hire-specific logic (job title matrix, manager approval)
+- **Could be atomized**: If access determination becomes standardized across workflows
+
+**Step 7: Final Verification and Documentation**
+- **Why inline**: Workflow-specific completion checklist and stakeholder notifications
+- **Not reused**: Each workflow has different success criteria
 
 ## Procedure Steps
 
@@ -209,137 +241,13 @@ This molecule combines the following atoms:
 
 ### Step 3: Create Active Directory Account
 
-**Estimated time:** 10 minutes
-**Owner:** IT Provisioning Technician
-**System:** Active Directory Admin Console
-
-**Actions:**
-
-1. **Open Active Directory Admin Console**
-   - Server: ADSERVER01
-   - Console: Active Directory Users and Computers
-
-2. **Create New User Object**
-   - Navigate to appropriate OU: Users > [Department] > Standard Users
-   - Right-click > New > User
-   - Fill in user details:
-     - First name: [Legal first name]
-     - Last name: [Legal last name]
-     - Full name: [First] [Last]
-     - User logon name: [first].[last] (all lowercase)
-       - If duplicate, use [first].[middle initial].[last]
-       - If still duplicate, append number: [first].[last]2
-     - User logon name (pre-2000): [first.last]
-
-3. **Configure Account Settings**
-   - Password: Generate random 16-character temp password using IT Password Tool
-   - User must change password at next logon: ✓ CHECKED
-   - User cannot change password: ☐ UNCHECKED
-   - Password never expires: ☐ UNCHECKED
-   - Account is disabled: ☐ UNCHECKED
-
-4. **Set Additional Properties**
-   - General tab:
-     - Description: [Job Title]
-     - Office: [Office Location]
-     - Telephone: [Mobile number]
-   - Organization tab:
-     - Title: [Job Title]
-     - Department: [Department]
-     - Company: [Company Name]
-     - Manager: [Browse to manager's AD account]
-   - Member Of tab:
-     - Add to "All-Employees" group
-     - Add to "[Department]-Users" group
-     - Add other groups based on approved access
-
-5. **Save and Verify**
-   - Click OK to create account
-   - Verify account appears in correct OU
-   - Test account by checking properties
-   - Record username in provisioning tracker
-
-**Quality Checkpoint:**
-- [ ] Username follows naming convention
-- [ ] Account created in correct OU
-- [ ] Temporary password generated and securely stored
-- [ ] Manager relationship configured
-- [ ] Basic group memberships added
-- [ ] "User must change password" is checked
-
-**Decision Point:**
-- **IF** username conflict → Use middle initial or numbered variant
-- **IF** manager not found in AD → Contact HR to verify manager; may need to create manager account first
-- **IF** special characters in name → Follow international name policy (documented in IT KB)
+{{include: atom-step-create-ad-account}}
 
 ---
 
 ### Step 4: Create Email Account and Configure Services
 
-**Estimated time:** 15 minutes
-**Owner:** IT Provisioning Technician
-**System:** Microsoft 365 Admin Center
-
-**Actions:**
-
-1. **Verify AD Sync Completed**
-   - Wait 15 minutes for AD-to-Azure AD sync
-   - Open Microsoft 365 Admin Center
-   - Navigate to Users > Active Users
-   - Verify new user appears
-   - If not present after 15 minutes, manually trigger sync
-
-2. **Assign Microsoft 365 License**
-   - Select user
-   - Licenses and Apps tab
-   - Assign license: "Microsoft 365 E3" (or per company standard)
-   - Enable services:
-     - ✓ Exchange Online
-     - ✓ SharePoint Online
-     - ✓ Teams
-     - ✓ Office Apps
-     - ✓ OneDrive for Business
-   - Save changes
-
-3. **Configure Email Settings**
-   - Wait 10 minutes for mailbox provisioning
-   - Verify email address: [first.last]@company.com
-   - Set mailbox quota: 50 GB (standard)
-   - Configure out-of-office for first day:
-     - "I am new to the organization. If urgent, please contact my manager [Manager Name] at [Manager Email]"
-   - Add email signature template
-   - Configure retention policy: Default 7-year retention
-
-4. **Set Up Additional Services**
-   - **Teams:**
-     - Add to company-wide teams: "All Employees", "Announcements"
-     - Add to department team
-   - **SharePoint:**
-     - Grant access to company intranet
-     - Grant access to department SharePoint site
-   - **OneDrive:**
-     - Auto-provisioned with email account
-     - Verify storage quota: 1 TB
-
-5. **Enable Security Features**
-   - Enable MFA enforcement (grace period: 14 days)
-   - Enable Conditional Access Policy: "Require MFA from untrusted locations"
-   - Enable mailbox auditing
-   - Enable litigation hold (if required for department)
-
-**Quality Checkpoint:**
-- [ ] Microsoft 365 license assigned
-- [ ] Email account active ([first.last]@company.com)
-- [ ] Mailbox fully provisioned (receive test email)
-- [ ] Teams access configured
-- [ ] MFA enrollment required
-- [ ] Security policies applied
-
-**Decision Point:**
-- **IF** mailbox not provisioned after 15 minutes → Check license assignment; retry or escalate
-- **IF** email address conflict → Follow naming convention rules from Step 3
-- **IF** department requires special Office 365 apps → Assign additional licenses per approval
-- **IF** executive/C-level → Apply "Executive" security policy (stricter requirements)
+{{include: atom-step-create-email-account}}
 
 ---
 
