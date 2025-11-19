@@ -1,5 +1,5 @@
 <!-- Global Navigation Component -->
-<!-- Include this in all pages with: <script src="/public/components/global-nav.js"></script> -->
+<!-- This is a self-contained component with inline CSS and JavaScript -->
 
 <style>
   :root {
@@ -381,10 +381,11 @@
     <div class="nav-center">
       <a href="/public/index.html" class="nav-link">Dashboard</a>
       <a href="/public/sops.html" class="nav-link">Browse SOPs</a>
+      <a href="/public/workspace.html" class="nav-link">Workspace</a>
       <a href="/public/graphrag.html" class="nav-link">🔍 AI Search</a>
-      <a href="/public/contribute.html" class="nav-link">✏️ Create</a>
-      <a href="/public/graph.html" class="nav-link">📊 Graph</a>
-      <a href="/public/docs.html" class="nav-link">Docs</a>
+      <a href="/public/graph.html" class="nav-link">Graph</a>
+      <a href="/public/search.html" class="nav-link">Search</a>
+      <a href="/public/contribute.html" class="nav-link">Contribute</a>
     </div>
 
     <!-- Right Section -->
@@ -402,8 +403,8 @@
         </div>
 
         <div class="user-dropdown" id="userDropdown">
-          <a href="/public/profile.html">My Profile</a>
-          <a href="/public/settings.html">Settings</a>
+          <a href="/public/index.html">Dashboard</a>
+          <a href="/public/docs.html">Documentation</a>
           <a href="/public/help.html">Help</a>
           <a href="#" onclick="logout()">Logout</a>
         </div>

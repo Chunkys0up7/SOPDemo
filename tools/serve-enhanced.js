@@ -449,7 +449,7 @@ async function handleRequest(req, res) {
 
   // Redirect root to dashboard
   if (pathname === '/' || pathname === '/index.html') {
-    res.writeHead(302, { 'Location': '/public/dashboard.html' });
+    res.writeHead(302, { 'Location': '/public/index.html' });
     res.end();
     return;
   }

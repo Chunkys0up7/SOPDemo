@@ -380,7 +380,7 @@
 
         /* Footer */
         .footer {
-            background: #1a1a1a;
+            background: white;
             color: white;
             padding: 40px;
             text-align: center;
@@ -468,16 +468,16 @@
 
         <div id="resultsContent">
             <!-- Example results (populated by JavaScript in production) -->
-            <div class="result-card" onclick="window.location='../sops/mortgage/sop-mf-002-fha-underwriting.md'">
+            <div class="result-card" onclick="window.location='../dist/sops/sop-it-001.md'">
                 <div class="result-header">
                     <img src="icons/document.svg" alt="SOP" class="result-icon">
                     <span class="result-type">Standard Operating Procedure</span>
                 </div>
-                <a href="../sops/mortgage/sop-mf-002-fha-underwriting.md" class="result-title">
-                    FHA Underwriting Process (SOP-MF-002)
+                <a href="../dist/sops/sop-it-001.md" class="result-title">
+                    IT Account Provisioning and Password Management (SOP-IT-001)
                 </a>
                 <p class="result-excerpt">
-                    FHA loans require a minimum <mark>credit score</mark> of 580 for borrowers seeking maximum financing. Borrowers with credit scores between 500-579 may qualify with a higher down payment...
+                    Complete procedures for <mark>account provisioning</mark>, password resets, and access management for IT systems. Includes Active Directory, email setup, and security protocols...
                 </p>
                 <div class="result-meta">
                     <div class="relevance-score">
@@ -486,21 +486,21 @@
                             <div class="score-fill" style="width: 95%"></div>
                         </div>
                     </div>
-                    <span class="meta-badge">Category: Mortgage Finance</span>
-                    <span class="meta-badge">Version: 1.2.0</span>
+                    <span class="meta-badge">Category: IT</span>
+                    <span class="meta-badge">Version: 2.1.0</span>
                 </div>
             </div>
 
-            <div class="result-card" onclick="window.location='../sop-components/atoms/fha-requirements.md'">
+            <div class="result-card" onclick="window.location='../sop-components/atoms/atom-password-reset.md'">
                 <div class="result-header">
                     <img src="icons/plus.svg" alt="Component" class="result-icon">
                     <span class="result-type">Reusable Component</span>
                 </div>
-                <a href="../sop-components/atoms/fha-requirements.md" class="result-title">
-                    FHA Loan Requirements
+                <a href="../sop-components/atoms/atom-password-reset.md" class="result-title">
+                    Password Reset Procedure
                 </a>
                 <p class="result-excerpt">
-                    Detailed breakdown of <mark>FHA requirements</mark> including credit score thresholds, debt-to-income ratios, property standards, and appraisal criteria...
+                    Standard <mark>password reset</mark> procedure for user accounts. Includes identity verification, security protocols, and step-by-step reset instructions...
                 </p>
                 <div class="result-meta">
                     <div class="relevance-score">
@@ -620,6 +620,19 @@
             }
         });
 
+        let sopData = null;
+
+        // Load mortgage SOP data
+        fetch('../graph/mortgage-sop-graph.json')
+            .then(response => response.json())
+            .then(data => {
+                sopData = data;
+                console.log('Loaded SOP data:', data.metadata.nodeCount, 'nodes');
+            })
+            .catch(error => {
+                console.error('Error loading SOP data:', error);
+            });
+
         function performSearch(query) {
             // Update UI
             searchQueryText.textContent = query;
@@ -630,16 +643,196 @@
                 resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }, 100);
 
-            // In production, this would make an API call to the semantic search backend
-            // For now, we show the example results with a loading indicator
-
             resultsContent.style.display = 'none';
             loadingIndicator.classList.add('show');
 
+            // Perform semantic search
             setTimeout(() => {
+                const results = semanticSearch(query);
+                displayResults(results, query);
                 loadingIndicator.classList.remove('show');
                 resultsContent.style.display = 'block';
-            }, 800);
+            }, 600);
+        }
+
+        function semanticSearch(query) {
+            if (!sopData) {
+                return [];
+            }
+
+            const queryLower = query.toLowerCase();
+            const queryTerms = queryLower.split(' ').filter(t => t.length > 2);
+            const sops = Object.values(sopData.nodes).filter(n => n.type === 'sop');
+
+            // Score each SOP based on semantic relevance
+            const scoredResults = sops.map(sop => {
+                let score = 0;
+
+                // Title matching (highest weight)
+                if (sop.title.toLowerCase().includes(queryLower)) {
+                    score += 100;
+                } else {
+                    queryTerms.forEach(term => {
+                        if (sop.title.toLowerCase().includes(term)) {
+                            score += 30;
+                        }
+                    });
+                }
+
+                // Department matching
+                if (sop.department && sop.department.toLowerCase().includes(queryLower)) {
+                    score += 50;
+                }
+
+                // Category matching
+                if (sop.category && sop.category.toLowerCase().includes(queryLower)) {
+                    score += 40;
+                }
+
+                // Tags matching
+                if (sop.tags) {
+                    sop.tags.forEach(tag => {
+                        if (tag.toLowerCase().includes(queryLower)) {
+                            score += 25;
+                        }
+                    });
+                }
+
+                // Compliance frameworks matching
+                if (sop.complianceFrameworks) {
+                    sop.complianceFrameworks.forEach(framework => {
+                        if (framework.toLowerCase().includes(queryLower)) {
+                            score += 35;
+                        }
+                    });
+                }
+
+                // Owner matching
+                if (sop.owner && sop.owner.toLowerCase().includes(queryLower)) {
+                    score += 15;
+                }
+
+                // Boost by criticality
+                if (sop.criticality === 'high') {
+                    score += 10;
+                }
+
+                return {
+                    ...sop,
+                    searchScore: score
+                };
+            });
+
+            // Filter and sort results
+            return scoredResults
+                .filter(r => r.searchScore > 0)
+                .sort((a, b) => b.searchScore - a.searchScore)
+                .slice(0, 10); // Top 10 results
+        }
+
+        function displayResults(results, query) {
+            if (results.length === 0) {
+                resultsContent.innerHTML = `
+                    <div style="text-align: center; padding: 60px 20px;">
+                        <div style="font-size: 64px; margin-bottom: 20px;">🔍</div>
+                        <h3 style="font-size: 24px; color: #666; margin-bottom: 10px;">No results found</h3>
+                        <p style="color: #999;">Try different keywords or check the example queries above</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = `
+                <div style="padding: 20px; background: #f0f4ff; border-left: 4px solid #0052CC; margin-bottom: 24px;">
+                    <strong style="color: #0052CC;">🤖 AI Insight:</strong> Found ${results.length} relevant SOPs matching "${query}".
+                    Results ranked by semantic relevance (title, frameworks, tags, department).
+                </div>
+            `;
+
+            results.forEach((sop, index) => {
+                const criticalityColor = {
+                    'high': '#c62828',
+                    'medium': '#ff9800',
+                    'low': '#4caf50'
+                }[sop.criticality] || '#666';
+
+                const statusBadge = sop.status === 'active' ?
+                    '<span style="background: #e8f5e9; color: #2e7d32; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;">ACTIVE</span>' :
+                    '<span style="background: #fff3e0; color: #e65100; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;">DRAFT</span>';
+
+                html += `
+                    <div style="background: white; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 16px; transition: all 0.2s; cursor: pointer;"
+                         onmouseover="this.style.borderColor='#0052CC'; this.style.boxShadow='0 4px 12px rgba(0,82,204,0.1)'"
+                         onmouseout="this.style.borderColor='#e0e0e0'; this.style.boxShadow='none'">
+
+                        <div style="display: flex; align-items: start; gap: 12px; margin-bottom: 12px;">
+                            <div style="background: ${criticalityColor}; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0;">
+                                ${index + 1}
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+                                    <h3 style="font-size: 18px; font-weight: 600; color: #1a1a1a; margin: 0;">${sop.title}</h3>
+                                    ${statusBadge}
+                                </div>
+                                <div style="display: flex; gap: 16px; font-size: 13px; color: #666; margin-bottom: 10px;">
+                                    <span><strong>ID:</strong> ${sop.id}</span>
+                                    <span><strong>Version:</strong> ${sop.version}</span>
+                                    <span><strong>Owner:</strong> ${sop.owner}</span>
+                                    <span style="color: ${criticalityColor};"><strong>Criticality:</strong> ${sop.criticality.toUpperCase()}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; margin-bottom: 12px;">
+                            <div style="flex: 1;">
+                                <div style="font-size: 12px; color: #666; margin-bottom: 4px;"><strong>Department:</strong></div>
+                                <div style="font-size: 13px; color: #1a1a1a;">${sop.department}</div>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-size: 12px; color: #666; margin-bottom: 4px;"><strong>Category:</strong></div>
+                                <div style="font-size: 13px; color: #1a1a1a;">${sop.category}</div>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-size: 12px; color: #666; margin-bottom: 4px;"><strong>Last Reviewed:</strong></div>
+                                <div style="font-size: 13px; color: #1a1a1a;">${sop.lastReviewed || 'N/A'}</div>
+                            </div>
+                        </div>
+
+                        ${sop.complianceFrameworks && sop.complianceFrameworks.length > 0 ? `
+                            <div style="margin-bottom: 12px;">
+                                <div style="font-size: 12px; color: #666; margin-bottom: 6px;"><strong>Compliance Frameworks:</strong></div>
+                                <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                                    ${sop.complianceFrameworks.map(f =>
+                                        `<span style="background: #e3f2fd; color: #0052CC; padding: 4px 10px; border-radius: 12px; font-size: 11px;">${f}</span>`
+                                    ).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+
+                        ${sop.tags && sop.tags.length > 0 ? `
+                            <div style="margin-bottom: 12px;">
+                                <div style="font-size: 12px; color: #666; margin-bottom: 6px;"><strong>Tags:</strong></div>
+                                <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                                    ${sop.tags.map(tag =>
+                                        `<span style="background: #f0f0f0; color: #666; padding: 4px 10px; border-radius: 12px; font-size: 11px;">#${tag}</span>`
+                                    ).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 12px; border-top: 1px solid #f0f0f0;">
+                            <div style="font-size: 12px; color: #999;">
+                                Relevance Score: ${sop.searchScore}
+                            </div>
+                            <a href="${sop.file_path}" style="background: #0052CC; color: white; padding: 8px 16px; border-radius: 4px; text-decoration: none; font-size: 13px; font-weight: 600;">
+                                View SOP →
+                            </a>
+                        </div>
+                    </div>
+                `;
+            });
+
+            resultsContent.innerHTML = html;
         }
     </script>
 </body>
