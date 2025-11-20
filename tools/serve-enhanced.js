@@ -18,6 +18,7 @@ import { fileURLToPath } from 'url';
 import { URL } from 'url';
 import { exec } from 'child_process';
 import { promisify } from 'util';
+import neo4j from 'neo4j-driver';
 
 const execAsync = promisify(exec);
 
@@ -38,6 +39,26 @@ const colors = {
 function log(message, color = 'reset') {
   const colorCode = colors[color] || colors.reset;
   console.log(`${colorCode}${message}${colors.reset}`);
+}
+
+// ============================================================================
+// Neo4j Connection
+// ============================================================================
+
+const NEO4J_URI = process.env.NEO4J_URI || 'bolt://localhost:7687';
+const NEO4J_USER = process.env.NEO4J_USER || 'neo4j';
+const NEO4J_PASSWORD = process.env.NEO4J_PASSWORD || 'neo4j';
+
+let neo4jDriver = null;
+
+try {
+  neo4jDriver = neo4j.driver(
+    NEO4J_URI,
+    neo4j.auth.basic(NEO4J_USER, NEO4J_PASSWORD)
+  );
+  log('📊 Neo4j driver initialized', 'green');
+} catch (error) {
+  log(`⚠️  Neo4j connection unavailable: ${error.message}`, 'yellow');
 }
 
 // ============================================================================
@@ -289,6 +310,115 @@ async function regenerateGraph() {
 }
 
 // ============================================================================
+// Neo4j Graph Query Functions
+// ============================================================================
+
+async function queryNeo4jGraph() {
+  if (!neo4jDriver) {
+    throw new Error('Neo4j driver not initialized');
+  }
+
+  const session = neo4jDriver.session();
+  try {
+    // Query all nodes and relationships
+    const result = await session.run(`
+      MATCH (n)
+      OPTIONAL MATCH (n)-[r]->(m)
+      RETURN n, r, m
+      LIMIT 500
+    `);
+
+    const nodes = new Map();
+    const edges = [];
+
+    // Process results
+    result.records.forEach(record => {
+      const sourceNode = record.get('n');
+      const relationship = record.get('r');
+      const targetNode = record.get('m');
+
+      // Add source node
+      if (sourceNode) {
+        const nodeId = sourceNode.identity.toString();
+        if (!nodes.has(nodeId)) {
+          const labels = sourceNode.labels;
+          const props = sourceNode.properties;
+
+          nodes.set(nodeId, {
+            id: nodeId,
+            type: labels[0]?.toLowerCase() || 'node',
+            title: props.title || props.name || props.id || nodeId,
+            version: props.version,
+            status: props.status,
+            owner: props.owner,
+            department: props.department,
+            category: props.category,
+            criticality: props.criticality,
+            complianceFrameworks: props.compliance_frameworks || props.complianceFrameworks || [],
+            tags: props.tags || []
+          });
+        }
+      }
+
+      // Add target node and relationship
+      if (targetNode && relationship) {
+        const targetId = targetNode.identity.toString();
+        if (!nodes.has(targetId)) {
+          const labels = targetNode.labels;
+          const props = targetNode.properties;
+
+          nodes.set(targetId, {
+            id: targetId,
+            type: labels[0]?.toLowerCase() || 'node',
+            title: props.title || props.name || props.id || targetId,
+            version: props.version,
+            status: props.status,
+            owner: props.owner,
+            department: props.department,
+            category: props.category,
+            criticality: props.criticality,
+            complianceFrameworks: props.compliance_frameworks || props.complianceFrameworks || [],
+            tags: props.tags || []
+          });
+        }
+
+        // Add edge
+        const sourceId = sourceNode.identity.toString();
+        const edgeId = relationship.identity.toString();
+        const relType = relationship.type;
+        const relProps = relationship.properties;
+
+        edges.push({
+          id: edgeId,
+          source: sourceId,
+          target: targetId,
+          type: relType.toLowerCase().replace(/_/g, '-'),
+          description: relProps.description || relType,
+          strength: relProps.strength || 'normal'
+        });
+      }
+    });
+
+    // Convert to Cytoscape format
+    return {
+      metadata: {
+        version: '3.0.0',
+        lastUpdated: new Date().toISOString(),
+        description: 'Live graph data from Neo4j',
+        nodeCount: nodes.size,
+        edgeCount: edges.length,
+        source: 'neo4j'
+      },
+      nodes: Object.fromEntries(nodes),
+      edges: edges
+    };
+
+  } finally {
+    await session.close();
+  }
+}
+
+// ============================================================================
 // API Handlers
 // ============================================================================
 
@@ -324,6 +454,10 @@ async function handleAPIRequest(req, res, pathname) {
 
   if (pathname === '/api/sops/create' && req.method === 'POST') {
     return handleSOPCreate(req, res, JSON.parse(body));
+  }
+
+  if (pathname === '/api/graph/neo4j' && req.method === 'GET') {
+    return handleNeo4jGraph(req, res);
   }
 
   // 404 for unknown API endpoints
@@ -566,6 +700,39 @@ async function handleSOPCreate(req, res, body) {
     log(`  [ERROR] ${error.message}`, 'yellow');
     res.writeHead(500, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ error: error.message, stack: error.stack }));
+  }
+}
+
+async function handleNeo4jGraph(req, res) {
+  try {
+    log('  [API] Fetching graph from Neo4j...', 'magenta');
+
+    if (!neo4jDriver) {
+      res.writeHead(503, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({
+        error: 'Neo4j not available',
+        message: 'Neo4j connection not initialized. Check NEO4J_PASSWORD environment variable.'
+      }));
+      return;
+    }
+
+    const graphData = await queryNeo4jGraph();
+
+    res.writeHead(200, {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    });
+    res.end(JSON.stringify(graphData));
+
+    log(`  [SUCCESS] Returned ${graphData.metadata.nodeCount} nodes, ${graphData.metadata.edgeCount} edges`, 'green');
+
+  } catch (error) {
+    log(`  [ERROR] Neo4j query failed: ${error.message}`, 'yellow');
+    res.writeHead(500, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({
+      error: 'Failed to query Neo4j',
+      message: error.message
+    }));
   }
 }
 

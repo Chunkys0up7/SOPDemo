@@ -715,8 +715,8 @@
                 </div>
             `;
 
-            // Fetch graph data
-            fetch('/graph/mortgage-sop-graph.json')
+            // Fetch graph data from Neo4j
+            fetch('/api/graph/neo4j')
                 .then(response => response.json())
                 .then(data => {
                     console.log('✅ Graph data loaded');
