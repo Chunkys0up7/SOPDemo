@@ -1183,19 +1183,19 @@
 
                 <!-- Construction Mode Toggle -->
                 <div class="construction-mode-toggle">
-                    <div class="mode-option selected" id="modeInline" onclick="handleModeClick('inline', event)">
+                    <div class="mode-option selected" id="modeInline" onclick="return handleModeClick('inline', event);">
                         <div class="mode-option-title">
                             <input type="radio" id="radioInline" name="constructionMode" value="inline" checked> ✍️ Write Custom Steps
                         </div>
                         <div class="mode-option-desc">Write all steps as inline content (traditional approach)</div>
                     </div>
-                    <div class="mode-option" id="modeHybrid" onclick="handleModeClick('hybrid', event)">
+                    <div class="mode-option" id="modeHybrid" onclick="return handleModeClick('hybrid', event);">
                         <div class="mode-option-title">
                             <input type="radio" id="radioHybrid" name="constructionMode" value="hybrid"> 🧱 Hybrid Construction
                         </div>
                         <div class="mode-option-desc">Combine reusable atoms with custom inline steps (recommended)</div>
                     </div>
-                    <div class="mode-option" id="modeAtomsOnly" onclick="handleModeClick('atoms-only', event)">
+                    <div class="mode-option" id="modeAtomsOnly" onclick="return handleModeClick('atoms-only', event);">
                         <div class="mode-option-title">
                             <input type="radio" id="radioAtomsOnly" name="constructionMode" value="atoms-only"> 📦 Build from Atoms
                         </div>
