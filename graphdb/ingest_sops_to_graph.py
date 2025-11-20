@@ -340,7 +340,18 @@ class SOPGraphIngestion:
 
         nodes = graph_data.get('nodes', {})
 
-        for node_id, node_data in nodes.items():
+        # Handle both list and dict formats
+        if isinstance(nodes, list):
+            # If nodes is a list, iterate directly
+            nodes_iter = nodes
+        elif isinstance(nodes, dict):
+            # If nodes is a dict, iterate over values
+            nodes_iter = nodes.values()
+        else:
+            print(f"Warning: Unexpected nodes format: {type(nodes)}")
+            return
+
+        for node_data in nodes_iter:
             node_type = node_data.get('type')
 
             if node_type == 'sop':
