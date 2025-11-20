@@ -439,6 +439,47 @@
             margin-bottom: 25px;
         }
 
+        .subsection-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .subsection-title:first-child {
+            margin-top: 0;
+        }
+
+        .character-counter {
+            font-size: 12px;
+            color: #666;
+            text-align: right;
+            margin-top: 4px;
+        }
+
+        .alert-info {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 16px;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+
+        .alert-info strong {
+            color: #1976D2;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .alert-info p {
+            margin: 0;
+            font-size: 14px;
+            color: #555;
+        }
+
         /* Collapsible Sections (for advanced metadata) */
         .form-section.collapsible {
             border-left: 3px solid #e0e0e0;
@@ -1820,6 +1861,256 @@
                     <div class="alert alert-warning" id="safetyCriticalWarning" style="display: none;">
                         <strong>⚠️ Safety Critical Procedure</strong>
                         <p>This procedure requires enhanced review, approval workflow, and audit trail. Additional validation steps will be required before activation.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1.11: Content Metadata -->
+            <div class="form-section collapsible">
+                <h2 class="collapsible-header">
+                    <span class="form-section-number">1.11</span> Content Metadata
+                    <span class="toggle-icon">▼</span>
+                </h2>
+                <div class="collapsible-content">
+                    <p class="subtitle">Summary, key points, and content quality metrics</p>
+
+                    <div class="form-group">
+                        <label class="form-label" for="documentSummary">Document Summary</label>
+                        <p class="form-hint">Brief overview for search results and previews (max 500 characters)</p>
+                        <textarea id="documentSummary" class="form-textarea" rows="3" maxlength="500" placeholder="Concise 2-3 sentence summary highlighting what this procedure does and who should use it..."></textarea>
+                        <div class="character-counter" id="summary-counter">0 / 500</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="keyPoints">Key Points (up to 5)</label>
+                        <p class="form-hint">Main takeaways or critical information (one per line)</p>
+                        <textarea id="keyPoints" class="form-textarea" rows="5" placeholder="- First key point&#10;- Second key point&#10;- Third key point&#10;- Fourth key point&#10;- Fifth key point"></textarea>
+                        <div class="validation-message" id="keypoints-validation"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="scopeInList">In Scope - Covered Activities</label>
+                        <p class="form-hint">Specific activities this procedure covers (comma-separated for metadata)</p>
+                        <input type="text" id="scopeInList" class="form-input" placeholder="e.g., user authentication, password reset, account lockout">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="scopeOutList">Out of Scope - Exclusions</label>
+                        <p class="form-hint">Activities explicitly not covered (comma-separated for metadata)</p>
+                        <input type="text" id="scopeOutList" class="form-input" placeholder="e.g., API authentication, SSO configuration, directory sync">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="readabilityScore">Readability Score</label>
+                            <p class="form-hint">Auto-calculated on save (Flesch-Kincaid grade level)</p>
+                            <input type="text" id="readabilityScore" class="form-input" placeholder="Calculated after save" readonly disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="wordCount">Word Count</label>
+                            <p class="form-hint">Total words in procedure steps</p>
+                            <input type="text" id="wordCount" class="form-input" placeholder="Calculated on save" readonly disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="readingTime">Estimated Reading Time</label>
+                            <p class="form-hint">Based on 200 words/minute average</p>
+                            <input type="text" id="readingTime" class="form-input" placeholder="Calculated on save" readonly disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="qualityScore">Quality Score</label>
+                            <p class="form-hint">Composite score based on completeness and best practices</p>
+                            <input type="text" id="qualityScore" class="form-input" placeholder="Calculated on save" readonly disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1.12: Technical Metadata -->
+            <div class="form-section collapsible">
+                <h2 class="collapsible-header">
+                    <span class="form-section-number">1.12</span> Technical Metadata
+                    <span class="toggle-icon">▼</span>
+                </h2>
+                <div class="collapsible-content">
+                    <p class="subtitle">Git integration, build information, and indexing configuration</p>
+
+                    <h3 class="subsection-title">Git Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="gitRepository">Git Repository</label>
+                            <p class="form-hint">Repository URL (auto-detected)</p>
+                            <input type="text" id="gitRepository" class="form-input" placeholder="Auto-populated from git remote" readonly disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="gitBranch">Current Branch</label>
+                            <p class="form-hint">Git branch where document is created</p>
+                            <input type="text" id="gitBranch" class="form-input" placeholder="Auto-detected" readonly disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="gitCommitSha">Last Commit SHA</label>
+                            <p class="form-hint">Git commit hash for version tracking</p>
+                            <input type="text" id="gitCommitSha" class="form-input" placeholder="Populated on commit" readonly disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="gitCommitDate">Last Commit Date</label>
+                            <p class="form-hint">When document was last committed</p>
+                            <input type="text" id="gitCommitDate" class="form-input" placeholder="Populated on commit" readonly disabled>
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">Build & Deployment</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="buildId">Build ID</label>
+                            <p class="form-hint">CI/CD build identifier</p>
+                            <input type="text" id="buildId" class="form-input" placeholder="Populated by CI/CD" readonly disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="buildDate">Build Date</label>
+                            <p class="form-hint">When document was built/deployed</p>
+                            <input type="text" id="buildDate" class="form-input" placeholder="Populated on build" readonly disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="buildStatus">Build Status</label>
+                        <p class="form-hint">Success, failed, or pending</p>
+                        <input type="text" id="buildStatus" class="form-input" placeholder="Pending" readonly disabled>
+                    </div>
+
+                    <h3 class="subsection-title">Search & Indexing</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="indexedDate">Indexed Date</label>
+                            <p class="form-hint">When document was added to search index</p>
+                            <input type="text" id="indexedDate" class="form-input" placeholder="Not yet indexed" readonly disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="embeddingModel">Embedding Model</label>
+                            <p class="form-hint">AI model used for vector embeddings</p>
+                            <input type="text" id="embeddingModel" class="form-input" placeholder="e.g., text-embedding-ada-002" readonly disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="chunkCount">Chunk Count</label>
+                            <p class="form-hint">Number of text chunks for vector search</p>
+                            <input type="text" id="chunkCount" class="form-input" placeholder="Calculated on indexing" readonly disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="vectorStoreId">Vector Store ID</label>
+                            <p class="form-hint">Reference ID in vector database</p>
+                            <input type="text" id="vectorStoreId" class="form-input" placeholder="Generated on indexing" readonly disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1.13: Analytics Metadata -->
+            <div class="form-section collapsible">
+                <h2 class="collapsible-header">
+                    <span class="form-section-number">1.13</span> Analytics & Usage Metadata
+                    <span class="toggle-icon">▼</span>
+                </h2>
+                <div class="collapsible-content">
+                    <p class="subtitle">Usage statistics, user feedback, and document health metrics</p>
+
+                    <h3 class="subsection-title">Usage Statistics (Read-Only)</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="totalViews">Total Views</label>
+                            <p class="form-hint">Number of times document has been accessed</p>
+                            <input type="text" id="totalViews" class="form-input" value="0" readonly disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="uniqueViewers">Unique Viewers</label>
+                            <p class="form-hint">Number of distinct users who viewed</p>
+                            <input type="text" id="uniqueViewers" class="form-input" value="0" readonly disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="avgTimeOnPage">Avg. Time on Page</label>
+                            <p class="form-hint">Average time users spend reading (minutes)</p>
+                            <input type="text" id="avgTimeOnPage" class="form-input" placeholder="No data yet" readonly disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="aiRetrievals">AI Search Retrievals</label>
+                            <p class="form-hint">Times returned in AI search results</p>
+                            <input type="text" id="aiRetrievals" class="form-input" value="0" readonly disabled>
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">User Feedback</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="helpfulnessRating">Helpfulness Rating</label>
+                            <p class="form-hint">Average rating from user feedback (1-5 stars)</p>
+                            <input type="text" id="helpfulnessRating" class="form-input" placeholder="No ratings yet" readonly disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="totalRatings">Total Ratings</label>
+                            <p class="form-hint">Number of users who rated this document</p>
+                            <input type="text" id="totalRatings" class="form-input" value="0" readonly disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="userComments">User Comments Summary</label>
+                        <p class="form-hint">Most recent user feedback (display only)</p>
+                        <textarea id="userComments" class="form-textarea" rows="3" placeholder="No comments yet..." readonly disabled></textarea>
+                    </div>
+
+                    <h3 class="subsection-title">Document Health Metrics</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="stalenessScore">Staleness Score</label>
+                            <p class="form-hint">Days since last update (0-365 scale)</p>
+                            <input type="text" id="stalenessScore" class="form-input" placeholder="0 (new document)" readonly disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="brokenLinks">Broken Links Count</label>
+                            <p class="form-hint">Number of invalid references detected</p>
+                            <input type="text" id="brokenLinks" class="form-input" value="0" readonly disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="completenessScore">Completeness Score</label>
+                            <p class="form-hint">Percentage of required fields filled (0-100%)</p>
+                            <input type="text" id="completenessScore" class="form-input" placeholder="Calculated on save" readonly disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="lastValidated">Last Validated</label>
+                            <p class="form-hint">Last automated validation check</p>
+                            <input type="text" id="lastValidated" class="form-input" placeholder="Not yet validated" readonly disabled>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <strong>ℹ️ Analytics Note</strong>
+                        <p>Usage statistics and feedback are collected automatically after document publication. All data is anonymized and aggregated.</p>
                     </div>
                 </div>
             </div>
@@ -3671,6 +3962,57 @@ Expected outcome: [What should be true after this step]"></textarea>
                         this.classList.remove('invalid');
                         keywordsValidation.textContent = '✓ Good';
                         keywordsValidation.className = 'validation-message success';
+                    }
+                });
+            }
+
+            // Document Summary - character counter (Section 1.11)
+            const summaryInput = document.getElementById('documentSummary');
+            const summaryCounter = document.getElementById('summary-counter');
+
+            if (summaryInput && summaryCounter) {
+                summaryInput.addEventListener('input', function() {
+                    const length = this.value.length;
+                    const max = 500;
+                    summaryCounter.textContent = `${length} / ${max}`;
+
+                    // Visual feedback
+                    if (length === 0) {
+                        this.classList.remove('valid', 'invalid');
+                    } else if (length > 400) {
+                        this.classList.add('warning');
+                        this.classList.remove('valid');
+                    } else {
+                        this.classList.add('valid');
+                        this.classList.remove('invalid', 'warning');
+                    }
+                });
+            }
+
+            // Key Points - validate max 5 points (Section 1.11)
+            const keyPointsInput = document.getElementById('keyPoints');
+            const keyPointsValidation = document.getElementById('keypoints-validation');
+
+            if (keyPointsInput && keyPointsValidation) {
+                keyPointsInput.addEventListener('input', function() {
+                    const lines = this.value.split('\n').filter(line => line.trim().length > 0);
+                    const count = lines.length;
+
+                    // Validation
+                    if (count === 0) {
+                        this.classList.remove('valid', 'invalid');
+                        keyPointsValidation.textContent = '';
+                        keyPointsValidation.className = 'validation-message';
+                    } else if (count > 5) {
+                        this.classList.add('invalid');
+                        this.classList.remove('valid');
+                        keyPointsValidation.textContent = `⚠️  Too many (max 5 points, you have ${count})`;
+                        keyPointsValidation.className = 'validation-message warning';
+                    } else {
+                        this.classList.add('valid');
+                        this.classList.remove('invalid');
+                        keyPointsValidation.textContent = `✓ ${count} point${count !== 1 ? 's' : ''}`;
+                        keyPointsValidation.className = 'validation-message success';
                     }
                 });
             }
