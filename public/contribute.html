@@ -2306,13 +2306,17 @@ Expected outcome: [What should be true after this step]"></textarea>
                 console.log(`📊 Graph loaded: ${graphData.nodes.length} total nodes`);
 
                 // Filter components based on template type
+                // Note: Support both 'module' and 'molecule' for backward compatibility
                 let allowedTypes = [];
-                if (selectedTemplate === 'molecule') {
-                    allowedTypes = ['atom'];  // Molecules can only include atoms
+                if (selectedTemplate === 'module' || selectedTemplate === 'molecule') {
+                    allowedTypes = ['atom'];  // Modules can only include atoms
+                    console.log('🟣 MODULE: Filtering for atoms only');
                 } else if (selectedTemplate === 'organism') {
-                    allowedTypes = ['atom', 'molecule'];  // Organisms can include atoms + molecules
+                    allowedTypes = ['atom', 'molecule', 'module'];  // Organisms can include atoms + modules
+                    console.log('🟢 ORGANISM: Filtering for atoms + modules');
                 } else if (selectedTemplate === 'sop') {
-                    allowedTypes = ['atom', 'molecule', 'organism'];  // SOPs can include everything
+                    allowedTypes = ['atom', 'molecule', 'module', 'organism'];  // SOPs can include everything
+                    console.log('🔴 SOP: Filtering for all component types');
                 }
 
                 availableAtoms = graphData.nodes
@@ -2620,15 +2624,68 @@ Expected outcome: [What should be true after this step]"></textarea>
 
         // Show/hide hybrid construction section based on template type
         function updateHybridConstructionVisibility(templateType) {
-            console.log(`🔄 updateHybridConstructionVisibility called with: ${templateType}`);
-            console.log(`   Current mode before update: ${currentConstructionMode}`);
-            console.log(`   Stack trace:`, new Error().stack);
+            console.log(`🔄 ========== updateHybridConstructionVisibility ==========`);
+            console.log(`   Template Type: ${templateType}`);
 
             const hybridSection = document.getElementById('hybridConstructionSection');
             const libraryContainer = document.getElementById('atomLibraryContainer');
             const section4 = document.querySelector('.form-section:nth-of-type(5)'); // Procedure Steps
 
-            // Update UI text based on template type
+            // ========== ATOMS: NO CONSTRUCTION SECTION (Early Return) ==========
+            // Atoms are BASE LEVEL - they are NOT composed from other components
+            if (templateType === 'atom') {
+                console.log(`🔵 ATOM TEMPLATE SELECTED - Atoms are base level, showing steps only`);
+
+                // AGGRESSIVELY hide construction section
+                if (hybridSection) {
+                    // Multiple hiding strategies for bulletproof hiding
+                    hybridSection.style.display = 'none';
+                    hybridSection.style.visibility = 'hidden';
+                    hybridSection.setAttribute('hidden', 'true');
+                    hybridSection.setAttribute('data-atom-hidden', 'true');
+                    hybridSection.classList.add('force-hidden');
+                    console.log(`✅ Construction section hidden with multiple strategies`);
+                } else {
+                    console.error(`❌ ERROR: hybridConstructionSection element not found!`);
+                }
+
+                // Always show procedure steps for atoms
+                if (section4) {
+                    section4.style.display = 'block';
+                    section4.style.visibility = 'visible';
+                    section4.removeAttribute('hidden');
+                    console.log(`✅ Procedure Steps section shown`);
+                }
+
+                // Reset to inline mode
+                currentConstructionMode = 'inline';
+
+                // Post-check with debug message
+                setTimeout(() => {
+                    const actualDisplay = hybridSection ? window.getComputedStyle(hybridSection).display : 'not-found';
+                    console.log(`🔍 POST-CHECK: hybridSection display = ${actualDisplay}`);
+
+                    if (actualDisplay !== 'none' && actualDisplay !== 'not-found') {
+                        console.error(`❌❌❌ CRITICAL: Section STILL VISIBLE (display: ${actualDisplay})`);
+                        const errorDiv = document.getElementById('atomTemplateError');
+                        if (errorDiv) {
+                            errorDiv.style.display = 'block';
+                            document.getElementById('errorTemplateType').textContent = templateType;
+                            document.getElementById('errorSectionDisplay').textContent = actualDisplay;
+                        }
+                    } else {
+                        console.log(`✅ POST-CHECK: Section correctly hidden`);
+                    }
+                }, 100);
+
+                console.log(`✅ ATOM SETUP COMPLETE - Early return`);
+                return; // EARLY RETURN - Don't process anything else for atoms
+            }
+
+            // ========== MODULES, ORGANISMS, SOPs: Show Construction Section ==========
+            console.log(`🟣 Composite template (${templateType}) - showing construction options`);
+
+            // Get UI elements for text updates
             const constructionSectionTitle = document.getElementById('constructionSectionTitle');
             const constructionSectionSubtitle = document.getElementById('constructionSectionSubtitle');
             const hybridModeDesc = document.getElementById('hybridModeDesc');
@@ -2637,148 +2694,106 @@ Expected outcome: [What should be true after this step]"></textarea>
             const libraryHeaderTitle = document.getElementById('libraryHeaderTitle');
             const libraryHeaderDesc = document.getElementById('libraryHeaderDesc');
 
-            // Show for molecules, organisms, and SOPs only (not for atoms)
-            if (templateType === 'molecule' || templateType === 'organism' || templateType === 'sop') {
-                console.log('✅ Template supports hybrid construction - showing section');
+            // Show construction section (undo all hiding strategies)
+            if (hybridSection) {
+                hybridSection.style.display = 'block';
+                hybridSection.style.visibility = 'visible';
+                hybridSection.removeAttribute('hidden');
+                hybridSection.removeAttribute('data-atom-hidden');
+                hybridSection.classList.remove('force-hidden');
+                console.log(`✅ Construction section shown`);
+            }
 
-                // Update text based on template type
-                if (templateType === 'molecule') {
-                    constructionSectionTitle.textContent = 'Build from Atoms';
-                    constructionSectionSubtitle.textContent = 'Molecules combine multiple atoms. Choose to assemble from existing atoms or write custom steps.';
-                    hybridModeDesc.textContent = 'Combine reusable atoms with custom inline steps (recommended)';
-                    atomsOnlyTitle.textContent = 'Build from Atoms';
-                    atomsOnlyDesc.textContent = 'Assemble entirely from existing atom components';
-                    libraryHeaderTitle.textContent = '🔵 Atom Library';
-                    libraryHeaderDesc.textContent = 'Browse and select atoms to include in your molecule. Each atom is a single-purpose, reusable component.';
-                } else if (templateType === 'organism') {
-                    constructionSectionTitle.textContent = 'Build from Atoms & Molecules';
-                    constructionSectionSubtitle.textContent = 'Organisms combine atoms and molecules. Choose to assemble from existing components or write custom steps.';
-                    hybridModeDesc.textContent = 'Combine reusable atoms/molecules with custom inline steps (recommended)';
-                    atomsOnlyTitle.textContent = 'Build from Components';
-                    atomsOnlyDesc.textContent = 'Assemble entirely from existing atoms and molecules';
-                    libraryHeaderTitle.textContent = '🔵🟣 Atom & Molecule Library';
-                    libraryHeaderDesc.textContent = 'Browse and select atoms and molecules to include in your organism.';
-                } else if (templateType === 'sop') {
-                    constructionSectionTitle.textContent = 'Build from Atoms, Molecules & Organisms';
-                    constructionSectionSubtitle.textContent = 'Full SOPs can reference any component type. Choose to assemble from existing components or write custom steps.';
-                    hybridModeDesc.textContent = 'Combine reusable components (atoms/molecules/organisms) with custom steps (recommended)';
-                    atomsOnlyTitle.textContent = 'Build from Components';
-                    atomsOnlyDesc.textContent = 'Assemble entirely from existing components (atoms, molecules, organisms)';
-                    libraryHeaderTitle.textContent = '🔵🟣🟢 Full Component Library';
-                    libraryHeaderDesc.textContent = 'Browse and select atoms, molecules, and organisms to include in your SOP.';
+            // Update text based on specific template type
+            if (templateType === 'module' || templateType === 'molecule') {
+                // 🟣 MODULES: Combine multiple atoms into task sequences
+                console.log('🟣 MODULE template - Build from Atoms only');
+                constructionSectionTitle.textContent = 'Build from Atoms';
+                constructionSectionSubtitle.textContent = 'Modules combine multiple atoms into task sequences. Choose to assemble from existing atoms or write custom steps.';
+                hybridModeDesc.textContent = 'Combine reusable atoms with custom inline steps (recommended)';
+                atomsOnlyTitle.textContent = 'Build from Atoms';
+                atomsOnlyDesc.textContent = 'Assemble entirely from existing atoms';
+                libraryHeaderTitle.textContent = '🔵 Atom Library';
+                libraryHeaderDesc.textContent = 'Browse and select atoms to include in your module. Each atom is a single-purpose, reusable component.';
+
+            } else if (templateType === 'organism') {
+                // 🟢 ORGANISMS: Combine atoms + modules into workflows
+                console.log('🟢 ORGANISM template - Build from Atoms & Modules');
+                constructionSectionTitle.textContent = 'Build from Atoms & Modules';
+                constructionSectionSubtitle.textContent = 'Organisms combine atoms and modules into complete workflows. Choose to assemble from existing components or write custom steps.';
+                hybridModeDesc.textContent = 'Combine reusable atoms/modules with custom inline steps (recommended)';
+                atomsOnlyTitle.textContent = 'Build from Atoms & Modules';
+                atomsOnlyDesc.textContent = 'Assemble entirely from existing atoms and modules';
+                libraryHeaderTitle.textContent = '🔵🟣 Atom & Module Library';
+                libraryHeaderDesc.textContent = 'Browse and select atoms and modules to include in your organism.';
+
+            } else if (templateType === 'sop') {
+                // 🔴 COMPLETE SOPs: Use all component types for end-to-end procedures
+                console.log('🔴 SOP template - Build from Atoms, Modules & Organisms');
+                constructionSectionTitle.textContent = 'Build from Atoms, Modules & Organisms';
+                constructionSectionSubtitle.textContent = 'Complete SOPs can reference any component type. Choose to assemble from existing components or write custom steps.';
+                hybridModeDesc.textContent = 'Combine reusable components (atoms/modules/organisms) with custom steps (recommended)';
+                atomsOnlyTitle.textContent = 'Build from Atoms, Modules & Organisms';
+                atomsOnlyDesc.textContent = 'Assemble entirely from existing components (atoms, modules, organisms)';
+                libraryHeaderTitle.textContent = '🔵🟣🟢 Full Component Library';
+                libraryHeaderDesc.textContent = 'Browse and select atoms, modules, and organisms to include in your SOP.';
+            }
+
+            // Reset to inline mode by default (user can change after)
+            const isInitialSetup = currentConstructionMode === null || currentConstructionMode === undefined || currentConstructionMode === 'inline';
+
+            if (isInitialSetup) {
+                console.log('🔄 Initial setup - setting inline mode as default');
+                currentConstructionMode = 'inline';
+
+                // Update UI to reflect inline mode
+                document.querySelectorAll('.mode-option').forEach(opt => opt.classList.remove('selected'));
+                const inlineOption = document.getElementById('modeInline');
+                if (inlineOption) {
+                    inlineOption.classList.add('selected');
                 }
 
-                // Show hybrid construction section
-                if (hybridSection) {
-                    hybridSection.style.display = 'block';
+                // Update radio buttons
+                document.querySelectorAll('input[name="constructionMode"]').forEach(radio => {
+                    radio.checked = (radio.value === 'inline');
+                });
+
+                // Hide library, show procedure steps (inline mode default)
+                if (libraryContainer) {
+                    libraryContainer.style.display = 'none';
                 }
-
-                // Only reset to inline mode if we're switching templates
-                // Don't reset if user is actively using a different mode
-                const isInitialSetup = currentConstructionMode === null || currentConstructionMode === undefined || currentConstructionMode === 'inline';
-
-                if (isInitialSetup) {
-                    console.log('🔄 Initial setup - setting inline mode as default');
-                    currentConstructionMode = 'inline';
-
-                    // Update UI to reflect inline mode
-                    document.querySelectorAll('.mode-option').forEach(opt => opt.classList.remove('selected'));
-                    const inlineOption = document.getElementById('modeInline');
-                    if (inlineOption) {
-                        inlineOption.classList.add('selected');
-                    }
-
-                    // Update radio buttons
-                    document.querySelectorAll('input[name="constructionMode"]').forEach(radio => {
-                        radio.checked = (radio.value === 'inline');
-                    });
-
-                    // Hide library, show procedure steps (inline mode default)
-                    if (libraryContainer) {
-                        libraryContainer.style.display = 'none';
-                    }
-                    if (section4) {
-                        section4.style.display = 'block';
-                    }
-                } else {
-                    console.log(`⚠️  User is in ${currentConstructionMode} mode - NOT resetting`);
-                    // Preserve the user's current mode selection
-                    // Just make sure the visibility is correct
-                    if (currentConstructionMode === 'hybrid' || currentConstructionMode === 'atoms-only') {
-                        if (libraryContainer) libraryContainer.style.display = 'block';
-                    }
-                    if (currentConstructionMode === 'atoms-only') {
-                        if (section4) section4.style.display = 'none';
-                    }
-                }
-
-                // Clear any previously selected atoms when switching templates
-                if (selectedAtomIds.length > 0) {
-                    console.log(`🧹 Clearing ${selectedAtomIds.length} previously selected atoms`);
-                    selectedAtomIds = [];
-                    updateSelectedAtomsPreview();
-                }
-
-                // Load atoms if not already loaded
-                if (availableAtoms.length === 0) {
-                    console.log('📦 Loading atoms for the first time...');
-                    loadAtoms();
-                } else {
-                    console.log(`✅ Atoms already loaded (${availableAtoms.length} available)`);
-                    // Re-render to clear selection highlighting
-                    renderAtoms(availableAtoms);
-                }
-            } else {
-                console.log(`❌ ========== ATOM TEMPLATE - HIDING CONSTRUCTION SECTION ==========`);
-                console.log(`   templateType received: ${templateType}`);
-                console.log(`   hybridSection found: ${!!hybridSection}`);
-                console.log(`   section4 found: ${!!section4}`);
-
-                // FORCEFULLY Hide hybrid construction section for atoms
-                if (hybridSection) {
-                    hybridSection.style.display = 'none';
-                    console.log(`✅ hybridSection.style.display set to: ${hybridSection.style.display}`);
-                } else {
-                    console.error(`❌ ERROR: hybridSection element not found!`);
-                }
-
-                // Always show procedure steps for atoms (they don't use the hybrid system)
                 if (section4) {
                     section4.style.display = 'block';
-                    console.log(`✅ section4 (Procedure Steps) displayed`);
-                } else {
-                    console.error(`❌ ERROR: section4 element not found!`);
                 }
-
-                // Reset construction mode
-                currentConstructionMode = 'inline';
-                console.log(`✅ ATOM TEMPLATE SETUP COMPLETE - Construction section should be HIDDEN`);
-
-                // DEBUG: Show error message if section is still visible
-                const errorDiv = document.getElementById('atomTemplateError');
-                const errorTemplateType = document.getElementById('errorTemplateType');
-                const errorSectionDisplay = document.getElementById('errorSectionDisplay');
-
-                // Use setTimeout to check AFTER any other scripts might have run
-                setTimeout(() => {
-                    const actualDisplay = hybridSection ? window.getComputedStyle(hybridSection).display : 'element-not-found';
-                    console.log(`🔍 POST-CHECK: hybridSection computed display = ${actualDisplay}`);
-
-                    if (actualDisplay !== 'none' && actualDisplay !== 'element-not-found') {
-                        console.error(`❌❌❌ CRITICAL ERROR: Section is STILL VISIBLE after hiding attempt!`);
-                        if (errorDiv && errorTemplateType && errorSectionDisplay) {
-                            errorDiv.style.display = 'block';
-                            errorTemplateType.textContent = templateType;
-                            errorSectionDisplay.textContent = actualDisplay;
-                        }
-                    } else {
-                        console.log(`✅ POST-CHECK: Section is correctly hidden`);
-                        if (errorDiv) {
-                            errorDiv.style.display = 'none';
-                        }
-                    }
-                }, 100);
+            } else {
+                console.log(`⚠️  User is in ${currentConstructionMode} mode - preserving selection`);
+                // Preserve the user's current mode selection
+                if (currentConstructionMode === 'hybrid' || currentConstructionMode === 'atoms-only') {
+                    if (libraryContainer) libraryContainer.style.display = 'block';
+                }
+                if (currentConstructionMode === 'atoms-only') {
+                    if (section4) section4.style.display = 'none';
+                }
             }
+
+            // Clear any previously selected atoms when switching templates
+            if (selectedAtomIds.length > 0) {
+                console.log(`🧹 Clearing ${selectedAtomIds.length} previously selected components`);
+                selectedAtomIds = [];
+                updateSelectedAtomsPreview();
+            }
+
+            // Load components if not already loaded
+            if (availableAtoms.length === 0) {
+                console.log('📦 Loading components for the first time...');
+                loadAtoms();
+            } else {
+                console.log(`✅ Components already loaded (${availableAtoms.length} available)`);
+                // Re-render to clear selection highlighting
+                renderAtoms(availableAtoms);
+            }
+
+            console.log(`✅ Template setup complete for: ${templateType}`);
         }
 
         // Initialize on page load
