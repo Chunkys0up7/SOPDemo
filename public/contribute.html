@@ -1345,15 +1345,32 @@
                         <label class="form-label" for="department">Department <span class="required">*</span></label>
                         <select id="department" class="form-select" required>
                             <option value="">Select department...</option>
-                            <option value="IT">IT & Technology</option>
-                            <option value="Operations">Operations</option>
-                            <option value="HR">Human Resources</option>
-                            <option value="Finance">Finance</option>
-                            <option value="Legal">Legal</option>
-                            <option value="Compliance">Compliance</option>
-                            <option value="Security">Security</option>
-                            <option value="Customer Service">Customer Service</option>
-                            <option value="Multi-Department">Multi-Department</option>
+                            <optgroup label="Core Operations">
+                                <option value="IT">IT & Technology</option>
+                                <option value="Operations">Operations & Logistics</option>
+                                <option value="Customer Service">Customer Service & Support</option>
+                                <option value="Sales">Sales & Business Development</option>
+                                <option value="Marketing">Marketing & Communications</option>
+                            </optgroup>
+                            <optgroup label="Corporate Functions">
+                                <option value="HR">Human Resources</option>
+                                <option value="Finance">Finance & Accounting</option>
+                                <option value="Legal">Legal & Contracts</option>
+                                <option value="Compliance">Compliance & Risk</option>
+                                <option value="Security">Security & Privacy</option>
+                            </optgroup>
+                            <optgroup label="Specialized">
+                                <option value="Product">Product Management</option>
+                                <option value="Engineering">Engineering & Development</option>
+                                <option value="Quality">Quality Assurance</option>
+                                <option value="Research">Research & Analytics</option>
+                                <option value="Procurement">Procurement & Sourcing</option>
+                                <option value="Facilities">Facilities & Admin</option>
+                            </optgroup>
+                            <optgroup label="Cross-Functional">
+                                <option value="Multi-Department">Multi-Department</option>
+                                <option value="Executive">Executive Leadership</option>
+                            </optgroup>
                         </select>
                     </div>
 
@@ -1361,12 +1378,32 @@
                         <label class="form-label" for="processCategory">Process Category <span class="required">*</span></label>
                         <select id="processCategory" class="form-select" required>
                             <option value="">Select category...</option>
-                            <option value="System Configuration">System Configuration</option>
-                            <option value="Troubleshooting">Troubleshooting</option>
-                            <option value="Compliance & Audit">Compliance & Audit</option>
-                            <option value="Maintenance & Updates">Maintenance & Updates</option>
-                            <option value="Risk Management">Risk Management</option>
-                            <option value="Training & Onboarding">Training & Onboarding</option>
+                            <optgroup label="Technical Operations">
+                                <option value="System Configuration">System Configuration & Setup</option>
+                                <option value="Troubleshooting">Troubleshooting & Support</option>
+                                <option value="Maintenance & Updates">Maintenance & Updates</option>
+                                <option value="Data Management">Data Management & Migration</option>
+                                <option value="Security Operations">Security Operations & Monitoring</option>
+                            </optgroup>
+                            <optgroup label="Business Processes">
+                                <option value="Compliance & Audit">Compliance & Audit</option>
+                                <option value="Risk Management">Risk Management & Assessment</option>
+                                <option value="Quality Assurance">Quality Assurance & Testing</option>
+                                <option value="Financial Operations">Financial Operations & Reporting</option>
+                                <option value="Procurement">Procurement & Vendor Management</option>
+                            </optgroup>
+                            <optgroup label="People & Development">
+                                <option value="Training & Onboarding">Training & Onboarding</option>
+                                <option value="Performance Management">Performance Management</option>
+                                <option value="Employee Relations">Employee Relations</option>
+                                <option value="Talent Acquisition">Talent Acquisition & Recruiting</option>
+                            </optgroup>
+                            <optgroup label="Customer & Operations">
+                                <option value="Customer Support">Customer Support & Service</option>
+                                <option value="Sales Operations">Sales Operations & CRM</option>
+                                <option value="Order Processing">Order Processing & Fulfillment</option>
+                                <option value="Project Management">Project Management & Delivery</option>
+                            </optgroup>
                         </select>
                     </div>
                 </div>
