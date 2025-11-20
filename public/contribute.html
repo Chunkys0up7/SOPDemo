@@ -258,6 +258,55 @@
             margin-bottom: 25px;
         }
 
+        /* Collapsible Sections (for advanced metadata) */
+        .form-section.collapsible {
+            border-left: 3px solid #e0e0e0;
+        }
+
+        .collapsible-header {
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            margin-bottom: 0 !important;
+        }
+
+        .collapsible-header:hover {
+            color: #0052CC;
+        }
+
+        .toggle-icon {
+            font-size: 14px;
+            color: #999;
+            transition: transform 0.3s ease;
+            margin-left: auto;
+        }
+
+        .form-section.collapsible.collapsed .toggle-icon {
+            transform: rotate(-90deg);
+        }
+
+        .collapsible-content {
+            max-height: 2000px;
+            overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
+            opacity: 1;
+            padding-top: 20px;
+        }
+
+        .form-section.collapsible.collapsed .collapsible-content {
+            max-height: 0;
+            opacity: 0;
+            padding-top: 0;
+        }
+
+        .form-section.collapsible.collapsed {
+            border-left-color: #f0f0f0;
+            padding-bottom: 20px;
+        }
+
         .form-row {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -336,6 +385,50 @@
             font-size: 14px;
             color: #666;
             cursor: pointer;
+        }
+
+        /* Alert Messages */
+        .alert {
+            padding: 16px 20px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            border-left: 4px solid;
+        }
+
+        .alert strong {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .alert p {
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .alert-warning {
+            background-color: #fff3cd;
+            border-left-color: #FFA726;
+            color: #856404;
+        }
+
+        .alert-info {
+            background-color: #d1ecf1;
+            border-left-color: #0052CC;
+            color: #0c5460;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            border-left-color: #D32F2F;
+            color: #721c24;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            border-left-color: #00A86B;
+            color: #155724;
         }
 
         /* Buttons */
@@ -1076,6 +1169,346 @@
                 </div>
             </div>
 
+            <!-- Section 1.5: Document Identification & Versioning -->
+            <div class="form-section collapsible">
+                <h2 class="collapsible-header">
+                    <span class="form-section-number">1.5</span> Document Identification & Versioning
+                    <span class="toggle-icon">▼</span>
+                </h2>
+                <div class="collapsible-content">
+                    <p class="subtitle">Automatic document tracking and version control</p>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="documentId">Document ID</label>
+                            <p class="form-hint">Auto-generated based on category and sequence (e.g., SOP-IT-001)</p>
+                            <input type="text" id="documentId" class="form-input" placeholder="Auto-generated on save" readonly disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="version">Version</label>
+                            <p class="form-hint">Semantic versioning: Major.Minor.Patch</p>
+                            <input type="text" id="version" class="form-input" value="1.0.0" placeholder="1.0.0">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="documentType">Document Type</label>
+                        <p class="form-hint">Automatically set based on template selected in step 3</p>
+                        <input type="text" id="documentType" class="form-input" value="" placeholder="Set by template selection" readonly disabled>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1.6: Lifecycle Management -->
+            <div class="form-section collapsible">
+                <h2 class="collapsible-header">
+                    <span class="form-section-number">1.6</span> Lifecycle Management
+                    <span class="toggle-icon">▼</span>
+                </h2>
+                <div class="collapsible-content">
+                    <p class="subtitle">Document status tracking and review scheduling</p>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="status">Status <span class="required">*</span></label>
+                            <select id="status" class="form-select" required>
+                                <option value="Draft" selected>Draft (Work in progress)</option>
+                                <option value="In Review">In Review (Awaiting approval)</option>
+                                <option value="Approved">Approved (Ready for use)</option>
+                                <option value="Active">Active (In production)</option>
+                                <option value="Archived">Archived (Historical reference)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="reviewCycle">Review Cycle <span class="required">*</span></label>
+                            <select id="reviewCycle" class="form-select" required>
+                                <option value="30">Monthly (30 days)</option>
+                                <option value="60">Bi-monthly (60 days)</option>
+                                <option value="90" selected>Quarterly (90 days)</option>
+                                <option value="180">Semi-annually (180 days)</option>
+                                <option value="365">Annually (365 days)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="effectiveDate">Effective Date</label>
+                            <p class="form-hint">When this procedure goes live (defaults to approval date)</p>
+                            <input type="date" id="effectiveDate" class="form-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="expirationDate">Expiration Date</label>
+                            <p class="form-hint">Optional - for temporary procedures only</p>
+                            <input type="date" id="expirationDate" class="form-input">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="nextReviewDate">Next Review Date</label>
+                        <p class="form-hint">Auto-calculated from review cycle, or set manually</p>
+                        <input type="date" id="nextReviewDate" class="form-input">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1.7: Ownership & Accountability -->
+            <div class="form-section collapsible">
+                <h2 class="collapsible-header">
+                    <span class="form-section-number">1.7</span> Ownership & Accountability
+                    <span class="toggle-icon">▼</span>
+                </h2>
+                <div class="collapsible-content">
+                    <p class="subtitle">Assign responsibility and approval authority</p>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="author">Author <span class="required">*</span></label>
+                            <p class="form-hint">Person creating this document</p>
+                            <input type="text" id="author" class="form-input" placeholder="Your name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="owner">Document Owner <span class="required">*</span></label>
+                            <p class="form-hint">Person responsible for maintenance</p>
+                            <input type="text" id="owner" class="form-input" placeholder="Owner name" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="reviewer">Reviewers</label>
+                            <p class="form-hint">Subject matter experts (comma-separated)</p>
+                            <input type="text" id="reviewer" class="form-input" placeholder="e.g., John Smith, Jane Doe">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="approver">Approver <span class="required">*</span></label>
+                            <p class="form-hint">Person with sign-off authority</p>
+                            <input type="text" id="approver" class="form-input" placeholder="Approver name" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="contact">Primary Contact</label>
+                        <p class="form-hint">Point of contact for questions (defaults to owner)</p>
+                        <input type="text" id="contact" class="form-input" placeholder="Contact name or email">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1.8: Faceted Classification -->
+            <div class="form-section collapsible">
+                <h2 class="collapsible-header">
+                    <span class="form-section-number">1.8</span> Faceted Classification
+                    <span class="toggle-icon">▼</span>
+                </h2>
+                <div class="collapsible-content">
+                    <p class="subtitle">Multi-dimensional categorization for discovery and filtering</p>
+
+                    <div class="form-group">
+                        <label class="form-label">Functional Areas <span class="required">*</span></label>
+                        <p class="form-hint">Select all areas this procedure applies to</p>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fa-safety" name="functionalArea" value="Safety">
+                                <label for="fa-safety">Safety</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fa-quality" name="functionalArea" value="Quality Assurance">
+                                <label for="fa-quality">Quality Assurance</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fa-manufacturing" name="functionalArea" value="Manufacturing">
+                                <label for="fa-manufacturing">Manufacturing</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fa-hr" name="functionalArea" value="Human Resources">
+                                <label for="fa-hr">Human Resources</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fa-finance" name="functionalArea" value="Finance & Accounting">
+                                <label for="fa-finance">Finance & Accounting</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fa-it" name="functionalArea" value="IT & Systems">
+                                <label for="fa-it">IT & Systems</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fa-customer" name="functionalArea" value="Customer Service">
+                                <label for="fa-customer">Customer Service</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fa-supply" name="functionalArea" value="Supply Chain">
+                                <label for="fa-supply">Supply Chain</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fa-rd" name="functionalArea" value="Research & Development">
+                                <label for="fa-rd">Research & Development</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="processType">Process Type <span class="required">*</span></label>
+                        <select id="processType" class="form-select" required>
+                            <option value="">Select process type...</option>
+                            <option value="Operational">Operational (day-to-day activities)</option>
+                            <option value="Maintenance">Maintenance (equipment/system upkeep)</option>
+                            <option value="Inspection">Inspection (quality checks)</option>
+                            <option value="Administrative">Administrative (paperwork/approval)</option>
+                            <option value="Emergency">Emergency (incident response)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Compliance Domains</label>
+                        <p class="form-hint">Select all regulatory frameworks this procedure addresses</p>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="comp-iso9001" name="complianceDomain" value="ISO 9001">
+                                <label for="comp-iso9001">ISO 9001 (Quality Management)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="comp-iso14001" name="complianceDomain" value="ISO 14001">
+                                <label for="comp-iso14001">ISO 14001 (Environmental)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="comp-fda" name="complianceDomain" value="FDA 21 CFR Part 11">
+                                <label for="comp-fda">FDA 21 CFR Part 11 (Electronic Records)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="comp-osha" name="complianceDomain" value="OSHA">
+                                <label for="comp-osha">OSHA (Workplace Safety)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="comp-gdpr" name="complianceDomain" value="GDPR">
+                                <label for="comp-gdpr">GDPR (Data Privacy)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="comp-soc2" name="complianceDomain" value="SOC 2">
+                                <label for="comp-soc2">SOC 2 (Security Controls)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="comp-hipaa" name="complianceDomain" value="HIPAA">
+                                <label for="comp-hipaa">HIPAA (Healthcare Privacy)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="comp-gmp" name="complianceDomain" value="GMP">
+                                <label for="comp-gmp">GMP (Good Manufacturing Practice)</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="lifecycleStage">Lifecycle Stage <span class="required">*</span></label>
+                        <select id="lifecycleStage" class="form-select" required>
+                            <option value="">Select lifecycle stage...</option>
+                            <option value="Development">Development (in progress)</option>
+                            <option value="Production">Production (active use)</option>
+                            <option value="Quality Control">Quality Control (verification)</option>
+                            <option value="Training">Training (learning materials)</option>
+                            <option value="Archived">Archived (historical reference)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1.9: Relationships & Dependencies -->
+            <div class="form-section collapsible">
+                <h2 class="collapsible-header">
+                    <span class="form-section-number">1.9</span> Relationships & Dependencies
+                    <span class="toggle-icon">▼</span>
+                </h2>
+                <div class="collapsible-content">
+                    <p class="subtitle">Link related procedures and define dependencies</p>
+
+                    <div class="form-group">
+                        <label class="form-label" for="prerequisites">Prerequisites</label>
+                        <p class="form-hint">SOPs that must be completed first (comma-separated IDs or titles)</p>
+                        <input type="text" id="prerequisites" class="form-input" placeholder="e.g., SOP-IT-001, User Account Setup">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="relatedProcedures">Related Procedures</label>
+                        <p class="form-hint">Associated documentation (comma-separated)</p>
+                        <input type="text" id="relatedProcedures" class="form-input" placeholder="e.g., SOP-SEC-005, Password Policy">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="supersedes">Supersedes</label>
+                        <p class="form-hint">Previous version this document replaces</p>
+                        <input type="text" id="supersedes" class="form-input" placeholder="e.g., SOP-IT-001 v0.9">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="references">External References</label>
+                        <p class="form-hint">Standards, regulations, forms (one per line)</p>
+                        <textarea id="references" class="form-textarea" rows="3" placeholder="e.g., ISO 27001 Section 5.2&#10;NIST SP 800-53&#10;Form IT-REQ-001"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1.10: Compliance & Risk -->
+            <div class="form-section collapsible">
+                <h2 class="collapsible-header">
+                    <span class="form-section-number">1.10</span> Compliance & Risk Assessment
+                    <span class="toggle-icon">▼</span>
+                </h2>
+                <div class="collapsible-content">
+                    <p class="subtitle">Regulatory requirements and risk classification</p>
+
+                    <div class="form-group">
+                        <label class="form-label" for="regulatoryRequirements">Regulatory Requirements</label>
+                        <p class="form-hint">Specific regulations this procedure satisfies</p>
+                        <textarea id="regulatoryRequirements" class="form-textarea" rows="3" placeholder="e.g., FDA 21 CFR 11.10(a) - System validation&#10;ISO 9001:2015 Clause 7.5 - Documented information"></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="trainingRequired">Training Required? <span class="required">*</span></label>
+                            <select id="trainingRequired" class="form-select" required>
+                                <option value="No">No - Self-explanatory</option>
+                                <option value="Yes" selected>Yes - Training needed</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="trainingProgramGroup" style="display: none;">
+                            <label class="form-label" for="trainingProgram">Training Program</label>
+                            <input type="text" id="trainingProgram" class="form-input" placeholder="e.g., IT Security Fundamentals">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="riskLevel">Risk Level <span class="required">*</span></label>
+                            <select id="riskLevel" class="form-select" required>
+                                <option value="Low">Low (minimal impact if error occurs)</option>
+                                <option value="Medium" selected>Medium (moderate impact, recoverable)</option>
+                                <option value="High">High (significant impact, difficult recovery)</option>
+                                <option value="Critical">Critical (severe impact, safety/security/legal)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="safetyCritical">Safety Critical? <span class="required">*</span></label>
+                            <select id="safetyCritical" class="form-select" required>
+                                <option value="No" selected>No</option>
+                                <option value="Yes">Yes - Requires special handling</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-warning" id="safetyCriticalWarning" style="display: none;">
+                        <strong>⚠️ Safety Critical Procedure</strong>
+                        <p>This procedure requires enhanced review, approval workflow, and audit trail. Additional validation steps will be required before activation.</p>
+                    </div>
+                </div>
+            </div>
+
             <!-- Section 2: Purpose & Scope -->
             <div class="form-section">
                 <h2><span class="form-section-number">2</span> Purpose & Scope</h2>
@@ -1459,6 +1892,20 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
 
             selectedTemplate = type;
             console.log(`✅ selectedTemplate set to: ${selectedTemplate}`);
+
+            // Update document type field (Section 1.5)
+            const documentTypeInput = document.getElementById('documentType');
+            if (documentTypeInput) {
+                const typeMap = {
+                    'atom': '🔵 Atom (Base Component)',
+                    'molecule': '🟣 Module (Task Sequence)',
+                    'module': '🟣 Module (Task Sequence)',
+                    'organism': '🟢 Organism (Workflow)',
+                    'sop': '🔴 Complete SOP (End-to-End Procedure)'
+                };
+                documentTypeInput.value = typeMap[type] || type.toUpperCase();
+                console.log(`📝 Document type updated: ${documentTypeInput.value}`);
+            }
 
             // Update selected card styling
             document.querySelectorAll('.template-card').forEach(card => {
@@ -2799,6 +3246,95 @@ Expected outcome: [What should be true after this step]"></textarea>
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
             console.log('🚀 Hybrid construction module initialized');
+            console.log('🚀 Metadata enhancements initialized');
+
+            // ==================================================
+            // COLLAPSIBLE SECTIONS
+            // ==================================================
+
+            // Initialize all collapsible sections as collapsed by default (progressive disclosure)
+            document.querySelectorAll('.form-section.collapsible').forEach(section => {
+                section.classList.add('collapsed');
+            });
+
+            // Add click handlers to collapsible headers
+            document.querySelectorAll('.collapsible-header').forEach(header => {
+                header.addEventListener('click', function() {
+                    const section = this.closest('.form-section.collapsible');
+                    section.classList.toggle('collapsed');
+
+                    const isCollapsed = section.classList.contains('collapsed');
+                    console.log(`📂 Section ${this.querySelector('.form-section-number').textContent}: ${isCollapsed ? 'Collapsed' : 'Expanded'}`);
+                });
+            });
+
+            // ==================================================
+            // CONDITIONAL FIELDS
+            // ==================================================
+
+            // Training Required -> Show/Hide Training Program field
+            const trainingRequiredSelect = document.getElementById('trainingRequired');
+            const trainingProgramGroup = document.getElementById('trainingProgramGroup');
+            const trainingProgramInput = document.getElementById('trainingProgram');
+
+            if (trainingRequiredSelect && trainingProgramGroup) {
+                trainingRequiredSelect.addEventListener('change', function() {
+                    if (this.value === 'Yes') {
+                        trainingProgramGroup.style.display = 'block';
+                        trainingProgramInput.required = true;
+                    } else {
+                        trainingProgramGroup.style.display = 'none';
+                        trainingProgramInput.required = false;
+                        trainingProgramInput.value = '';
+                    }
+                });
+
+                // Trigger on page load to set initial state
+                trainingRequiredSelect.dispatchEvent(new Event('change'));
+            }
+
+            // Safety Critical -> Show/Hide Warning
+            const safetyCriticalSelect = document.getElementById('safetyCritical');
+            const safetyCriticalWarning = document.getElementById('safetyCriticalWarning');
+
+            if (safetyCriticalSelect && safetyCriticalWarning) {
+                safetyCriticalSelect.addEventListener('change', function() {
+                    if (this.value === 'Yes') {
+                        safetyCriticalWarning.style.display = 'block';
+                        console.log('⚠️  Safety Critical procedure - enhanced validation required');
+                    } else {
+                        safetyCriticalWarning.style.display = 'none';
+                    }
+                });
+
+                // Trigger on page load
+                safetyCriticalSelect.dispatchEvent(new Event('change'));
+            }
+
+            // ==================================================
+            // AUTO-CALCULATE NEXT REVIEW DATE
+            // ==================================================
+
+            const reviewCycleSelect = document.getElementById('reviewCycle');
+            const nextReviewDateInput = document.getElementById('nextReviewDate');
+
+            if (reviewCycleSelect && nextReviewDateInput) {
+                reviewCycleSelect.addEventListener('change', function() {
+                    const days = parseInt(this.value);
+                    const today = new Date();
+                    const nextReview = new Date(today);
+                    nextReview.setDate(today.getDate() + days);
+
+                    // Format as YYYY-MM-DD for date input
+                    const formatted = nextReview.toISOString().split('T')[0];
+                    nextReviewDateInput.value = formatted;
+
+                    console.log(`📅 Next review date calculated: ${formatted} (${days} days from today)`);
+                });
+
+                // Calculate on page load
+                reviewCycleSelect.dispatchEvent(new Event('change'));
+            }
         });
 
     </script>
