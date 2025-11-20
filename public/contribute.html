@@ -1425,6 +1425,8 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
         let stepCount = 0;
 
         function selectTemplate(type, event) {
+            console.log(`🎯 ========== TEMPLATE SELECTED: ${type} ==========`);
+
             // Check if we're switching templates (form already visible)
             const formLayout = document.getElementById('formLayout');
             const formWasVisible = formLayout.style.display === 'grid';
@@ -1448,6 +1450,7 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
             }
 
             selectedTemplate = type;
+            console.log(`✅ selectedTemplate set to: ${selectedTemplate}`);
 
             // Update selected card styling
             document.querySelectorAll('.template-card').forEach(card => {
@@ -1463,8 +1466,10 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
             // Configure form sections based on template type
             configureFormSections(type);
 
-            // Show/hide hybrid construction section
+            // CRITICAL: Show/hide hybrid construction section
+            console.log(`🔧 About to call updateHybridConstructionVisibility with: ${type}`);
             updateHybridConstructionVisibility(type);
+            console.log(`✅ updateHybridConstructionVisibility completed`);
 
             // Only scroll if form was hidden (first time selection)
             // Don't scroll if switching templates (prevents jarring reset feeling)
@@ -2716,20 +2721,30 @@ Expected outcome: [What should be true after this step]"></textarea>
                     renderAtoms(availableAtoms);
                 }
             } else {
-                console.log('❌ Template does not support hybrid construction (atom selected) - hiding section');
+                console.log(`❌ ========== ATOM TEMPLATE - HIDING CONSTRUCTION SECTION ==========`);
+                console.log(`   templateType received: ${templateType}`);
+                console.log(`   hybridSection found: ${!!hybridSection}`);
+                console.log(`   section4 found: ${!!section4}`);
 
-                // Hide hybrid construction section for atoms
+                // FORCEFULLY Hide hybrid construction section for atoms
                 if (hybridSection) {
                     hybridSection.style.display = 'none';
+                    console.log(`✅ hybridSection.style.display set to: ${hybridSection.style.display}`);
+                } else {
+                    console.error(`❌ ERROR: hybridSection element not found!`);
                 }
 
                 // Always show procedure steps for atoms (they don't use the hybrid system)
                 if (section4) {
                     section4.style.display = 'block';
+                    console.log(`✅ section4 (Procedure Steps) displayed`);
+                } else {
+                    console.error(`❌ ERROR: section4 element not found!`);
                 }
 
                 // Reset construction mode
                 currentConstructionMode = 'inline';
+                console.log(`✅ ATOM TEMPLATE SETUP COMPLETE - Construction section should be HIDDEN`);
             }
         }
 
