@@ -1275,109 +1275,14 @@
 
     <!-- Main Content -->
     <div class="container">
-        <!-- Info Banner (Full Width) -->
-        <div class="info-banner">
-            <h3>📋 Enterprise SOP Template System</h3>
-            <p>Our SOP system uses a modular atomic design approach for maximum searchability, reusability, and adaptability:</p>
-            <ul>
-                <li><strong>Atoms</strong> - Single-purpose reusable components (e.g., "Login Procedure", "Verify Email")</li>
-                <li><strong>Molecules</strong> - Multi-step procedures combining atoms (e.g., "Account Setup", "Approval Workflow")</li>
-                <li><strong>Organisms</strong> - Complete workflows combining molecules (e.g., "Employee Onboarding", "Wire Transfer Process")</li>
-                <li><strong>SOPs</strong> - Full documented procedures with metadata, compliance, quality controls, and troubleshooting</li>
-            </ul>
-            <p style="margin-top: 15px;"><strong>All components include:</strong> Rich metadata for search, compliance frameworks, decision logic, quality checkpoints, troubleshooting guidance, and version control.</p>
-            <p><a href="../TEMPLATE_CONFIGURATION_GUIDE.md" style="color: #0052CC; font-weight: 600;">📖 View Template Configuration Guide</a></p>
-        </div>
+        <!-- Simple Intro - Get to the point! -->
+        <p style="text-align: center; font-size: 16px; color: #666; margin-bottom: 40px;">
+            Choose what you're creating. Each type has a unique, streamlined workflow.
+            <a href="../TEMPLATE_CONFIGURATION_GUIDE.md" style="color: #0052CC; margin-left: 10px;">📖 Learn more</a>
+        </p>
 
-        <!-- Atomic Design Hierarchy Explanation -->
-        <div class="atomic-design-explainer">
-            <h2>📚 Understanding Atomic Design for Documentation</h2>
-            <p class="explainer-intro">Our documentation system follows atomic design principles, building complex procedures from simple, reusable components. Choose the right level based on what you're creating:</p>
-
-            <div class="hierarchy-visual">
-                <div class="hierarchy-level">
-                    <div class="level-icon atom-icon">🔵</div>
-                    <div class="level-content">
-                        <h3>Atoms</h3>
-                        <p>Single-purpose, foundational components that can't be broken down further. <strong>These are NOT composed from other components.</strong></p>
-                        <div class="level-example">Example: "Log into system", "Verify email format", "Click submit button"</div>
-                    </div>
-                </div>
-
-                <div class="hierarchy-arrow">↓</div>
-
-                <div class="hierarchy-level">
-                    <div class="level-icon module-icon">🟣</div>
-                    <div class="level-content">
-                        <h3>Modules</h3>
-                        <p>Task sequences combining <strong>multiple atoms</strong> into cohesive procedures.</p>
-                        <div class="level-example">Example: "User account setup" = Login atom + Profile atom + Verification atom</div>
-                    </div>
-                </div>
-
-                <div class="hierarchy-arrow">↓</div>
-
-                <div class="hierarchy-level">
-                    <div class="level-icon organism-icon">🟢</div>
-                    <div class="level-content">
-                        <h3>Organisms</h3>
-                        <p>Complete workflows combining <strong>atoms + modules</strong> into complex processes.</p>
-                        <div class="level-example">Example: "Employee onboarding" = Account setup module + Training module + Equipment atoms</div>
-                    </div>
-                </div>
-
-                <div class="hierarchy-arrow">↓</div>
-
-                <div class="hierarchy-level">
-                    <div class="level-icon sop-icon">🔴</div>
-                    <div class="level-content">
-                        <h3>Complete SOPs</h3>
-                        <p>End-to-end procedures using <strong>all component types</strong>, with full metadata, compliance, and quality assurance.</p>
-                        <div class="level-example">Example: "IT Security Policy" = Authentication organisms + Access control modules + Audit atoms</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="decision-helper">
-                <h4>❓ Not sure which to choose?</h4>
-                <div class="decision-tree">
-                    <div class="decision-question">
-                        <strong>Q: Can this be broken into smaller steps?</strong>
-                        <div class="decision-branch">
-                            <div class="decision-answer">
-                                <span class="decision-label no">No → Start with an <strong>Atom</strong></span>
-                                <p class="decision-hint">Single action, can't be simplified further</p>
-                            </div>
-                            <div class="decision-answer">
-                                <span class="decision-label yes">Yes → Ask: Does it combine existing atoms?</span>
-                                <div class="decision-sub">
-                                    <div class="decision-answer">
-                                        <span class="decision-label yes">Yes → Create a <strong>Module</strong></span>
-                                        <p class="decision-hint">Combines atoms into a task sequence</p>
-                                    </div>
-                                    <div class="decision-answer">
-                                        <span class="decision-label">No → Does it combine modules + atoms?</span>
-                                        <div class="decision-sub">
-                                            <div class="decision-answer">
-                                                <span class="decision-label yes">Yes → Create an <strong>Organism</strong></span>
-                                                <p class="decision-hint">Complex workflow with multiple modules</p>
-                                            </div>
-                                            <div class="decision-answer">
-                                                <span class="decision-label yes">Full documentation → Create a <strong>Complete SOP</strong></span>
-                                                <p class="decision-hint">Comprehensive procedure with metadata & compliance</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Template Selection (Full Width) -->
-        <h2 style="margin-bottom: 20px;">Step 1: Choose Component Type</h2>
+        <!-- Template Selection -->
+        <h2 style="margin-bottom: 20px; text-align: center;">Choose Your Template</h2>
         <div class="template-selection">
             <div class="template-card" onclick="selectTemplate('atom', event)" role="button" tabindex="0" aria-label="Select Atom template - single purpose component">
                 <div class="badge atom">🔵 Atom</div>
@@ -2570,51 +2475,44 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
                 atom: {
                     icon: '🔵',
                     title: 'Atom - Simple Component',
-                    description: 'Creating a single-purpose, reusable component. SIMPLIFIED - only ~10 essential fields.',
+                    description: 'Quick workflow: Basic info → Description → Save. Only ~10 fields.',
                     sections: [
-                        '✅ Section 1: Basic Info (Title, Department, Category, Keywords)',
-                        '✅ Section 2: Description & Action (What it does)',
-                        '✅ Section 3: Ownership (Author, Owner, Status)',
-                        '<s>All complex metadata hidden (compliance, troubleshooting, etc.)</s>'
+                        'Title, Department, Category',
+                        'What does this do?',
+                        'Author & Owner'
                     ]
                 },
                 molecule: {
                     icon: '🟣',
-                    title: 'Molecule - Multi-Step Procedure',
-                    description: 'You\'re creating a multi-step procedure combining atoms (~201 lines). Moderate complexity with optional compliance.',
+                    title: 'Molecule - Task Sequence',
+                    description: 'Unique workflow: Basic info → Build from Atoms → Save. Compose existing atoms into sequences.',
                     sections: [
-                        'Core Information (includes duration estimate)',
-                        'Purpose & Scope (with prerequisites)',
-                        'Compliance (optional - only if applicable)',
-                        'Procedure Steps (multiple steps)',
-                        'Detailed Troubleshooting (comprehensive matrix)',
-                        'Ownership (includes approver)'
+                        'Title & metadata',
+                        'Select atoms from library',
+                        'Arrange sequence',
+                        'Add ownership'
                     ]
                 },
                 organism: {
                     icon: '🟢',
                     title: 'Organism - Complete Workflow',
-                    description: 'You\'re creating a complete workflow combining molecules and atoms (~297 lines). Complex template with required compliance tracking.',
+                    description: 'Unique workflow: Metadata → Build from Atoms & Modules → Compliance → Save.',
                     sections: [
-                        'Core Information (comprehensive)',
-                        'Purpose & Scope (detailed with roles)',
-                        'Compliance & Regulatory (required)',
-                        'Workflow Steps (multi-phase)',
-                        'Comprehensive Troubleshooting (with escalation)',
-                        'Governance (full ownership and reviewers)'
+                        'Core information',
+                        'Select components (atoms + modules)',
+                        'Compliance tracking',
+                        'Workflow ownership'
                     ]
                 },
                 sop: {
                     icon: '🟠',
                     title: 'Full SOP - Complete Documentation',
-                    description: 'You\'re creating a full SOP with complete governance (~646 lines). All fields and sections are required for comprehensive documentation.',
+                    description: 'Comprehensive workflow: Full metadata → Build/Write steps → Compliance → Governance → Save.',
                     sections: [
-                        'Core Information (all 20+ metadata fields)',
-                        'Purpose & Scope (strategic alignment)',
-                        'Compliance & Regulatory (detailed tracking)',
-                        'Procedure Steps (comprehensive with decision logic)',
-                        'Troubleshooting Matrix (full escalation paths)',
-                        'Governance (complete ownership chain)'
+                        'Complete metadata set',
+                        'Build from all components OR write custom',
+                        'Regulatory compliance',
+                        'Full governance chain'
                     ]
                 }
             };
