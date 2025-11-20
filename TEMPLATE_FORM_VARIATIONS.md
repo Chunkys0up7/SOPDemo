@@ -35,7 +35,7 @@ This is the simplest template with basic fields only.
    - Purpose ✅
    - Scope - What IS Covered ✅
    - Scope - What is NOT Covered ✅
-   - *Subtitle:* "Simple description of what this component does"
+   - _Subtitle:_ "Simple description of what this component does"
 
 3. ❌ **Compliance Section** (completely hidden)
 
@@ -43,14 +43,14 @@ This is the simplest template with basic fields only.
 
 5. ✅ **Troubleshooting**
    - Troubleshooting Matrix ✅
-   - *Subtitle:* "Basic troubleshooting table for common issues"
+   - _Subtitle:_ "Basic troubleshooting table for common issues"
 
 6. ✅ **Ownership** (basic)
    - Owner (Department) ✅
    - Maintainer (Person/Role) ✅
    - ❌ Approver (hidden)
    - ❌ Additional Reviewers (hidden)
-   - *Subtitle:* "Basic ownership information"
+   - _Subtitle:_ "Basic ownership information"
 
 ### Section Numbering
 - Section 1: Core Information
@@ -86,23 +86,23 @@ Moderate complexity with optional compliance.
    - Purpose ✅
    - Scope - What IS Covered ✅
    - Scope - What is NOT Covered ✅
-   - *Subtitle:* "Define the multi-step procedure and prerequisites"
+   - _Subtitle:_ "Define the multi-step procedure and prerequisites"
 
 3. ⚠️ **Compliance** (optional - highlighted in yellow)
    - Compliance Frameworks (checkboxes) ⚠️
    - ❌ Audit Frequency (not required)
    - ✅ Review Frequency (required)
-   - *Subtitle:* "Optional: Only if compliance frameworks apply"
-   - *Visual:* Yellow background (#fffef0) with orange border (#FFA726)
+   - _Subtitle:_ "Optional: Only if compliance frameworks apply"
+   - _Visual:_ Yellow background (#fffef0) with orange border (#FFA726)
 
 4. ✅ **Procedure Steps**
    - Dynamic step builder ✅
    - Step name, actions, decision logic, quality checkpoints ✅
-   - *Subtitle:* "Multiple steps combining atoms"
+   - _Subtitle:_ "Multiple steps combining atoms"
 
 5. ✅ **Troubleshooting**
    - Troubleshooting Matrix ✅
-   - *Subtitle:* "Detailed troubleshooting matrix"
+   - _Subtitle:_ "Detailed troubleshooting matrix"
 
 6. ✅ **Ownership**
    - Owner (Department) ✅
@@ -146,23 +146,23 @@ Complex template with required compliance tracking.
    - Purpose ✅
    - Scope - What IS Covered ✅
    - Scope - What is NOT Covered ✅
-   - *Subtitle:* "Detailed workflow description with roles and responsibilities"
+   - _Subtitle:_ "Detailed workflow description with roles and responsibilities"
 
 3. ✅ **Compliance & Regulatory** (required)
    - Compliance Frameworks (checkboxes) ✅
    - ✅ Audit Frequency (required)
    - ✅ Review Frequency (required)
-   - *Subtitle:* "Required: Identify all regulatory requirements"
-   - *Visual:* Normal white background
+   - _Subtitle:_ "Required: Identify all regulatory requirements"
+   - _Visual:_ Normal white background
 
 4. ✅ **Workflow Steps**
    - Dynamic step builder ✅
    - Step name, actions, decision logic, quality checkpoints ✅
-   - *Subtitle:* "Multi-phase workflow combining molecules and atoms"
+   - _Subtitle:_ "Multi-phase workflow combining molecules and atoms"
 
 5. ✅ **Troubleshooting**
    - Troubleshooting Matrix ✅
-   - *Subtitle:* "Comprehensive troubleshooting with escalation"
+   - _Subtitle:_ "Comprehensive troubleshooting with escalation"
 
 6. ✅ **Governance** (full details)
    - Owner (Department) ✅
@@ -206,22 +206,22 @@ All fields and sections are required for comprehensive documentation.
    - Purpose ✅
    - Scope - What IS Covered ✅
    - Scope - What is NOT Covered ✅
-   - *Subtitle:* "Comprehensive documentation with business value and strategic alignment"
+   - _Subtitle:_ "Comprehensive documentation with business value and strategic alignment"
 
 3. ✅ **Compliance & Regulatory** (required, detailed)
    - Compliance Frameworks (checkboxes) ✅
    - ✅ Audit Frequency (required) ✅
    - ✅ Review Frequency (required) ✅
-   - *Subtitle:* "Required: Detailed regulatory and compliance tracking"
+   - _Subtitle:_ "Required: Detailed regulatory and compliance tracking"
 
 4. ✅ **Procedure Steps** (comprehensive)
    - Dynamic step builder ✅
    - Step name, actions, decision logic, quality checkpoints ✅
-   - *Subtitle:* "Comprehensive steps with full decision logic and quality controls"
+   - _Subtitle:_ "Comprehensive steps with full decision logic and quality controls"
 
 5. ✅ **Troubleshooting** (full matrix)
    - Troubleshooting Matrix ✅
-   - *Subtitle:* "Comprehensive troubleshooting matrix with escalation paths"
+   - _Subtitle:_ "Comprehensive troubleshooting matrix with escalation paths"
 
 6. ✅ **Governance** (complete ownership chain)
    - Owner (Department) ✅

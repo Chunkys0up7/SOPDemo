@@ -23,6 +23,7 @@ from pathlib import Path
 from typing import Dict, List, Optional
 from datetime import datetime
 import re
+import argparse
 
 try:
     from neo4j import GraphDatabase
@@ -42,7 +43,8 @@ class SOPGraphIngestion:
         neo4j_user: str = "neo4j",
         neo4j_password: str = None,
         openai_api_key: str = None,
-        embedding_model: str = "text-embedding-ada-002"
+        embedding_model: str = "text-embedding-ada-002",
+        use_embeddings: bool = True
     ):
         """Initialize graph ingestion pipeline."""
 
@@ -60,13 +62,18 @@ class SOPGraphIngestion:
         )
 
         # OpenAI client for embeddings
-        self.openai_api_key = openai_api_key or os.getenv("OPENAI_API_KEY")
-        if not self.openai_api_key:
-            print("WARNING: No OpenAI API key provided. Embeddings will not be generated.")
-            print("         Set OPENAI_API_KEY environment variable to enable embeddings.")
+        self.use_embeddings = use_embeddings
+        if not use_embeddings:
+            print("INFO: Embeddings disabled via --no-embeddings flag")
             self.openai_client = None
         else:
-            self.openai_client = OpenAI(api_key=self.openai_api_key)
+            self.openai_api_key = openai_api_key or os.getenv("OPENAI_API_KEY")
+            if not self.openai_api_key:
+                print("WARNING: No OpenAI API key provided. Embeddings will not be generated.")
+                print("         Set OPENAI_API_KEY environment variable to enable embeddings.")
+                self.openai_client = None
+            else:
+                self.openai_client = OpenAI(api_key=self.openai_api_key)
 
         self.embedding_model = embedding_model
 
@@ -417,6 +424,12 @@ class SOPGraphIngestion:
 def main():
     """Main execution function."""
 
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description='Ingest SOP documentation into Neo4j graph database')
+    parser.add_argument('--no-embeddings', action='store_true',
+                        help='Skip generating OpenAI embeddings (no API key required)')
+    args = parser.parse_args()
+
     print("="*60)
     print("SOP Documentation Graph Ingestion Pipeline")
     print("="*60)
@@ -428,12 +441,13 @@ def main():
 
     # Initialize ingestion
     try:
-        ingestion = SOPGraphIngestion()
+        ingestion = SOPGraphIngestion(use_embeddings=not args.no_embeddings)
     except ValueError as e:
         print(f"\nERROR: {e}")
         print("\nPlease set environment variables:")
         print("  export NEO4J_PASSWORD='your-password'")
         print("  export OPENAI_API_KEY='your-api-key'  (optional, for embeddings)")
+        print("\nOr run with --no-embeddings to skip vector embeddings")
         return 1
 
     try:
