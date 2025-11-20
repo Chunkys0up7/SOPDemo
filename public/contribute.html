@@ -1181,6 +1181,14 @@
                 <h2><span class="form-section-number">3.5</span> <span id="constructionSectionTitle">Build from Existing Components</span><span class="atoms-count-badge" id="selectedAtomsCount">0 selected</span></h2>
                 <p class="subtitle" id="constructionSectionSubtitle">Choose how to construct this procedure: use existing reusable components or write custom steps</p>
 
+                <!-- DEBUG ERROR MESSAGE - Should only appear if JavaScript fails -->
+                <div id="atomTemplateError" style="display: none; background: #ffebee; border-left: 4px solid #d32f2f; padding: 20px; margin-bottom: 20px; border-radius: 4px;">
+                    <h3 style="color: #d32f2f; margin: 0 0 10px 0;">⚠️ CONFIGURATION ERROR</h3>
+                    <p style="margin: 0; color: #333;">This section should be HIDDEN for Atom templates. If you're seeing this, the JavaScript failed to execute properly.</p>
+                    <p style="margin: 10px 0 0 0; font-size: 12px; color: #666;">Selected template: <strong id="errorTemplateType" style="color: #d32f2f;">unknown</strong></p>
+                    <p style="margin: 10px 0 0 0; font-size: 12px; color: #666;">Section display: <strong id="errorSectionDisplay" style="color: #d32f2f;">unknown</strong></p>
+                </div>
+
                 <!-- Construction Mode Toggle -->
                 <div class="construction-mode-toggle">
                     <div class="mode-option selected" id="modeInline" onclick="return handleModeClick('inline', event);">
@@ -2745,6 +2753,31 @@ Expected outcome: [What should be true after this step]"></textarea>
                 // Reset construction mode
                 currentConstructionMode = 'inline';
                 console.log(`✅ ATOM TEMPLATE SETUP COMPLETE - Construction section should be HIDDEN`);
+
+                // DEBUG: Show error message if section is still visible
+                const errorDiv = document.getElementById('atomTemplateError');
+                const errorTemplateType = document.getElementById('errorTemplateType');
+                const errorSectionDisplay = document.getElementById('errorSectionDisplay');
+
+                // Use setTimeout to check AFTER any other scripts might have run
+                setTimeout(() => {
+                    const actualDisplay = hybridSection ? window.getComputedStyle(hybridSection).display : 'element-not-found';
+                    console.log(`🔍 POST-CHECK: hybridSection computed display = ${actualDisplay}`);
+
+                    if (actualDisplay !== 'none' && actualDisplay !== 'element-not-found') {
+                        console.error(`❌❌❌ CRITICAL ERROR: Section is STILL VISIBLE after hiding attempt!`);
+                        if (errorDiv && errorTemplateType && errorSectionDisplay) {
+                            errorDiv.style.display = 'block';
+                            errorTemplateType.textContent = templateType;
+                            errorSectionDisplay.textContent = actualDisplay;
+                        }
+                    } else {
+                        console.log(`✅ POST-CHECK: Section is correctly hidden`);
+                        if (errorDiv) {
+                            errorDiv.style.display = 'none';
+                        }
+                    }
+                }, 100);
             }
         }
 
