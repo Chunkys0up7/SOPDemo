@@ -370,32 +370,42 @@
     <div id="global-nav-container"></div>
 
     <!-- Search Hero -->
-    <section class="search-hero">
-        <h1>🔍 Search SOPs</h1>
+    <section class="search-hero" role="banner">
+        <h1 id="page-title">🔍 Search SOPs</h1>
         <p>Find the procedures you need with keyword or AI-powered graph search</p>
 
         <!-- Tab Switcher -->
-        <div class="search-tabs">
-            <button class="search-tab active" onclick="switchSearchMode('keyword')" id="tab-keyword">
+        <div class="search-tabs" role="tablist" aria-label="Search mode selection">
+            <button class="search-tab active"
+                    onclick="switchSearchMode('keyword')"
+                    id="tab-keyword"
+                    role="tab"
+                    aria-selected="true"
+                    aria-controls="search-panel">
                 📝 Keyword Search
             </button>
-            <button class="search-tab" onclick="switchSearchMode('graph')" id="tab-graph">
+            <button class="search-tab"
+                    onclick="switchSearchMode('graph')"
+                    id="tab-graph"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="search-panel">
                 🤖 AI Graph Search
             </button>
         </div>
     </section>
 
     <!-- Main Container -->
-    <div class="container">
+    <div class="container" id="search-panel" role="tabpanel" aria-labelledby="page-title">
         <!-- Search Box -->
-        <div class="search-box-container">
+        <div class="search-box-container" role="search">
             <!-- Search Mode Info -->
-            <div class="search-mode-info" id="mode-info-keyword">
+            <div class="search-mode-info" id="mode-info-keyword" role="status" aria-live="polite">
                 <h3>📝 Keyword Search</h3>
                 <p>Fast text-based search across all SOP titles, descriptions, and content. Perfect for finding specific procedures when you know what you're looking for.</p>
             </div>
 
-            <div class="search-mode-info" id="mode-info-graph" style="display: none;">
+            <div class="search-mode-info" id="mode-info-graph" style="display: none;" role="status" aria-live="polite">
                 <h3>🤖 AI Graph Search</h3>
                 <p>Advanced semantic search using graph relationships and AI. Discovers related procedures, dependencies, and components you might not have thought of. Best for exploring connected workflows.</p>
             </div>
@@ -408,8 +418,9 @@
                     id="searchQuery"
                     placeholder="Search for procedures, steps, or keywords..."
                     aria-label="Search SOPs"
+                    aria-describedby="mode-info-keyword mode-info-graph"
                 >
-                <button class="search-btn" onclick="performSearch()">Search</button>
+                <button class="search-btn" onclick="performSearch()" aria-label="Execute search">Search</button>
             </div>
 
             <!-- Filters -->
@@ -451,9 +462,9 @@
         </div>
 
         <!-- Results Container -->
-        <div class="results-container" id="resultsContainer">
+        <div class="results-container" id="resultsContainer" role="region" aria-live="polite" aria-label="Search results">
             <div class="empty-state">
-                <div class="empty-state-icon">🔎</div>
+                <div class="empty-state-icon" aria-hidden="true">🔎</div>
                 <h3>Start Your Search</h3>
                 <p>Enter keywords above to find SOPs, or try the AI Graph Search for intelligent recommendations</p>
             </div>
@@ -484,8 +495,15 @@
             currentSearchMode = mode;
 
             // Update tabs
-            document.getElementById('tab-keyword').classList.toggle('active', mode === 'keyword');
-            document.getElementById('tab-graph').classList.toggle('active', mode === 'graph');
+            const keywordTab = document.getElementById('tab-keyword');
+            const graphTab = document.getElementById('tab-graph');
+
+            keywordTab.classList.toggle('active', mode === 'keyword');
+            graphTab.classList.toggle('active', mode === 'graph');
+
+            // Update ARIA attributes
+            keywordTab.setAttribute('aria-selected', mode === 'keyword');
+            graphTab.setAttribute('aria-selected', mode === 'graph');
 
             // Update info
             document.getElementById('mode-info-keyword').style.display = mode === 'keyword' ? 'block' : 'none';
