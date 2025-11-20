@@ -3357,7 +3357,17 @@ Expected outcome: [What should be true after this step]"></textarea>
                 }
 
                 const graphData = await response.json();
-                console.log(`📊 Graph loaded: ${graphData.nodes.length} total nodes`);
+
+                // Handle both array and object formats for nodes
+                let nodesArray = [];
+                if (Array.isArray(graphData.nodes)) {
+                    nodesArray = graphData.nodes;
+                } else if (typeof graphData.nodes === 'object' && graphData.nodes !== null) {
+                    // Convert object to array
+                    nodesArray = Object.values(graphData.nodes);
+                }
+
+                console.log(`📊 Graph loaded: ${nodesArray.length} total nodes`);
 
                 // Filter components based on template type
                 // Note: Support both 'module' and 'molecule' for backward compatibility
@@ -3373,7 +3383,7 @@ Expected outcome: [What should be true after this step]"></textarea>
                     console.log('🔴 SOP: Filtering for all component types');
                 }
 
-                availableAtoms = graphData.nodes
+                availableAtoms = nodesArray
                     .filter(node => allowedTypes.includes(node.type))
                     .map(component => ({
                         id: component.id,
