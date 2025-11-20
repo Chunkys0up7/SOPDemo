@@ -157,6 +157,187 @@
             font-weight: bold;
         }
 
+        /* Atomic Design Explainer */
+        .atomic-design-explainer {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .atomic-design-explainer h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .explainer-intro {
+            font-size: 16px;
+            color: #666;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        /* Hierarchy Visual */
+        .hierarchy-visual {
+            margin-bottom: 40px;
+        }
+
+        .hierarchy-level {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            background: white;
+            padding: 24px;
+            border-radius: 8px;
+            border-left: 4px solid #e0e0e0;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .hierarchy-level:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateX(4px);
+        }
+
+        .level-icon {
+            font-size: 48px;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .level-content {
+            flex: 1;
+        }
+
+        .level-content h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .level-content p {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .level-example {
+            font-size: 13px;
+            color: #999;
+            font-style: italic;
+            background: #f8f9fa;
+            padding: 10px 14px;
+            border-radius: 4px;
+            border-left: 3px solid #e0e0e0;
+        }
+
+        /* Color-code hierarchy levels */
+        .hierarchy-level:has(.atom-icon) {
+            border-left-color: #2563eb;
+        }
+
+        .hierarchy-level:has(.module-icon) {
+            border-left-color: #7c3aed;
+        }
+
+        .hierarchy-level:has(.organism-icon) {
+            border-left-color: #059669;
+        }
+
+        .hierarchy-level:has(.sop-icon) {
+            border-left-color: #dc2626;
+        }
+
+        .hierarchy-arrow {
+            text-align: center;
+            font-size: 32px;
+            color: #999;
+            margin: 8px 0;
+        }
+
+        /* Decision Helper */
+        .decision-helper {
+            background: #fff3cd;
+            border: 2px solid #FFA726;
+            border-radius: 8px;
+            padding: 30px;
+        }
+
+        .decision-helper h4 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: 20px;
+        }
+
+        .decision-tree {
+            background: white;
+            padding: 24px;
+            border-radius: 6px;
+        }
+
+        .decision-question {
+            font-size: 15px;
+        }
+
+        .decision-question > strong {
+            display: block;
+            font-size: 16px;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+        }
+
+        .decision-branch {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .decision-answer {
+            padding-left: 24px;
+            border-left: 3px solid #e0e0e0;
+        }
+
+        .decision-label {
+            display: block;
+            font-size: 15px;
+            font-weight: 600;
+            color: #0052CC;
+            margin-bottom: 6px;
+        }
+
+        .decision-label.yes {
+            color: #00A86B;
+        }
+
+        .decision-label.no {
+            color: #D32F2F;
+        }
+
+        .decision-hint {
+            font-size: 13px;
+            color: #666;
+            font-style: italic;
+            margin: 0;
+        }
+
+        .decision-sub {
+            margin-top: 12px;
+            margin-left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
         /* Template Selection */
         .template-selection {
             display: grid;
@@ -258,6 +439,96 @@
             margin-bottom: 25px;
         }
 
+        .subsection-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .subsection-title:first-child {
+            margin-top: 0;
+        }
+
+        .character-counter {
+            font-size: 12px;
+            color: #666;
+            text-align: right;
+            margin-top: 4px;
+        }
+
+        .alert-info {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 16px;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+
+        .alert-info strong {
+            color: #1976D2;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .alert-info p {
+            margin: 0;
+            font-size: 14px;
+            color: #555;
+        }
+
+        /* Collapsible Sections (for advanced metadata) */
+        .form-section.collapsible {
+            border-left: 3px solid #e0e0e0;
+        }
+
+        .collapsible-header {
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            margin-bottom: 0 !important;
+        }
+
+        .collapsible-header:hover {
+            color: #0052CC;
+        }
+
+        .toggle-icon {
+            font-size: 14px;
+            color: #999;
+            transition: transform 0.3s ease;
+            margin-left: auto;
+        }
+
+        .form-section.collapsible.collapsed .toggle-icon {
+            transform: rotate(-90deg);
+        }
+
+        .collapsible-content {
+            max-height: 2000px;
+            overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
+            opacity: 1;
+            padding-top: 20px;
+        }
+
+        .form-section.collapsible.collapsed .collapsible-content {
+            max-height: 0;
+            opacity: 0;
+            padding-top: 0;
+        }
+
+        .form-section.collapsible.collapsed {
+            border-left-color: #f0f0f0;
+            padding-bottom: 20px;
+        }
+
         .form-row {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -313,6 +584,45 @@
             min-height: 200px;
         }
 
+        /* Field Validation & Feedback */
+        .field-feedback {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 6px;
+            min-height: 20px;
+        }
+
+        .char-counter, .keyword-counter {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .validation-message {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .validation-message.error {
+            color: #D32F2F;
+        }
+
+        .validation-message.success {
+            color: #00A86B;
+        }
+
+        .validation-message.warning {
+            color: #FFA726;
+        }
+
+        .form-input.invalid, .form-textarea.invalid, .form-select.invalid {
+            border-color: #D32F2F;
+        }
+
+        .form-input.valid, .form-textarea.valid, .form-select.valid {
+            border-color: #00A86B;
+        }
+
         /* Checkbox Group */
         .checkbox-group {
             display: grid;
@@ -336,6 +646,50 @@
             font-size: 14px;
             color: #666;
             cursor: pointer;
+        }
+
+        /* Alert Messages */
+        .alert {
+            padding: 16px 20px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            border-left: 4px solid;
+        }
+
+        .alert strong {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .alert p {
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .alert-warning {
+            background-color: #fff3cd;
+            border-left-color: #FFA726;
+            color: #856404;
+        }
+
+        .alert-info {
+            background-color: #d1ecf1;
+            border-left-color: #0052CC;
+            color: #0c5460;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            border-left-color: #D32F2F;
+            color: #721c24;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            border-left-color: #00A86B;
+            color: #155724;
         }
 
         /* Buttons */
@@ -668,6 +1022,7 @@
 
         .mode-option input[type="radio"] {
             margin-right: 8px;
+            pointer-events: none; /* CRITICAL: Let clicks pass through to parent div onclick handler */
         }
 
         .mode-option-title {
@@ -675,11 +1030,13 @@
             font-weight: 600;
             color: #1a1a1a;
             margin-bottom: 5px;
+            pointer-events: none; /* Let clicks pass through to parent */
         }
 
         .mode-option-desc {
             font-size: 13px;
             color: #666;
+            pointer-events: none; /* Let clicks pass through to parent */
         }
 
         .atom-library-container {
@@ -932,35 +1289,122 @@
             <p><a href="../TEMPLATE_CONFIGURATION_GUIDE.md" style="color: #0052CC; font-weight: 600;">📖 View Template Configuration Guide</a></p>
         </div>
 
+        <!-- Atomic Design Hierarchy Explanation -->
+        <div class="atomic-design-explainer">
+            <h2>📚 Understanding Atomic Design for Documentation</h2>
+            <p class="explainer-intro">Our documentation system follows atomic design principles, building complex procedures from simple, reusable components. Choose the right level based on what you're creating:</p>
+
+            <div class="hierarchy-visual">
+                <div class="hierarchy-level">
+                    <div class="level-icon atom-icon">🔵</div>
+                    <div class="level-content">
+                        <h3>Atoms</h3>
+                        <p>Single-purpose, foundational components that can't be broken down further. <strong>These are NOT composed from other components.</strong></p>
+                        <div class="level-example">Example: "Log into system", "Verify email format", "Click submit button"</div>
+                    </div>
+                </div>
+
+                <div class="hierarchy-arrow">↓</div>
+
+                <div class="hierarchy-level">
+                    <div class="level-icon module-icon">🟣</div>
+                    <div class="level-content">
+                        <h3>Modules</h3>
+                        <p>Task sequences combining <strong>multiple atoms</strong> into cohesive procedures.</p>
+                        <div class="level-example">Example: "User account setup" = Login atom + Profile atom + Verification atom</div>
+                    </div>
+                </div>
+
+                <div class="hierarchy-arrow">↓</div>
+
+                <div class="hierarchy-level">
+                    <div class="level-icon organism-icon">🟢</div>
+                    <div class="level-content">
+                        <h3>Organisms</h3>
+                        <p>Complete workflows combining <strong>atoms + modules</strong> into complex processes.</p>
+                        <div class="level-example">Example: "Employee onboarding" = Account setup module + Training module + Equipment atoms</div>
+                    </div>
+                </div>
+
+                <div class="hierarchy-arrow">↓</div>
+
+                <div class="hierarchy-level">
+                    <div class="level-icon sop-icon">🔴</div>
+                    <div class="level-content">
+                        <h3>Complete SOPs</h3>
+                        <p>End-to-end procedures using <strong>all component types</strong>, with full metadata, compliance, and quality assurance.</p>
+                        <div class="level-example">Example: "IT Security Policy" = Authentication organisms + Access control modules + Audit atoms</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="decision-helper">
+                <h4>❓ Not sure which to choose?</h4>
+                <div class="decision-tree">
+                    <div class="decision-question">
+                        <strong>Q: Can this be broken into smaller steps?</strong>
+                        <div class="decision-branch">
+                            <div class="decision-answer">
+                                <span class="decision-label no">No → Start with an <strong>Atom</strong></span>
+                                <p class="decision-hint">Single action, can't be simplified further</p>
+                            </div>
+                            <div class="decision-answer">
+                                <span class="decision-label yes">Yes → Ask: Does it combine existing atoms?</span>
+                                <div class="decision-sub">
+                                    <div class="decision-answer">
+                                        <span class="decision-label yes">Yes → Create a <strong>Module</strong></span>
+                                        <p class="decision-hint">Combines atoms into a task sequence</p>
+                                    </div>
+                                    <div class="decision-answer">
+                                        <span class="decision-label">No → Does it combine modules + atoms?</span>
+                                        <div class="decision-sub">
+                                            <div class="decision-answer">
+                                                <span class="decision-label yes">Yes → Create an <strong>Organism</strong></span>
+                                                <p class="decision-hint">Complex workflow with multiple modules</p>
+                                            </div>
+                                            <div class="decision-answer">
+                                                <span class="decision-label yes">Full documentation → Create a <strong>Complete SOP</strong></span>
+                                                <p class="decision-hint">Comprehensive procedure with metadata & compliance</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Template Selection (Full Width) -->
         <h2 style="margin-bottom: 20px;">Step 1: Choose Component Type</h2>
         <div class="template-selection">
-            <div class="template-card" onclick="selectTemplate('atom', event)">
-                <div class="badge atom">Atom</div>
+            <div class="template-card" onclick="selectTemplate('atom', event)" role="button" tabindex="0" aria-label="Select Atom template - single purpose component">
+                <div class="badge atom">🔵 Atom</div>
                 <h3>Single Component</h3>
-                <p>Create a reusable, single-purpose procedure step.</p>
+                <p>Create a reusable, single-purpose procedure step. <strong>Not composed from other components.</strong></p>
                 <div class="examples">Examples: Login, Submit Form, Verify Data</div>
             </div>
 
-            <div class="template-card" onclick="selectTemplate('molecule', event)">
-                <div class="badge molecule">Molecule</div>
-                <h3>Multi-Step Procedure</h3>
-                <p>Combine multiple atoms into a cohesive procedure.</p>
-                <div class="examples">Examples: Account Setup, Approval Chain</div>
+            <div class="template-card" onclick="selectTemplate('molecule', event)" role="button" tabindex="0" aria-label="Select Module template - combines atoms into task sequence">
+                <div class="badge molecule">🟣 Module</div>
+                <h3>Task Sequence</h3>
+                <p>Combine multiple atoms into a cohesive task sequence. <strong>Build from atoms only.</strong></p>
+                <div class="examples">Examples: Account Setup, Approval Chain, Data Validation</div>
             </div>
 
-            <div class="template-card" onclick="selectTemplate('organism', event)">
-                <div class="badge organism">Organism</div>
+            <div class="template-card" onclick="selectTemplate('organism', event)" role="button" tabindex="0" aria-label="Select Organism template - combines atoms and modules into workflow">
+                <div class="badge organism">🟢 Organism</div>
                 <h3>Complete Workflow</h3>
-                <p>Build complex workflows from molecules and atoms.</p>
-                <div class="examples">Examples: Onboarding, Wire Transfer</div>
+                <p>Build complex workflows from modules and atoms. <strong>Build from atoms + modules.</strong></p>
+                <div class="examples">Examples: Employee Onboarding, Wire Transfer, Incident Response</div>
             </div>
 
-            <div class="template-card" onclick="selectTemplate('sop', event)">
-                <div class="badge sop">Full SOP</div>
+            <div class="template-card" onclick="selectTemplate('sop', event)" role="button" tabindex="0" aria-label="Select Complete SOP template - full documentation with all components">
+                <div class="badge sop">🔴 Complete SOP</div>
                 <h3>Full Documentation</h3>
-                <p>Complete SOP with metadata, compliance, and QA.</p>
-                <div class="examples">Examples: IT Security, HR Policy</div>
+                <p>Complete SOP with metadata, compliance, and QA. <strong>Uses all component types.</strong></p>
+                <div class="examples">Examples: IT Security Policy, HR Procedures, Quality Control</div>
             </div>
         </div>
 
@@ -984,7 +1428,11 @@
                 <div class="form-group">
                     <label class="form-label" for="title">Title <span class="required">*</span></label>
                     <p class="form-hint">Clear, descriptive title (e.g., "User Onboarding Process", "Wire Transfer Security")</p>
-                    <input type="text" id="title" class="form-input" placeholder="Procedure title..." required>
+                    <input type="text" id="title" class="form-input" placeholder="Procedure title..." required maxlength="100" aria-describedby="title-hint title-counter">
+                    <div class="field-feedback">
+                        <span class="char-counter" id="title-counter">0 / 100</span>
+                        <span class="validation-message" id="title-validation"></span>
+                    </div>
                 </div>
 
                 <div class="form-row">
@@ -1069,7 +1517,601 @@
                 <div class="form-group">
                     <label class="form-label" for="keywords">Search Keywords <span class="required">*</span></label>
                     <p class="form-hint">Comma-separated keywords for searchability (minimum 5)</p>
-                    <input type="text" id="keywords" class="form-input" placeholder="e.g., wire transfer, security, compliance, fraud prevention, approval" required>
+                    <input type="text" id="keywords" class="form-input" placeholder="e.g., wire transfer, security, compliance, fraud prevention, approval" required aria-describedby="keywords-hint keywords-count">
+                    <div class="field-feedback">
+                        <span class="keyword-counter" id="keywords-count">0 keywords</span>
+                        <span class="validation-message" id="keywords-validation"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1.5: Document Identification & Versioning -->
+            <div class="form-section collapsible">
+                <h2 class="collapsible-header">
+                    <span class="form-section-number">1.5</span> Document Identification & Versioning
+                    <span class="toggle-icon">▼</span>
+                </h2>
+                <div class="collapsible-content">
+                    <p class="subtitle">Automatic document tracking and version control</p>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="documentId">Document ID</label>
+                            <p class="form-hint">Auto-generated based on category and sequence (e.g., SOP-IT-001)</p>
+                            <input type="text" id="documentId" class="form-input" placeholder="Auto-generated on save" readonly disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="version">Version</label>
+                            <p class="form-hint">Semantic versioning: Major.Minor.Patch</p>
+                            <input type="text" id="version" class="form-input" value="1.0.0" placeholder="1.0.0">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="documentType">Document Type</label>
+                        <p class="form-hint">Automatically set based on template selected in step 3</p>
+                        <input type="text" id="documentType" class="form-input" value="" placeholder="Set by template selection" readonly disabled>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1.6: Lifecycle Management -->
+            <div class="form-section collapsible">
+                <h2 class="collapsible-header">
+                    <span class="form-section-number">1.6</span> Lifecycle Management
+                    <span class="toggle-icon">▼</span>
+                </h2>
+                <div class="collapsible-content">
+                    <p class="subtitle">Document status tracking and review scheduling</p>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="status">Status <span class="required">*</span></label>
+                            <select id="status" class="form-select" required>
+                                <option value="Draft" selected>Draft (Work in progress)</option>
+                                <option value="In Review">In Review (Awaiting approval)</option>
+                                <option value="Approved">Approved (Ready for use)</option>
+                                <option value="Active">Active (In production)</option>
+                                <option value="Archived">Archived (Historical reference)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="reviewCycle">Review Cycle <span class="required">*</span></label>
+                            <select id="reviewCycle" class="form-select" required>
+                                <option value="30">Monthly (30 days)</option>
+                                <option value="60">Bi-monthly (60 days)</option>
+                                <option value="90" selected>Quarterly (90 days)</option>
+                                <option value="180">Semi-annually (180 days)</option>
+                                <option value="365">Annually (365 days)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="effectiveDate">Effective Date</label>
+                            <p class="form-hint">When this procedure goes live (defaults to approval date)</p>
+                            <input type="date" id="effectiveDate" class="form-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="expirationDate">Expiration Date</label>
+                            <p class="form-hint">Optional - for temporary procedures only</p>
+                            <input type="date" id="expirationDate" class="form-input">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="nextReviewDate">Next Review Date</label>
+                        <p class="form-hint">Auto-calculated from review cycle, or set manually</p>
+                        <input type="date" id="nextReviewDate" class="form-input">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1.7: Ownership & Accountability -->
+            <div class="form-section collapsible">
+                <h2 class="collapsible-header">
+                    <span class="form-section-number">1.7</span> Ownership & Accountability
+                    <span class="toggle-icon">▼</span>
+                </h2>
+                <div class="collapsible-content">
+                    <p class="subtitle">Assign responsibility and approval authority</p>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="author">Author <span class="required">*</span></label>
+                            <p class="form-hint">Person creating this document</p>
+                            <input type="text" id="author" class="form-input" placeholder="Your name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="owner">Document Owner <span class="required">*</span></label>
+                            <p class="form-hint">Person responsible for maintenance</p>
+                            <input type="text" id="owner" class="form-input" placeholder="Owner name" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="reviewer">Reviewers</label>
+                            <p class="form-hint">Subject matter experts (comma-separated)</p>
+                            <input type="text" id="reviewer" class="form-input" placeholder="e.g., John Smith, Jane Doe">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="approver">Approver <span class="required">*</span></label>
+                            <p class="form-hint">Person with sign-off authority</p>
+                            <input type="text" id="approver" class="form-input" placeholder="Approver name" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="contact">Primary Contact</label>
+                        <p class="form-hint">Point of contact for questions (defaults to owner)</p>
+                        <input type="text" id="contact" class="form-input" placeholder="Contact name or email">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1.8: Faceted Classification -->
+            <div class="form-section collapsible">
+                <h2 class="collapsible-header">
+                    <span class="form-section-number">1.8</span> Faceted Classification
+                    <span class="toggle-icon">▼</span>
+                </h2>
+                <div class="collapsible-content">
+                    <p class="subtitle">Multi-dimensional categorization for discovery and filtering</p>
+
+                    <div class="form-group">
+                        <label class="form-label">Functional Areas <span class="required">*</span></label>
+                        <p class="form-hint">Select all areas this procedure applies to</p>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fa-safety" name="functionalArea" value="Safety">
+                                <label for="fa-safety">Safety</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fa-quality" name="functionalArea" value="Quality Assurance">
+                                <label for="fa-quality">Quality Assurance</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fa-manufacturing" name="functionalArea" value="Manufacturing">
+                                <label for="fa-manufacturing">Manufacturing</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fa-hr" name="functionalArea" value="Human Resources">
+                                <label for="fa-hr">Human Resources</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fa-finance" name="functionalArea" value="Finance & Accounting">
+                                <label for="fa-finance">Finance & Accounting</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fa-it" name="functionalArea" value="IT & Systems">
+                                <label for="fa-it">IT & Systems</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fa-customer" name="functionalArea" value="Customer Service">
+                                <label for="fa-customer">Customer Service</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fa-supply" name="functionalArea" value="Supply Chain">
+                                <label for="fa-supply">Supply Chain</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fa-rd" name="functionalArea" value="Research & Development">
+                                <label for="fa-rd">Research & Development</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="processType">Process Type <span class="required">*</span></label>
+                        <select id="processType" class="form-select" required>
+                            <option value="">Select process type...</option>
+                            <option value="Operational">Operational (day-to-day activities)</option>
+                            <option value="Maintenance">Maintenance (equipment/system upkeep)</option>
+                            <option value="Inspection">Inspection (quality checks)</option>
+                            <option value="Administrative">Administrative (paperwork/approval)</option>
+                            <option value="Emergency">Emergency (incident response)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Compliance Domains</label>
+                        <p class="form-hint">Select all regulatory frameworks this procedure addresses</p>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="comp-iso9001" name="complianceDomain" value="ISO 9001">
+                                <label for="comp-iso9001">ISO 9001 (Quality Management)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="comp-iso14001" name="complianceDomain" value="ISO 14001">
+                                <label for="comp-iso14001">ISO 14001 (Environmental)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="comp-fda" name="complianceDomain" value="FDA 21 CFR Part 11">
+                                <label for="comp-fda">FDA 21 CFR Part 11 (Electronic Records)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="comp-osha" name="complianceDomain" value="OSHA">
+                                <label for="comp-osha">OSHA (Workplace Safety)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="comp-gdpr" name="complianceDomain" value="GDPR">
+                                <label for="comp-gdpr">GDPR (Data Privacy)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="comp-soc2" name="complianceDomain" value="SOC 2">
+                                <label for="comp-soc2">SOC 2 (Security Controls)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="comp-hipaa" name="complianceDomain" value="HIPAA">
+                                <label for="comp-hipaa">HIPAA (Healthcare Privacy)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="comp-gmp" name="complianceDomain" value="GMP">
+                                <label for="comp-gmp">GMP (Good Manufacturing Practice)</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="lifecycleStage">Lifecycle Stage <span class="required">*</span></label>
+                        <select id="lifecycleStage" class="form-select" required>
+                            <option value="">Select lifecycle stage...</option>
+                            <option value="Development">Development (in progress)</option>
+                            <option value="Production">Production (active use)</option>
+                            <option value="Quality Control">Quality Control (verification)</option>
+                            <option value="Training">Training (learning materials)</option>
+                            <option value="Archived">Archived (historical reference)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1.9: Relationships & Dependencies -->
+            <div class="form-section collapsible">
+                <h2 class="collapsible-header">
+                    <span class="form-section-number">1.9</span> Relationships & Dependencies
+                    <span class="toggle-icon">▼</span>
+                </h2>
+                <div class="collapsible-content">
+                    <p class="subtitle">Link related procedures and define dependencies</p>
+
+                    <div class="form-group">
+                        <label class="form-label" for="prerequisites">Prerequisites</label>
+                        <p class="form-hint">SOPs that must be completed first (comma-separated IDs or titles)</p>
+                        <input type="text" id="prerequisites" class="form-input" placeholder="e.g., SOP-IT-001, User Account Setup">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="relatedProcedures">Related Procedures</label>
+                        <p class="form-hint">Associated documentation (comma-separated)</p>
+                        <input type="text" id="relatedProcedures" class="form-input" placeholder="e.g., SOP-SEC-005, Password Policy">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="supersedes">Supersedes</label>
+                        <p class="form-hint">Previous version this document replaces</p>
+                        <input type="text" id="supersedes" class="form-input" placeholder="e.g., SOP-IT-001 v0.9">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="references">External References</label>
+                        <p class="form-hint">Standards, regulations, forms (one per line)</p>
+                        <textarea id="references" class="form-textarea" rows="3" placeholder="e.g., ISO 27001 Section 5.2&#10;NIST SP 800-53&#10;Form IT-REQ-001"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1.10: Compliance & Risk -->
+            <div class="form-section collapsible">
+                <h2 class="collapsible-header">
+                    <span class="form-section-number">1.10</span> Compliance & Risk Assessment
+                    <span class="toggle-icon">▼</span>
+                </h2>
+                <div class="collapsible-content">
+                    <p class="subtitle">Regulatory requirements and risk classification</p>
+
+                    <div class="form-group">
+                        <label class="form-label" for="regulatoryRequirements">Regulatory Requirements</label>
+                        <p class="form-hint">Specific regulations this procedure satisfies</p>
+                        <textarea id="regulatoryRequirements" class="form-textarea" rows="3" placeholder="e.g., FDA 21 CFR 11.10(a) - System validation&#10;ISO 9001:2015 Clause 7.5 - Documented information"></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="trainingRequired">Training Required? <span class="required">*</span></label>
+                            <select id="trainingRequired" class="form-select" required>
+                                <option value="No">No - Self-explanatory</option>
+                                <option value="Yes" selected>Yes - Training needed</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="trainingProgramGroup" style="display: none;">
+                            <label class="form-label" for="trainingProgram">Training Program</label>
+                            <input type="text" id="trainingProgram" class="form-input" placeholder="e.g., IT Security Fundamentals">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="riskLevel">Risk Level <span class="required">*</span></label>
+                            <select id="riskLevel" class="form-select" required>
+                                <option value="Low">Low (minimal impact if error occurs)</option>
+                                <option value="Medium" selected>Medium (moderate impact, recoverable)</option>
+                                <option value="High">High (significant impact, difficult recovery)</option>
+                                <option value="Critical">Critical (severe impact, safety/security/legal)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="safetyCritical">Safety Critical? <span class="required">*</span></label>
+                            <select id="safetyCritical" class="form-select" required>
+                                <option value="No" selected>No</option>
+                                <option value="Yes">Yes - Requires special handling</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-warning" id="safetyCriticalWarning" style="display: none;">
+                        <strong>⚠️ Safety Critical Procedure</strong>
+                        <p>This procedure requires enhanced review, approval workflow, and audit trail. Additional validation steps will be required before activation.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1.11: Content Metadata -->
+            <div class="form-section collapsible">
+                <h2 class="collapsible-header">
+                    <span class="form-section-number">1.11</span> Content Metadata
+                    <span class="toggle-icon">▼</span>
+                </h2>
+                <div class="collapsible-content">
+                    <p class="subtitle">Summary, key points, and content quality metrics</p>
+
+                    <div class="form-group">
+                        <label class="form-label" for="documentSummary">Document Summary</label>
+                        <p class="form-hint">Brief overview for search results and previews (max 500 characters)</p>
+                        <textarea id="documentSummary" class="form-textarea" rows="3" maxlength="500" placeholder="Concise 2-3 sentence summary highlighting what this procedure does and who should use it..."></textarea>
+                        <div class="character-counter" id="summary-counter">0 / 500</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="keyPoints">Key Points (up to 5)</label>
+                        <p class="form-hint">Main takeaways or critical information (one per line)</p>
+                        <textarea id="keyPoints" class="form-textarea" rows="5" placeholder="- First key point&#10;- Second key point&#10;- Third key point&#10;- Fourth key point&#10;- Fifth key point"></textarea>
+                        <div class="validation-message" id="keypoints-validation"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="scopeInList">In Scope - Covered Activities</label>
+                        <p class="form-hint">Specific activities this procedure covers (comma-separated for metadata)</p>
+                        <input type="text" id="scopeInList" class="form-input" placeholder="e.g., user authentication, password reset, account lockout">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="scopeOutList">Out of Scope - Exclusions</label>
+                        <p class="form-hint">Activities explicitly not covered (comma-separated for metadata)</p>
+                        <input type="text" id="scopeOutList" class="form-input" placeholder="e.g., API authentication, SSO configuration, directory sync">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="readabilityScore">Readability Score</label>
+                            <p class="form-hint">Auto-calculated on save (Flesch-Kincaid grade level)</p>
+                            <input type="text" id="readabilityScore" class="form-input" placeholder="Calculated after save" readonly disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="wordCount">Word Count</label>
+                            <p class="form-hint">Total words in procedure steps</p>
+                            <input type="text" id="wordCount" class="form-input" placeholder="Calculated on save" readonly disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="readingTime">Estimated Reading Time</label>
+                            <p class="form-hint">Based on 200 words/minute average</p>
+                            <input type="text" id="readingTime" class="form-input" placeholder="Calculated on save" readonly disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="qualityScore">Quality Score</label>
+                            <p class="form-hint">Composite score based on completeness and best practices</p>
+                            <input type="text" id="qualityScore" class="form-input" placeholder="Calculated on save" readonly disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1.12: Technical Metadata -->
+            <div class="form-section collapsible">
+                <h2 class="collapsible-header">
+                    <span class="form-section-number">1.12</span> Technical Metadata
+                    <span class="toggle-icon">▼</span>
+                </h2>
+                <div class="collapsible-content">
+                    <p class="subtitle">Git integration, build information, and indexing configuration</p>
+
+                    <h3 class="subsection-title">Git Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="gitRepository">Git Repository</label>
+                            <p class="form-hint">Repository URL (auto-detected)</p>
+                            <input type="text" id="gitRepository" class="form-input" placeholder="Auto-populated from git remote" readonly disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="gitBranch">Current Branch</label>
+                            <p class="form-hint">Git branch where document is created</p>
+                            <input type="text" id="gitBranch" class="form-input" placeholder="Auto-detected" readonly disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="gitCommitSha">Last Commit SHA</label>
+                            <p class="form-hint">Git commit hash for version tracking</p>
+                            <input type="text" id="gitCommitSha" class="form-input" placeholder="Populated on commit" readonly disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="gitCommitDate">Last Commit Date</label>
+                            <p class="form-hint">When document was last committed</p>
+                            <input type="text" id="gitCommitDate" class="form-input" placeholder="Populated on commit" readonly disabled>
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">Build & Deployment</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="buildId">Build ID</label>
+                            <p class="form-hint">CI/CD build identifier</p>
+                            <input type="text" id="buildId" class="form-input" placeholder="Populated by CI/CD" readonly disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="buildDate">Build Date</label>
+                            <p class="form-hint">When document was built/deployed</p>
+                            <input type="text" id="buildDate" class="form-input" placeholder="Populated on build" readonly disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="buildStatus">Build Status</label>
+                        <p class="form-hint">Success, failed, or pending</p>
+                        <input type="text" id="buildStatus" class="form-input" placeholder="Pending" readonly disabled>
+                    </div>
+
+                    <h3 class="subsection-title">Search & Indexing</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="indexedDate">Indexed Date</label>
+                            <p class="form-hint">When document was added to search index</p>
+                            <input type="text" id="indexedDate" class="form-input" placeholder="Not yet indexed" readonly disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="embeddingModel">Embedding Model</label>
+                            <p class="form-hint">AI model used for vector embeddings</p>
+                            <input type="text" id="embeddingModel" class="form-input" placeholder="e.g., text-embedding-ada-002" readonly disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="chunkCount">Chunk Count</label>
+                            <p class="form-hint">Number of text chunks for vector search</p>
+                            <input type="text" id="chunkCount" class="form-input" placeholder="Calculated on indexing" readonly disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="vectorStoreId">Vector Store ID</label>
+                            <p class="form-hint">Reference ID in vector database</p>
+                            <input type="text" id="vectorStoreId" class="form-input" placeholder="Generated on indexing" readonly disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1.13: Analytics Metadata -->
+            <div class="form-section collapsible">
+                <h2 class="collapsible-header">
+                    <span class="form-section-number">1.13</span> Analytics & Usage Metadata
+                    <span class="toggle-icon">▼</span>
+                </h2>
+                <div class="collapsible-content">
+                    <p class="subtitle">Usage statistics, user feedback, and document health metrics</p>
+
+                    <h3 class="subsection-title">Usage Statistics (Read-Only)</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="totalViews">Total Views</label>
+                            <p class="form-hint">Number of times document has been accessed</p>
+                            <input type="text" id="totalViews" class="form-input" value="0" readonly disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="uniqueViewers">Unique Viewers</label>
+                            <p class="form-hint">Number of distinct users who viewed</p>
+                            <input type="text" id="uniqueViewers" class="form-input" value="0" readonly disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="avgTimeOnPage">Avg. Time on Page</label>
+                            <p class="form-hint">Average time users spend reading (minutes)</p>
+                            <input type="text" id="avgTimeOnPage" class="form-input" placeholder="No data yet" readonly disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="aiRetrievals">AI Search Retrievals</label>
+                            <p class="form-hint">Times returned in AI search results</p>
+                            <input type="text" id="aiRetrievals" class="form-input" value="0" readonly disabled>
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">User Feedback</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="helpfulnessRating">Helpfulness Rating</label>
+                            <p class="form-hint">Average rating from user feedback (1-5 stars)</p>
+                            <input type="text" id="helpfulnessRating" class="form-input" placeholder="No ratings yet" readonly disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="totalRatings">Total Ratings</label>
+                            <p class="form-hint">Number of users who rated this document</p>
+                            <input type="text" id="totalRatings" class="form-input" value="0" readonly disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="userComments">User Comments Summary</label>
+                        <p class="form-hint">Most recent user feedback (display only)</p>
+                        <textarea id="userComments" class="form-textarea" rows="3" placeholder="No comments yet..." readonly disabled></textarea>
+                    </div>
+
+                    <h3 class="subsection-title">Document Health Metrics</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="stalenessScore">Staleness Score</label>
+                            <p class="form-hint">Days since last update (0-365 scale)</p>
+                            <input type="text" id="stalenessScore" class="form-input" placeholder="0 (new document)" readonly disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="brokenLinks">Broken Links Count</label>
+                            <p class="form-hint">Number of invalid references detected</p>
+                            <input type="text" id="brokenLinks" class="form-input" value="0" readonly disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="completenessScore">Completeness Score</label>
+                            <p class="form-hint">Percentage of required fields filled (0-100%)</p>
+                            <input type="text" id="completenessScore" class="form-input" placeholder="Calculated on save" readonly disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="lastValidated">Last Validated</label>
+                            <p class="form-hint">Last automated validation check</p>
+                            <input type="text" id="lastValidated" class="form-input" placeholder="Not yet validated" readonly disabled>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <strong>ℹ️ Analytics Note</strong>
+                        <p>Usage statistics and feedback are collected automatically after document publication. All data is anonymized and aggregated.</p>
+                    </div>
                 </div>
             </div>
 
@@ -1175,36 +2217,44 @@
 
             <!-- Section 3.5: Hybrid Construction - Atom Library (Only for Molecules/Organisms/SOPs) -->
             <div class="form-section" id="hybridConstructionSection" style="display: none;">
-                <h2><span class="form-section-number">3.5</span> Build from Existing Components<span class="atoms-count-badge" id="selectedAtomsCount">0 selected</span></h2>
-                <p class="subtitle">Choose how to construct this procedure: use existing reusable atoms or write custom steps</p>
+                <h2><span class="form-section-number">3.5</span> <span id="constructionSectionTitle">Build from Existing Components</span><span class="atoms-count-badge" id="selectedAtomsCount">0 selected</span></h2>
+                <p class="subtitle" id="constructionSectionSubtitle">Choose how to construct this procedure: use existing reusable components or write custom steps</p>
+
+                <!-- DEBUG ERROR MESSAGE - Should only appear if JavaScript fails -->
+                <div id="atomTemplateError" style="display: none; background: #ffebee; border-left: 4px solid #d32f2f; padding: 20px; margin-bottom: 20px; border-radius: 4px;">
+                    <h3 style="color: #d32f2f; margin: 0 0 10px 0;">⚠️ CONFIGURATION ERROR</h3>
+                    <p style="margin: 0; color: #333;">This section should be HIDDEN for Atom templates. If you're seeing this, the JavaScript failed to execute properly.</p>
+                    <p style="margin: 10px 0 0 0; font-size: 12px; color: #666;">Selected template: <strong id="errorTemplateType" style="color: #d32f2f;">unknown</strong></p>
+                    <p style="margin: 10px 0 0 0; font-size: 12px; color: #666;">Section display: <strong id="errorSectionDisplay" style="color: #d32f2f;">unknown</strong></p>
+                </div>
 
                 <!-- Construction Mode Toggle -->
                 <div class="construction-mode-toggle">
-                    <div class="mode-option selected" id="modeInline" onclick="event.preventDefault(); selectConstructionMode('inline'); return false;">
+                    <div class="mode-option selected" id="modeInline" onclick="return handleModeClick('inline', event);">
                         <div class="mode-option-title">
-                            <input type="radio" name="constructionMode" value="inline" checked onclick="event.preventDefault();"> ✍️ Write Custom Steps
+                            <input type="radio" id="radioInline" name="constructionMode" value="inline" checked> ✍️ Write Custom Steps
                         </div>
                         <div class="mode-option-desc">Write all steps as inline content (traditional approach)</div>
                     </div>
-                    <div class="mode-option" id="modeHybrid" onclick="event.preventDefault(); selectConstructionMode('hybrid'); return false;">
+                    <div class="mode-option" id="modeHybrid" onclick="return handleModeClick('hybrid', event);">
                         <div class="mode-option-title">
-                            <input type="radio" name="constructionMode" value="hybrid" onclick="event.preventDefault();"> 🧱 Hybrid Construction
+                            <input type="radio" id="radioHybrid" name="constructionMode" value="hybrid"> 🧱 Hybrid Construction
                         </div>
-                        <div class="mode-option-desc">Combine reusable atoms with custom inline steps (recommended)</div>
+                        <div class="mode-option-desc" id="hybridModeDesc">Combine reusable components with custom inline steps (recommended)</div>
                     </div>
-                    <div class="mode-option" id="modeAtomsOnly" onclick="event.preventDefault(); selectConstructionMode('atoms-only'); return false;">
+                    <div class="mode-option" id="modeAtomsOnly" onclick="return handleModeClick('atoms-only', event);">
                         <div class="mode-option-title">
-                            <input type="radio" name="constructionMode" value="atoms-only" onclick="event.preventDefault();"> 📦 Build from Atoms
+                            <input type="radio" id="radioAtomsOnly" name="constructionMode" value="atoms-only"> 📦 <span id="atomsOnlyTitle">Build from Components</span>
                         </div>
-                        <div class="mode-option-desc">Assemble entirely from existing reusable components</div>
+                        <div class="mode-option-desc" id="atomsOnlyDesc">Assemble entirely from existing reusable components</div>
                     </div>
                 </div>
 
                 <!-- Atom Library (shown when hybrid or atoms-only mode selected) -->
                 <div class="atom-library-container" id="atomLibraryContainer" style="display: none;">
                     <div class="atom-library-header">
-                        <h3>🔍 Atom Library - Reusable Components</h3>
-                        <p>Browse and select existing atoms to include in your procedure. Each atom is a self-contained, tested procedure step.</p>
+                        <h3 id="libraryHeaderTitle">🔍 Component Library</h3>
+                        <p id="libraryHeaderDesc">Browse and select existing components to include in your procedure.</p>
                     </div>
 
                     <!-- Search and Filters -->
@@ -1422,6 +2472,8 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
         let stepCount = 0;
 
         function selectTemplate(type, event) {
+            console.log(`🎯 ========== TEMPLATE SELECTED: ${type} ==========`);
+
             // Check if we're switching templates (form already visible)
             const formLayout = document.getElementById('formLayout');
             const formWasVisible = formLayout.style.display === 'grid';
@@ -1445,6 +2497,21 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
             }
 
             selectedTemplate = type;
+            console.log(`✅ selectedTemplate set to: ${selectedTemplate}`);
+
+            // Update document type field (Section 1.5)
+            const documentTypeInput = document.getElementById('documentType');
+            if (documentTypeInput) {
+                const typeMap = {
+                    'atom': '🔵 Atom (Base Component)',
+                    'molecule': '🟣 Module (Task Sequence)',
+                    'module': '🟣 Module (Task Sequence)',
+                    'organism': '🟢 Organism (Workflow)',
+                    'sop': '🔴 Complete SOP (End-to-End Procedure)'
+                };
+                documentTypeInput.value = typeMap[type] || type.toUpperCase();
+                console.log(`📝 Document type updated: ${documentTypeInput.value}`);
+            }
 
             // Update selected card styling
             document.querySelectorAll('.template-card').forEach(card => {
@@ -1460,8 +2527,10 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
             // Configure form sections based on template type
             configureFormSections(type);
 
-            // Show/hide hybrid construction section
+            // CRITICAL: Show/hide hybrid construction section
+            console.log(`🔧 About to call updateHybridConstructionVisibility with: ${type}`);
             updateHybridConstructionVisibility(type);
+            console.log(`✅ updateHybridConstructionVisibility completed`);
 
             // Only scroll if form was hidden (first time selection)
             // Don't scroll if switching templates (prevents jarring reset feeling)
@@ -2269,7 +3338,7 @@ Expected outcome: [What should be true after this step]"></textarea>
 
         // Load atoms from graph
         async function loadAtoms() {
-            console.log('🔄 Loading atoms from graph...');
+            console.log(`🔄 Loading components from graph for template type: ${selectedTemplate}...`);
             const grid = document.getElementById('atomLibraryGrid');
 
             try {
@@ -2289,19 +3358,33 @@ Expected outcome: [What should be true after this step]"></textarea>
                 const graphData = await response.json();
                 console.log(`📊 Graph loaded: ${graphData.nodes.length} total nodes`);
 
-                // Filter only atom nodes
+                // Filter components based on template type
+                // Note: Support both 'module' and 'molecule' for backward compatibility
+                let allowedTypes = [];
+                if (selectedTemplate === 'module' || selectedTemplate === 'molecule') {
+                    allowedTypes = ['atom'];  // Modules can only include atoms
+                    console.log('🟣 MODULE: Filtering for atoms only');
+                } else if (selectedTemplate === 'organism') {
+                    allowedTypes = ['atom', 'molecule', 'module'];  // Organisms can include atoms + modules
+                    console.log('🟢 ORGANISM: Filtering for atoms + modules');
+                } else if (selectedTemplate === 'sop') {
+                    allowedTypes = ['atom', 'molecule', 'module', 'organism'];  // SOPs can include everything
+                    console.log('🔴 SOP: Filtering for all component types');
+                }
+
                 availableAtoms = graphData.nodes
-                    .filter(node => node.type === 'atom')
-                    .map(atom => ({
-                        id: atom.id,
-                        title: atom.title || 'Untitled Atom',
-                        department: atom.department || 'General',
-                        subtype: atom.subtype || 'procedural-step',
-                        description: atom.description || '',
-                        complexity: atom.complexity || 'Intermediate'
+                    .filter(node => allowedTypes.includes(node.type))
+                    .map(component => ({
+                        id: component.id,
+                        type: component.type,  // Keep track of type for display
+                        title: component.title || `Untitled ${component.type}`,
+                        department: component.department || 'General',
+                        subtype: component.subtype || 'procedural-step',
+                        description: component.description || '',
+                        complexity: component.complexity || 'Intermediate'
                     }));
 
-                console.log(`✅ Loaded ${availableAtoms.length} atoms from graph`);
+                console.log(`✅ Loaded ${availableAtoms.length} components (${allowedTypes.join(', ')}) from graph`);
 
                 if (availableAtoms.length === 0) {
                     grid.innerHTML = '<div class="atom-library-empty"><p>⚠️ No atoms found in graph. Try building some SOPs first!</p></div>';
@@ -2490,6 +3573,34 @@ Expected outcome: [What should be true after this step]"></textarea>
         }
 
         // Select construction mode
+        // Handle mode option click - bulletproof single entry point
+        function handleModeClick(mode, event) {
+            console.log(`🎯 handleModeClick called for mode: ${mode}`);
+
+            // Stop ALL event propagation and default behavior
+            if (event) {
+                event.stopPropagation();
+                event.preventDefault();
+            }
+
+            // Manually check the radio button
+            const radioId = mode === 'inline' ? 'radioInline' :
+                           mode === 'hybrid' ? 'radioHybrid' :
+                           'radioAtomsOnly';
+
+            const radio = document.getElementById(radioId);
+            if (radio && !radio.checked) {
+                radio.checked = true;
+                console.log(`✅ Radio button ${radioId} manually checked`);
+            }
+
+            // Now call the actual mode switching logic
+            selectConstructionMode(mode);
+
+            // Prevent any form submission or page navigation
+            return false;
+        }
+
         function selectConstructionMode(mode) {
             console.log(`🔄 Switching to ${mode} mode`);
             console.log(`   Current mode before switch: ${currentConstructionMode}`);
@@ -2566,99 +3677,413 @@ Expected outcome: [What should be true after this step]"></textarea>
 
         // Show/hide hybrid construction section based on template type
         function updateHybridConstructionVisibility(templateType) {
-            console.log(`🔄 updateHybridConstructionVisibility called with: ${templateType}`);
-            console.log(`   Current mode before update: ${currentConstructionMode}`);
-            console.log(`   Stack trace:`, new Error().stack);
+            console.log(`🔄 ========== updateHybridConstructionVisibility ==========`);
+            console.log(`   Template Type: ${templateType}`);
 
             const hybridSection = document.getElementById('hybridConstructionSection');
             const libraryContainer = document.getElementById('atomLibraryContainer');
             const section4 = document.querySelector('.form-section:nth-of-type(5)'); // Procedure Steps
 
-            // Show for molecules, organisms, and SOPs only (not for atoms)
-            if (templateType === 'molecule' || templateType === 'organism' || templateType === 'sop') {
-                console.log('✅ Template supports hybrid construction - showing section');
+            // ========== ATOMS: NO CONSTRUCTION SECTION (Early Return) ==========
+            // Atoms are BASE LEVEL - they are NOT composed from other components
+            if (templateType === 'atom') {
+                console.log(`🔵 ATOM TEMPLATE SELECTED - Atoms are base level, showing steps only`);
 
-                // Show hybrid construction section
+                // AGGRESSIVELY hide construction section
                 if (hybridSection) {
-                    hybridSection.style.display = 'block';
-                }
-
-                // Only reset to inline mode if we're switching templates
-                // Don't reset if user is actively using a different mode
-                const isInitialSetup = currentConstructionMode === null || currentConstructionMode === undefined || currentConstructionMode === 'inline';
-
-                if (isInitialSetup) {
-                    console.log('🔄 Initial setup - setting inline mode as default');
-                    currentConstructionMode = 'inline';
-
-                    // Update UI to reflect inline mode
-                    document.querySelectorAll('.mode-option').forEach(opt => opt.classList.remove('selected'));
-                    const inlineOption = document.getElementById('modeInline');
-                    if (inlineOption) {
-                        inlineOption.classList.add('selected');
-                    }
-
-                    // Update radio buttons
-                    document.querySelectorAll('input[name="constructionMode"]').forEach(radio => {
-                        radio.checked = (radio.value === 'inline');
-                    });
-
-                    // Hide library, show procedure steps (inline mode default)
-                    if (libraryContainer) {
-                        libraryContainer.style.display = 'none';
-                    }
-                    if (section4) {
-                        section4.style.display = 'block';
-                    }
-                } else {
-                    console.log(`⚠️  User is in ${currentConstructionMode} mode - NOT resetting`);
-                    // Preserve the user's current mode selection
-                    // Just make sure the visibility is correct
-                    if (currentConstructionMode === 'hybrid' || currentConstructionMode === 'atoms-only') {
-                        if (libraryContainer) libraryContainer.style.display = 'block';
-                    }
-                    if (currentConstructionMode === 'atoms-only') {
-                        if (section4) section4.style.display = 'none';
-                    }
-                }
-
-                // Clear any previously selected atoms when switching templates
-                if (selectedAtomIds.length > 0) {
-                    console.log(`🧹 Clearing ${selectedAtomIds.length} previously selected atoms`);
-                    selectedAtomIds = [];
-                    updateSelectedAtomsPreview();
-                }
-
-                // Load atoms if not already loaded
-                if (availableAtoms.length === 0) {
-                    console.log('📦 Loading atoms for the first time...');
-                    loadAtoms();
-                } else {
-                    console.log(`✅ Atoms already loaded (${availableAtoms.length} available)`);
-                    // Re-render to clear selection highlighting
-                    renderAtoms(availableAtoms);
-                }
-            } else {
-                console.log('❌ Template does not support hybrid construction (atom selected) - hiding section');
-
-                // Hide hybrid construction section for atoms
-                if (hybridSection) {
+                    // Multiple hiding strategies for bulletproof hiding
                     hybridSection.style.display = 'none';
+                    hybridSection.style.visibility = 'hidden';
+                    hybridSection.setAttribute('hidden', 'true');
+                    hybridSection.setAttribute('data-atom-hidden', 'true');
+                    hybridSection.classList.add('force-hidden');
+                    console.log(`✅ Construction section hidden with multiple strategies`);
+                } else {
+                    console.error(`❌ ERROR: hybridConstructionSection element not found!`);
                 }
 
-                // Always show procedure steps for atoms (they don't use the hybrid system)
+                // Always show procedure steps for atoms
+                if (section4) {
+                    section4.style.display = 'block';
+                    section4.style.visibility = 'visible';
+                    section4.removeAttribute('hidden');
+                    console.log(`✅ Procedure Steps section shown`);
+                }
+
+                // Reset to inline mode
+                currentConstructionMode = 'inline';
+
+                // Post-check with debug message
+                setTimeout(() => {
+                    const actualDisplay = hybridSection ? window.getComputedStyle(hybridSection).display : 'not-found';
+                    console.log(`🔍 POST-CHECK: hybridSection display = ${actualDisplay}`);
+
+                    if (actualDisplay !== 'none' && actualDisplay !== 'not-found') {
+                        console.error(`❌❌❌ CRITICAL: Section STILL VISIBLE (display: ${actualDisplay})`);
+                        const errorDiv = document.getElementById('atomTemplateError');
+                        if (errorDiv) {
+                            errorDiv.style.display = 'block';
+                            document.getElementById('errorTemplateType').textContent = templateType;
+                            document.getElementById('errorSectionDisplay').textContent = actualDisplay;
+                        }
+                    } else {
+                        console.log(`✅ POST-CHECK: Section correctly hidden`);
+                    }
+                }, 100);
+
+                console.log(`✅ ATOM SETUP COMPLETE - Early return`);
+                return; // EARLY RETURN - Don't process anything else for atoms
+            }
+
+            // ========== MODULES, ORGANISMS, SOPs: Show Construction Section ==========
+            console.log(`🟣 Composite template (${templateType}) - showing construction options`);
+
+            // Get UI elements for text updates
+            const constructionSectionTitle = document.getElementById('constructionSectionTitle');
+            const constructionSectionSubtitle = document.getElementById('constructionSectionSubtitle');
+            const hybridModeDesc = document.getElementById('hybridModeDesc');
+            const atomsOnlyTitle = document.getElementById('atomsOnlyTitle');
+            const atomsOnlyDesc = document.getElementById('atomsOnlyDesc');
+            const libraryHeaderTitle = document.getElementById('libraryHeaderTitle');
+            const libraryHeaderDesc = document.getElementById('libraryHeaderDesc');
+
+            // Show construction section (undo all hiding strategies)
+            if (hybridSection) {
+                hybridSection.style.display = 'block';
+                hybridSection.style.visibility = 'visible';
+                hybridSection.removeAttribute('hidden');
+                hybridSection.removeAttribute('data-atom-hidden');
+                hybridSection.classList.remove('force-hidden');
+                console.log(`✅ Construction section shown`);
+            }
+
+            // Update text based on specific template type
+            if (templateType === 'module' || templateType === 'molecule') {
+                // 🟣 MODULES: Combine multiple atoms into task sequences
+                console.log('🟣 MODULE template - Build from Atoms only');
+                constructionSectionTitle.textContent = 'Build from Atoms';
+                constructionSectionSubtitle.textContent = 'Modules combine multiple atoms into task sequences. Choose to assemble from existing atoms or write custom steps.';
+                hybridModeDesc.textContent = 'Combine reusable atoms with custom inline steps (recommended)';
+                atomsOnlyTitle.textContent = 'Build from Atoms';
+                atomsOnlyDesc.textContent = 'Assemble entirely from existing atoms';
+                libraryHeaderTitle.textContent = '🔵 Atom Library';
+                libraryHeaderDesc.textContent = 'Browse and select atoms to include in your module. Each atom is a single-purpose, reusable component.';
+
+            } else if (templateType === 'organism') {
+                // 🟢 ORGANISMS: Combine atoms + modules into workflows
+                console.log('🟢 ORGANISM template - Build from Atoms & Modules');
+                constructionSectionTitle.textContent = 'Build from Atoms & Modules';
+                constructionSectionSubtitle.textContent = 'Organisms combine atoms and modules into complete workflows. Choose to assemble from existing components or write custom steps.';
+                hybridModeDesc.textContent = 'Combine reusable atoms/modules with custom inline steps (recommended)';
+                atomsOnlyTitle.textContent = 'Build from Atoms & Modules';
+                atomsOnlyDesc.textContent = 'Assemble entirely from existing atoms and modules';
+                libraryHeaderTitle.textContent = '🔵🟣 Atom & Module Library';
+                libraryHeaderDesc.textContent = 'Browse and select atoms and modules to include in your organism.';
+
+            } else if (templateType === 'sop') {
+                // 🔴 COMPLETE SOPs: Use all component types for end-to-end procedures
+                console.log('🔴 SOP template - Build from Atoms, Modules & Organisms');
+                constructionSectionTitle.textContent = 'Build from Atoms, Modules & Organisms';
+                constructionSectionSubtitle.textContent = 'Complete SOPs can reference any component type. Choose to assemble from existing components or write custom steps.';
+                hybridModeDesc.textContent = 'Combine reusable components (atoms/modules/organisms) with custom steps (recommended)';
+                atomsOnlyTitle.textContent = 'Build from Atoms, Modules & Organisms';
+                atomsOnlyDesc.textContent = 'Assemble entirely from existing components (atoms, modules, organisms)';
+                libraryHeaderTitle.textContent = '🔵🟣🟢 Full Component Library';
+                libraryHeaderDesc.textContent = 'Browse and select atoms, modules, and organisms to include in your SOP.';
+            }
+
+            // Reset to inline mode by default (user can change after)
+            const isInitialSetup = currentConstructionMode === null || currentConstructionMode === undefined || currentConstructionMode === 'inline';
+
+            if (isInitialSetup) {
+                console.log('🔄 Initial setup - setting inline mode as default');
+                currentConstructionMode = 'inline';
+
+                // Update UI to reflect inline mode
+                document.querySelectorAll('.mode-option').forEach(opt => opt.classList.remove('selected'));
+                const inlineOption = document.getElementById('modeInline');
+                if (inlineOption) {
+                    inlineOption.classList.add('selected');
+                }
+
+                // Update radio buttons
+                document.querySelectorAll('input[name="constructionMode"]').forEach(radio => {
+                    radio.checked = (radio.value === 'inline');
+                });
+
+                // Hide library, show procedure steps (inline mode default)
+                if (libraryContainer) {
+                    libraryContainer.style.display = 'none';
+                }
                 if (section4) {
                     section4.style.display = 'block';
                 }
-
-                // Reset construction mode
-                currentConstructionMode = 'inline';
+            } else {
+                console.log(`⚠️  User is in ${currentConstructionMode} mode - preserving selection`);
+                // Preserve the user's current mode selection
+                if (currentConstructionMode === 'hybrid' || currentConstructionMode === 'atoms-only') {
+                    if (libraryContainer) libraryContainer.style.display = 'block';
+                }
+                if (currentConstructionMode === 'atoms-only') {
+                    if (section4) section4.style.display = 'none';
+                }
             }
+
+            // Clear any previously selected atoms when switching templates
+            if (selectedAtomIds.length > 0) {
+                console.log(`🧹 Clearing ${selectedAtomIds.length} previously selected components`);
+                selectedAtomIds = [];
+                updateSelectedAtomsPreview();
+            }
+
+            // Load components if not already loaded
+            if (availableAtoms.length === 0) {
+                console.log('📦 Loading components for the first time...');
+                loadAtoms();
+            } else {
+                console.log(`✅ Components already loaded (${availableAtoms.length} available)`);
+                // Re-render to clear selection highlighting
+                renderAtoms(availableAtoms);
+            }
+
+            console.log(`✅ Template setup complete for: ${templateType}`);
         }
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
             console.log('🚀 Hybrid construction module initialized');
+            console.log('🚀 Metadata enhancements initialized');
+            console.log('⌨️  Keyboard navigation initialized');
+
+            // ==================================================
+            // KEYBOARD NAVIGATION FOR TEMPLATE CARDS
+            // ==================================================
+
+            // Enable Enter/Space key selection for template cards
+            document.querySelectorAll('.template-card').forEach(card => {
+                card.addEventListener('keydown', function(e) {
+                    // Enter or Space key
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        // Trigger the onclick event
+                        this.click();
+                        console.log(`⌨️  Template card activated via keyboard`);
+                    }
+                });
+
+                // Add focus styles
+                card.addEventListener('focus', function() {
+                    this.style.outline = '3px solid #0052CC';
+                    this.style.outlineOffset = '2px';
+                });
+
+                card.addEventListener('blur', function() {
+                    this.style.outline = 'none';
+                });
+            });
+
+            // ==================================================
+            // COLLAPSIBLE SECTIONS
+            // ==================================================
+
+            // Initialize all collapsible sections as collapsed by default (progressive disclosure)
+            document.querySelectorAll('.form-section.collapsible').forEach(section => {
+                section.classList.add('collapsed');
+            });
+
+            // Add click handlers to collapsible headers
+            document.querySelectorAll('.collapsible-header').forEach(header => {
+                header.addEventListener('click', function() {
+                    const section = this.closest('.form-section.collapsible');
+                    section.classList.toggle('collapsed');
+
+                    const isCollapsed = section.classList.contains('collapsed');
+                    console.log(`📂 Section ${this.querySelector('.form-section-number').textContent}: ${isCollapsed ? 'Collapsed' : 'Expanded'}`);
+                });
+            });
+
+            // ==================================================
+            // REAL-TIME FIELD VALIDATION & CHARACTER COUNTERS
+            // ==================================================
+
+            // Title field - character counter and length validation
+            const titleInput = document.getElementById('title');
+            const titleCounter = document.getElementById('title-counter');
+            const titleValidation = document.getElementById('title-validation');
+
+            if (titleInput && titleCounter) {
+                titleInput.addEventListener('input', function() {
+                    const length = this.value.length;
+                    const max = 100;
+                    titleCounter.textContent = `${length} / ${max}`;
+
+                    // Validation
+                    if (length === 0) {
+                        this.classList.remove('valid', 'invalid');
+                        titleValidation.textContent = '';
+                        titleValidation.className = 'validation-message';
+                    } else if (length < 10) {
+                        this.classList.add('invalid');
+                        this.classList.remove('valid');
+                        titleValidation.textContent = '⚠️  Too short (min 10 characters)';
+                        titleValidation.className = 'validation-message warning';
+                    } else if (length >= 10 && length <= max) {
+                        this.classList.add('valid');
+                        this.classList.remove('invalid');
+                        titleValidation.textContent = '✓ Good';
+                        titleValidation.className = 'validation-message success';
+                    }
+                });
+            }
+
+            // Keywords field - count keywords and validate minimum
+            const keywordsInput = document.getElementById('keywords');
+            const keywordsCount = document.getElementById('keywords-count');
+            const keywordsValidation = document.getElementById('keywords-validation');
+
+            if (keywordsInput && keywordsCount) {
+                keywordsInput.addEventListener('input', function() {
+                    const keywords = this.value.split(',').map(k => k.trim()).filter(k => k.length > 0);
+                    const count = keywords.length;
+                    keywordsCount.textContent = `${count} keyword${count !== 1 ? 's' : ''}`;
+
+                    // Validation
+                    if (count === 0) {
+                        this.classList.remove('valid', 'invalid');
+                        keywordsValidation.textContent = '';
+                        keywordsValidation.className = 'validation-message';
+                    } else if (count < 5) {
+                        this.classList.add('invalid');
+                        this.classList.remove('valid');
+                        keywordsValidation.textContent = `⚠️  Need ${5 - count} more (min 5)`;
+                        keywordsValidation.className = 'validation-message warning';
+                    } else {
+                        this.classList.add('valid');
+                        this.classList.remove('invalid');
+                        keywordsValidation.textContent = '✓ Good';
+                        keywordsValidation.className = 'validation-message success';
+                    }
+                });
+            }
+
+            // Document Summary - character counter (Section 1.11)
+            const summaryInput = document.getElementById('documentSummary');
+            const summaryCounter = document.getElementById('summary-counter');
+
+            if (summaryInput && summaryCounter) {
+                summaryInput.addEventListener('input', function() {
+                    const length = this.value.length;
+                    const max = 500;
+                    summaryCounter.textContent = `${length} / ${max}`;
+
+                    // Visual feedback
+                    if (length === 0) {
+                        this.classList.remove('valid', 'invalid');
+                    } else if (length > 400) {
+                        this.classList.add('warning');
+                        this.classList.remove('valid');
+                    } else {
+                        this.classList.add('valid');
+                        this.classList.remove('invalid', 'warning');
+                    }
+                });
+            }
+
+            // Key Points - validate max 5 points (Section 1.11)
+            const keyPointsInput = document.getElementById('keyPoints');
+            const keyPointsValidation = document.getElementById('keypoints-validation');
+
+            if (keyPointsInput && keyPointsValidation) {
+                keyPointsInput.addEventListener('input', function() {
+                    const lines = this.value.split('\n').filter(line => line.trim().length > 0);
+                    const count = lines.length;
+
+                    // Validation
+                    if (count === 0) {
+                        this.classList.remove('valid', 'invalid');
+                        keyPointsValidation.textContent = '';
+                        keyPointsValidation.className = 'validation-message';
+                    } else if (count > 5) {
+                        this.classList.add('invalid');
+                        this.classList.remove('valid');
+                        keyPointsValidation.textContent = `⚠️  Too many (max 5 points, you have ${count})`;
+                        keyPointsValidation.className = 'validation-message warning';
+                    } else {
+                        this.classList.add('valid');
+                        this.classList.remove('invalid');
+                        keyPointsValidation.textContent = `✓ ${count} point${count !== 1 ? 's' : ''}`;
+                        keyPointsValidation.className = 'validation-message success';
+                    }
+                });
+            }
+
+            // ==================================================
+            // CONDITIONAL FIELDS
+            // ==================================================
+
+            // Training Required -> Show/Hide Training Program field
+            const trainingRequiredSelect = document.getElementById('trainingRequired');
+            const trainingProgramGroup = document.getElementById('trainingProgramGroup');
+            const trainingProgramInput = document.getElementById('trainingProgram');
+
+            if (trainingRequiredSelect && trainingProgramGroup) {
+                trainingRequiredSelect.addEventListener('change', function() {
+                    if (this.value === 'Yes') {
+                        trainingProgramGroup.style.display = 'block';
+                        trainingProgramInput.required = true;
+                    } else {
+                        trainingProgramGroup.style.display = 'none';
+                        trainingProgramInput.required = false;
+                        trainingProgramInput.value = '';
+                    }
+                });
+
+                // Trigger on page load to set initial state
+                trainingRequiredSelect.dispatchEvent(new Event('change'));
+            }
+
+            // Safety Critical -> Show/Hide Warning
+            const safetyCriticalSelect = document.getElementById('safetyCritical');
+            const safetyCriticalWarning = document.getElementById('safetyCriticalWarning');
+
+            if (safetyCriticalSelect && safetyCriticalWarning) {
+                safetyCriticalSelect.addEventListener('change', function() {
+                    if (this.value === 'Yes') {
+                        safetyCriticalWarning.style.display = 'block';
+                        console.log('⚠️  Safety Critical procedure - enhanced validation required');
+                    } else {
+                        safetyCriticalWarning.style.display = 'none';
+                    }
+                });
+
+                // Trigger on page load
+                safetyCriticalSelect.dispatchEvent(new Event('change'));
+            }
+
+            // ==================================================
+            // AUTO-CALCULATE NEXT REVIEW DATE
+            // ==================================================
+
+            const reviewCycleSelect = document.getElementById('reviewCycle');
+            const nextReviewDateInput = document.getElementById('nextReviewDate');
+
+            if (reviewCycleSelect && nextReviewDateInput) {
+                reviewCycleSelect.addEventListener('change', function() {
+                    const days = parseInt(this.value);
+                    const today = new Date();
+                    const nextReview = new Date(today);
+                    nextReview.setDate(today.getDate() + days);
+
+                    // Format as YYYY-MM-DD for date input
+                    const formatted = nextReview.toISOString().split('T')[0];
+                    nextReviewDateInput.value = formatted;
+
+                    console.log(`📅 Next review date calculated: ${formatted} (${days} days from today)`);
+                });
+
+                // Calculate on page load
+                reviewCycleSelect.dispatchEvent(new Event('change'));
+            }
         });
 
     </script>

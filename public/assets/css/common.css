@@ -580,9 +580,23 @@ a:hover {
 .text-warning { color: var(--color-warning); }
 .text-error { color: var(--color-error); }
 
-.bg-primary { background-color: var(--color-primary); }
+.bg-primary {
+    background-color: var(--color-primary);
+    color: white;
+}
 .bg-surface { background-color: var(--color-surface); }
 .bg-background { background-color: var(--color-background); }
+
+/* Force hidden - bulletproof hiding for atomic workflow */
+.force-hidden {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    left: -9999px !important;
+}
 
 /* Borders */
 .border {
