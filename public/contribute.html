@@ -1275,109 +1275,14 @@
 
     <!-- Main Content -->
     <div class="container">
-        <!-- Info Banner (Full Width) -->
-        <div class="info-banner">
-            <h3>📋 Enterprise SOP Template System</h3>
-            <p>Our SOP system uses a modular atomic design approach for maximum searchability, reusability, and adaptability:</p>
-            <ul>
-                <li><strong>Atoms</strong> - Single-purpose reusable components (e.g., "Login Procedure", "Verify Email")</li>
-                <li><strong>Molecules</strong> - Multi-step procedures combining atoms (e.g., "Account Setup", "Approval Workflow")</li>
-                <li><strong>Organisms</strong> - Complete workflows combining molecules (e.g., "Employee Onboarding", "Wire Transfer Process")</li>
-                <li><strong>SOPs</strong> - Full documented procedures with metadata, compliance, quality controls, and troubleshooting</li>
-            </ul>
-            <p style="margin-top: 15px;"><strong>All components include:</strong> Rich metadata for search, compliance frameworks, decision logic, quality checkpoints, troubleshooting guidance, and version control.</p>
-            <p><a href="../TEMPLATE_CONFIGURATION_GUIDE.md" style="color: #0052CC; font-weight: 600;">📖 View Template Configuration Guide</a></p>
-        </div>
+        <!-- Simple Intro - Get to the point! -->
+        <p style="text-align: center; font-size: 16px; color: #666; margin-bottom: 40px;">
+            Choose what you're creating. Each type has a unique, streamlined workflow.
+            <a href="../TEMPLATE_CONFIGURATION_GUIDE.md" style="color: #0052CC; margin-left: 10px;">📖 Learn more</a>
+        </p>
 
-        <!-- Atomic Design Hierarchy Explanation -->
-        <div class="atomic-design-explainer">
-            <h2>📚 Understanding Atomic Design for Documentation</h2>
-            <p class="explainer-intro">Our documentation system follows atomic design principles, building complex procedures from simple, reusable components. Choose the right level based on what you're creating:</p>
-
-            <div class="hierarchy-visual">
-                <div class="hierarchy-level">
-                    <div class="level-icon atom-icon">🔵</div>
-                    <div class="level-content">
-                        <h3>Atoms</h3>
-                        <p>Single-purpose, foundational components that can't be broken down further. <strong>These are NOT composed from other components.</strong></p>
-                        <div class="level-example">Example: "Log into system", "Verify email format", "Click submit button"</div>
-                    </div>
-                </div>
-
-                <div class="hierarchy-arrow">↓</div>
-
-                <div class="hierarchy-level">
-                    <div class="level-icon module-icon">🟣</div>
-                    <div class="level-content">
-                        <h3>Modules</h3>
-                        <p>Task sequences combining <strong>multiple atoms</strong> into cohesive procedures.</p>
-                        <div class="level-example">Example: "User account setup" = Login atom + Profile atom + Verification atom</div>
-                    </div>
-                </div>
-
-                <div class="hierarchy-arrow">↓</div>
-
-                <div class="hierarchy-level">
-                    <div class="level-icon organism-icon">🟢</div>
-                    <div class="level-content">
-                        <h3>Organisms</h3>
-                        <p>Complete workflows combining <strong>atoms + modules</strong> into complex processes.</p>
-                        <div class="level-example">Example: "Employee onboarding" = Account setup module + Training module + Equipment atoms</div>
-                    </div>
-                </div>
-
-                <div class="hierarchy-arrow">↓</div>
-
-                <div class="hierarchy-level">
-                    <div class="level-icon sop-icon">🔴</div>
-                    <div class="level-content">
-                        <h3>Complete SOPs</h3>
-                        <p>End-to-end procedures using <strong>all component types</strong>, with full metadata, compliance, and quality assurance.</p>
-                        <div class="level-example">Example: "IT Security Policy" = Authentication organisms + Access control modules + Audit atoms</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="decision-helper">
-                <h4>❓ Not sure which to choose?</h4>
-                <div class="decision-tree">
-                    <div class="decision-question">
-                        <strong>Q: Can this be broken into smaller steps?</strong>
-                        <div class="decision-branch">
-                            <div class="decision-answer">
-                                <span class="decision-label no">No → Start with an <strong>Atom</strong></span>
-                                <p class="decision-hint">Single action, can't be simplified further</p>
-                            </div>
-                            <div class="decision-answer">
-                                <span class="decision-label yes">Yes → Ask: Does it combine existing atoms?</span>
-                                <div class="decision-sub">
-                                    <div class="decision-answer">
-                                        <span class="decision-label yes">Yes → Create a <strong>Module</strong></span>
-                                        <p class="decision-hint">Combines atoms into a task sequence</p>
-                                    </div>
-                                    <div class="decision-answer">
-                                        <span class="decision-label">No → Does it combine modules + atoms?</span>
-                                        <div class="decision-sub">
-                                            <div class="decision-answer">
-                                                <span class="decision-label yes">Yes → Create an <strong>Organism</strong></span>
-                                                <p class="decision-hint">Complex workflow with multiple modules</p>
-                                            </div>
-                                            <div class="decision-answer">
-                                                <span class="decision-label yes">Full documentation → Create a <strong>Complete SOP</strong></span>
-                                                <p class="decision-hint">Comprehensive procedure with metadata & compliance</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Template Selection (Full Width) -->
-        <h2 style="margin-bottom: 20px;">Step 1: Choose Component Type</h2>
+        <!-- Template Selection -->
+        <h2 style="margin-bottom: 20px; text-align: center;">Choose Your Template</h2>
         <div class="template-selection">
             <div class="template-card" onclick="selectTemplate('atom', event)" role="button" tabindex="0" aria-label="Select Atom template - single purpose component">
                 <div class="badge atom">🔵 Atom</div>
@@ -1440,15 +1345,32 @@
                         <label class="form-label" for="department">Department <span class="required">*</span></label>
                         <select id="department" class="form-select" required>
                             <option value="">Select department...</option>
-                            <option value="IT">IT & Technology</option>
-                            <option value="Operations">Operations</option>
-                            <option value="HR">Human Resources</option>
-                            <option value="Finance">Finance</option>
-                            <option value="Legal">Legal</option>
-                            <option value="Compliance">Compliance</option>
-                            <option value="Security">Security</option>
-                            <option value="Customer Service">Customer Service</option>
-                            <option value="Multi-Department">Multi-Department</option>
+                            <optgroup label="Core Operations">
+                                <option value="IT">IT & Technology</option>
+                                <option value="Operations">Operations & Logistics</option>
+                                <option value="Customer Service">Customer Service & Support</option>
+                                <option value="Sales">Sales & Business Development</option>
+                                <option value="Marketing">Marketing & Communications</option>
+                            </optgroup>
+                            <optgroup label="Corporate Functions">
+                                <option value="HR">Human Resources</option>
+                                <option value="Finance">Finance & Accounting</option>
+                                <option value="Legal">Legal & Contracts</option>
+                                <option value="Compliance">Compliance & Risk</option>
+                                <option value="Security">Security & Privacy</option>
+                            </optgroup>
+                            <optgroup label="Specialized">
+                                <option value="Product">Product Management</option>
+                                <option value="Engineering">Engineering & Development</option>
+                                <option value="Quality">Quality Assurance</option>
+                                <option value="Research">Research & Analytics</option>
+                                <option value="Procurement">Procurement & Sourcing</option>
+                                <option value="Facilities">Facilities & Admin</option>
+                            </optgroup>
+                            <optgroup label="Cross-Functional">
+                                <option value="Multi-Department">Multi-Department</option>
+                                <option value="Executive">Executive Leadership</option>
+                            </optgroup>
                         </select>
                     </div>
 
@@ -1456,12 +1378,32 @@
                         <label class="form-label" for="processCategory">Process Category <span class="required">*</span></label>
                         <select id="processCategory" class="form-select" required>
                             <option value="">Select category...</option>
-                            <option value="System Configuration">System Configuration</option>
-                            <option value="Troubleshooting">Troubleshooting</option>
-                            <option value="Compliance & Audit">Compliance & Audit</option>
-                            <option value="Maintenance & Updates">Maintenance & Updates</option>
-                            <option value="Risk Management">Risk Management</option>
-                            <option value="Training & Onboarding">Training & Onboarding</option>
+                            <optgroup label="Technical Operations">
+                                <option value="System Configuration">System Configuration & Setup</option>
+                                <option value="Troubleshooting">Troubleshooting & Support</option>
+                                <option value="Maintenance & Updates">Maintenance & Updates</option>
+                                <option value="Data Management">Data Management & Migration</option>
+                                <option value="Security Operations">Security Operations & Monitoring</option>
+                            </optgroup>
+                            <optgroup label="Business Processes">
+                                <option value="Compliance & Audit">Compliance & Audit</option>
+                                <option value="Risk Management">Risk Management & Assessment</option>
+                                <option value="Quality Assurance">Quality Assurance & Testing</option>
+                                <option value="Financial Operations">Financial Operations & Reporting</option>
+                                <option value="Procurement">Procurement & Vendor Management</option>
+                            </optgroup>
+                            <optgroup label="People & Development">
+                                <option value="Training & Onboarding">Training & Onboarding</option>
+                                <option value="Performance Management">Performance Management</option>
+                                <option value="Employee Relations">Employee Relations</option>
+                                <option value="Talent Acquisition">Talent Acquisition & Recruiting</option>
+                            </optgroup>
+                            <optgroup label="Customer & Operations">
+                                <option value="Customer Support">Customer Support & Service</option>
+                                <option value="Sales Operations">Sales Operations & CRM</option>
+                                <option value="Order Processing">Order Processing & Fulfillment</option>
+                                <option value="Project Management">Project Management & Delivery</option>
+                            </optgroup>
                         </select>
                     </div>
                 </div>
@@ -2228,25 +2170,35 @@
                     <p style="margin: 10px 0 0 0; font-size: 12px; color: #666;">Section display: <strong id="errorSectionDisplay" style="color: #d32f2f;">unknown</strong></p>
                 </div>
 
-                <!-- Construction Mode Toggle -->
-                <div class="construction-mode-toggle">
-                    <div class="mode-option selected" id="modeInline" onclick="return handleModeClick('inline', event);">
-                        <div class="mode-option-title">
-                            <input type="radio" id="radioInline" name="constructionMode" value="inline" checked> ✍️ Write Custom Steps
+                <!-- Construction Mode Selection - BUILD FROM ATOMS IS NOW PRIMARY! -->
+                <div style="background: #e3f2fd; border: 3px solid #2196F3; border-radius: 12px; padding: 25px; margin-bottom: 25px;">
+                    <h3 style="color: #1565C0; margin: 0 0 15px 0; font-size: 20px;">💡 How do you want to create this?</h3>
+                    <p style="color: #424242; margin-bottom: 20px; font-size: 15px;">Build from existing atoms (recommended) or write custom steps:</p>
+
+                    <div class="construction-mode-toggle">
+                        <!-- PRIMARY OPTION: Build from Atoms (NOW DEFAULT & RECOMMENDED!) -->
+                        <div class="mode-option selected" id="modeAtomsOnly" onclick="return handleModeClick('atoms-only', event);" style="border: 3px solid #4CAF50; background: #f1f8f4;">
+                            <div class="mode-option-title" style="font-size: 18px; font-weight: 600;">
+                                <input type="radio" id="radioAtomsOnly" name="constructionMode" value="atoms-only" checked> 📦 <span id="atomsOnlyTitle">Build from Atoms</span> ⭐
+                            </div>
+                            <div class="mode-option-desc" id="atomsOnlyDesc" style="font-size: 15px; color: #2e7d32;"><strong>RECOMMENDED:</strong> Select and compose existing reusable atoms</div>
                         </div>
-                        <div class="mode-option-desc">Write all steps as inline content (traditional approach)</div>
-                    </div>
-                    <div class="mode-option" id="modeHybrid" onclick="return handleModeClick('hybrid', event);">
-                        <div class="mode-option-title">
-                            <input type="radio" id="radioHybrid" name="constructionMode" value="hybrid"> 🧱 Hybrid Construction
+
+                        <!-- Secondary Option: Hybrid Construction -->
+                        <div class="mode-option" id="modeHybrid" onclick="return handleModeClick('hybrid', event);">
+                            <div class="mode-option-title">
+                                <input type="radio" id="radioHybrid" name="constructionMode" value="hybrid"> 🧱 Hybrid Construction
+                            </div>
+                            <div class="mode-option-desc" id="hybridModeDesc">Mix reusable components with custom steps</div>
                         </div>
-                        <div class="mode-option-desc" id="hybridModeDesc">Combine reusable components with custom inline steps (recommended)</div>
-                    </div>
-                    <div class="mode-option" id="modeAtomsOnly" onclick="return handleModeClick('atoms-only', event);">
-                        <div class="mode-option-title">
-                            <input type="radio" id="radioAtomsOnly" name="constructionMode" value="atoms-only"> 📦 <span id="atomsOnlyTitle">Build from Components</span>
+
+                        <!-- Tertiary Option: Write Custom (Alternative) -->
+                        <div class="mode-option" id="modeInline" onclick="return handleModeClick('inline', event);">
+                            <div class="mode-option-title">
+                                <input type="radio" id="radioInline" name="constructionMode" value="inline"> ✍️ Write Custom Steps
+                            </div>
+                            <div class="mode-option-desc">Write all steps as inline content (traditional approach)</div>
                         </div>
-                        <div class="mode-option-desc" id="atomsOnlyDesc">Assemble entirely from existing reusable components</div>
                     </div>
                 </div>
 
@@ -2560,53 +2512,44 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
                 atom: {
                     icon: '🔵',
                     title: 'Atom - Simple Component',
-                    description: 'You\'re creating a single-purpose, reusable component (~128 lines). This is the simplest template with basic fields only.',
+                    description: 'Quick workflow: Basic info → Description → Save. Only ~10 fields.',
                     sections: [
-                        'Core Information (simplified - no duration estimate)',
-                        'Purpose & Description (brief, focused)',
-                        '<s>Compliance Section (skipped for atoms)</s>',
-                        '<s>Procedure Steps (atoms are single-purpose)</s>',
-                        'Basic Troubleshooting (simple table)',
-                        'Basic Ownership (owner and maintainer only)'
+                        'Title, Department, Category',
+                        'What does this do?',
+                        'Author & Owner'
                     ]
                 },
                 molecule: {
                     icon: '🟣',
-                    title: 'Molecule - Multi-Step Procedure',
-                    description: 'You\'re creating a multi-step procedure combining atoms (~201 lines). Moderate complexity with optional compliance.',
+                    title: 'Molecule - Task Sequence',
+                    description: 'Unique workflow: Basic info → Build from Atoms → Save. Compose existing atoms into sequences.',
                     sections: [
-                        'Core Information (includes duration estimate)',
-                        'Purpose & Scope (with prerequisites)',
-                        'Compliance (optional - only if applicable)',
-                        'Procedure Steps (multiple steps)',
-                        'Detailed Troubleshooting (comprehensive matrix)',
-                        'Ownership (includes approver)'
+                        'Title & metadata',
+                        'Select atoms from library',
+                        'Arrange sequence',
+                        'Add ownership'
                     ]
                 },
                 organism: {
                     icon: '🟢',
                     title: 'Organism - Complete Workflow',
-                    description: 'You\'re creating a complete workflow combining molecules and atoms (~297 lines). Complex template with required compliance tracking.',
+                    description: 'Unique workflow: Metadata → Build from Atoms & Modules → Compliance → Save.',
                     sections: [
-                        'Core Information (comprehensive)',
-                        'Purpose & Scope (detailed with roles)',
-                        'Compliance & Regulatory (required)',
-                        'Workflow Steps (multi-phase)',
-                        'Comprehensive Troubleshooting (with escalation)',
-                        'Governance (full ownership and reviewers)'
+                        'Core information',
+                        'Select components (atoms + modules)',
+                        'Compliance tracking',
+                        'Workflow ownership'
                     ]
                 },
                 sop: {
                     icon: '🟠',
                     title: 'Full SOP - Complete Documentation',
-                    description: 'You\'re creating a full SOP with complete governance (~646 lines). All fields and sections are required for comprehensive documentation.',
+                    description: 'Comprehensive workflow: Full metadata → Build/Write steps → Compliance → Governance → Save.',
                     sections: [
-                        'Core Information (all 20+ metadata fields)',
-                        'Purpose & Scope (strategic alignment)',
-                        'Compliance & Regulatory (detailed tracking)',
-                        'Procedure Steps (comprehensive with decision logic)',
-                        'Troubleshooting Matrix (full escalation paths)',
-                        'Governance (complete ownership chain)'
+                        'Complete metadata set',
+                        'Build from all components OR write custom',
+                        'Regulatory compliance',
+                        'Full governance chain'
                     ]
                 }
             };
@@ -2647,30 +2590,45 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
 
             // Update section titles and configure based on template type
             if (type === 'atom') {
-                // ATOM: Simple component
-                section2.querySelector('h2').innerHTML = '<span class="form-section-number">2</span> Purpose & Description';
-                section2.querySelector('.subtitle').textContent = 'Simple description of what this component does';
+                // ATOM: DRASTICALLY SIMPLIFIED - Only show essential fields
+                console.log('🔵 ATOM: Applying radical simplification');
 
-                // Hide compliance section
-                section3.style.display = 'none';
+                // Update section titles
+                section2.querySelector('h2').innerHTML = '<span class="form-section-number">2</span> Description & Action';
+                section2.querySelector('.subtitle').textContent = 'What does this atom do? (one simple action)';
 
-                // Hide procedure steps (atoms are single-purpose)
-                section4.style.display = 'none';
+                // HIDE ALL COMPLEX SECTIONS
+                section3.style.display = 'none'; // Hide compliance
+                section4.style.display = 'none'; // Hide procedure steps (atoms are single-purpose)
+                section5.style.display = 'none'; // Hide troubleshooting (too complex for atoms)
 
-                // Simplify troubleshooting
-                section5.querySelector('.subtitle').textContent = 'Basic troubleshooting table for common issues';
+                // Simplify Section 6 (Ownership) - only show basics
+                section6.querySelector('h2').innerHTML = '<span class="form-section-number">3</span> Ownership';
+                section6.querySelector('.subtitle').textContent = 'Who created and maintains this atom?';
 
-                // Simplify ownership
-                section6.querySelector('.subtitle').textContent = 'Basic ownership information';
+                // HIDE ALL SUBSECTIONS (1.5 through 1.13) - These are enterprise metadata
+                const subsections = document.querySelectorAll('.form-section.collapsible');
+                subsections.forEach(subsection => {
+                    console.log(`   Hiding subsection: ${subsection.querySelector('h2')?.textContent || 'unknown'}`);
+                    subsection.style.display = 'none';
+                });
 
-                // Hide/disable certain fields
-                estimatedDuration.parentElement.style.display = 'none';
-                approver.parentElement.parentElement.style.display = 'none'; // Hide the whole row
-                reviewers.parentElement.style.display = 'none';
+                // Hide complex fields from Section 1
+                const complexityField = document.getElementById('complexity');
+                const audienceField = document.querySelector('label[for="aud-executive"]')?.closest('.form-group');
+                if (estimatedDuration) estimatedDuration.parentElement.style.display = 'none';
+                if (complexityField) complexityField.parentElement.style.display = 'none';
+                if (audienceField) audienceField.style.display = 'none';
 
-                // Make compliance fields optional
-                auditFrequency.removeAttribute('required');
-                reviewFrequency.removeAttribute('required');
+                // Hide complex ownership fields
+                if (approver) approver.parentElement.parentElement.style.display = 'none';
+                if (reviewers) reviewers.parentElement.style.display = 'none';
+
+                // Make compliance fields optional (not shown anyway)
+                if (auditFrequency) auditFrequency.removeAttribute('required');
+                if (reviewFrequency) reviewFrequency.removeAttribute('required');
+
+                console.log('✅ ATOM simplification complete - showing only ~10 essential fields');
 
             } else if (type === 'molecule') {
                 // MOLECULE: Multi-step procedure
@@ -3377,7 +3335,7 @@ Expected outcome: [What should be true after this step]"></textarea>
 
         let availableAtoms = [];
         let selectedAtomIds = [];
-        let currentConstructionMode = 'inline';
+        let currentConstructionMode = 'atoms-only'; // CHANGED: atoms-only is now the default!
 
         // Load atoms from graph
         async function loadAtoms() {
@@ -3835,32 +3793,37 @@ Expected outcome: [What should be true after this step]"></textarea>
                 libraryHeaderDesc.textContent = 'Browse and select atoms, modules, and organisms to include in your SOP.';
             }
 
-            // Reset to inline mode by default (user can change after)
-            const isInitialSetup = currentConstructionMode === null || currentConstructionMode === undefined || currentConstructionMode === 'inline';
+            // CHANGED: Set atoms-only as DEFAULT mode (user can change after)
+            const isInitialSetup = currentConstructionMode === null || currentConstructionMode === undefined || currentConstructionMode === 'atoms-only';
 
             if (isInitialSetup) {
-                console.log('🔄 Initial setup - setting inline mode as default');
-                currentConstructionMode = 'inline';
+                console.log('🔄 Initial setup - setting ATOMS-ONLY mode as default (RECOMMENDED)');
+                currentConstructionMode = 'atoms-only';
 
-                // Update UI to reflect inline mode
+                // Update UI to reflect atoms-only mode
                 document.querySelectorAll('.mode-option').forEach(opt => opt.classList.remove('selected'));
-                const inlineOption = document.getElementById('modeInline');
-                if (inlineOption) {
-                    inlineOption.classList.add('selected');
+                const atomsOnlyOption = document.getElementById('modeAtomsOnly');
+                if (atomsOnlyOption) {
+                    atomsOnlyOption.classList.add('selected');
                 }
 
                 // Update radio buttons
                 document.querySelectorAll('input[name="constructionMode"]').forEach(radio => {
-                    radio.checked = (radio.value === 'inline');
+                    radio.checked = (radio.value === 'atoms-only');
                 });
 
-                // Hide library, show procedure steps (inline mode default)
+                // SHOW library (atoms-only mode default), HIDE procedure steps
                 if (libraryContainer) {
-                    libraryContainer.style.display = 'none';
+                    libraryContainer.style.display = 'block';
+                    console.log('✅ Atom library shown by default');
                 }
                 if (section4) {
-                    section4.style.display = 'block';
+                    section4.style.display = 'none';
+                    console.log('✅ Procedure steps hidden (using atoms instead)');
                 }
+
+                // Load atoms immediately
+                loadAtoms();
             } else {
                 console.log(`⚠️  User is in ${currentConstructionMode} mode - preserving selection`);
                 // Preserve the user's current mode selection
