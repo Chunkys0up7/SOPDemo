@@ -436,8 +436,9 @@
 
   // Search functionality
   const searchInput = document.getElementById('global-search');
+  let searchDebounceTimer;
 
-  // Redirect to GraphRAG on Enter key
+  // Redirect to search on Enter key
   searchInput?.addEventListener('keypress', function(e) {
     if (e.key === 'Enter' && e.target.value.trim()) {
       const query = encodeURIComponent(e.target.value.trim());
@@ -445,8 +446,16 @@
     }
   });
 
-  // Show quick results on input
-  searchInput?.addEventListener('input', function(e) {
+  // Debounce utility function
+  function debounce(func, delay) {
+    return function(...args) {
+      clearTimeout(searchDebounceTimer);
+      searchDebounceTimer = setTimeout(() => func.apply(this, args), delay);
+    };
+  }
+
+  // Show quick results on input (debounced to 300ms)
+  searchInput?.addEventListener('input', debounce(function(e) {
     const query = e.target.value.toLowerCase();
 
     if (query.length < 2) return;
@@ -467,7 +476,7 @@
     );
 
     showSearchResults(results, query);
-  });
+  }, 300)); // 300ms debounce delay
 
   function showSearchResults(results, query) {
     // Remove existing results dropdown

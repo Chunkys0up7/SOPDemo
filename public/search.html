@@ -474,6 +474,7 @@
     <script>
         let currentSearchMode = 'keyword';
         let allGraphData = null;
+        let graphDataCached = false;
 
         // Load global navigation
         fetch('/public/components/global-nav.html')
@@ -555,11 +556,16 @@
             `;
 
             try {
-                // Fetch graph data if not already loaded
-                if (!allGraphData) {
+                // Fetch graph data if not already cached
+                if (!graphDataCached) {
+                    console.log('📊 Fetching graph data from server...');
                     const response = await fetch('/graph/sop-graph.json');
                     if (!response.ok) throw new Error('Failed to load data');
                     allGraphData = await response.json();
+                    graphDataCached = true;
+                    console.log(`✅ Graph data cached (${allGraphData.nodes.length} nodes)`);
+                } else {
+                    console.log('⚡ Using cached graph data');
                 }
 
                 // Simple keyword search
@@ -616,11 +622,16 @@
             `;
 
             try {
-                // Fetch graph data if not already loaded
-                if (!allGraphData) {
+                // Fetch graph data if not already cached
+                if (!graphDataCached) {
+                    console.log('📊 Fetching graph data from server...');
                     const response = await fetch('/graph/sop-graph.json');
                     if (!response.ok) throw new Error('Failed to load data');
                     allGraphData = await response.json();
+                    graphDataCached = true;
+                    console.log(`✅ Graph data cached (${allGraphData.nodes.length} nodes)`);
+                } else {
+                    console.log('⚡ Using cached graph data');
                 }
 
                 // Graph-based semantic search
