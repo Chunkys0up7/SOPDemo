@@ -1,0 +1,332 @@
+{
+  "metadata": {
+    "title": "SOP Documentation Ontology",
+    "version": "1.0.0",
+    "description": "Ontology schema for atomic SOP documentation system with GraphRAG support",
+    "created": "2025-11-19",
+    "namespace": "https://sop-demo.com/ontology#"
+  },
+
+  "entities": [
+    {
+      "type": "Atom",
+      "description": "Smallest reusable unit - single-purpose component (~128 lines)",
+      "properties": {
+        "id": {"type": "string", "required": true, "unique": true},
+        "type": {"type": "enum", "values": ["atom"], "required": true},
+        "title": {"type": "string", "required": true, "searchable": true},
+        "version": {"type": "string", "required": true},
+        "content": {"type": "text", "required": true, "vectorized": true},
+        "department": {"type": "string", "indexed": true},
+        "processCategory": {"type": "string", "indexed": true},
+        "complexity": {"type": "enum", "values": ["Basic", "Intermediate", "Advanced"], "indexed": true},
+        "audience": {"type": "array<string>", "indexed": true},
+        "tags": {"type": "array<string>", "indexed": true, "searchable": true},
+        "keywords": {"type": "array<string>", "searchable": true},
+        "complianceFrameworks": {"type": "array<string>", "indexed": true},
+        "reusable": {"type": "boolean", "default": true},
+        "owner": {"type": "string", "indexed": true},
+        "maintainer": {"type": "string"},
+        "approver": {"type": "string"},
+        "lastReviewed": {"type": "date"},
+        "nextReview": {"type": "date"},
+        "embedding": {"type": "vector", "dimensions": 1536, "indexed": true}
+      },
+      "indexes": ["id", "department", "complexity", "tags"]
+    },
+
+    {
+      "type": "Molecule",
+      "description": "Multi-step procedure combining atoms (~256 lines)",
+      "properties": {
+        "id": {"type": "string", "required": true, "unique": true},
+        "type": {"type": "enum", "values": ["molecule"], "required": true},
+        "title": {"type": "string", "required": true, "searchable": true},
+        "version": {"type": "string", "required": true},
+        "content": {"type": "text", "required": true, "vectorized": true},
+        "purpose": {"type": "text", "searchable": true},
+        "tags": {"type": "array<string>", "indexed": true},
+        "owner": {"type": "string", "indexed": true},
+        "embedding": {"type": "vector", "dimensions": 1536, "indexed": true}
+      },
+      "indexes": ["id", "tags"]
+    },
+
+    {
+      "type": "Organism",
+      "description": "Complex workflow from molecules and atoms (~512 lines)",
+      "properties": {
+        "id": {"type": "string", "required": true, "unique": true},
+        "type": {"type": "enum", "values": ["organism"], "required": true},
+        "title": {"type": "string", "required": true, "searchable": true},
+        "version": {"type": "string", "required": true},
+        "content": {"type": "text", "required": true, "vectorized": true},
+        "workflow": {"type": "text", "searchable": true},
+        "owner": {"type": "string", "indexed": true},
+        "embedding": {"type": "vector", "dimensions": 1536, "indexed": true}
+      },
+      "indexes": ["id", "owner"]
+    },
+
+    {
+      "type": "SOP",
+      "description": "Complete Standard Operating Procedure document (~1024 lines)",
+      "properties": {
+        "id": {"type": "string", "required": true, "unique": true},
+        "type": {"type": "enum", "values": ["sop"], "required": true},
+        "title": {"type": "string", "required": true, "searchable": true},
+        "version": {"type": "string", "required": true},
+        "status": {"type": "enum", "values": ["draft", "active", "deprecated", "archived"]},
+        "owner": {"type": "string", "required": true, "indexed": true},
+        "approver": {"type": "string"},
+        "lastReviewed": {"type": "date"},
+        "embedding": {"type": "vector", "dimensions": 1536, "indexed": true}
+      },
+      "indexes": ["id", "status", "owner"]
+    },
+
+    {
+      "type": "Concept",
+      "description": "Abstract domain concept or topic",
+      "properties": {
+        "name": {"type": "string", "required": true, "unique": true},
+        "definition": {"type": "text", "searchable": true},
+        "domain": {"type": "string", "indexed": true},
+        "category": {"type": "string", "indexed": true},
+        "synonyms": {"type": "array<string>", "searchable": true},
+        "embedding": {"type": "vector", "dimensions": 1536, "indexed": true}
+      },
+      "indexes": ["name", "domain", "category"]
+    },
+
+    {
+      "type": "Actor",
+      "description": "User role or system entity",
+      "properties": {
+        "role": {"type": "string", "required": true, "unique": true},
+        "description": {"type": "text"},
+        "department": {"type": "string", "indexed": true},
+        "permissions": {"type": "array<string>"},
+        "responsibilities": {"type": "array<string>"}
+      },
+      "indexes": ["role", "department"]
+    },
+
+    {
+      "type": "ComplianceFramework",
+      "description": "Regulatory or compliance framework",
+      "properties": {
+        "name": {"type": "string", "required": true, "unique": true},
+        "description": {"type": "text"},
+        "authority": {"type": "string"},
+        "requirements": {"type": "array<string>"},
+        "applicableDomains": {"type": "array<string>"}
+      },
+      "indexes": ["name"]
+    },
+
+    {
+      "type": "Department",
+      "description": "Organizational department or team",
+      "properties": {
+        "name": {"type": "string", "required": true, "unique": true},
+        "description": {"type": "text"},
+        "head": {"type": "string"},
+        "function": {"type": "string"}
+      },
+      "indexes": ["name"]
+    }
+  ],
+
+  "relationships": [
+    {
+      "type": "COMPOSED_OF",
+      "description": "Component composition relationship",
+      "from": ["Molecule", "Organism", "SOP"],
+      "to": ["Atom", "Molecule", "Organism"],
+      "properties": {
+        "order": {"type": "integer", "description": "Position in sequence"},
+        "required": {"type": "boolean", "default": true},
+        "version": {"type": "string"}
+      },
+      "cardinality": "one-to-many"
+    },
+
+    {
+      "type": "DEPENDS_ON",
+      "description": "Dependency relationship between components",
+      "from": ["Atom", "Molecule", "Organism"],
+      "to": ["Atom", "Molecule", "Organism"],
+      "properties": {
+        "dependencyType": {"type": "enum", "values": ["hard", "soft", "optional"]},
+        "minVersion": {"type": "string"},
+        "description": {"type": "text"}
+      },
+      "cardinality": "many-to-many"
+    },
+
+    {
+      "type": "REFERENCES",
+      "description": "Reference to a concept or external entity",
+      "from": ["Atom", "Molecule", "Organism", "SOP"],
+      "to": ["Concept", "Atom", "SOP"],
+      "properties": {
+        "context": {"type": "text"},
+        "referenceType": {"type": "enum", "values": ["see-also", "prerequisite", "related", "parent"]}
+      },
+      "cardinality": "many-to-many"
+    },
+
+    {
+      "type": "APPLIES_TO",
+      "description": "Component applies to specific actor/role",
+      "from": ["Atom", "Molecule", "Organism", "SOP"],
+      "to": ["Actor"],
+      "properties": {
+        "permission": {"type": "enum", "values": ["read", "execute", "modify", "approve"]}
+      },
+      "cardinality": "many-to-many"
+    },
+
+    {
+      "type": "COMPLIES_WITH",
+      "description": "Component complies with framework/regulation",
+      "from": ["Atom", "Molecule", "Organism", "SOP"],
+      "to": ["ComplianceFramework"],
+      "properties": {
+        "section": {"type": "string"},
+        "requirement": {"type": "string"},
+        "verifiedDate": {"type": "date"}
+      },
+      "cardinality": "many-to-many"
+    },
+
+    {
+      "type": "OWNED_BY",
+      "description": "Ownership relationship",
+      "from": ["Atom", "Molecule", "Organism", "SOP"],
+      "to": ["Department", "Actor"],
+      "properties": {
+        "since": {"type": "date"},
+        "responsibility": {"type": "text"}
+      },
+      "cardinality": "many-to-one"
+    },
+
+    {
+      "type": "PRECEDES",
+      "description": "Sequential relationship in workflow",
+      "from": ["Atom", "Molecule", "Organism"],
+      "to": ["Atom", "Molecule", "Organism"],
+      "properties": {
+        "mandatory": {"type": "boolean", "default": true},
+        "condition": {"type": "text"}
+      },
+      "cardinality": "one-to-many"
+    },
+
+    {
+      "type": "VARIANT_OF",
+      "description": "Version or variation relationship",
+      "from": ["Atom", "Molecule", "Organism", "SOP"],
+      "to": ["Atom", "Molecule", "Organism", "SOP"],
+      "properties": {
+        "variantType": {"type": "enum", "values": ["version", "fork", "adaptation"]},
+        "changes": {"type": "text"},
+        "deprecated": {"type": "boolean", "default": false}
+      },
+      "cardinality": "many-to-one"
+    },
+
+    {
+      "type": "USED_IN",
+      "description": "Transitive usage relationship",
+      "from": ["Atom"],
+      "to": ["Molecule", "Organism", "SOP"],
+      "properties": {
+        "frequency": {"type": "integer", "description": "Usage count"},
+        "lastUsed": {"type": "date"}
+      },
+      "cardinality": "many-to-many",
+      "transitive": true
+    },
+
+    {
+      "type": "REPLACES",
+      "description": "Replacement/supersession relationship",
+      "from": ["Atom", "Molecule", "Organism", "SOP"],
+      "to": ["Atom", "Molecule", "Organism", "SOP"],
+      "properties": {
+        "effectiveDate": {"type": "date"},
+        "reason": {"type": "text"}
+      },
+      "cardinality": "one-to-one"
+    }
+  ],
+
+  "constraints": [
+    {
+      "type": "structural",
+      "rule": "A Molecule must contain at least 1 Atom",
+      "check": "(m:Molecule)-[:COMPOSED_OF]->(a:Atom)"
+    },
+    {
+      "type": "structural",
+      "rule": "An Organism must contain at least 1 Molecule or Atom",
+      "check": "(o:Organism)-[:COMPOSED_OF]->(n) WHERE n:Molecule OR n:Atom"
+    },
+    {
+      "type": "structural",
+      "rule": "A SOP must contain at least 1 component",
+      "check": "(s:SOP)-[:COMPOSED_OF]->(n)"
+    },
+    {
+      "type": "cyclical",
+      "rule": "Components cannot cyclically depend on themselves",
+      "check": "NOT (n)-[:DEPENDS_ON*]->(n)"
+    },
+    {
+      "type": "version",
+      "rule": "Version format must follow semver (major.minor.patch)",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    {
+      "type": "ownership",
+      "rule": "Every component must have an owner",
+      "check": "(n)-[:OWNED_BY]->(d:Department)"
+    }
+  ],
+
+  "queryPatterns": [
+    {
+      "name": "find-component-dependencies",
+      "description": "Find all dependencies of a component (2 hops)",
+      "cypher": "MATCH path = (c {id: $id})-[:DEPENDS_ON*1..2]->(dep) RETURN path"
+    },
+    {
+      "name": "find-component-usage",
+      "description": "Find all places where a component is used",
+      "cypher": "MATCH path = (c {id: $id})<-[:COMPOSED_OF*1..3]-(parent) RETURN path"
+    },
+    {
+      "name": "find-compliance-coverage",
+      "description": "Find all components complying with a framework",
+      "cypher": "MATCH (c)-[:COMPLIES_WITH]->(f:ComplianceFramework {name: $framework}) RETURN c"
+    },
+    {
+      "name": "find-department-components",
+      "description": "Find all components owned by a department",
+      "cypher": "MATCH (c)-[:OWNED_BY]->(d:Department {name: $department}) RETURN c"
+    },
+    {
+      "name": "find-workflow-path",
+      "description": "Find complete workflow path from start to end",
+      "cypher": "MATCH path = (start {id: $startId})-[:PRECEDES*]->(end {id: $endId}) RETURN path"
+    },
+    {
+      "name": "find-related-concepts",
+      "description": "Find concepts related to a component",
+      "cypher": "MATCH (c {id: $id})-[:REFERENCES]->(concept:Concept) RETURN concept"
+    }
+  ]
+}

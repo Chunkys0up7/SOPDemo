@@ -356,35 +356,36 @@
   });
 </script>
 
-<nav class="global-nav">
+<nav class="global-nav" role="navigation" aria-label="Main navigation">
   <div class="nav-container">
     <!-- Left Section -->
     <div class="nav-left">
-      <a href="/" class="logo">
-        <img src="/public/assets/branding/pursuit-icon.svg" alt="Pursuit Bank" style="width: 32px; height: 32px;">
+      <a href="/" class="logo" aria-label="Pursuit SOP System Home">
+        <img src="/public/assets/branding/pursuit-icon.svg" alt="" aria-hidden="true" style="width: 32px; height: 32px;">
         <span style="color: #0052CC; font-weight: 600; font-size: 20px; letter-spacing: -0.5px;">Pursuit</span>
         <span style="color: #718096; font-weight: 400; font-size: 14px; margin-left: -4px;">SOP System</span>
       </a>
 
-      <div class="search-bar">
-        <span class="search-icon">🔍</span>
+      <div class="search-bar" role="search">
+        <span class="search-icon" aria-hidden="true">🔍</span>
         <input
           type="search"
           placeholder="Search SOPs..."
           id="global-search"
           autocomplete="off"
+          aria-label="Quick search SOPs"
         />
       </div>
     </div>
 
     <!-- Center Section -->
-    <div class="nav-center">
-      <a href="/public/index.html" class="nav-link">Dashboard</a>
-      <a href="/public/sops.html" class="nav-link">Browse SOPs</a>
-      <a href="/public/workspace.html" class="nav-link">Workspace</a>
-      <a href="/public/graph.html" class="nav-link">Graph</a>
-      <a href="/public/search.html" class="nav-link">Search</a>
-      <a href="/public/contribute.html" class="nav-link">Contribute</a>
+    <div class="nav-center" role="menubar" aria-label="Primary navigation menu">
+      <a href="/public/index.html" class="nav-link" role="menuitem" title="View your dashboard and recent activity">Dashboard</a>
+      <a href="/public/sops.html" class="nav-link" role="menuitem" title="Browse and discover all available SOPs">📚 Browse</a>
+      <a href="/public/workspace.html" class="nav-link" role="menuitem" title="Your personal workspace for editing SOPs">✏️ Workspace</a>
+      <a href="/public/graph.html" class="nav-link" role="menuitem" title="Visualize SOP relationships and dependencies">📊 Graph</a>
+      <a href="/public/search.html" class="nav-link" role="menuitem" title="Search SOPs with keyword or AI graph search">🔍 Search</a>
+      <a href="/public/contribute.html" class="nav-link" role="menuitem" title="Create new SOPs using templates or atoms">➕ Create</a>
     </div>
 
     <!-- Right Section -->
@@ -434,7 +435,27 @@
   });
 
   // Search functionality
-  document.getElementById('global-search')?.addEventListener('input', function(e) {
+  const searchInput = document.getElementById('global-search');
+  let searchDebounceTimer;
+
+  // Redirect to search on Enter key
+  searchInput?.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter' && e.target.value.trim()) {
+      const query = encodeURIComponent(e.target.value.trim());
+      window.location.href = `/public/search.html?q=${query}`;
+    }
+  });
+
+  // Debounce utility function
+  function debounce(func, delay) {
+    return function(...args) {
+      clearTimeout(searchDebounceTimer);
+      searchDebounceTimer = setTimeout(() => func.apply(this, args), delay);
+    };
+  }
+
+  // Show quick results on input (debounced to 300ms)
+  searchInput?.addEventListener('input', debounce(function(e) {
     const query = e.target.value.toLowerCase();
 
     if (query.length < 2) return;
@@ -454,10 +475,10 @@
       sop.dept.toLowerCase().includes(query)
     );
 
-    showSearchResults(results);
-  });
+    showSearchResults(results, query);
+  }, 300)); // 300ms debounce delay
 
-  function showSearchResults(results) {
+  function showSearchResults(results, query) {
     // Remove existing results dropdown
     const existing = document.querySelector('.search-results');
     if (existing) existing.remove();
@@ -500,6 +521,25 @@
       item.addEventListener('mouseleave', () => item.style.background = 'white');
       dropdown.appendChild(item);
     });
+
+    // Add "See all results" link
+    const seeAll = document.createElement('a');
+    seeAll.href = `/public/search.html?q=${encodeURIComponent(query)}`;
+    seeAll.style.cssText = `
+      display: block;
+      padding: 12px 16px;
+      text-decoration: none;
+      color: #667eea;
+      border-top: 1px solid #e2e8f0;
+      font-weight: 600;
+      font-size: 14px;
+      text-align: center;
+      transition: background 0.2s;
+    `;
+    seeAll.innerHTML = `🔍 See all results in AI Search →`;
+    seeAll.addEventListener('mouseenter', () => seeAll.style.background = '#f7fafc');
+    seeAll.addEventListener('mouseleave', () => seeAll.style.background = 'white');
+    dropdown.appendChild(seeAll);
 
     // Position relative to search bar
     const searchBar = document.querySelector('.search-bar');

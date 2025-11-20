@@ -46,6 +46,10 @@ def resolve_link(link, source_file):
     if link.startswith(('http://', 'https://', '#', 'javascript:', 'mailto:', 'tel:')):
         return None, 'external'
 
+    # Skip template variables (e.g., ${sop.file_path})
+    if link.startswith('${') or '${' in link:
+        return None, 'template'
+
     # Remove query strings and anchors
     link_clean = link.split('?')[0].split('#')[0]
 
