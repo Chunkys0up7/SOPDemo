@@ -157,6 +157,187 @@
             font-weight: bold;
         }
 
+        /* Atomic Design Explainer */
+        .atomic-design-explainer {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .atomic-design-explainer h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .explainer-intro {
+            font-size: 16px;
+            color: #666;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        /* Hierarchy Visual */
+        .hierarchy-visual {
+            margin-bottom: 40px;
+        }
+
+        .hierarchy-level {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            background: white;
+            padding: 24px;
+            border-radius: 8px;
+            border-left: 4px solid #e0e0e0;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .hierarchy-level:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateX(4px);
+        }
+
+        .level-icon {
+            font-size: 48px;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .level-content {
+            flex: 1;
+        }
+
+        .level-content h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .level-content p {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .level-example {
+            font-size: 13px;
+            color: #999;
+            font-style: italic;
+            background: #f8f9fa;
+            padding: 10px 14px;
+            border-radius: 4px;
+            border-left: 3px solid #e0e0e0;
+        }
+
+        /* Color-code hierarchy levels */
+        .hierarchy-level:has(.atom-icon) {
+            border-left-color: #2563eb;
+        }
+
+        .hierarchy-level:has(.module-icon) {
+            border-left-color: #7c3aed;
+        }
+
+        .hierarchy-level:has(.organism-icon) {
+            border-left-color: #059669;
+        }
+
+        .hierarchy-level:has(.sop-icon) {
+            border-left-color: #dc2626;
+        }
+
+        .hierarchy-arrow {
+            text-align: center;
+            font-size: 32px;
+            color: #999;
+            margin: 8px 0;
+        }
+
+        /* Decision Helper */
+        .decision-helper {
+            background: #fff3cd;
+            border: 2px solid #FFA726;
+            border-radius: 8px;
+            padding: 30px;
+        }
+
+        .decision-helper h4 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: 20px;
+        }
+
+        .decision-tree {
+            background: white;
+            padding: 24px;
+            border-radius: 6px;
+        }
+
+        .decision-question {
+            font-size: 15px;
+        }
+
+        .decision-question > strong {
+            display: block;
+            font-size: 16px;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+        }
+
+        .decision-branch {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .decision-answer {
+            padding-left: 24px;
+            border-left: 3px solid #e0e0e0;
+        }
+
+        .decision-label {
+            display: block;
+            font-size: 15px;
+            font-weight: 600;
+            color: #0052CC;
+            margin-bottom: 6px;
+        }
+
+        .decision-label.yes {
+            color: #00A86B;
+        }
+
+        .decision-label.no {
+            color: #D32F2F;
+        }
+
+        .decision-hint {
+            font-size: 13px;
+            color: #666;
+            font-style: italic;
+            margin: 0;
+        }
+
+        .decision-sub {
+            margin-top: 12px;
+            margin-left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
         /* Template Selection */
         .template-selection {
             display: grid;
@@ -360,6 +541,45 @@
 
         .form-textarea.large {
             min-height: 200px;
+        }
+
+        /* Field Validation & Feedback */
+        .field-feedback {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 6px;
+            min-height: 20px;
+        }
+
+        .char-counter, .keyword-counter {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .validation-message {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .validation-message.error {
+            color: #D32F2F;
+        }
+
+        .validation-message.success {
+            color: #00A86B;
+        }
+
+        .validation-message.warning {
+            color: #FFA726;
+        }
+
+        .form-input.invalid, .form-textarea.invalid, .form-select.invalid {
+            border-color: #D32F2F;
+        }
+
+        .form-input.valid, .form-textarea.valid, .form-select.valid {
+            border-color: #00A86B;
         }
 
         /* Checkbox Group */
@@ -1028,35 +1248,122 @@
             <p><a href="../TEMPLATE_CONFIGURATION_GUIDE.md" style="color: #0052CC; font-weight: 600;">📖 View Template Configuration Guide</a></p>
         </div>
 
+        <!-- Atomic Design Hierarchy Explanation -->
+        <div class="atomic-design-explainer">
+            <h2>📚 Understanding Atomic Design for Documentation</h2>
+            <p class="explainer-intro">Our documentation system follows atomic design principles, building complex procedures from simple, reusable components. Choose the right level based on what you're creating:</p>
+
+            <div class="hierarchy-visual">
+                <div class="hierarchy-level">
+                    <div class="level-icon atom-icon">🔵</div>
+                    <div class="level-content">
+                        <h3>Atoms</h3>
+                        <p>Single-purpose, foundational components that can't be broken down further. <strong>These are NOT composed from other components.</strong></p>
+                        <div class="level-example">Example: "Log into system", "Verify email format", "Click submit button"</div>
+                    </div>
+                </div>
+
+                <div class="hierarchy-arrow">↓</div>
+
+                <div class="hierarchy-level">
+                    <div class="level-icon module-icon">🟣</div>
+                    <div class="level-content">
+                        <h3>Modules</h3>
+                        <p>Task sequences combining <strong>multiple atoms</strong> into cohesive procedures.</p>
+                        <div class="level-example">Example: "User account setup" = Login atom + Profile atom + Verification atom</div>
+                    </div>
+                </div>
+
+                <div class="hierarchy-arrow">↓</div>
+
+                <div class="hierarchy-level">
+                    <div class="level-icon organism-icon">🟢</div>
+                    <div class="level-content">
+                        <h3>Organisms</h3>
+                        <p>Complete workflows combining <strong>atoms + modules</strong> into complex processes.</p>
+                        <div class="level-example">Example: "Employee onboarding" = Account setup module + Training module + Equipment atoms</div>
+                    </div>
+                </div>
+
+                <div class="hierarchy-arrow">↓</div>
+
+                <div class="hierarchy-level">
+                    <div class="level-icon sop-icon">🔴</div>
+                    <div class="level-content">
+                        <h3>Complete SOPs</h3>
+                        <p>End-to-end procedures using <strong>all component types</strong>, with full metadata, compliance, and quality assurance.</p>
+                        <div class="level-example">Example: "IT Security Policy" = Authentication organisms + Access control modules + Audit atoms</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="decision-helper">
+                <h4>❓ Not sure which to choose?</h4>
+                <div class="decision-tree">
+                    <div class="decision-question">
+                        <strong>Q: Can this be broken into smaller steps?</strong>
+                        <div class="decision-branch">
+                            <div class="decision-answer">
+                                <span class="decision-label no">No → Start with an <strong>Atom</strong></span>
+                                <p class="decision-hint">Single action, can't be simplified further</p>
+                            </div>
+                            <div class="decision-answer">
+                                <span class="decision-label yes">Yes → Ask: Does it combine existing atoms?</span>
+                                <div class="decision-sub">
+                                    <div class="decision-answer">
+                                        <span class="decision-label yes">Yes → Create a <strong>Module</strong></span>
+                                        <p class="decision-hint">Combines atoms into a task sequence</p>
+                                    </div>
+                                    <div class="decision-answer">
+                                        <span class="decision-label">No → Does it combine modules + atoms?</span>
+                                        <div class="decision-sub">
+                                            <div class="decision-answer">
+                                                <span class="decision-label yes">Yes → Create an <strong>Organism</strong></span>
+                                                <p class="decision-hint">Complex workflow with multiple modules</p>
+                                            </div>
+                                            <div class="decision-answer">
+                                                <span class="decision-label yes">Full documentation → Create a <strong>Complete SOP</strong></span>
+                                                <p class="decision-hint">Comprehensive procedure with metadata & compliance</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Template Selection (Full Width) -->
         <h2 style="margin-bottom: 20px;">Step 1: Choose Component Type</h2>
         <div class="template-selection">
-            <div class="template-card" onclick="selectTemplate('atom', event)">
-                <div class="badge atom">Atom</div>
+            <div class="template-card" onclick="selectTemplate('atom', event)" role="button" tabindex="0" aria-label="Select Atom template - single purpose component">
+                <div class="badge atom">🔵 Atom</div>
                 <h3>Single Component</h3>
-                <p>Create a reusable, single-purpose procedure step.</p>
+                <p>Create a reusable, single-purpose procedure step. <strong>Not composed from other components.</strong></p>
                 <div class="examples">Examples: Login, Submit Form, Verify Data</div>
             </div>
 
-            <div class="template-card" onclick="selectTemplate('molecule', event)">
-                <div class="badge molecule">Molecule</div>
-                <h3>Multi-Step Procedure</h3>
-                <p>Combine multiple atoms into a cohesive procedure.</p>
-                <div class="examples">Examples: Account Setup, Approval Chain</div>
+            <div class="template-card" onclick="selectTemplate('molecule', event)" role="button" tabindex="0" aria-label="Select Module template - combines atoms into task sequence">
+                <div class="badge molecule">🟣 Module</div>
+                <h3>Task Sequence</h3>
+                <p>Combine multiple atoms into a cohesive task sequence. <strong>Build from atoms only.</strong></p>
+                <div class="examples">Examples: Account Setup, Approval Chain, Data Validation</div>
             </div>
 
-            <div class="template-card" onclick="selectTemplate('organism', event)">
-                <div class="badge organism">Organism</div>
+            <div class="template-card" onclick="selectTemplate('organism', event)" role="button" tabindex="0" aria-label="Select Organism template - combines atoms and modules into workflow">
+                <div class="badge organism">🟢 Organism</div>
                 <h3>Complete Workflow</h3>
-                <p>Build complex workflows from molecules and atoms.</p>
-                <div class="examples">Examples: Onboarding, Wire Transfer</div>
+                <p>Build complex workflows from modules and atoms. <strong>Build from atoms + modules.</strong></p>
+                <div class="examples">Examples: Employee Onboarding, Wire Transfer, Incident Response</div>
             </div>
 
-            <div class="template-card" onclick="selectTemplate('sop', event)">
-                <div class="badge sop">Full SOP</div>
+            <div class="template-card" onclick="selectTemplate('sop', event)" role="button" tabindex="0" aria-label="Select Complete SOP template - full documentation with all components">
+                <div class="badge sop">🔴 Complete SOP</div>
                 <h3>Full Documentation</h3>
-                <p>Complete SOP with metadata, compliance, and QA.</p>
-                <div class="examples">Examples: IT Security, HR Policy</div>
+                <p>Complete SOP with metadata, compliance, and QA. <strong>Uses all component types.</strong></p>
+                <div class="examples">Examples: IT Security Policy, HR Procedures, Quality Control</div>
             </div>
         </div>
 
@@ -1080,7 +1387,11 @@
                 <div class="form-group">
                     <label class="form-label" for="title">Title <span class="required">*</span></label>
                     <p class="form-hint">Clear, descriptive title (e.g., "User Onboarding Process", "Wire Transfer Security")</p>
-                    <input type="text" id="title" class="form-input" placeholder="Procedure title..." required>
+                    <input type="text" id="title" class="form-input" placeholder="Procedure title..." required maxlength="100" aria-describedby="title-hint title-counter">
+                    <div class="field-feedback">
+                        <span class="char-counter" id="title-counter">0 / 100</span>
+                        <span class="validation-message" id="title-validation"></span>
+                    </div>
                 </div>
 
                 <div class="form-row">
@@ -1165,7 +1476,11 @@
                 <div class="form-group">
                     <label class="form-label" for="keywords">Search Keywords <span class="required">*</span></label>
                     <p class="form-hint">Comma-separated keywords for searchability (minimum 5)</p>
-                    <input type="text" id="keywords" class="form-input" placeholder="e.g., wire transfer, security, compliance, fraud prevention, approval" required>
+                    <input type="text" id="keywords" class="form-input" placeholder="e.g., wire transfer, security, compliance, fraud prevention, approval" required aria-describedby="keywords-hint keywords-count">
+                    <div class="field-feedback">
+                        <span class="keyword-counter" id="keywords-count">0 keywords</span>
+                        <span class="validation-message" id="keywords-validation"></span>
+                    </div>
                 </div>
             </div>
 
@@ -3247,6 +3562,34 @@ Expected outcome: [What should be true after this step]"></textarea>
         document.addEventListener('DOMContentLoaded', function() {
             console.log('🚀 Hybrid construction module initialized');
             console.log('🚀 Metadata enhancements initialized');
+            console.log('⌨️  Keyboard navigation initialized');
+
+            // ==================================================
+            // KEYBOARD NAVIGATION FOR TEMPLATE CARDS
+            // ==================================================
+
+            // Enable Enter/Space key selection for template cards
+            document.querySelectorAll('.template-card').forEach(card => {
+                card.addEventListener('keydown', function(e) {
+                    // Enter or Space key
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        // Trigger the onclick event
+                        this.click();
+                        console.log(`⌨️  Template card activated via keyboard`);
+                    }
+                });
+
+                // Add focus styles
+                card.addEventListener('focus', function() {
+                    this.style.outline = '3px solid #0052CC';
+                    this.style.outlineOffset = '2px';
+                });
+
+                card.addEventListener('blur', function() {
+                    this.style.outline = 'none';
+                });
+            });
 
             // ==================================================
             // COLLAPSIBLE SECTIONS
@@ -3267,6 +3610,70 @@ Expected outcome: [What should be true after this step]"></textarea>
                     console.log(`📂 Section ${this.querySelector('.form-section-number').textContent}: ${isCollapsed ? 'Collapsed' : 'Expanded'}`);
                 });
             });
+
+            // ==================================================
+            // REAL-TIME FIELD VALIDATION & CHARACTER COUNTERS
+            // ==================================================
+
+            // Title field - character counter and length validation
+            const titleInput = document.getElementById('title');
+            const titleCounter = document.getElementById('title-counter');
+            const titleValidation = document.getElementById('title-validation');
+
+            if (titleInput && titleCounter) {
+                titleInput.addEventListener('input', function() {
+                    const length = this.value.length;
+                    const max = 100;
+                    titleCounter.textContent = `${length} / ${max}`;
+
+                    // Validation
+                    if (length === 0) {
+                        this.classList.remove('valid', 'invalid');
+                        titleValidation.textContent = '';
+                        titleValidation.className = 'validation-message';
+                    } else if (length < 10) {
+                        this.classList.add('invalid');
+                        this.classList.remove('valid');
+                        titleValidation.textContent = '⚠️  Too short (min 10 characters)';
+                        titleValidation.className = 'validation-message warning';
+                    } else if (length >= 10 && length <= max) {
+                        this.classList.add('valid');
+                        this.classList.remove('invalid');
+                        titleValidation.textContent = '✓ Good';
+                        titleValidation.className = 'validation-message success';
+                    }
+                });
+            }
+
+            // Keywords field - count keywords and validate minimum
+            const keywordsInput = document.getElementById('keywords');
+            const keywordsCount = document.getElementById('keywords-count');
+            const keywordsValidation = document.getElementById('keywords-validation');
+
+            if (keywordsInput && keywordsCount) {
+                keywordsInput.addEventListener('input', function() {
+                    const keywords = this.value.split(',').map(k => k.trim()).filter(k => k.length > 0);
+                    const count = keywords.length;
+                    keywordsCount.textContent = `${count} keyword${count !== 1 ? 's' : ''}`;
+
+                    // Validation
+                    if (count === 0) {
+                        this.classList.remove('valid', 'invalid');
+                        keywordsValidation.textContent = '';
+                        keywordsValidation.className = 'validation-message';
+                    } else if (count < 5) {
+                        this.classList.add('invalid');
+                        this.classList.remove('valid');
+                        keywordsValidation.textContent = `⚠️  Need ${5 - count} more (min 5)`;
+                        keywordsValidation.className = 'validation-message warning';
+                    } else {
+                        this.classList.add('valid');
+                        this.classList.remove('invalid');
+                        keywordsValidation.textContent = '✓ Good';
+                        keywordsValidation.className = 'validation-message success';
+                    }
+                });
+            }
 
             // ==================================================
             // CONDITIONAL FIELDS
