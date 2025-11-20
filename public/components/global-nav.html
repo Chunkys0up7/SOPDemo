@@ -382,9 +382,8 @@
       <a href="/public/index.html" class="nav-link">Dashboard</a>
       <a href="/public/sops.html" class="nav-link">Browse SOPs</a>
       <a href="/public/workspace.html" class="nav-link">Workspace</a>
-      <a href="/public/graphrag.html" class="nav-link">🔍 AI Search</a>
       <a href="/public/graph.html" class="nav-link">Graph</a>
-      <a href="/public/search.html" class="nav-link">Search</a>
+      <a href="/public/search.html" class="nav-link">🔍 Search</a>
       <a href="/public/contribute.html" class="nav-link">Contribute</a>
     </div>
 
@@ -441,7 +440,7 @@
   searchInput?.addEventListener('keypress', function(e) {
     if (e.key === 'Enter' && e.target.value.trim()) {
       const query = encodeURIComponent(e.target.value.trim());
-      window.location.href = `/public/graphrag.html?q=${query}`;
+      window.location.href = `/public/search.html?q=${query}`;
     }
   });
 
@@ -515,7 +514,7 @@
 
     // Add "See all results" link
     const seeAll = document.createElement('a');
-    seeAll.href = `/public/graphrag.html?q=${encodeURIComponent(query)}`;
+    seeAll.href = `/public/search.html?q=${encodeURIComponent(query)}`;
     seeAll.style.cssText = `
       display: block;
       padding: 12px 16px;
