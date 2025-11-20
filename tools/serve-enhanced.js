@@ -12,9 +12,14 @@
 
 import http from 'http';
 import fs from 'fs/promises';
+import fsSync from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { URL } from 'url';
+import { exec } from 'child_process';
+import { promisify } from 'util';
+
+const execAsync = promisify(exec);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -128,6 +133,162 @@ class VectorDatabase {
 const vectorDB = new VectorDatabase();
 
 // ============================================================================
+// SOP Creation Helpers
+// ============================================================================
+
+async function getNextSOPId() {
+  const sopsDir = path.join(ROOT_DIR, 'sops', 'mortgage');
+  const files = await fs.readdir(sopsDir);
+  const sopFiles = files.filter(f => f.match(/^sop-mf-\d+.*\.md$/));
+
+  const ids = sopFiles.map(f => {
+    const match = f.match(/^sop-mf-(\d+)/);
+    return match ? parseInt(match[1]) : 0;
+  });
+
+  const maxId = ids.length > 0 ? Math.max(...ids) : 0;
+  return maxId + 1;
+}
+
+function generateMarkdownFromFormData(formData, sopId) {
+  const today = new Date().toISOString().split('T')[0];
+  const nextReview = new Date();
+  nextReview.setMonth(nextReview.getMonth() + (formData.reviewFrequency === 'Quarterly' ? 3 : formData.reviewFrequency === 'Semi-annually' ? 6 : 12));
+
+  let markdown = `---\n`;
+  markdown += `id: sop-mf-${String(sopId).padStart(3, '0')}\n`;
+  markdown += `title: ${formData.title}\n`;
+  markdown += `version: 1.0.0\n`;
+  markdown += `status: draft\n`;
+  markdown += `owner: ${formData.owner}\n`;
+  markdown += `category: ${formData.processCategory}\n`;
+  markdown += `department: ${formData.department}\n`;
+  markdown += `criticality: medium\n`;
+  markdown += `last_reviewed: ${today}\n`;
+  markdown += `next_review: ${nextReview.toISOString().split('T')[0]}\n`;
+  markdown += `review_frequency: ${formData.reviewFrequency.toLowerCase()}\n`;
+  markdown += `effective_date: ${today}\n`;
+  markdown += `approver: ${formData.approver}\n`;
+  markdown += `maintainer: ${formData.maintainer}\n`;
+
+  if (formData.reviewers && formData.reviewers.trim()) {
+    const reviewersList = formData.reviewers.split(',').map(r => r.trim());
+    markdown += `reviewers:\n`;
+    reviewersList.forEach(r => {
+      markdown += `  - ${r}\n`;
+    });
+  }
+
+  if (formData.complianceFrameworks && formData.complianceFrameworks.length > 0) {
+    markdown += `compliance_frameworks:\n`;
+    formData.complianceFrameworks.forEach(fw => {
+      markdown += `  - ${fw}\n`;
+    });
+  }
+
+  if (formData.keywords && formData.keywords.length > 0) {
+    markdown += `tags:\n`;
+    formData.keywords.forEach(kw => {
+      markdown += `  - ${kw.toLowerCase().replace(/\s+/g, '-')}\n`;
+    });
+  }
+
+  markdown += `complexity: ${formData.complexity}\n`;
+  markdown += `estimated_duration: ${formData.estimatedDuration}\n`;
+  markdown += `---\n\n`;
+
+  // Document body
+  markdown += `# ${formData.title}\n\n`;
+
+  if (formData.purpose) {
+    markdown += `## Purpose\n\n${formData.purpose}\n\n`;
+  }
+
+  if (formData.scope) {
+    markdown += `## Scope\n\n### What IS Covered\n\n${formData.scope}\n\n`;
+  }
+
+  if (formData.outOfScope && formData.outOfScope.trim()) {
+    markdown += `### What is NOT Covered\n\n${formData.outOfScope}\n\n`;
+  }
+
+  if (formData.audience && formData.audience.length > 0) {
+    markdown += `## Audience\n\nThis procedure is intended for:\n`;
+    formData.audience.forEach(aud => {
+      markdown += `- ${aud}\n`;
+    });
+    markdown += `\n`;
+  }
+
+  // Add steps if provided
+  if (formData.steps && formData.steps.length > 0) {
+    markdown += `## Procedure\n\n`;
+    formData.steps.forEach((step, i) => {
+      markdown += `### Step ${i + 1}: ${step.title}\n\n`;
+      if (step.description) {
+        markdown += `${step.description}\n\n`;
+      }
+    });
+  }
+
+  if (formData.troubleshooting && formData.troubleshooting.trim()) {
+    markdown += `## Troubleshooting\n\n`;
+    const issues = formData.troubleshooting.split('\n').filter(line => line.trim());
+    if (issues.length > 0) {
+      markdown += `| Issue | Symptoms | Root Cause | Solution | Escalation |\n`;
+      markdown += `|-------|----------|------------|----------|------------|\n`;
+      issues.forEach(issue => {
+        const parts = issue.split('|').map(p => p.trim());
+        if (parts.length >= 4) {
+          markdown += `| ${parts[0]} | ${parts[1]} | ${parts[2]} | ${parts[3]} | ${parts[4] || 'Contact supervisor'} |\n`;
+        }
+      });
+      markdown += `\n`;
+    } else {
+      markdown += `${formData.troubleshooting}\n\n`;
+    }
+  }
+
+  // Compliance section
+  if (formData.complianceFrameworks && formData.complianceFrameworks.length > 0) {
+    markdown += `## Compliance & Regulatory Requirements\n\n`;
+    markdown += `This procedure complies with the following frameworks:\n`;
+    formData.complianceFrameworks.forEach(fw => {
+      markdown += `- ${fw}\n`;
+    });
+    markdown += `\n`;
+    markdown += `**Audit Frequency:** ${formData.auditFrequency}\n`;
+    markdown += `**Review Frequency:** ${formData.reviewFrequency}\n\n`;
+  }
+
+  // Ownership
+  markdown += `## Document Control\n\n`;
+  markdown += `- **Owner:** ${formData.owner}\n`;
+  markdown += `- **Maintainer:** ${formData.maintainer}\n`;
+  markdown += `- **Approver:** ${formData.approver}\n`;
+  if (formData.reviewers && formData.reviewers.trim()) {
+    markdown += `- **Reviewers:** ${formData.reviewers}\n`;
+  }
+  markdown += `- **Last Reviewed:** ${today}\n`;
+  markdown += `- **Next Review:** ${nextReview.toISOString().split('T')[0]}\n`;
+
+  return markdown;
+}
+
+async function regenerateGraph() {
+  try {
+    const scriptPath = path.join(ROOT_DIR, 'scripts', 'build-mortgage-graph.py');
+    const { stdout, stderr } = await execAsync(`python "${scriptPath}"`);
+    log('  [GRAPH] Auto-regenerated successfully', 'green');
+    if (stdout) log(`  ${stdout.trim()}`, 'cyan');
+    return { success: true, output: stdout };
+  } catch (error) {
+    log(`  [ERROR] Graph regeneration failed: ${error.message}`, 'yellow');
+    return { success: false, error: error.message };
+  }
+}
+
+// ============================================================================
 // API Handlers
 // ============================================================================
 
@@ -159,6 +320,10 @@ async function handleAPIRequest(req, res, pathname) {
 
   if (pathname === '/api/sops/quality' && req.method === 'GET') {
     return handleSOPQuality(req, res);
+  }
+
+  if (pathname === '/api/sops/create' && req.method === 'POST') {
+    return handleSOPCreate(req, res, JSON.parse(body));
   }
 
   // 404 for unknown API endpoints
@@ -345,6 +510,65 @@ async function handleSOPQuality(req, res) {
   res.end(JSON.stringify(quality));
 }
 
+async function handleSOPCreate(req, res, body) {
+  try {
+    log('  [API] Creating new SOP...', 'magenta');
+
+    // Validate required fields
+    const requiredFields = ['title', 'department', 'owner', 'maintainer', 'approver'];
+    for (const field of requiredFields) {
+      if (!body[field] || !body[field].trim()) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: `Missing required field: ${field}` }));
+        return;
+      }
+    }
+
+    // Get next SOP ID
+    const sopId = await getNextSOPId();
+    const sopIdFormatted = String(sopId).padStart(3, '0');
+
+    // Generate markdown content
+    const markdown = generateMarkdownFromFormData(body, sopId);
+
+    // Create filename
+    const filename = `sop-mf-${sopIdFormatted}-${body.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}.md`;
+    const filepath = path.join(ROOT_DIR, 'sops', 'mortgage', filename);
+
+    // Write file
+    await fs.writeFile(filepath, markdown, 'utf8');
+    log(`  [SOP] Created: ${filename}`, 'green');
+
+    // Regenerate graph
+    const graphResult = await regenerateGraph();
+
+    const response = {
+      success: true,
+      sop: {
+        id: `sop-mf-${sopIdFormatted}`,
+        filename: filename,
+        path: `/sops/mortgage/${filename}`,
+        title: body.title
+      },
+      graph: graphResult,
+      message: 'SOP created successfully and graph regenerated'
+    };
+
+    res.writeHead(201, {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    });
+    res.end(JSON.stringify(response));
+
+    log(`  [SUCCESS] SOP created: sop-mf-${sopIdFormatted}`, 'green');
+
+  } catch (error) {
+    log(`  [ERROR] ${error.message}`, 'yellow');
+    res.writeHead(500, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ error: error.message, stack: error.stack }));
+  }
+}
+
 function generateAnswer(query, results) {
   if (results.length === 0) {
     return {
@@ -486,9 +710,27 @@ function startServer(port) {
     log('   GET  /api/assistant/health    - Service health check', 'cyan');
     log('   GET  /api/assistant/stats     - Usage statistics', 'cyan');
     log('   GET  /api/sops/metrics        - SOP metrics dashboard', 'cyan');
-    log('   GET  /api/sops/quality        - Quality analytics\n', 'cyan');
+    log('   GET  /api/sops/quality        - Quality analytics', 'cyan');
+    log('   POST /api/sops/create         - Create new SOP\n', 'cyan');
 
     log(`📂 Serving from:  ${ROOT_DIR}`, 'blue');
+
+    // Setup file watcher for auto-graph regeneration
+    const sopsDir = path.join(ROOT_DIR, 'sops', 'mortgage');
+    let regenerateTimeout;
+
+    fsSync.watch(sopsDir, (eventType, filename) => {
+      if (filename && filename.endsWith('.md')) {
+        // Debounce: wait 1 second after last change
+        clearTimeout(regenerateTimeout);
+        regenerateTimeout = setTimeout(async () => {
+          log(`  [WATCH] Detected change: ${filename}`, 'cyan');
+          await regenerateGraph();
+        }, 1000);
+      }
+    });
+
+    log('👁️  File watcher:  Monitoring sops/mortgage/ for changes\n', 'blue');
     log('\n⏹  Press Ctrl+C to stop\n', 'yellow');
     log('═══════════════════════════════════════════════════════════\n', 'bright');
   });
