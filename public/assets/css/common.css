@@ -580,7 +580,10 @@ a:hover {
 .text-warning { color: var(--color-warning); }
 .text-error { color: var(--color-error); }
 
-.bg-primary { background-color: var(--color-primary); }
+.bg-primary {
+    background-color: var(--color-primary);
+    color: white;
+}
 .bg-surface { background-color: var(--color-surface); }
 .bg-background { background-color: var(--color-background); }
 

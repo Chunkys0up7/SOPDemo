@@ -1180,24 +1180,24 @@
 
                 <!-- Construction Mode Toggle -->
                 <div class="construction-mode-toggle">
-                    <div class="mode-option selected" id="modeInline" onclick="event.preventDefault(); selectConstructionMode('inline'); return false;">
+                    <label class="mode-option selected" id="modeInline" for="radioInline">
                         <div class="mode-option-title">
-                            <input type="radio" name="constructionMode" value="inline" checked onclick="event.preventDefault();"> ✍️ Write Custom Steps
+                            <input type="radio" id="radioInline" name="constructionMode" value="inline" checked onchange="selectConstructionMode('inline')"> ✍️ Write Custom Steps
                         </div>
                         <div class="mode-option-desc">Write all steps as inline content (traditional approach)</div>
-                    </div>
-                    <div class="mode-option" id="modeHybrid" onclick="event.preventDefault(); selectConstructionMode('hybrid'); return false;">
+                    </label>
+                    <label class="mode-option" id="modeHybrid" for="radioHybrid">
                         <div class="mode-option-title">
-                            <input type="radio" name="constructionMode" value="hybrid" onclick="event.preventDefault();"> 🧱 Hybrid Construction
+                            <input type="radio" id="radioHybrid" name="constructionMode" value="hybrid" onchange="selectConstructionMode('hybrid')"> 🧱 Hybrid Construction
                         </div>
                         <div class="mode-option-desc">Combine reusable atoms with custom inline steps (recommended)</div>
-                    </div>
-                    <div class="mode-option" id="modeAtomsOnly" onclick="event.preventDefault(); selectConstructionMode('atoms-only'); return false;">
+                    </label>
+                    <label class="mode-option" id="modeAtomsOnly" for="radioAtomsOnly">
                         <div class="mode-option-title">
-                            <input type="radio" name="constructionMode" value="atoms-only" onclick="event.preventDefault();"> 📦 Build from Atoms
+                            <input type="radio" id="radioAtomsOnly" name="constructionMode" value="atoms-only" onchange="selectConstructionMode('atoms-only')"> 📦 Build from Atoms
                         </div>
                         <div class="mode-option-desc">Assemble entirely from existing reusable components</div>
-                    </div>
+                    </label>
                 </div>
 
                 <!-- Atom Library (shown when hybrid or atoms-only mode selected) -->
