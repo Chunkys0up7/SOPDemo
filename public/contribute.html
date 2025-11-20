@@ -1178,8 +1178,8 @@
 
             <!-- Section 3.5: Hybrid Construction - Atom Library (Only for Molecules/Organisms/SOPs) -->
             <div class="form-section" id="hybridConstructionSection" style="display: none;">
-                <h2><span class="form-section-number">3.5</span> Build from Existing Components<span class="atoms-count-badge" id="selectedAtomsCount">0 selected</span></h2>
-                <p class="subtitle">Choose how to construct this procedure: use existing reusable atoms or write custom steps</p>
+                <h2><span class="form-section-number">3.5</span> <span id="constructionSectionTitle">Build from Existing Components</span><span class="atoms-count-badge" id="selectedAtomsCount">0 selected</span></h2>
+                <p class="subtitle" id="constructionSectionSubtitle">Choose how to construct this procedure: use existing reusable components or write custom steps</p>
 
                 <!-- Construction Mode Toggle -->
                 <div class="construction-mode-toggle">
@@ -1193,21 +1193,21 @@
                         <div class="mode-option-title">
                             <input type="radio" id="radioHybrid" name="constructionMode" value="hybrid"> 🧱 Hybrid Construction
                         </div>
-                        <div class="mode-option-desc">Combine reusable atoms with custom inline steps (recommended)</div>
+                        <div class="mode-option-desc" id="hybridModeDesc">Combine reusable components with custom inline steps (recommended)</div>
                     </div>
                     <div class="mode-option" id="modeAtomsOnly" onclick="return handleModeClick('atoms-only', event);">
                         <div class="mode-option-title">
-                            <input type="radio" id="radioAtomsOnly" name="constructionMode" value="atoms-only"> 📦 Build from Atoms
+                            <input type="radio" id="radioAtomsOnly" name="constructionMode" value="atoms-only"> 📦 <span id="atomsOnlyTitle">Build from Components</span>
                         </div>
-                        <div class="mode-option-desc">Assemble entirely from existing reusable components</div>
+                        <div class="mode-option-desc" id="atomsOnlyDesc">Assemble entirely from existing reusable components</div>
                     </div>
                 </div>
 
                 <!-- Atom Library (shown when hybrid or atoms-only mode selected) -->
                 <div class="atom-library-container" id="atomLibraryContainer" style="display: none;">
                     <div class="atom-library-header">
-                        <h3>🔍 Atom Library - Reusable Components</h3>
-                        <p>Browse and select existing atoms to include in your procedure. Each atom is a self-contained, tested procedure step.</p>
+                        <h3 id="libraryHeaderTitle">🔍 Component Library</h3>
+                        <p id="libraryHeaderDesc">Browse and select existing components to include in your procedure.</p>
                     </div>
 
                     <!-- Search and Filters -->
@@ -2272,7 +2272,7 @@ Expected outcome: [What should be true after this step]"></textarea>
 
         // Load atoms from graph
         async function loadAtoms() {
-            console.log('🔄 Loading atoms from graph...');
+            console.log(`🔄 Loading components from graph for template type: ${selectedTemplate}...`);
             const grid = document.getElementById('atomLibraryGrid');
 
             try {
@@ -2292,19 +2292,29 @@ Expected outcome: [What should be true after this step]"></textarea>
                 const graphData = await response.json();
                 console.log(`📊 Graph loaded: ${graphData.nodes.length} total nodes`);
 
-                // Filter only atom nodes
+                // Filter components based on template type
+                let allowedTypes = [];
+                if (selectedTemplate === 'molecule') {
+                    allowedTypes = ['atom'];  // Molecules can only include atoms
+                } else if (selectedTemplate === 'organism') {
+                    allowedTypes = ['atom', 'molecule'];  // Organisms can include atoms + molecules
+                } else if (selectedTemplate === 'sop') {
+                    allowedTypes = ['atom', 'molecule', 'organism'];  // SOPs can include everything
+                }
+
                 availableAtoms = graphData.nodes
-                    .filter(node => node.type === 'atom')
-                    .map(atom => ({
-                        id: atom.id,
-                        title: atom.title || 'Untitled Atom',
-                        department: atom.department || 'General',
-                        subtype: atom.subtype || 'procedural-step',
-                        description: atom.description || '',
-                        complexity: atom.complexity || 'Intermediate'
+                    .filter(node => allowedTypes.includes(node.type))
+                    .map(component => ({
+                        id: component.id,
+                        type: component.type,  // Keep track of type for display
+                        title: component.title || `Untitled ${component.type}`,
+                        department: component.department || 'General',
+                        subtype: component.subtype || 'procedural-step',
+                        description: component.description || '',
+                        complexity: component.complexity || 'Intermediate'
                     }));
 
-                console.log(`✅ Loaded ${availableAtoms.length} atoms from graph`);
+                console.log(`✅ Loaded ${availableAtoms.length} components (${allowedTypes.join(', ')}) from graph`);
 
                 if (availableAtoms.length === 0) {
                     grid.innerHTML = '<div class="atom-library-empty"><p>⚠️ No atoms found in graph. Try building some SOPs first!</p></div>';
@@ -2605,9 +2615,45 @@ Expected outcome: [What should be true after this step]"></textarea>
             const libraryContainer = document.getElementById('atomLibraryContainer');
             const section4 = document.querySelector('.form-section:nth-of-type(5)'); // Procedure Steps
 
+            // Update UI text based on template type
+            const constructionSectionTitle = document.getElementById('constructionSectionTitle');
+            const constructionSectionSubtitle = document.getElementById('constructionSectionSubtitle');
+            const hybridModeDesc = document.getElementById('hybridModeDesc');
+            const atomsOnlyTitle = document.getElementById('atomsOnlyTitle');
+            const atomsOnlyDesc = document.getElementById('atomsOnlyDesc');
+            const libraryHeaderTitle = document.getElementById('libraryHeaderTitle');
+            const libraryHeaderDesc = document.getElementById('libraryHeaderDesc');
+
             // Show for molecules, organisms, and SOPs only (not for atoms)
             if (templateType === 'molecule' || templateType === 'organism' || templateType === 'sop') {
                 console.log('✅ Template supports hybrid construction - showing section');
+
+                // Update text based on template type
+                if (templateType === 'molecule') {
+                    constructionSectionTitle.textContent = 'Build from Atoms';
+                    constructionSectionSubtitle.textContent = 'Molecules combine multiple atoms. Choose to assemble from existing atoms or write custom steps.';
+                    hybridModeDesc.textContent = 'Combine reusable atoms with custom inline steps (recommended)';
+                    atomsOnlyTitle.textContent = 'Build from Atoms';
+                    atomsOnlyDesc.textContent = 'Assemble entirely from existing atom components';
+                    libraryHeaderTitle.textContent = '🔵 Atom Library';
+                    libraryHeaderDesc.textContent = 'Browse and select atoms to include in your molecule. Each atom is a single-purpose, reusable component.';
+                } else if (templateType === 'organism') {
+                    constructionSectionTitle.textContent = 'Build from Atoms & Molecules';
+                    constructionSectionSubtitle.textContent = 'Organisms combine atoms and molecules. Choose to assemble from existing components or write custom steps.';
+                    hybridModeDesc.textContent = 'Combine reusable atoms/molecules with custom inline steps (recommended)';
+                    atomsOnlyTitle.textContent = 'Build from Components';
+                    atomsOnlyDesc.textContent = 'Assemble entirely from existing atoms and molecules';
+                    libraryHeaderTitle.textContent = '🔵🟣 Atom & Molecule Library';
+                    libraryHeaderDesc.textContent = 'Browse and select atoms and molecules to include in your organism.';
+                } else if (templateType === 'sop') {
+                    constructionSectionTitle.textContent = 'Build from Atoms, Molecules & Organisms';
+                    constructionSectionSubtitle.textContent = 'Full SOPs can reference any component type. Choose to assemble from existing components or write custom steps.';
+                    hybridModeDesc.textContent = 'Combine reusable components (atoms/molecules/organisms) with custom steps (recommended)';
+                    atomsOnlyTitle.textContent = 'Build from Components';
+                    atomsOnlyDesc.textContent = 'Assemble entirely from existing components (atoms, molecules, organisms)';
+                    libraryHeaderTitle.textContent = '🔵🟣🟢 Full Component Library';
+                    libraryHeaderDesc.textContent = 'Browse and select atoms, molecules, and organisms to include in your SOP.';
+                }
 
                 // Show hybrid construction section
                 if (hybridSection) {
