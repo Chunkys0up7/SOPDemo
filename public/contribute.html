@@ -2228,25 +2228,35 @@
                     <p style="margin: 10px 0 0 0; font-size: 12px; color: #666;">Section display: <strong id="errorSectionDisplay" style="color: #d32f2f;">unknown</strong></p>
                 </div>
 
-                <!-- Construction Mode Toggle -->
-                <div class="construction-mode-toggle">
-                    <div class="mode-option selected" id="modeInline" onclick="return handleModeClick('inline', event);">
-                        <div class="mode-option-title">
-                            <input type="radio" id="radioInline" name="constructionMode" value="inline" checked> ✍️ Write Custom Steps
+                <!-- Construction Mode Selection - BUILD FROM ATOMS IS NOW PRIMARY! -->
+                <div style="background: #e3f2fd; border: 3px solid #2196F3; border-radius: 12px; padding: 25px; margin-bottom: 25px;">
+                    <h3 style="color: #1565C0; margin: 0 0 15px 0; font-size: 20px;">💡 How do you want to create this?</h3>
+                    <p style="color: #424242; margin-bottom: 20px; font-size: 15px;">Build from existing atoms (recommended) or write custom steps:</p>
+
+                    <div class="construction-mode-toggle">
+                        <!-- PRIMARY OPTION: Build from Atoms (NOW DEFAULT & RECOMMENDED!) -->
+                        <div class="mode-option selected" id="modeAtomsOnly" onclick="return handleModeClick('atoms-only', event);" style="border: 3px solid #4CAF50; background: #f1f8f4;">
+                            <div class="mode-option-title" style="font-size: 18px; font-weight: 600;">
+                                <input type="radio" id="radioAtomsOnly" name="constructionMode" value="atoms-only" checked> 📦 <span id="atomsOnlyTitle">Build from Atoms</span> ⭐
+                            </div>
+                            <div class="mode-option-desc" id="atomsOnlyDesc" style="font-size: 15px; color: #2e7d32;"><strong>RECOMMENDED:</strong> Select and compose existing reusable atoms</div>
                         </div>
-                        <div class="mode-option-desc">Write all steps as inline content (traditional approach)</div>
-                    </div>
-                    <div class="mode-option" id="modeHybrid" onclick="return handleModeClick('hybrid', event);">
-                        <div class="mode-option-title">
-                            <input type="radio" id="radioHybrid" name="constructionMode" value="hybrid"> 🧱 Hybrid Construction
+
+                        <!-- Secondary Option: Hybrid Construction -->
+                        <div class="mode-option" id="modeHybrid" onclick="return handleModeClick('hybrid', event);">
+                            <div class="mode-option-title">
+                                <input type="radio" id="radioHybrid" name="constructionMode" value="hybrid"> 🧱 Hybrid Construction
+                            </div>
+                            <div class="mode-option-desc" id="hybridModeDesc">Mix reusable components with custom steps</div>
                         </div>
-                        <div class="mode-option-desc" id="hybridModeDesc">Combine reusable components with custom inline steps (recommended)</div>
-                    </div>
-                    <div class="mode-option" id="modeAtomsOnly" onclick="return handleModeClick('atoms-only', event);">
-                        <div class="mode-option-title">
-                            <input type="radio" id="radioAtomsOnly" name="constructionMode" value="atoms-only"> 📦 <span id="atomsOnlyTitle">Build from Components</span>
+
+                        <!-- Tertiary Option: Write Custom (Alternative) -->
+                        <div class="mode-option" id="modeInline" onclick="return handleModeClick('inline', event);">
+                            <div class="mode-option-title">
+                                <input type="radio" id="radioInline" name="constructionMode" value="inline"> ✍️ Write Custom Steps
+                            </div>
+                            <div class="mode-option-desc">Write all steps as inline content (traditional approach)</div>
                         </div>
-                        <div class="mode-option-desc" id="atomsOnlyDesc">Assemble entirely from existing reusable components</div>
                     </div>
                 </div>
 
@@ -2560,14 +2570,12 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
                 atom: {
                     icon: '🔵',
                     title: 'Atom - Simple Component',
-                    description: 'You\'re creating a single-purpose, reusable component (~128 lines). This is the simplest template with basic fields only.',
+                    description: 'Creating a single-purpose, reusable component. SIMPLIFIED - only ~10 essential fields.',
                     sections: [
-                        'Core Information (simplified - no duration estimate)',
-                        'Purpose & Description (brief, focused)',
-                        '<s>Compliance Section (skipped for atoms)</s>',
-                        '<s>Procedure Steps (atoms are single-purpose)</s>',
-                        'Basic Troubleshooting (simple table)',
-                        'Basic Ownership (owner and maintainer only)'
+                        '✅ Section 1: Basic Info (Title, Department, Category, Keywords)',
+                        '✅ Section 2: Description & Action (What it does)',
+                        '✅ Section 3: Ownership (Author, Owner, Status)',
+                        '<s>All complex metadata hidden (compliance, troubleshooting, etc.)</s>'
                     ]
                 },
                 molecule: {
@@ -2647,30 +2655,45 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
 
             // Update section titles and configure based on template type
             if (type === 'atom') {
-                // ATOM: Simple component
-                section2.querySelector('h2').innerHTML = '<span class="form-section-number">2</span> Purpose & Description';
-                section2.querySelector('.subtitle').textContent = 'Simple description of what this component does';
+                // ATOM: DRASTICALLY SIMPLIFIED - Only show essential fields
+                console.log('🔵 ATOM: Applying radical simplification');
 
-                // Hide compliance section
-                section3.style.display = 'none';
+                // Update section titles
+                section2.querySelector('h2').innerHTML = '<span class="form-section-number">2</span> Description & Action';
+                section2.querySelector('.subtitle').textContent = 'What does this atom do? (one simple action)';
 
-                // Hide procedure steps (atoms are single-purpose)
-                section4.style.display = 'none';
+                // HIDE ALL COMPLEX SECTIONS
+                section3.style.display = 'none'; // Hide compliance
+                section4.style.display = 'none'; // Hide procedure steps (atoms are single-purpose)
+                section5.style.display = 'none'; // Hide troubleshooting (too complex for atoms)
 
-                // Simplify troubleshooting
-                section5.querySelector('.subtitle').textContent = 'Basic troubleshooting table for common issues';
+                // Simplify Section 6 (Ownership) - only show basics
+                section6.querySelector('h2').innerHTML = '<span class="form-section-number">3</span> Ownership';
+                section6.querySelector('.subtitle').textContent = 'Who created and maintains this atom?';
 
-                // Simplify ownership
-                section6.querySelector('.subtitle').textContent = 'Basic ownership information';
+                // HIDE ALL SUBSECTIONS (1.5 through 1.13) - These are enterprise metadata
+                const subsections = document.querySelectorAll('.form-section.collapsible');
+                subsections.forEach(subsection => {
+                    console.log(`   Hiding subsection: ${subsection.querySelector('h2')?.textContent || 'unknown'}`);
+                    subsection.style.display = 'none';
+                });
 
-                // Hide/disable certain fields
-                estimatedDuration.parentElement.style.display = 'none';
-                approver.parentElement.parentElement.style.display = 'none'; // Hide the whole row
-                reviewers.parentElement.style.display = 'none';
+                // Hide complex fields from Section 1
+                const complexityField = document.getElementById('complexity');
+                const audienceField = document.querySelector('label[for="aud-executive"]')?.closest('.form-group');
+                if (estimatedDuration) estimatedDuration.parentElement.style.display = 'none';
+                if (complexityField) complexityField.parentElement.style.display = 'none';
+                if (audienceField) audienceField.style.display = 'none';
 
-                // Make compliance fields optional
-                auditFrequency.removeAttribute('required');
-                reviewFrequency.removeAttribute('required');
+                // Hide complex ownership fields
+                if (approver) approver.parentElement.parentElement.style.display = 'none';
+                if (reviewers) reviewers.parentElement.style.display = 'none';
+
+                // Make compliance fields optional (not shown anyway)
+                if (auditFrequency) auditFrequency.removeAttribute('required');
+                if (reviewFrequency) reviewFrequency.removeAttribute('required');
+
+                console.log('✅ ATOM simplification complete - showing only ~10 essential fields');
 
             } else if (type === 'molecule') {
                 // MOLECULE: Multi-step procedure
@@ -3377,7 +3400,7 @@ Expected outcome: [What should be true after this step]"></textarea>
 
         let availableAtoms = [];
         let selectedAtomIds = [];
-        let currentConstructionMode = 'inline';
+        let currentConstructionMode = 'atoms-only'; // CHANGED: atoms-only is now the default!
 
         // Load atoms from graph
         async function loadAtoms() {
@@ -3835,32 +3858,37 @@ Expected outcome: [What should be true after this step]"></textarea>
                 libraryHeaderDesc.textContent = 'Browse and select atoms, modules, and organisms to include in your SOP.';
             }
 
-            // Reset to inline mode by default (user can change after)
-            const isInitialSetup = currentConstructionMode === null || currentConstructionMode === undefined || currentConstructionMode === 'inline';
+            // CHANGED: Set atoms-only as DEFAULT mode (user can change after)
+            const isInitialSetup = currentConstructionMode === null || currentConstructionMode === undefined || currentConstructionMode === 'atoms-only';
 
             if (isInitialSetup) {
-                console.log('🔄 Initial setup - setting inline mode as default');
-                currentConstructionMode = 'inline';
+                console.log('🔄 Initial setup - setting ATOMS-ONLY mode as default (RECOMMENDED)');
+                currentConstructionMode = 'atoms-only';
 
-                // Update UI to reflect inline mode
+                // Update UI to reflect atoms-only mode
                 document.querySelectorAll('.mode-option').forEach(opt => opt.classList.remove('selected'));
-                const inlineOption = document.getElementById('modeInline');
-                if (inlineOption) {
-                    inlineOption.classList.add('selected');
+                const atomsOnlyOption = document.getElementById('modeAtomsOnly');
+                if (atomsOnlyOption) {
+                    atomsOnlyOption.classList.add('selected');
                 }
 
                 // Update radio buttons
                 document.querySelectorAll('input[name="constructionMode"]').forEach(radio => {
-                    radio.checked = (radio.value === 'inline');
+                    radio.checked = (radio.value === 'atoms-only');
                 });
 
-                // Hide library, show procedure steps (inline mode default)
+                // SHOW library (atoms-only mode default), HIDE procedure steps
                 if (libraryContainer) {
-                    libraryContainer.style.display = 'none';
+                    libraryContainer.style.display = 'block';
+                    console.log('✅ Atom library shown by default');
                 }
                 if (section4) {
-                    section4.style.display = 'block';
+                    section4.style.display = 'none';
+                    console.log('✅ Procedure steps hidden (using atoms instead)');
                 }
+
+                // Load atoms immediately
+                loadAtoms();
             } else {
                 console.log(`⚠️  User is in ${currentConstructionMode} mode - preserving selection`);
                 // Preserve the user's current mode selection
