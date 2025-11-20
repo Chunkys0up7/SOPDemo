@@ -668,6 +668,7 @@
 
         .mode-option input[type="radio"] {
             margin-right: 8px;
+            pointer-events: none; /* CRITICAL: Let clicks pass through to parent div onclick handler */
         }
 
         .mode-option-title {
@@ -675,11 +676,13 @@
             font-weight: 600;
             color: #1a1a1a;
             margin-bottom: 5px;
+            pointer-events: none; /* Let clicks pass through to parent */
         }
 
         .mode-option-desc {
             font-size: 13px;
             color: #666;
+            pointer-events: none; /* Let clicks pass through to parent */
         }
 
         .atom-library-container {
