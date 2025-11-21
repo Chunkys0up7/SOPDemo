@@ -715,8 +715,16 @@
                 </div>
             `;
 
-            // Fetch graph data
-            fetch('/graph/mortgage-sop-graph.json')
+            // Fetch graph data from Neo4j (with fallback to static JSON)
+            fetch('/api/graph/neo4j')
+                .then(response => {
+                    if (!response.ok) {
+                        console.warn('⚠️  Neo4j unavailable, falling back to static JSON');
+                        // Fallback to static JSON
+                        return fetch('/graph/mortgage-sop-graph.json');
+                    }
+                    return response;
+                })
                 .then(response => response.json())
                 .then(data => {
                     console.log('✅ Graph data loaded');
