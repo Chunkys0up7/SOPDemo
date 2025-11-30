@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat:*)",
+      "Bash(node tools/build.js:*)",
+      "Bash(node tools/convert-graph-format.js:*)",
+      "Bash(node -e:*)",
+      "Bash(node tools/generate-realistic-data.js:*)",
+      "Bash(npm start)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

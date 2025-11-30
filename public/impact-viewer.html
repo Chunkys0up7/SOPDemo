@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impact Analysis - Change Propagation Viewer</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0e27;
+            color: #e0e6f0;
+            padding: 20px;
+        }
+
+        #container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #60a5fa;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #9ca3af;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        /* Search Section */
+        #search-section {
+            background: #131829;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #1e2439;
+        }
+
+        #search-section h2 {
+            color: #60a5fa;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .search-controls {
+            display: grid;
+            grid-template-columns: 1fr 200px;
+            gap: 15px;
+        }
+
+        input[type="text"] {
+            padding: 12px;
+            background: #1a1f35;
+            border: 1px solid #2a3150;
+            border-radius: 8px;
+            color: #e0e6f0;
+            font-size: 14px;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #60a5fa;
+        }
+
+        select {
+            padding: 12px;
+            background: #1a1f35;
+            border: 1px solid #2a3150;
+            border-radius: 8px;
+            color: #e0e6f0;
+            font-size: 14px;
+        }
+
+        button {
+            padding: 12px 24px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background: #2563eb;
+        }
+
+        #suggestions {
+            margin-top: 10px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .suggestion-chip {
+            background: #1a1f35;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            cursor: pointer;
+            border: 1px solid #2a3150;
+            transition: all 0.2s;
+        }
+
+        .suggestion-chip:hover {
+            background: #2a3150;
+            border-color: #60a5fa;
+        }
+
+        /* Risk Assessment */
+        #risk-assessment {
+            background: #131829;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #1e2439;
+            display: none;
+        }
+
+        #risk-assessment.visible {
+            display: block;
+        }
+
+        .risk-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .risk-card {
+            background: #1a1f35;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .risk-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #60a5fa;
+            margin-bottom: 5px;
+        }
+
+        .risk-label {
+            color: #9ca3af;
+            font-size: 13px;
+        }
+
+        .risk-level {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .risk-level.low { background: #10b981; color: white; }
+        .risk-level.medium { background: #f59e0b; color: white; }
+        .risk-level.high { background: #ef4444; color: white; }
+        .risk-level.critical { background: #7c2d12; color: white; }
+
+        /* Impact Tree */
+        #impact-tree {
+            background: #131829;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #1e2439;
+            display: none;
+        }
+
+        #impact-tree.visible {
+            display: block;
+        }
+
+        #impact-tree h2 {
+            color: #60a5fa;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        #tree-container {
+            background: #0a0e27;
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+        }
+
+        .tree-node {
+            fill: #1a1f35;
+            stroke: #2a3150;
+            stroke-width: 2px;
+        }
+
+        .tree-node.root {
+            fill: #ef4444;
+            stroke: #f87171;
+        }
+
+        .tree-node.direct {
+            fill: #f59e0b;
+            stroke: #fbbf24;
+        }
+
+        .tree-node.downstream {
+            fill: #3b82f6;
+            stroke: #60a5fa;
+        }
+
+        .tree-link {
+            fill: none;
+            stroke: #2a3150;
+            stroke-width: 2px;
+        }
+
+        .tree-text {
+            fill: #e0e6f0;
+            font-size: 12px;
+        }
+
+        /* Recommendations */
+        #recommendations {
+            background: #131829;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #1e2439;
+            display: none;
+        }
+
+        #recommendations.visible {
+            display: block;
+        }
+
+        #recommendations h2 {
+            color: #60a5fa;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .recommendation {
+            background: #1a1f35;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid #60a5fa;
+        }
+
+        .recommendation.warning {
+            border-left-color: #f59e0b;
+        }
+
+        .recommendation.critical {
+            border-left-color: #ef4444;
+        }
+
+        .rec-icon {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #9ca3af;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>🔍 Impact Analysis</h1>
+        <p class="subtitle">Visualize how changes propagate through the SOP ecosystem</p>
+
+        <!-- Search Section -->
+        <div id="search-section">
+            <h2>Select Component to Analyze</h2>
+            <div class="search-controls">
+                <input type="text" id="component-search" placeholder="Search by ID or title...">
+                <select id="change-type">
+                    <option value="modification">Modification</option>
+                    <option value="deletion">Deletion</option>
+                    <option value="rename">Rename</option>
+                </select>
+            </div>
+            <div id="suggestions"></div>
+        </div>
+
+        <!-- Risk Assessment -->
+        <div id="risk-assessment">
+            <h2>📊 Risk Assessment</h2>
+            <div class="risk-grid">
+                <div class="risk-card">
+                    <div class="risk-value" id="direct-impacts">0</div>
+                    <div class="risk-label">Direct Impacts</div>
+                </div>
+                <div class="risk-card">
+                    <div class="risk-value" id="downstream-impacts">0</div>
+                    <div class="risk-label">Downstream Impacts</div>
+                </div>
+                <div class="risk-card">
+                    <div class="risk-value" id="affected-sops">0</div>
+                    <div class="risk-label">Affected SOPs</div>
+                </div>
+                <div class="risk-card">
+                    <div id="risk-level-badge"></div>
+                    <div class="risk-label">Risk Level</div>
+                </div>
+            </div>
+            <div id="selected-component" style="padding: 15px; background: #1a1f35; border-radius: 8px; margin-top: 10px;">
+                <strong>Analyzing:</strong> <span id="selected-name"></span>
+            </div>
+        </div>
+
+        <!-- Impact Tree -->
+        <div id="impact-tree">
+            <h2>🌳 Impact Propagation Tree</h2>
+            <div id="tree-container">
+                <svg id="tree-svg"></svg>
+            </div>
+        </div>
+
+        <!-- Recommendations -->
+        <div id="recommendations">
+            <h2>💡 Recommendations</h2>
+            <div id="rec-list"></div>
+        </div>
+    </div>
+
+    <script>
+        let graphData = null;
+        let selectedComponent = null;
+
+        // Load graph data
+        fetch('../graph/sop-graph.json')
+            .then(res => res.json())
+            .then(data => {
+                graphData = data;
+                initializeSuggestions();
+            })
+            .catch(err => {
+                console.error('Failed to load graph:', err);
+            });
+
+        function initializeSuggestions() {
+            const nodes = Object.values(graphData.nodes);
+            const suggestions = document.getElementById('suggestions');
+
+            // Show popular components as suggestions
+            const popular = [
+                'atom-access-request-form',
+                'molecule-account-setup',
+                'organism-employee-onboarding',
+                'sop-001-user-onboarding'
+            ];
+
+            popular.forEach(id => {
+                const node = graphData.nodes[id];
+                if (node) {
+                    const chip = document.createElement('div');
+                    chip.className = 'suggestion-chip';
+                    chip.textContent = node.id;
+                    chip.onclick = () => analyzeComponent(id);
+                    suggestions.appendChild(chip);
+                }
+            });
+
+            // Setup search
+            const searchInput = document.getElementById('component-search');
+            searchInput.addEventListener('input', handleSearch);
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const value = e.target.value.toLowerCase();
+                    const match = Object.keys(graphData.nodes).find(id =>
+                        id.toLowerCase().includes(value)
+                    );
+                    if (match) analyzeComponent(match);
+                }
+            });
+        }
+
+        function handleSearch(e) {
+            const term = e.target.value.toLowerCase();
+            if (term.length < 2) return;
+
+            const matches = Object.keys(graphData.nodes)
+                .filter(id => id.toLowerCase().includes(term) ||
+                    graphData.nodes[id].title.toLowerCase().includes(term))
+                .slice(0, 5);
+
+            const suggestions = document.getElementById('suggestions');
+            suggestions.innerHTML = '';
+
+            matches.forEach(id => {
+                const chip = document.createElement('div');
+                chip.className = 'suggestion-chip';
+                chip.textContent = id;
+                chip.onclick = () => analyzeComponent(id);
+                suggestions.appendChild(chip);
+            });
+        }
+
+        function analyzeComponent(componentId) {
+            selectedComponent = graphData.nodes[componentId];
+            if (!selectedComponent) return;
+
+            document.getElementById('selected-name').textContent = `${selectedComponent.id} - ${selectedComponent.title}`;
+
+            // Calculate impact
+            const impact = calculateImpact(componentId);
+
+            // Update risk assessment
+            document.getElementById('direct-impacts').textContent = impact.direct.length;
+            document.getElementById('downstream-impacts').textContent = impact.downstream.length;
+            document.getElementById('affected-sops').textContent = impact.affectedSOPs.length;
+
+            const riskLevel = determineRiskLevel(impact);
+            document.getElementById('risk-level-badge').innerHTML =
+                `<span class="risk-level ${riskLevel.toLowerCase()}">${riskLevel.toUpperCase()}</span>`;
+
+            document.getElementById('risk-assessment').classList.add('visible');
+
+            // Draw tree
+            drawImpactTree(componentId, impact);
+            document.getElementById('impact-tree').classList.add('visible');
+
+            // Generate recommendations
+            generateRecommendations(impact, riskLevel);
+            document.getElementById('recommendations').classList.add('visible');
+        }
+
+        function calculateImpact(componentId) {
+            const direct = [];
+            const downstream = [];
+            const visited = new Set();
+            const affectedSOPs = new Set();
+
+            // Find direct dependencies (edges where this is the source)
+            graphData.edges.forEach(edge => {
+                if (edge.source === componentId) {
+                    direct.push(edge.target);
+                    findDownstream(edge.target, visited, downstream, affectedSOPs);
+                }
+            });
+
+            return {
+                direct: Array.from(new Set(direct)),
+                downstream: Array.from(downstream),
+                affectedSOPs: Array.from(affectedSOPs)
+            };
+        }
+
+        function findDownstream(nodeId, visited, downstream, affectedSOPs) {
+            if (visited.has(nodeId)) return;
+            visited.add(nodeId);
+
+            const node = graphData.nodes[nodeId];
+            if (node && node.type === 'sop') {
+                affectedSOPs.add(nodeId);
+            }
+
+            graphData.edges.forEach(edge => {
+                if (edge.source === nodeId) {
+                    downstream.push(edge.target);
+                    findDownstream(edge.target, visited, downstream, affectedSOPs);
+                }
+            });
+        }
+
+        function determineRiskLevel(impact) {
+            const total = impact.direct.length + impact.downstream.length;
+            const sopCount = impact.affectedSOPs.length;
+
+            if (sopCount >= 5 || total >= 20) return 'CRITICAL';
+            if (sopCount >= 3 || total >= 10) return 'HIGH';
+            if (sopCount >= 1 || total >= 5) return 'MEDIUM';
+            return 'LOW';
+        }
+
+        function drawImpactTree(rootId, impact) {
+            const margin = {top: 20, right: 120, bottom: 20, left: 120};
+            const width = 1200 - margin.right - margin.left;
+            const height = 600 - margin.top - margin.bottom;
+
+            // Clear previous
+            d3.select('#tree-svg').selectAll('*').remove();
+
+            const svg = d3.select('#tree-svg')
+                .attr('width', width + margin.right + margin.left)
+                .attr('height', height + margin.top + margin.bottom);
+
+            const g = svg.append('g')
+                .attr('transform', `translate(${margin.left},${margin.top})`);
+
+            // Build tree structure
+            const root = {
+                name: rootId,
+                type: 'root',
+                children: impact.direct.map(id => ({
+                    name: id,
+                    type: 'direct',
+                    children: getChildren(id, impact.downstream)
+                }))
+            };
+
+            const treeLayout = d3.tree().size([height, width]);
+            const rootNode = d3.hierarchy(root);
+            treeLayout(rootNode);
+
+            // Draw links
+            g.selectAll('.tree-link')
+                .data(rootNode.links())
+                .join('path')
+                .attr('class', 'tree-link')
+                .attr('d', d3.linkHorizontal()
+                    .x(d => d.y)
+                    .y(d => d.x));
+
+            // Draw nodes
+            const nodes = g.selectAll('.tree-node-group')
+                .data(rootNode.descendants())
+                .join('g')
+                .attr('transform', d => `translate(${d.y},${d.x})`);
+
+            nodes.append('circle')
+                .attr('class', d => `tree-node ${d.data.type}`)
+                .attr('r', d => d.data.type === 'root' ? 8 : 6);
+
+            nodes.append('text')
+                .attr('class', 'tree-text')
+                .attr('dy', '0.31em')
+                .attr('x', d => d.children ? -12 : 12)
+                .attr('text-anchor', d => d.children ? 'end' : 'start')
+                .text(d => d.data.name.split('-').slice(-1)[0]);
+        }
+
+        function getChildren(nodeId, downstreamList) {
+            const children = [];
+            graphData.edges.forEach(edge => {
+                if (edge.source === nodeId && downstreamList.includes(edge.target)) {
+                    children.push({
+                        name: edge.target,
+                        type: 'downstream'
+                    });
+                }
+            });
+            return children;
+        }
+
+        function generateRecommendations(impact, riskLevel) {
+            const recList = document.getElementById('rec-list');
+            recList.innerHTML = '';
+
+            const recs = [];
+
+            if (riskLevel === 'CRITICAL') {
+                recs.push({
+                    type: 'critical',
+                    icon: '🚨',
+                    text: 'CRITICAL: Review all ' + impact.affectedSOPs.length + ' affected SOPs before publishing changes'
+                });
+                recs.push({
+                    type: 'warning',
+                    icon: '⚠️',
+                    text: 'Notify department leads and stakeholders immediately'
+                });
+                recs.push({
+                    type: 'warning',
+                    icon: '📅',
+                    text: 'Consider phased rollout over 2-4 weeks to minimize disruption'
+                });
+            } else if (riskLevel === 'HIGH') {
+                recs.push({
+                    type: 'warning',
+                    icon: '⚠️',
+                    text: 'Review all ' + impact.affectedSOPs.length + ' affected SOPs before publishing'
+                });
+                recs.push({
+                    type: 'normal',
+                    icon: '📧',
+                    text: 'Notify department leads of upcoming changes'
+                });
+            } else if (riskLevel === 'MEDIUM') {
+                recs.push({
+                    type: 'normal',
+                    icon: '✓',
+                    text: 'Review affected SOPs and update training materials'
+                });
+            } else {
+                recs.push({
+                    type: 'normal',
+                    icon: '✓',
+                    text: 'Low risk change - standard review process applies'
+                });
+            }
+
+            recs.forEach(rec => {
+                const div = document.createElement('div');
+                div.className = `recommendation ${rec.type}`;
+                div.innerHTML = `<span class="rec-icon">${rec.icon}</span>${rec.text}`;
+                recList.appendChild(div);
+            });
+        }
+    </script>
+</body>
+</html>

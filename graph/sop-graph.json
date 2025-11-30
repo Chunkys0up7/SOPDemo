@@ -1,301 +1,2732 @@
 {
   "metadata": {
-    "version": "4.0.0",
-    "lastUpdated": "2025-11-20",
-    "description": "Enriched SOP graph with comprehensive metadata for demo and testing",
-    "totalNodes": 45,
-    "atomCount": 25,
-    "moleculeCount": 12,
-    "organismCount": 5,
-    "sopCount": 3
+    "version": "5.0.0",
+    "lastUpdated": "2025-11-30T19:26:25.822Z",
+    "description": "Comprehensive enterprise SOP graph with realistic dependencies",
+    "organization": "Example Corp",
+    "stats": {
+      "atomCount": 42,
+      "moleculeCount": 18,
+      "organismCount": 8,
+      "sopCount": 10,
+      "edgeCount": 122
+    }
   },
-  "nodes": [
-    {
-      "id": "atom-login-system",
-      "type": "atom",
-      "title": "Login to System",
-      "description": "Standard login procedure with MFA",
-      "department": "IT",
-      "subtype": "procedural-step",
-      "category": "System Configuration",
-      "tags": ["authentication", "security", "login", "mfa"],
-      "version": "1.0.0",
-      "status": "active",
-      "owner": "IT Security Team",
-      "author": "John Smith"
-    },
-    {
-      "id": "atom-verify-email",
-      "type": "atom",
-      "title": "Verify Email Address",
-      "description": "Email verification with confirmation link",
-      "department": "IT",
-      "subtype": "verification",
-      "category": "Compliance & Audit",
-      "tags": ["email", "verification", "authentication"],
-      "version": "1.0.0",
-      "status": "active",
-      "owner": "IT Operations",
-      "author": "Jane Doe"
-    },
-    {
-      "id": "atom-submit-form",
-      "type": "atom",
-      "title": "Submit Request Form",
-      "description": "Generic form submission action",
-      "department": "Operations",
-      "subtype": "action",
-      "category": "System Configuration",
-      "tags": ["form", "submit", "workflow"],
-      "version": "1.0.0",
-      "status": "active",
-      "owner": "Operations Team",
-      "author": "Mike Johnson"
-    },
-    {
-      "id": "atom-approve-request",
-      "type": "atom",
-      "title": "Approve Request",
-      "description": "Manager approval step",
-      "department": "HR",
-      "subtype": "approval",
-      "category": "Compliance & Audit",
-      "tags": ["approval", "workflow", "authorization"],
-      "version": "1.0.0",
-      "status": "active",
-      "owner": "HR Department",
-      "author": "Sarah Williams"
-    },
-    {
-      "id": "atom-check-inventory",
-      "type": "atom",
-      "title": "Check Inventory Status",
-      "description": "Verify item availability in inventory",
-      "department": "Operations",
-      "subtype": "verification",
-      "category": "Maintenance & Updates",
-      "tags": ["inventory", "stock", "availability"],
-      "version": "1.0.0",
-      "status": "active",
-      "owner": "Warehouse Team",
-      "author": "Tom Brown"
-    },
-    {
-      "id": "atom-send-notification",
-      "type": "atom",
-      "title": "Send Email Notification",
-      "description": "Automated email notification",
-      "department": "IT",
-      "subtype": "communication",
-      "category": "System Configuration",
-      "tags": ["email", "notification", "automation"],
-      "version": "1.0.0",
-      "status": "active",
-      "owner": "IT Automation",
-      "author": "Lisa Chen"
-    },
-    {
-      "id": "atom-validate-data",
-      "type": "atom",
-      "title": "Validate Input Data",
-      "description": "Check data format and completeness",
-      "department": "IT",
-      "subtype": "validation",
-      "category": "Risk Management",
-      "tags": ["validation", "data-quality", "verification"],
-      "version": "1.0.0",
-      "status": "active",
-      "owner": "Data Quality Team",
-      "author": "David Lee"
-    },
-    {
-      "id": "atom-create-ticket",
-      "type": "atom",
-      "title": "Create Support Ticket",
-      "description": "Log issue in ticketing system",
-      "department": "Customer Service",
-      "subtype": "action",
-      "category": "Troubleshooting",
-      "tags": ["ticket", "support", "helpdesk"],
-      "version": "1.0.0",
-      "status": "active",
-      "owner": "Support Team",
-      "author": "Emily Davis"
-    },
-    {
-      "id": "atom-backup-data",
-      "type": "atom",
-      "title": "Backup System Data",
-      "description": "Create data backup before changes",
-      "department": "IT",
-      "subtype": "safety-check",
-      "category": "Maintenance & Updates",
-      "tags": ["backup", "data-protection", "safety"],
-      "version": "1.0.0",
-      "status": "active",
-      "owner": "IT Infrastructure",
-      "author": "Robert Wilson"
-    },
-    {
-      "id": "atom-generate-report",
-      "type": "atom",
-      "title": "Generate Status Report",
-      "description": "Create automated status report",
-      "department": "Finance",
-      "subtype": "reporting",
-      "category": "Compliance & Audit",
-      "tags": ["reporting", "analytics", "documentation"],
-      "version": "1.0.0",
-      "status": "active",
-      "owner": "Finance Team",
-      "author": "Jennifer Moore"
-    },
-    {
+  "nodes": {
+    "atom-access-request-form": {
       "id": "atom-access-request-form",
       "type": "atom",
       "title": "System Access Request Form",
-      "description": "Request form for system access",
+      "description": "System Access Request Form - single-purpose component",
       "department": "IT",
       "subtype": "form",
       "category": "System Configuration",
-      "tags": ["security", "access", "forms", "it"],
-      "version": "2.1.0",
+      "tags": [
+        "access",
+        "forms",
+        "security"
+      ],
+      "version": "1.0.0",
       "status": "active",
-      "owner": "IT Security",
-      "author": "Mark Taylor"
+      "owner": "IT Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
     },
-    {
-      "id": "atom-welcome-message",
+    "atom-equipment-request-form": {
+      "id": "atom-equipment-request-form",
       "type": "atom",
-      "title": "Welcome Message Template",
-      "description": "Standard welcome message for new users",
+      "title": "Equipment Request Form",
+      "description": "Equipment Request Form - single-purpose component",
+      "department": "Operations",
+      "subtype": "form",
+      "category": "System Configuration",
+      "tags": [
+        "equipment",
+        "procurement"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Operations Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-training-confirmation-form": {
+      "id": "atom-training-confirmation-form",
+      "type": "atom",
+      "title": "Training Completion Form",
+      "description": "Training Completion Form - single-purpose component",
+      "department": "HR",
+      "subtype": "form",
+      "category": "Training & Onboarding",
+      "tags": [
+        "training",
+        "hr"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "HR Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-incident-report-form": {
+      "id": "atom-incident-report-form",
+      "type": "atom",
+      "title": "Security Incident Report",
+      "description": "Security Incident Report - single-purpose component",
+      "department": "Security",
+      "subtype": "form",
+      "category": "Troubleshooting",
+      "tags": [
+        "security",
+        "incident"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Security Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-change-request-form": {
+      "id": "atom-change-request-form",
+      "type": "atom",
+      "title": "Change Request Form",
+      "description": "Change Request Form - single-purpose component",
+      "department": "IT",
+      "subtype": "form",
+      "category": "System Configuration",
+      "tags": [
+        "change-management"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "IT Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-vendor-intake-form": {
+      "id": "atom-vendor-intake-form",
+      "type": "atom",
+      "title": "Vendor Information Form",
+      "description": "Vendor Information Form - single-purpose component",
+      "department": "Finance",
+      "subtype": "form",
+      "category": "General",
+      "tags": [
+        "vendor",
+        "procurement"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Finance Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-time-off-request": {
+      "id": "atom-time-off-request",
+      "type": "atom",
+      "title": "Time Off Request Form",
+      "description": "Time Off Request Form - single-purpose component",
+      "department": "HR",
+      "subtype": "form",
+      "category": "General",
+      "tags": [
+        "hr",
+        "time-off"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "HR Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-expense-report": {
+      "id": "atom-expense-report",
+      "type": "atom",
+      "title": "Expense Reimbursement Form",
+      "description": "Expense Reimbursement Form - single-purpose component",
+      "department": "Finance",
+      "subtype": "form",
+      "category": "General",
+      "tags": [
+        "finance",
+        "expenses"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Finance Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-security-checklist": {
+      "id": "atom-security-checklist",
+      "type": "atom",
+      "title": "Security Baseline Checklist",
+      "description": "Security Baseline Checklist - single-purpose component",
+      "department": "Security",
+      "subtype": "checklist",
+      "category": "Compliance & Audit",
+      "tags": [
+        "security",
+        "compliance"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Security Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-equipment-checklist": {
+      "id": "atom-equipment-checklist",
+      "type": "atom",
+      "title": "Equipment Inventory Checklist",
+      "description": "Equipment Inventory Checklist - single-purpose component",
+      "department": "Operations",
+      "subtype": "checklist",
+      "category": "Maintenance & Updates",
+      "tags": [
+        "equipment",
+        "inventory"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Operations Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-compliance-checklist": {
+      "id": "atom-compliance-checklist",
+      "type": "atom",
+      "title": "Regulatory Compliance Checklist",
+      "description": "Regulatory Compliance Checklist - single-purpose component",
+      "department": "Compliance",
+      "subtype": "checklist",
+      "category": "Compliance & Audit",
+      "tags": [
+        "compliance",
+        "audit"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Compliance Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-onboarding-checklist": {
+      "id": "atom-onboarding-checklist",
+      "type": "atom",
+      "title": "New Hire Onboarding Checklist",
+      "description": "New Hire Onboarding Checklist - single-purpose component",
+      "department": "HR",
+      "subtype": "checklist",
+      "category": "Training & Onboarding",
+      "tags": [
+        "onboarding",
+        "hr"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "HR Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-offboarding-checklist": {
+      "id": "atom-offboarding-checklist",
+      "type": "atom",
+      "title": "Employee Exit Checklist",
+      "description": "Employee Exit Checklist - single-purpose component",
+      "department": "HR",
+      "subtype": "checklist",
+      "category": "General",
+      "tags": [
+        "offboarding",
+        "hr"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "HR Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-deployment-checklist": {
+      "id": "atom-deployment-checklist",
+      "type": "atom",
+      "title": "Production Deployment Checklist",
+      "description": "Production Deployment Checklist - single-purpose component",
+      "department": "IT",
+      "subtype": "checklist",
+      "category": "System Configuration",
+      "tags": [
+        "deployment",
+        "devops"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "IT Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-audit-checklist": {
+      "id": "atom-audit-checklist",
+      "type": "atom",
+      "title": "Internal Audit Checklist",
+      "description": "Internal Audit Checklist - single-purpose component",
+      "department": "Compliance",
+      "subtype": "checklist",
+      "category": "Compliance & Audit",
+      "tags": [
+        "audit",
+        "compliance"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Compliance Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-background-check": {
+      "id": "atom-background-check",
+      "type": "atom",
+      "title": "Background Verification Process",
+      "description": "Background Verification Process - single-purpose component",
+      "department": "HR",
+      "subtype": "verification",
+      "category": "Compliance & Audit",
+      "tags": [
+        "hr",
+        "compliance",
+        "verification"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "HR Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-email-verification": {
+      "id": "atom-email-verification",
+      "type": "atom",
+      "title": "Email Address Verification",
+      "description": "Email Address Verification - single-purpose component",
+      "department": "IT",
+      "subtype": "verification",
+      "category": "System Configuration",
+      "tags": [
+        "verification",
+        "email"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "IT Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-identity-verification": {
+      "id": "atom-identity-verification",
+      "type": "atom",
+      "title": "Government ID Verification",
+      "description": "Government ID Verification - single-purpose component",
+      "department": "Security",
+      "subtype": "verification",
+      "category": "Compliance & Audit",
+      "tags": [
+        "verification",
+        "kyc",
+        "security"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Security Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-credit-check": {
+      "id": "atom-credit-check",
+      "type": "atom",
+      "title": "Credit and Financial Verification",
+      "description": "Credit and Financial Verification - single-purpose component",
+      "department": "Finance",
+      "subtype": "verification",
+      "category": "Risk Management",
+      "tags": [
+        "finance",
+        "verification"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Finance Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-reference-check": {
+      "id": "atom-reference-check",
+      "type": "atom",
+      "title": "Reference Check Process",
+      "description": "Reference Check Process - single-purpose component",
+      "department": "HR",
+      "subtype": "verification",
+      "category": "General",
+      "tags": [
+        "hr",
+        "verification"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "HR Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-license-verification": {
+      "id": "atom-license-verification",
+      "type": "atom",
+      "title": "License and Certification Check",
+      "description": "License and Certification Check - single-purpose component",
+      "department": "Compliance",
+      "subtype": "verification",
+      "category": "Compliance & Audit",
+      "tags": [
+        "compliance",
+        "verification"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Compliance Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-create-ad-account": {
+      "id": "atom-create-ad-account",
+      "type": "atom",
+      "title": "Create Active Directory Account",
+      "description": "Create Active Directory Account - single-purpose component",
+      "department": "IT",
+      "subtype": "action",
+      "category": "System Configuration",
+      "tags": [
+        "it",
+        "account",
+        "active-directory"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "IT Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-create-email": {
+      "id": "atom-create-email",
+      "type": "atom",
+      "title": "Provision Email Account",
+      "description": "Provision Email Account - single-purpose component",
+      "department": "IT",
+      "subtype": "action",
+      "category": "System Configuration",
+      "tags": [
+        "email",
+        "m365"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "IT Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-assign-equipment": {
+      "id": "atom-assign-equipment",
+      "type": "atom",
+      "title": "Assign and Ship Equipment",
+      "description": "Assign and Ship Equipment - single-purpose component",
+      "department": "Operations",
+      "subtype": "action",
+      "category": "General",
+      "tags": [
+        "equipment",
+        "shipping"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Operations Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-revoke-access": {
+      "id": "atom-revoke-access",
+      "type": "atom",
+      "title": "Revoke System Access",
+      "description": "Revoke System Access - single-purpose component",
+      "department": "IT",
+      "subtype": "action",
+      "category": "System Configuration",
+      "tags": [
+        "security",
+        "access-control"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "IT Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-archive-account": {
+      "id": "atom-archive-account",
+      "type": "atom",
+      "title": "Archive User Account and Data",
+      "description": "Archive User Account and Data - single-purpose component",
+      "department": "IT",
+      "subtype": "action",
+      "category": "Maintenance & Updates",
+      "tags": [
+        "archival",
+        "data-retention"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "IT Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-notify-manager": {
+      "id": "atom-notify-manager",
+      "type": "atom",
+      "title": "Send Manager Notification",
+      "description": "Send Manager Notification - single-purpose component",
+      "department": "HR",
+      "subtype": "action",
+      "category": "General",
+      "tags": [
+        "notification",
+        "communication"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "HR Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-escalate-issue": {
+      "id": "atom-escalate-issue",
+      "type": "atom",
+      "title": "Escalate to Senior Team",
+      "description": "Escalate to Senior Team - single-purpose component",
+      "department": "Operations",
+      "subtype": "action",
+      "category": "Troubleshooting",
+      "tags": [
+        "escalation",
+        "support"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Operations Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-log-audit-event": {
+      "id": "atom-log-audit-event",
+      "type": "atom",
+      "title": "Log Audit Trail Event",
+      "description": "Log Audit Trail Event - single-purpose component",
+      "department": "Compliance",
+      "subtype": "action",
+      "category": "Compliance & Audit",
+      "tags": [
+        "audit",
+        "logging"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Compliance Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-manager-approval": {
+      "id": "atom-manager-approval",
+      "type": "atom",
+      "title": "Manager Approval Step",
+      "description": "Manager Approval Step - single-purpose component",
+      "department": "HR",
+      "subtype": "approval",
+      "category": "General",
+      "tags": [
+        "approval",
+        "workflow"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "HR Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-security-approval": {
+      "id": "atom-security-approval",
+      "type": "atom",
+      "title": "Security Team Approval",
+      "description": "Security Team Approval - single-purpose component",
+      "department": "Security",
+      "subtype": "approval",
+      "category": "Risk Management",
+      "tags": [
+        "security",
+        "approval"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Security Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-finance-approval": {
+      "id": "atom-finance-approval",
+      "type": "atom",
+      "title": "Finance Department Approval",
+      "description": "Finance Department Approval - single-purpose component",
+      "department": "Finance",
+      "subtype": "approval",
+      "category": "General",
+      "tags": [
+        "finance",
+        "approval"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Finance Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-compliance-approval": {
+      "id": "atom-compliance-approval",
+      "type": "atom",
+      "title": "Compliance Review Approval",
+      "description": "Compliance Review Approval - single-purpose component",
+      "department": "Compliance",
+      "subtype": "approval",
+      "category": "Compliance & Audit",
+      "tags": [
+        "compliance",
+        "approval"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Compliance Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-executive-approval": {
+      "id": "atom-executive-approval",
+      "type": "atom",
+      "title": "Executive Sign-Off",
+      "description": "Executive Sign-Off - single-purpose component",
+      "department": "Executive",
+      "subtype": "approval",
+      "category": "General",
+      "tags": [
+        "executive",
+        "approval"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Executive Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-welcome-email": {
+      "id": "atom-welcome-email",
+      "type": "atom",
+      "title": "New Hire Welcome Email",
+      "description": "New Hire Welcome Email - single-purpose component",
       "department": "HR",
       "subtype": "communication",
       "category": "Training & Onboarding",
-      "tags": ["onboarding", "welcome", "communication"],
+      "tags": [
+        "onboarding",
+        "communication"
+      ],
       "version": "1.0.0",
       "status": "active",
-      "owner": "HR Onboarding",
-      "author": "Amanda Green"
+      "owner": "HR Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
     },
-    {
-      "id": "atom-training-modules",
+    "atom-exit-notification": {
+      "id": "atom-exit-notification",
       "type": "atom",
-      "title": "Security Training Module List",
-      "description": "Required security training courses",
+      "title": "Employee Exit Announcement",
+      "description": "Employee Exit Announcement - single-purpose component",
+      "department": "HR",
+      "subtype": "communication",
+      "category": "General",
+      "tags": [
+        "offboarding",
+        "communication"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "HR Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-security-alert": {
+      "id": "atom-security-alert",
+      "type": "atom",
+      "title": "Security Incident Alert",
+      "description": "Security Incident Alert - single-purpose component",
       "department": "Security",
-      "subtype": "training",
-      "category": "Training & Onboarding",
-      "tags": ["training", "security", "compliance"],
+      "subtype": "communication",
+      "category": "Troubleshooting",
+      "tags": [
+        "security",
+        "alert"
+      ],
       "version": "1.0.0",
       "status": "active",
-      "owner": "Security Training",
-      "author": "Chris Anderson"
+      "owner": "Security Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
     },
-    {
-      "id": "atom-equipment-form",
+    "atom-status-update": {
+      "id": "atom-status-update",
       "type": "atom",
-      "title": "Equipment Request Form",
-      "description": "Form to request IT equipment",
+      "title": "Stakeholder Status Update",
+      "description": "Stakeholder Status Update - single-purpose component",
       "department": "Operations",
-      "subtype": "form",
-      "category": "Maintenance & Updates",
-      "tags": ["equipment", "procurement", "forms"],
+      "subtype": "communication",
+      "category": "General",
+      "tags": [
+        "communication",
+        "updates"
+      ],
       "version": "1.0.0",
       "status": "active",
-      "owner": "Procurement",
-      "author": "Kevin Martinez"
+      "owner": "Operations Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
     },
-    {
-      "id": "atom-confidentiality-agreement",
+    "atom-training-invite": {
+      "id": "atom-training-invite",
       "type": "atom",
-      "title": "Confidentiality and NDA Agreement",
-      "description": "Standard NDA and confidentiality form",
-      "department": "Legal",
-      "subtype": "form",
-      "category": "Compliance & Audit",
-      "tags": ["legal", "nda", "confidentiality"],
+      "title": "Training Session Invitation",
+      "description": "Training Session Invitation - single-purpose component",
+      "department": "HR",
+      "subtype": "communication",
+      "category": "Training & Onboarding",
+      "tags": [
+        "training",
+        "communication"
+      ],
       "version": "1.0.0",
       "status": "active",
-      "owner": "Legal Department",
-      "author": "Patricia White"
+      "owner": "HR Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
     },
-    {
+    "atom-nda-agreement": {
+      "id": "atom-nda-agreement",
+      "type": "atom",
+      "title": "Non-Disclosure Agreement",
+      "description": "Non-Disclosure Agreement - single-purpose component",
+      "department": "Legal",
+      "subtype": "document",
+      "category": "Compliance & Audit",
+      "tags": [
+        "legal",
+        "nda"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Legal Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-policy-handbook": {
+      "id": "atom-policy-handbook",
+      "type": "atom",
+      "title": "Company Policy Handbook",
+      "description": "Company Policy Handbook - single-purpose component",
+      "department": "HR",
+      "subtype": "document",
+      "category": "General",
+      "tags": [
+        "policy",
+        "hr"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "HR Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "atom-incident-postmortem": {
+      "id": "atom-incident-postmortem",
+      "type": "atom",
+      "title": "Incident Postmortem Template",
+      "description": "Incident Postmortem Template - single-purpose component",
+      "department": "IT",
+      "subtype": "document",
+      "category": "Troubleshooting",
+      "tags": [
+        "incident",
+        "postmortem"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "IT Team",
+      "author": "System Generated",
+      "complexity": "low",
+      "reusability": "high"
+    },
+    "molecule-account-setup": {
       "id": "molecule-account-setup",
       "type": "molecule",
-      "title": "User Account Setup Sequence",
-      "description": "Complete user account creation workflow",
+      "title": "User Account Setup Process",
+      "description": "User Account Setup Process - multi-step task sequence",
       "department": "IT",
-      "subtype": "workflow",
-      "category": "System Configuration",
-      "tags": ["account", "setup", "onboarding"],
-      "composedOf": ["atom-login-system", "atom-verify-email", "atom-send-notification"],
-      "version": "1.5.0",
-      "status": "active",
-      "owner": "IT Operations",
-      "author": "System Administrator"
-    },
-    {
-      "id": "molecule-approval-workflow",
-      "type": "molecule",
-      "title": "Standard Approval Process",
-      "description": "Multi-level approval workflow",
-      "department": "Operations",
-      "subtype": "approval-chain",
-      "category": "Compliance & Audit",
-      "tags": ["approval", "workflow", "governance"],
-      "composedOf": ["atom-submit-form", "atom-approve-request", "atom-send-notification"],
-      "version": "2.0.0",
-      "status": "active",
-      "owner": "Operations Manager",
-      "author": "Workflow Admin"
-    },
-    {
-      "id": "molecule-data-validation",
-      "type": "molecule",
-      "title": "Data Validation Sequence",
-      "description": "Complete data validation workflow",
-      "department": "IT",
-      "subtype": "validation-chain",
-      "category": "Risk Management",
-      "tags": ["validation", "data-quality", "verification"],
-      "composedOf": ["atom-validate-data", "atom-backup-data", "atom-generate-report"],
+      "category": "Workflow",
+      "composedOf": [
+        "atom-access-request-form",
+        "atom-create-ad-account",
+        "atom-create-email",
+        "atom-email-verification"
+      ],
+      "tags": [
+        "workflow",
+        "molecule",
+        "it"
+      ],
       "version": "1.0.0",
       "status": "active",
-      "owner": "Data Team",
-      "author": "Quality Manager"
+      "owner": "IT Department",
+      "author": "System Generated",
+      "estimatedDuration": "30-60 minutes"
     },
-    {
+    "molecule-equipment-provisioning": {
+      "id": "molecule-equipment-provisioning",
+      "type": "molecule",
+      "title": "Equipment Request and Provisioning",
+      "description": "Equipment Request and Provisioning - multi-step task sequence",
+      "department": "Operations",
+      "category": "Workflow",
+      "composedOf": [
+        "atom-equipment-request-form",
+        "atom-manager-approval",
+        "atom-assign-equipment"
+      ],
+      "tags": [
+        "workflow",
+        "molecule",
+        "operations"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Operations Department",
+      "author": "System Generated",
+      "estimatedDuration": "30-60 minutes"
+    },
+    "molecule-background-screening": {
+      "id": "molecule-background-screening",
+      "type": "molecule",
+      "title": "Background and Reference Checks",
+      "description": "Background and Reference Checks - multi-step task sequence",
+      "department": "HR",
+      "category": "Workflow",
+      "composedOf": [
+        "atom-background-check",
+        "atom-reference-check",
+        "atom-identity-verification"
+      ],
+      "tags": [
+        "workflow",
+        "molecule",
+        "hr"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "HR Department",
+      "author": "System Generated",
+      "estimatedDuration": "30-60 minutes"
+    },
+    "molecule-training-completion": {
+      "id": "molecule-training-completion",
+      "type": "molecule",
+      "title": "Required Training Process",
+      "description": "Required Training Process - multi-step task sequence",
+      "department": "HR",
+      "category": "Workflow",
+      "composedOf": [
+        "atom-training-invite",
+        "atom-training-confirmation-form",
+        "atom-log-audit-event"
+      ],
+      "tags": [
+        "workflow",
+        "molecule",
+        "hr"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "HR Department",
+      "author": "System Generated",
+      "estimatedDuration": "30-60 minutes"
+    },
+    "molecule-security-clearance": {
+      "id": "molecule-security-clearance",
+      "type": "molecule",
+      "title": "Security Clearance Workflow",
+      "description": "Security Clearance Workflow - multi-step task sequence",
+      "department": "Security",
+      "category": "Workflow",
+      "composedOf": [
+        "atom-security-checklist",
+        "atom-identity-verification",
+        "atom-security-approval"
+      ],
+      "tags": [
+        "workflow",
+        "molecule",
+        "security"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Security Department",
+      "author": "System Generated",
+      "estimatedDuration": "30-60 minutes"
+    },
+    "molecule-vendor-onboarding": {
+      "id": "molecule-vendor-onboarding",
+      "type": "molecule",
+      "title": "Vendor Registration Process",
+      "description": "Vendor Registration Process - multi-step task sequence",
+      "department": "Finance",
+      "category": "Workflow",
+      "composedOf": [
+        "atom-vendor-intake-form",
+        "atom-credit-check",
+        "atom-compliance-approval",
+        "atom-finance-approval"
+      ],
+      "tags": [
+        "workflow",
+        "molecule",
+        "finance"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Finance Department",
+      "author": "System Generated",
+      "estimatedDuration": "30-60 minutes"
+    },
+    "molecule-access-approval": {
+      "id": "molecule-access-approval",
+      "type": "molecule",
+      "title": "System Access Approval Workflow",
+      "description": "System Access Approval Workflow - multi-step task sequence",
+      "department": "Security",
+      "category": "Workflow",
+      "composedOf": [
+        "atom-access-request-form",
+        "atom-manager-approval",
+        "atom-security-approval"
+      ],
+      "tags": [
+        "workflow",
+        "molecule",
+        "security"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Security Department",
+      "author": "System Generated",
+      "estimatedDuration": "30-60 minutes"
+    },
+    "molecule-incident-response": {
+      "id": "molecule-incident-response",
+      "type": "molecule",
+      "title": "Security Incident Initial Response",
+      "description": "Security Incident Initial Response - multi-step task sequence",
+      "department": "Security",
+      "category": "Workflow",
+      "composedOf": [
+        "atom-incident-report-form",
+        "atom-security-alert",
+        "atom-escalate-issue",
+        "atom-log-audit-event"
+      ],
+      "tags": [
+        "workflow",
+        "molecule",
+        "security"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Security Department",
+      "author": "System Generated",
+      "estimatedDuration": "30-60 minutes"
+    },
+    "molecule-change-approval": {
+      "id": "molecule-change-approval",
+      "type": "molecule",
+      "title": "Change Request Approval Chain",
+      "description": "Change Request Approval Chain - multi-step task sequence",
+      "department": "IT",
+      "category": "Workflow",
+      "composedOf": [
+        "atom-change-request-form",
+        "atom-manager-approval",
+        "atom-security-approval",
+        "atom-deployment-checklist"
+      ],
+      "tags": [
+        "workflow",
+        "molecule",
+        "it"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "IT Department",
+      "author": "System Generated",
+      "estimatedDuration": "30-60 minutes"
+    },
+    "molecule-compliance-audit": {
+      "id": "molecule-compliance-audit",
+      "type": "molecule",
+      "title": "Compliance Audit Process",
+      "description": "Compliance Audit Process - multi-step task sequence",
+      "department": "Compliance",
+      "category": "Workflow",
+      "composedOf": [
+        "atom-compliance-checklist",
+        "atom-audit-checklist",
+        "atom-log-audit-event"
+      ],
+      "tags": [
+        "workflow",
+        "molecule",
+        "compliance"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Compliance Department",
+      "author": "System Generated",
+      "estimatedDuration": "30-60 minutes"
+    },
+    "molecule-exit-processing": {
+      "id": "molecule-exit-processing",
+      "type": "molecule",
+      "title": "Employee Exit Processing",
+      "description": "Employee Exit Processing - multi-step task sequence",
+      "department": "HR",
+      "category": "Workflow",
+      "composedOf": [
+        "atom-offboarding-checklist",
+        "atom-revoke-access",
+        "atom-archive-account",
+        "atom-exit-notification"
+      ],
+      "tags": [
+        "workflow",
+        "molecule",
+        "hr"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "HR Department",
+      "author": "System Generated",
+      "estimatedDuration": "30-60 minutes"
+    },
+    "molecule-onboarding-docs": {
+      "id": "molecule-onboarding-docs",
+      "type": "molecule",
+      "title": "Onboarding Documentation",
+      "description": "Onboarding Documentation - multi-step task sequence",
+      "department": "HR",
+      "category": "Workflow",
+      "composedOf": [
+        "atom-nda-agreement",
+        "atom-policy-handbook",
+        "atom-welcome-email"
+      ],
+      "tags": [
+        "workflow",
+        "molecule",
+        "hr"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "HR Department",
+      "author": "System Generated",
+      "estimatedDuration": "30-60 minutes"
+    },
+    "molecule-license-compliance": {
+      "id": "molecule-license-compliance",
+      "type": "molecule",
+      "title": "License and Certification Tracking",
+      "description": "License and Certification Tracking - multi-step task sequence",
+      "department": "Compliance",
+      "category": "Workflow",
+      "composedOf": [
+        "atom-license-verification",
+        "atom-compliance-checklist",
+        "atom-log-audit-event"
+      ],
+      "tags": [
+        "workflow",
+        "molecule",
+        "compliance"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Compliance Department",
+      "author": "System Generated",
+      "estimatedDuration": "30-60 minutes"
+    },
+    "molecule-expense-approval": {
+      "id": "molecule-expense-approval",
+      "type": "molecule",
+      "title": "Expense Reimbursement Workflow",
+      "description": "Expense Reimbursement Workflow - multi-step task sequence",
+      "department": "Finance",
+      "category": "Workflow",
+      "composedOf": [
+        "atom-expense-report",
+        "atom-manager-approval",
+        "atom-finance-approval"
+      ],
+      "tags": [
+        "workflow",
+        "molecule",
+        "finance"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Finance Department",
+      "author": "System Generated",
+      "estimatedDuration": "30-60 minutes"
+    },
+    "molecule-time-off-approval": {
+      "id": "molecule-time-off-approval",
+      "type": "molecule",
+      "title": "Time Off Request Process",
+      "description": "Time Off Request Process - multi-step task sequence",
+      "department": "HR",
+      "category": "Workflow",
+      "composedOf": [
+        "atom-time-off-request",
+        "atom-manager-approval",
+        "atom-notify-manager"
+      ],
+      "tags": [
+        "workflow",
+        "molecule",
+        "hr"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "HR Department",
+      "author": "System Generated",
+      "estimatedDuration": "30-60 minutes"
+    },
+    "molecule-deployment-approval": {
+      "id": "molecule-deployment-approval",
+      "type": "molecule",
+      "title": "Production Deployment Workflow",
+      "description": "Production Deployment Workflow - multi-step task sequence",
+      "department": "IT",
+      "category": "Workflow",
+      "composedOf": [
+        "atom-change-request-form",
+        "atom-deployment-checklist",
+        "atom-manager-approval"
+      ],
+      "tags": [
+        "workflow",
+        "molecule",
+        "it"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "IT Department",
+      "author": "System Generated",
+      "estimatedDuration": "30-60 minutes"
+    },
+    "molecule-vendor-screening": {
+      "id": "molecule-vendor-screening",
+      "type": "molecule",
+      "title": "Vendor Due Diligence",
+      "description": "Vendor Due Diligence - multi-step task sequence",
+      "department": "Finance",
+      "category": "Workflow",
+      "composedOf": [
+        "atom-vendor-intake-form",
+        "atom-credit-check",
+        "atom-compliance-checklist"
+      ],
+      "tags": [
+        "workflow",
+        "molecule",
+        "finance"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Finance Department",
+      "author": "System Generated",
+      "estimatedDuration": "30-60 minutes"
+    },
+    "molecule-postmortem-review": {
+      "id": "molecule-postmortem-review",
+      "type": "molecule",
+      "title": "Incident Postmortem Workflow",
+      "description": "Incident Postmortem Workflow - multi-step task sequence",
+      "department": "IT",
+      "category": "Workflow",
+      "composedOf": [
+        "atom-incident-postmortem",
+        "atom-status-update",
+        "atom-log-audit-event"
+      ],
+      "tags": [
+        "workflow",
+        "molecule",
+        "it"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "IT Department",
+      "author": "System Generated",
+      "estimatedDuration": "30-60 minutes"
+    },
+    "organism-employee-onboarding": {
       "id": "organism-employee-onboarding",
       "type": "organism",
-      "title": "Complete Employee Onboarding",
-      "description": "End-to-end employee onboarding workflow",
+      "title": "Complete Employee Onboarding Workflow",
+      "description": "Complete Employee Onboarding Workflow - complete end-to-end workflow",
       "department": "HR",
-      "subtype": "complete-workflow",
-      "category": "Training & Onboarding",
-      "tags": ["onboarding", "hr", "employee", "workflow"],
-      "composedOf": ["atom-welcome-message", "molecule-account-setup", "atom-training-modules", "atom-equipment-form"],
-      "version": "3.0.0",
+      "category": "Complete Workflow",
+      "composedOf": [
+        "molecule-background-screening",
+        "molecule-account-setup",
+        "molecule-onboarding-docs",
+        "molecule-equipment-provisioning",
+        "molecule-training-completion",
+        "atom-welcome-email"
+      ],
+      "tags": [
+        "workflow",
+        "organism",
+        "hr"
+      ],
+      "version": "1.0.0",
       "status": "active",
-      "owner": "HR Director",
-      "author": "HR Team Lead"
+      "owner": "HR Leadership",
+      "author": "System Generated",
+      "complianceFrameworks": [
+        "ISO 9001",
+        "SOC 2"
+      ],
+      "riskLevel": "medium",
+      "reviewFrequency": "quarterly"
+    },
+    "organism-employee-offboarding": {
+      "id": "organism-employee-offboarding",
+      "type": "organism",
+      "title": "Employee Offboarding Workflow",
+      "description": "Employee Offboarding Workflow - complete end-to-end workflow",
+      "department": "HR",
+      "category": "Complete Workflow",
+      "composedOf": [
+        "molecule-exit-processing",
+        "molecule-equipment-provisioning",
+        "atom-exit-notification",
+        "atom-archive-account"
+      ],
+      "tags": [
+        "workflow",
+        "organism",
+        "hr"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "HR Leadership",
+      "author": "System Generated",
+      "complianceFrameworks": [
+        "ISO 9001",
+        "SOC 2"
+      ],
+      "riskLevel": "medium",
+      "reviewFrequency": "quarterly"
+    },
+    "organism-system-access": {
+      "id": "organism-system-access",
+      "type": "organism",
+      "title": "System Access Provisioning Workflow",
+      "description": "System Access Provisioning Workflow - complete end-to-end workflow",
+      "department": "IT",
+      "category": "Complete Workflow",
+      "composedOf": [
+        "molecule-access-approval",
+        "molecule-account-setup",
+        "molecule-security-clearance",
+        "atom-log-audit-event"
+      ],
+      "tags": [
+        "workflow",
+        "organism",
+        "it"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "IT Leadership",
+      "author": "System Generated",
+      "complianceFrameworks": [
+        "ISO 9001",
+        "SOC 2"
+      ],
+      "riskLevel": "medium",
+      "reviewFrequency": "quarterly"
+    },
+    "organism-incident-management": {
+      "id": "organism-incident-management",
+      "type": "organism",
+      "title": "Security Incident Management Workflow",
+      "description": "Security Incident Management Workflow - complete end-to-end workflow",
+      "department": "Security",
+      "category": "Complete Workflow",
+      "composedOf": [
+        "molecule-incident-response",
+        "molecule-postmortem-review",
+        "atom-security-alert",
+        "atom-compliance-approval"
+      ],
+      "tags": [
+        "workflow",
+        "organism",
+        "security"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Security Leadership",
+      "author": "System Generated",
+      "complianceFrameworks": [
+        "ISO 9001",
+        "SOC 2"
+      ],
+      "riskLevel": "medium",
+      "reviewFrequency": "quarterly"
+    },
+    "organism-vendor-management": {
+      "id": "organism-vendor-management",
+      "type": "organism",
+      "title": "Vendor Onboarding and Management",
+      "description": "Vendor Onboarding and Management - complete end-to-end workflow",
+      "department": "Finance",
+      "category": "Complete Workflow",
+      "composedOf": [
+        "molecule-vendor-onboarding",
+        "molecule-vendor-screening",
+        "molecule-compliance-audit",
+        "atom-executive-approval"
+      ],
+      "tags": [
+        "workflow",
+        "organism",
+        "finance"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Finance Leadership",
+      "author": "System Generated",
+      "complianceFrameworks": [
+        "ISO 9001",
+        "SOC 2"
+      ],
+      "riskLevel": "medium",
+      "reviewFrequency": "quarterly"
+    },
+    "organism-change-management": {
+      "id": "organism-change-management",
+      "type": "organism",
+      "title": "IT Change Management Workflow",
+      "description": "IT Change Management Workflow - complete end-to-end workflow",
+      "department": "IT",
+      "category": "Complete Workflow",
+      "composedOf": [
+        "molecule-change-approval",
+        "molecule-deployment-approval",
+        "atom-deployment-checklist",
+        "molecule-postmortem-review"
+      ],
+      "tags": [
+        "workflow",
+        "organism",
+        "it"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "IT Leadership",
+      "author": "System Generated",
+      "complianceFrameworks": [
+        "ISO 9001",
+        "SOC 2"
+      ],
+      "riskLevel": "medium",
+      "reviewFrequency": "quarterly"
+    },
+    "organism-compliance-review": {
+      "id": "organism-compliance-review",
+      "type": "organism",
+      "title": "Quarterly Compliance Review",
+      "description": "Quarterly Compliance Review - complete end-to-end workflow",
+      "department": "Compliance",
+      "category": "Complete Workflow",
+      "composedOf": [
+        "molecule-compliance-audit",
+        "molecule-license-compliance",
+        "atom-audit-checklist",
+        "atom-compliance-approval"
+      ],
+      "tags": [
+        "workflow",
+        "organism",
+        "compliance"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Compliance Leadership",
+      "author": "System Generated",
+      "complianceFrameworks": [
+        "ISO 9001",
+        "SOC 2"
+      ],
+      "riskLevel": "medium",
+      "reviewFrequency": "quarterly"
+    },
+    "organism-training-program": {
+      "id": "organism-training-program",
+      "type": "organism",
+      "title": "Employee Training and Certification Program",
+      "description": "Employee Training and Certification Program - complete end-to-end workflow",
+      "department": "HR",
+      "category": "Complete Workflow",
+      "composedOf": [
+        "molecule-training-completion",
+        "molecule-license-compliance",
+        "atom-training-confirmation-form",
+        "atom-log-audit-event"
+      ],
+      "tags": [
+        "workflow",
+        "organism",
+        "hr"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "HR Leadership",
+      "author": "System Generated",
+      "complianceFrameworks": [
+        "ISO 9001",
+        "SOC 2"
+      ],
+      "riskLevel": "medium",
+      "reviewFrequency": "quarterly"
+    },
+    "sop-001-user-onboarding": {
+      "id": "sop-001-user-onboarding",
+      "type": "sop",
+      "title": "User Onboarding - Complete Process",
+      "description": "Complete SOP for User Onboarding - Complete Process",
+      "department": "HR",
+      "category": "Standard Operating Procedure",
+      "composedOf": [
+        "organism-employee-onboarding",
+        "molecule-security-clearance"
+      ],
+      "tags": [
+        "sop",
+        "hr",
+        "compliance"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "HR Leadership",
+      "author": "System Generated",
+      "lastReviewed": "2025-11-30",
+      "approver": "HR Director",
+      "complianceFrameworks": [
+        "SOC 2",
+        "ISO 27001"
+      ],
+      "riskLevel": "high",
+      "reviewFrequency": "quarterly"
+    },
+    "sop-002-user-offboarding": {
+      "id": "sop-002-user-offboarding",
+      "type": "sop",
+      "title": "Employee Offboarding and Access Removal",
+      "description": "Complete SOP for Employee Offboarding and Access Removal",
+      "department": "HR",
+      "category": "Standard Operating Procedure",
+      "composedOf": [
+        "organism-employee-offboarding"
+      ],
+      "tags": [
+        "sop",
+        "hr",
+        "compliance"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "HR Leadership",
+      "author": "System Generated",
+      "lastReviewed": "2025-11-30",
+      "approver": "HR Director",
+      "complianceFrameworks": [
+        "SOC 2",
+        "ISO 27001"
+      ],
+      "riskLevel": "critical",
+      "reviewFrequency": "monthly"
+    },
+    "sop-003-access-request": {
+      "id": "sop-003-access-request",
+      "type": "sop",
+      "title": "System Access Request and Approval",
+      "description": "Complete SOP for System Access Request and Approval",
+      "department": "IT",
+      "category": "Standard Operating Procedure",
+      "composedOf": [
+        "organism-system-access"
+      ],
+      "tags": [
+        "sop",
+        "it",
+        "compliance"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "IT Leadership",
+      "author": "System Generated",
+      "lastReviewed": "2025-11-30",
+      "approver": "IT Director",
+      "complianceFrameworks": [
+        "SOC 2"
+      ],
+      "riskLevel": "high",
+      "reviewFrequency": "quarterly"
+    },
+    "sop-004-incident-response": {
+      "id": "sop-004-incident-response",
+      "type": "sop",
+      "title": "Security Incident Response Protocol",
+      "description": "Complete SOP for Security Incident Response Protocol",
+      "department": "Security",
+      "category": "Standard Operating Procedure",
+      "composedOf": [
+        "organism-incident-management",
+        "molecule-compliance-audit"
+      ],
+      "tags": [
+        "sop",
+        "security",
+        "compliance"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Security Leadership",
+      "author": "System Generated",
+      "lastReviewed": "2025-11-30",
+      "approver": "Security Director",
+      "complianceFrameworks": [
+        "SOC 2",
+        "ISO 27001",
+        "NIST CSF"
+      ],
+      "riskLevel": "critical",
+      "reviewFrequency": "monthly"
+    },
+    "sop-005-system-provisioning": {
+      "id": "sop-005-system-provisioning",
+      "type": "sop",
+      "title": "IT System Provisioning and Configuration",
+      "description": "Complete SOP for IT System Provisioning and Configuration",
+      "department": "IT",
+      "category": "Standard Operating Procedure",
+      "composedOf": [
+        "organism-system-access",
+        "molecule-deployment-approval"
+      ],
+      "tags": [
+        "sop",
+        "it",
+        "compliance"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "IT Leadership",
+      "author": "System Generated",
+      "lastReviewed": "2025-11-30",
+      "approver": "IT Director",
+      "complianceFrameworks": [
+        "SOC 2"
+      ],
+      "riskLevel": "medium",
+      "reviewFrequency": "quarterly"
+    },
+    "sop-006-training-certification": {
+      "id": "sop-006-training-certification",
+      "type": "sop",
+      "title": "Employee Training and Certification Program",
+      "description": "Complete SOP for Employee Training and Certification Program",
+      "department": "HR",
+      "category": "Standard Operating Procedure",
+      "composedOf": [
+        "organism-training-program"
+      ],
+      "tags": [
+        "sop",
+        "hr",
+        "compliance"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "HR Leadership",
+      "author": "System Generated",
+      "lastReviewed": "2025-11-30",
+      "approver": "HR Director",
+      "complianceFrameworks": [
+        "ISO 9001"
+      ],
+      "riskLevel": "low",
+      "reviewFrequency": "quarterly"
+    },
+    "sop-007-equipment-lifecycle": {
+      "id": "sop-007-equipment-lifecycle",
+      "type": "sop",
+      "title": "Equipment Allocation and Lifecycle Management",
+      "description": "Complete SOP for Equipment Allocation and Lifecycle Management",
+      "department": "Operations",
+      "category": "Standard Operating Procedure",
+      "composedOf": [
+        "molecule-equipment-provisioning",
+        "atom-equipment-checklist"
+      ],
+      "tags": [
+        "sop",
+        "operations",
+        "compliance"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Operations Leadership",
+      "author": "System Generated",
+      "lastReviewed": "2025-11-30",
+      "approver": "Operations Director",
+      "complianceFrameworks": [
+        "ISO 9001"
+      ],
+      "riskLevel": "low",
+      "reviewFrequency": "quarterly"
+    },
+    "sop-008-vendor-management": {
+      "id": "sop-008-vendor-management",
+      "type": "sop",
+      "title": "Vendor Onboarding and Due Diligence",
+      "description": "Complete SOP for Vendor Onboarding and Due Diligence",
+      "department": "Finance",
+      "category": "Standard Operating Procedure",
+      "composedOf": [
+        "organism-vendor-management"
+      ],
+      "tags": [
+        "sop",
+        "finance",
+        "compliance"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Finance Leadership",
+      "author": "System Generated",
+      "lastReviewed": "2025-11-30",
+      "approver": "Finance Director",
+      "complianceFrameworks": [
+        "SOC 2",
+        "SOX"
+      ],
+      "riskLevel": "high",
+      "reviewFrequency": "quarterly"
+    },
+    "sop-009-change-management": {
+      "id": "sop-009-change-management",
+      "type": "sop",
+      "title": "IT Change Management and Deployment",
+      "description": "Complete SOP for IT Change Management and Deployment",
+      "department": "IT",
+      "category": "Standard Operating Procedure",
+      "composedOf": [
+        "organism-change-management"
+      ],
+      "tags": [
+        "sop",
+        "it",
+        "compliance"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "IT Leadership",
+      "author": "System Generated",
+      "lastReviewed": "2025-11-30",
+      "approver": "IT Director",
+      "complianceFrameworks": [
+        "ITIL",
+        "SOC 2"
+      ],
+      "riskLevel": "high",
+      "reviewFrequency": "quarterly"
+    },
+    "sop-010-compliance-audit": {
+      "id": "sop-010-compliance-audit",
+      "type": "sop",
+      "title": "Quarterly Compliance Audit and Reporting",
+      "description": "Complete SOP for Quarterly Compliance Audit and Reporting",
+      "department": "Compliance",
+      "category": "Standard Operating Procedure",
+      "composedOf": [
+        "organism-compliance-review",
+        "molecule-compliance-audit"
+      ],
+      "tags": [
+        "sop",
+        "compliance",
+        "compliance"
+      ],
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "Compliance Leadership",
+      "author": "System Generated",
+      "lastReviewed": "2025-11-30",
+      "approver": "Compliance Director",
+      "complianceFrameworks": [
+        "SOC 2",
+        "ISO 9001",
+        "GDPR"
+      ],
+      "riskLevel": "critical",
+      "reviewFrequency": "monthly"
+    }
+  },
+  "edges": [
+    {
+      "id": "edge-001",
+      "source": "atom-access-request-form",
+      "target": "molecule-account-setup",
+      "type": "component-of",
+      "description": "atom-access-request-form is a component of molecule-account-setup",
+      "strength": "strong"
     },
     {
-      "id": "sop-complete-onboarding",
-      "type": "sop",
-      "title": "Complete New Hire Onboarding SOP",
-      "description": "Comprehensive onboarding process with all requirements",
-      "department": "Multi-Department",
-      "category": "Training & Onboarding",
-      "tags": ["onboarding", "hr", "compliance", "it", "operations"],
-      "composedOf": ["organism-employee-onboarding", "molecule-approval-workflow", "atom-confidentiality-agreement"],
-      "version": "5.0.0",
-      "status": "active",
-      "owner": "Chief HR Officer",
-      "author": "Executive Team",
-      "complianceFrameworks": ["ISO 9001", "SOC 2"],
-      "riskLevel": "medium"
+      "id": "edge-002",
+      "source": "atom-create-ad-account",
+      "target": "molecule-account-setup",
+      "type": "component-of",
+      "description": "atom-create-ad-account is a component of molecule-account-setup",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-003",
+      "source": "atom-create-email",
+      "target": "molecule-account-setup",
+      "type": "component-of",
+      "description": "atom-create-email is a component of molecule-account-setup",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-004",
+      "source": "atom-email-verification",
+      "target": "molecule-account-setup",
+      "type": "component-of",
+      "description": "atom-email-verification is a component of molecule-account-setup",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-005",
+      "source": "atom-equipment-request-form",
+      "target": "molecule-equipment-provisioning",
+      "type": "component-of",
+      "description": "atom-equipment-request-form is a component of molecule-equipment-provisioning",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-006",
+      "source": "atom-manager-approval",
+      "target": "molecule-equipment-provisioning",
+      "type": "component-of",
+      "description": "atom-manager-approval is a component of molecule-equipment-provisioning",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-007",
+      "source": "atom-assign-equipment",
+      "target": "molecule-equipment-provisioning",
+      "type": "component-of",
+      "description": "atom-assign-equipment is a component of molecule-equipment-provisioning",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-008",
+      "source": "atom-background-check",
+      "target": "molecule-background-screening",
+      "type": "component-of",
+      "description": "atom-background-check is a component of molecule-background-screening",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-009",
+      "source": "atom-reference-check",
+      "target": "molecule-background-screening",
+      "type": "component-of",
+      "description": "atom-reference-check is a component of molecule-background-screening",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-010",
+      "source": "atom-identity-verification",
+      "target": "molecule-background-screening",
+      "type": "component-of",
+      "description": "atom-identity-verification is a component of molecule-background-screening",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-011",
+      "source": "atom-training-invite",
+      "target": "molecule-training-completion",
+      "type": "component-of",
+      "description": "atom-training-invite is a component of molecule-training-completion",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-012",
+      "source": "atom-training-confirmation-form",
+      "target": "molecule-training-completion",
+      "type": "component-of",
+      "description": "atom-training-confirmation-form is a component of molecule-training-completion",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-013",
+      "source": "atom-log-audit-event",
+      "target": "molecule-training-completion",
+      "type": "component-of",
+      "description": "atom-log-audit-event is a component of molecule-training-completion",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-014",
+      "source": "atom-security-checklist",
+      "target": "molecule-security-clearance",
+      "type": "component-of",
+      "description": "atom-security-checklist is a component of molecule-security-clearance",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-015",
+      "source": "atom-identity-verification",
+      "target": "molecule-security-clearance",
+      "type": "component-of",
+      "description": "atom-identity-verification is a component of molecule-security-clearance",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-016",
+      "source": "atom-security-approval",
+      "target": "molecule-security-clearance",
+      "type": "component-of",
+      "description": "atom-security-approval is a component of molecule-security-clearance",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-017",
+      "source": "atom-vendor-intake-form",
+      "target": "molecule-vendor-onboarding",
+      "type": "component-of",
+      "description": "atom-vendor-intake-form is a component of molecule-vendor-onboarding",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-018",
+      "source": "atom-credit-check",
+      "target": "molecule-vendor-onboarding",
+      "type": "component-of",
+      "description": "atom-credit-check is a component of molecule-vendor-onboarding",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-019",
+      "source": "atom-compliance-approval",
+      "target": "molecule-vendor-onboarding",
+      "type": "component-of",
+      "description": "atom-compliance-approval is a component of molecule-vendor-onboarding",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-020",
+      "source": "atom-finance-approval",
+      "target": "molecule-vendor-onboarding",
+      "type": "component-of",
+      "description": "atom-finance-approval is a component of molecule-vendor-onboarding",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-021",
+      "source": "atom-access-request-form",
+      "target": "molecule-access-approval",
+      "type": "component-of",
+      "description": "atom-access-request-form is a component of molecule-access-approval",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-022",
+      "source": "atom-manager-approval",
+      "target": "molecule-access-approval",
+      "type": "component-of",
+      "description": "atom-manager-approval is a component of molecule-access-approval",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-023",
+      "source": "atom-security-approval",
+      "target": "molecule-access-approval",
+      "type": "component-of",
+      "description": "atom-security-approval is a component of molecule-access-approval",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-024",
+      "source": "atom-incident-report-form",
+      "target": "molecule-incident-response",
+      "type": "component-of",
+      "description": "atom-incident-report-form is a component of molecule-incident-response",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-025",
+      "source": "atom-security-alert",
+      "target": "molecule-incident-response",
+      "type": "component-of",
+      "description": "atom-security-alert is a component of molecule-incident-response",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-026",
+      "source": "atom-escalate-issue",
+      "target": "molecule-incident-response",
+      "type": "component-of",
+      "description": "atom-escalate-issue is a component of molecule-incident-response",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-027",
+      "source": "atom-log-audit-event",
+      "target": "molecule-incident-response",
+      "type": "component-of",
+      "description": "atom-log-audit-event is a component of molecule-incident-response",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-028",
+      "source": "atom-change-request-form",
+      "target": "molecule-change-approval",
+      "type": "component-of",
+      "description": "atom-change-request-form is a component of molecule-change-approval",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-029",
+      "source": "atom-manager-approval",
+      "target": "molecule-change-approval",
+      "type": "component-of",
+      "description": "atom-manager-approval is a component of molecule-change-approval",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-030",
+      "source": "atom-security-approval",
+      "target": "molecule-change-approval",
+      "type": "component-of",
+      "description": "atom-security-approval is a component of molecule-change-approval",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-031",
+      "source": "atom-deployment-checklist",
+      "target": "molecule-change-approval",
+      "type": "component-of",
+      "description": "atom-deployment-checklist is a component of molecule-change-approval",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-032",
+      "source": "atom-compliance-checklist",
+      "target": "molecule-compliance-audit",
+      "type": "component-of",
+      "description": "atom-compliance-checklist is a component of molecule-compliance-audit",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-033",
+      "source": "atom-audit-checklist",
+      "target": "molecule-compliance-audit",
+      "type": "component-of",
+      "description": "atom-audit-checklist is a component of molecule-compliance-audit",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-034",
+      "source": "atom-log-audit-event",
+      "target": "molecule-compliance-audit",
+      "type": "component-of",
+      "description": "atom-log-audit-event is a component of molecule-compliance-audit",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-035",
+      "source": "atom-offboarding-checklist",
+      "target": "molecule-exit-processing",
+      "type": "component-of",
+      "description": "atom-offboarding-checklist is a component of molecule-exit-processing",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-036",
+      "source": "atom-revoke-access",
+      "target": "molecule-exit-processing",
+      "type": "component-of",
+      "description": "atom-revoke-access is a component of molecule-exit-processing",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-037",
+      "source": "atom-archive-account",
+      "target": "molecule-exit-processing",
+      "type": "component-of",
+      "description": "atom-archive-account is a component of molecule-exit-processing",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-038",
+      "source": "atom-exit-notification",
+      "target": "molecule-exit-processing",
+      "type": "component-of",
+      "description": "atom-exit-notification is a component of molecule-exit-processing",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-039",
+      "source": "atom-nda-agreement",
+      "target": "molecule-onboarding-docs",
+      "type": "component-of",
+      "description": "atom-nda-agreement is a component of molecule-onboarding-docs",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-040",
+      "source": "atom-policy-handbook",
+      "target": "molecule-onboarding-docs",
+      "type": "component-of",
+      "description": "atom-policy-handbook is a component of molecule-onboarding-docs",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-041",
+      "source": "atom-welcome-email",
+      "target": "molecule-onboarding-docs",
+      "type": "component-of",
+      "description": "atom-welcome-email is a component of molecule-onboarding-docs",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-042",
+      "source": "atom-license-verification",
+      "target": "molecule-license-compliance",
+      "type": "component-of",
+      "description": "atom-license-verification is a component of molecule-license-compliance",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-043",
+      "source": "atom-compliance-checklist",
+      "target": "molecule-license-compliance",
+      "type": "component-of",
+      "description": "atom-compliance-checklist is a component of molecule-license-compliance",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-044",
+      "source": "atom-log-audit-event",
+      "target": "molecule-license-compliance",
+      "type": "component-of",
+      "description": "atom-log-audit-event is a component of molecule-license-compliance",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-045",
+      "source": "atom-expense-report",
+      "target": "molecule-expense-approval",
+      "type": "component-of",
+      "description": "atom-expense-report is a component of molecule-expense-approval",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-046",
+      "source": "atom-manager-approval",
+      "target": "molecule-expense-approval",
+      "type": "component-of",
+      "description": "atom-manager-approval is a component of molecule-expense-approval",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-047",
+      "source": "atom-finance-approval",
+      "target": "molecule-expense-approval",
+      "type": "component-of",
+      "description": "atom-finance-approval is a component of molecule-expense-approval",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-048",
+      "source": "atom-time-off-request",
+      "target": "molecule-time-off-approval",
+      "type": "component-of",
+      "description": "atom-time-off-request is a component of molecule-time-off-approval",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-049",
+      "source": "atom-manager-approval",
+      "target": "molecule-time-off-approval",
+      "type": "component-of",
+      "description": "atom-manager-approval is a component of molecule-time-off-approval",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-050",
+      "source": "atom-notify-manager",
+      "target": "molecule-time-off-approval",
+      "type": "component-of",
+      "description": "atom-notify-manager is a component of molecule-time-off-approval",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-051",
+      "source": "atom-change-request-form",
+      "target": "molecule-deployment-approval",
+      "type": "component-of",
+      "description": "atom-change-request-form is a component of molecule-deployment-approval",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-052",
+      "source": "atom-deployment-checklist",
+      "target": "molecule-deployment-approval",
+      "type": "component-of",
+      "description": "atom-deployment-checklist is a component of molecule-deployment-approval",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-053",
+      "source": "atom-manager-approval",
+      "target": "molecule-deployment-approval",
+      "type": "component-of",
+      "description": "atom-manager-approval is a component of molecule-deployment-approval",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-054",
+      "source": "atom-vendor-intake-form",
+      "target": "molecule-vendor-screening",
+      "type": "component-of",
+      "description": "atom-vendor-intake-form is a component of molecule-vendor-screening",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-055",
+      "source": "atom-credit-check",
+      "target": "molecule-vendor-screening",
+      "type": "component-of",
+      "description": "atom-credit-check is a component of molecule-vendor-screening",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-056",
+      "source": "atom-compliance-checklist",
+      "target": "molecule-vendor-screening",
+      "type": "component-of",
+      "description": "atom-compliance-checklist is a component of molecule-vendor-screening",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-057",
+      "source": "atom-incident-postmortem",
+      "target": "molecule-postmortem-review",
+      "type": "component-of",
+      "description": "atom-incident-postmortem is a component of molecule-postmortem-review",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-058",
+      "source": "atom-status-update",
+      "target": "molecule-postmortem-review",
+      "type": "component-of",
+      "description": "atom-status-update is a component of molecule-postmortem-review",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-059",
+      "source": "atom-log-audit-event",
+      "target": "molecule-postmortem-review",
+      "type": "component-of",
+      "description": "atom-log-audit-event is a component of molecule-postmortem-review",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-060",
+      "source": "molecule-background-screening",
+      "target": "organism-employee-onboarding",
+      "type": "component-of",
+      "description": "molecule-background-screening is part of organism-employee-onboarding",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-061",
+      "source": "molecule-account-setup",
+      "target": "organism-employee-onboarding",
+      "type": "component-of",
+      "description": "molecule-account-setup is part of organism-employee-onboarding",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-062",
+      "source": "molecule-onboarding-docs",
+      "target": "organism-employee-onboarding",
+      "type": "component-of",
+      "description": "molecule-onboarding-docs is part of organism-employee-onboarding",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-063",
+      "source": "molecule-equipment-provisioning",
+      "target": "organism-employee-onboarding",
+      "type": "component-of",
+      "description": "molecule-equipment-provisioning is part of organism-employee-onboarding",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-064",
+      "source": "molecule-training-completion",
+      "target": "organism-employee-onboarding",
+      "type": "component-of",
+      "description": "molecule-training-completion is part of organism-employee-onboarding",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-065",
+      "source": "atom-welcome-email",
+      "target": "organism-employee-onboarding",
+      "type": "component-of",
+      "description": "atom-welcome-email is part of organism-employee-onboarding",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-066",
+      "source": "molecule-exit-processing",
+      "target": "organism-employee-offboarding",
+      "type": "component-of",
+      "description": "molecule-exit-processing is part of organism-employee-offboarding",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-067",
+      "source": "molecule-equipment-provisioning",
+      "target": "organism-employee-offboarding",
+      "type": "component-of",
+      "description": "molecule-equipment-provisioning is part of organism-employee-offboarding",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-068",
+      "source": "atom-exit-notification",
+      "target": "organism-employee-offboarding",
+      "type": "component-of",
+      "description": "atom-exit-notification is part of organism-employee-offboarding",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-069",
+      "source": "atom-archive-account",
+      "target": "organism-employee-offboarding",
+      "type": "component-of",
+      "description": "atom-archive-account is part of organism-employee-offboarding",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-070",
+      "source": "molecule-access-approval",
+      "target": "organism-system-access",
+      "type": "component-of",
+      "description": "molecule-access-approval is part of organism-system-access",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-071",
+      "source": "molecule-account-setup",
+      "target": "organism-system-access",
+      "type": "component-of",
+      "description": "molecule-account-setup is part of organism-system-access",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-072",
+      "source": "molecule-security-clearance",
+      "target": "organism-system-access",
+      "type": "component-of",
+      "description": "molecule-security-clearance is part of organism-system-access",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-073",
+      "source": "atom-log-audit-event",
+      "target": "organism-system-access",
+      "type": "component-of",
+      "description": "atom-log-audit-event is part of organism-system-access",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-074",
+      "source": "molecule-incident-response",
+      "target": "organism-incident-management",
+      "type": "component-of",
+      "description": "molecule-incident-response is part of organism-incident-management",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-075",
+      "source": "molecule-postmortem-review",
+      "target": "organism-incident-management",
+      "type": "component-of",
+      "description": "molecule-postmortem-review is part of organism-incident-management",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-076",
+      "source": "atom-security-alert",
+      "target": "organism-incident-management",
+      "type": "component-of",
+      "description": "atom-security-alert is part of organism-incident-management",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-077",
+      "source": "atom-compliance-approval",
+      "target": "organism-incident-management",
+      "type": "component-of",
+      "description": "atom-compliance-approval is part of organism-incident-management",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-078",
+      "source": "molecule-vendor-onboarding",
+      "target": "organism-vendor-management",
+      "type": "component-of",
+      "description": "molecule-vendor-onboarding is part of organism-vendor-management",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-079",
+      "source": "molecule-vendor-screening",
+      "target": "organism-vendor-management",
+      "type": "component-of",
+      "description": "molecule-vendor-screening is part of organism-vendor-management",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-080",
+      "source": "molecule-compliance-audit",
+      "target": "organism-vendor-management",
+      "type": "component-of",
+      "description": "molecule-compliance-audit is part of organism-vendor-management",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-081",
+      "source": "atom-executive-approval",
+      "target": "organism-vendor-management",
+      "type": "component-of",
+      "description": "atom-executive-approval is part of organism-vendor-management",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-082",
+      "source": "molecule-change-approval",
+      "target": "organism-change-management",
+      "type": "component-of",
+      "description": "molecule-change-approval is part of organism-change-management",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-083",
+      "source": "molecule-deployment-approval",
+      "target": "organism-change-management",
+      "type": "component-of",
+      "description": "molecule-deployment-approval is part of organism-change-management",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-084",
+      "source": "atom-deployment-checklist",
+      "target": "organism-change-management",
+      "type": "component-of",
+      "description": "atom-deployment-checklist is part of organism-change-management",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-085",
+      "source": "molecule-postmortem-review",
+      "target": "organism-change-management",
+      "type": "component-of",
+      "description": "molecule-postmortem-review is part of organism-change-management",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-086",
+      "source": "molecule-compliance-audit",
+      "target": "organism-compliance-review",
+      "type": "component-of",
+      "description": "molecule-compliance-audit is part of organism-compliance-review",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-087",
+      "source": "molecule-license-compliance",
+      "target": "organism-compliance-review",
+      "type": "component-of",
+      "description": "molecule-license-compliance is part of organism-compliance-review",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-088",
+      "source": "atom-audit-checklist",
+      "target": "organism-compliance-review",
+      "type": "component-of",
+      "description": "atom-audit-checklist is part of organism-compliance-review",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-089",
+      "source": "atom-compliance-approval",
+      "target": "organism-compliance-review",
+      "type": "component-of",
+      "description": "atom-compliance-approval is part of organism-compliance-review",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-090",
+      "source": "molecule-training-completion",
+      "target": "organism-training-program",
+      "type": "component-of",
+      "description": "molecule-training-completion is part of organism-training-program",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-091",
+      "source": "molecule-license-compliance",
+      "target": "organism-training-program",
+      "type": "component-of",
+      "description": "molecule-license-compliance is part of organism-training-program",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-092",
+      "source": "atom-training-confirmation-form",
+      "target": "organism-training-program",
+      "type": "component-of",
+      "description": "atom-training-confirmation-form is part of organism-training-program",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-093",
+      "source": "atom-log-audit-event",
+      "target": "organism-training-program",
+      "type": "component-of",
+      "description": "atom-log-audit-event is part of organism-training-program",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-094",
+      "source": "organism-employee-onboarding",
+      "target": "sop-001-user-onboarding",
+      "type": "component-of",
+      "description": "organism-employee-onboarding implements sop-001-user-onboarding",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-095",
+      "source": "molecule-security-clearance",
+      "target": "sop-001-user-onboarding",
+      "type": "component-of",
+      "description": "molecule-security-clearance implements sop-001-user-onboarding",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-096",
+      "source": "organism-employee-offboarding",
+      "target": "sop-002-user-offboarding",
+      "type": "component-of",
+      "description": "organism-employee-offboarding implements sop-002-user-offboarding",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-097",
+      "source": "organism-system-access",
+      "target": "sop-003-access-request",
+      "type": "component-of",
+      "description": "organism-system-access implements sop-003-access-request",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-098",
+      "source": "organism-incident-management",
+      "target": "sop-004-incident-response",
+      "type": "component-of",
+      "description": "organism-incident-management implements sop-004-incident-response",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-099",
+      "source": "molecule-compliance-audit",
+      "target": "sop-004-incident-response",
+      "type": "component-of",
+      "description": "molecule-compliance-audit implements sop-004-incident-response",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-100",
+      "source": "organism-system-access",
+      "target": "sop-005-system-provisioning",
+      "type": "component-of",
+      "description": "organism-system-access implements sop-005-system-provisioning",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-101",
+      "source": "molecule-deployment-approval",
+      "target": "sop-005-system-provisioning",
+      "type": "component-of",
+      "description": "molecule-deployment-approval implements sop-005-system-provisioning",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-102",
+      "source": "organism-training-program",
+      "target": "sop-006-training-certification",
+      "type": "component-of",
+      "description": "organism-training-program implements sop-006-training-certification",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-103",
+      "source": "molecule-equipment-provisioning",
+      "target": "sop-007-equipment-lifecycle",
+      "type": "component-of",
+      "description": "molecule-equipment-provisioning implements sop-007-equipment-lifecycle",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-104",
+      "source": "atom-equipment-checklist",
+      "target": "sop-007-equipment-lifecycle",
+      "type": "component-of",
+      "description": "atom-equipment-checklist implements sop-007-equipment-lifecycle",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-105",
+      "source": "organism-vendor-management",
+      "target": "sop-008-vendor-management",
+      "type": "component-of",
+      "description": "organism-vendor-management implements sop-008-vendor-management",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-106",
+      "source": "organism-change-management",
+      "target": "sop-009-change-management",
+      "type": "component-of",
+      "description": "organism-change-management implements sop-009-change-management",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-107",
+      "source": "organism-compliance-review",
+      "target": "sop-010-compliance-audit",
+      "type": "component-of",
+      "description": "organism-compliance-review implements sop-010-compliance-audit",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-108",
+      "source": "molecule-compliance-audit",
+      "target": "sop-010-compliance-audit",
+      "type": "component-of",
+      "description": "molecule-compliance-audit implements sop-010-compliance-audit",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-109",
+      "source": "sop-001-user-onboarding",
+      "target": "sop-003-access-request",
+      "type": "depends-on",
+      "description": "Onboarding requires system access",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-110",
+      "source": "sop-002-user-offboarding",
+      "target": "sop-003-access-request",
+      "type": "depends-on",
+      "description": "Offboarding requires access revocation",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-111",
+      "source": "sop-004-incident-response",
+      "target": "sop-010-compliance-audit",
+      "type": "depends-on",
+      "description": "Incidents trigger compliance review",
+      "strength": "normal"
+    },
+    {
+      "id": "edge-112",
+      "source": "sop-005-system-provisioning",
+      "target": "sop-009-change-management",
+      "type": "depends-on",
+      "description": "Provisioning follows change process",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-113",
+      "source": "sop-008-vendor-management",
+      "target": "sop-010-compliance-audit",
+      "type": "depends-on",
+      "description": "Vendors require compliance verification",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-114",
+      "source": "sop-009-change-management",
+      "target": "sop-004-incident-response",
+      "type": "related-to",
+      "description": "Changes may trigger incidents",
+      "strength": "normal"
+    },
+    {
+      "id": "edge-115",
+      "source": "sop-006-training-certification",
+      "target": "sop-001-user-onboarding",
+      "type": "depends-on",
+      "description": "Training required for new hires",
+      "strength": "normal"
+    },
+    {
+      "id": "edge-116",
+      "source": "organism-employee-onboarding",
+      "target": "organism-system-access",
+      "type": "depends-on",
+      "description": "Onboarding requires system access",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-117",
+      "source": "organism-employee-offboarding",
+      "target": "organism-system-access",
+      "type": "depends-on",
+      "description": "Offboarding requires access removal",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-118",
+      "source": "organism-incident-management",
+      "target": "organism-compliance-review",
+      "type": "triggers",
+      "description": "Incidents trigger compliance review",
+      "strength": "normal"
+    },
+    {
+      "id": "edge-119",
+      "source": "organism-change-management",
+      "target": "organism-incident-management",
+      "type": "related-to",
+      "description": "Changes may cause incidents",
+      "strength": "normal"
+    },
+    {
+      "id": "edge-120",
+      "source": "molecule-account-setup",
+      "target": "molecule-security-clearance",
+      "type": "depends-on",
+      "description": "Accounts require security clearance",
+      "strength": "strong"
+    },
+    {
+      "id": "edge-121",
+      "source": "molecule-exit-processing",
+      "target": "molecule-equipment-provisioning",
+      "type": "depends-on",
+      "description": "Exit requires equipment return",
+      "strength": "normal"
+    },
+    {
+      "id": "edge-122",
+      "source": "molecule-vendor-onboarding",
+      "target": "molecule-compliance-audit",
+      "type": "depends-on",
+      "description": "Vendors undergo compliance audit",
+      "strength": "strong"
     }
-  ],
-  "edges": []
+  ]
 }

@@ -98,6 +98,14 @@ class SOPBuilder {
   }
 
   /**
+   * Strip YAML frontmatter from content
+   */
+  stripFrontmatter(content) {
+    // Remove YAML frontmatter (--- ... ---)
+    return content.replace(/^---[\s\S]*?---\n*/m, '');
+  }
+
+  /**
    * Get component content by ID
    */
   getComponent(componentId) {
@@ -132,8 +140,11 @@ class SOPBuilder {
       const componentContent = this.getComponent(componentId);
       processedComponents.add(componentId);
 
+      // Strip frontmatter from component before including
+      const strippedContent = this.stripFrontmatter(componentContent);
+
       // Recursively process includes in the included component
-      const recursiveProcessed = this.processIncludes(componentContent, new Set(processedComponents));
+      const recursiveProcessed = this.processIncludes(strippedContent, new Set(processedComponents));
 
       processed = processed.replace(match[0], recursiveProcessed);
     }
@@ -159,27 +170,35 @@ class SOPBuilder {
 
     this.log(`\n🔨 Building ${sopId}: ${sopNode.title}`, 'cyan');
 
+    // Safe metadata access with defaults
+    const metadata = sopNode.metadata || {};
+    const lastReviewed = metadata.lastReviewed || sopNode.lastReviewed || 'Not yet reviewed';
+    const approver = metadata.approver || sopNode.approver || 'Pending approval';
+    const version = sopNode.version || '1.0.0';
+    const status = sopNode.status || 'draft';
+    const owner = sopNode.owner || 'Unassigned';
+
     // Start with SOP header
     let sopContent = `---
 generated: true
 generated_date: ${new Date().toISOString()}
 sop_id: ${sopId}
 title: ${sopNode.title}
-version: ${sopNode.version}
-status: ${sopNode.status}
-owner: ${sopNode.owner}
-last_reviewed: ${sopNode.metadata.lastReviewed}
-approver: ${sopNode.metadata.approver}
+version: ${version}
+status: ${status}
+owner: ${owner}
+last_reviewed: ${lastReviewed}
+approver: ${approver}
 ---
 
 # ${sopNode.title}
 
 **SOP ID**: ${sopId}
-**Version**: ${sopNode.version}
-**Status**: ${sopNode.status}
-**Owner**: ${sopNode.owner}
-**Last Reviewed**: ${sopNode.metadata.lastReviewed}
-**Approved By**: ${sopNode.metadata.approver}
+**Version**: ${version}
+**Status**: ${status}
+**Owner**: ${owner}
+**Last Reviewed**: ${lastReviewed}
+**Approved By**: ${approver}
 
 ---
 
@@ -214,26 +233,35 @@ This SOP is automatically assembled from modular components to ensure consistenc
       }
     }
 
+    // Get components list (supports both 'components' and 'composedOf' fields)
+    const componentsList = sopNode.components || sopNode.composedOf || [];
+
     // Add components section
-    sopContent += `\n## Components\n\nThis SOP is composed of the following modular components:\n\n`;
+    if (componentsList.length > 0) {
+      sopContent += `\n## Components\n\nThis SOP is composed of the following modular components:\n\n`;
 
-    for (const componentId of sopNode.components) {
-      const component = this.components.get(componentId);
-      if (component) {
-        sopContent += `- **${componentId}** (${component.type})\n`;
+      for (const componentId of componentsList) {
+        const component = this.components.get(componentId);
+        if (component) {
+          sopContent += `- **${componentId}** (${component.type})\n`;
+        } else {
+          sopContent += `- **${componentId}** (not found in component library)\n`;
+        }
       }
-    }
 
-    sopContent += `\n---\n\n`;
+      sopContent += `\n---\n\n`;
 
-    // Build the main content by including all components
-    sopContent += `## SOP Content\n\n`;
+      // Build the main content by including all components
+      sopContent += `## SOP Content\n\n`;
 
-    for (const componentId of sopNode.components) {
-      this.log(`  → Including component: ${componentId}`, 'cyan');
-      const component = this.getComponent(componentId);
-      const processed = this.processIncludes(component);
-      sopContent += `\n${processed}\n\n---\n\n`;
+      for (const componentId of componentsList) {
+        this.log(`  → Including component: ${componentId}`, 'cyan');
+        const component = this.getComponent(componentId);
+        const processed = this.processIncludes(component);
+        sopContent += `\n${processed}\n\n---\n\n`;
+      }
+    } else {
+      sopContent += `\n## Content\n\n_This SOP does not reference any modular components._\n\n`;
     }
 
     // Add related SOPs section
@@ -254,7 +282,7 @@ This SOP is automatically assembled from modular components to ensure consistenc
 
     // Add change history
     sopContent += `\n## Change History\n\n| Version | Date | Changes | Approver |\n|---------|------|---------|----------|\n`;
-    sopContent += `| ${sopNode.version} | ${sopNode.metadata.lastReviewed} | Current version | ${sopNode.metadata.approver} |\n\n`;
+    sopContent += `| ${version} | ${lastReviewed} | Current version | ${approver} |\n\n`;
 
     sopContent += `---\n\n`;
     sopContent += `**Last Built**: ${new Date().toISOString()}  \n`;
@@ -303,6 +331,9 @@ This SOP is automatically assembled from modular components to ensure consistenc
    */
   async generateBuildReport(results) {
     const reportPath = path.join(ROOT_DIR, 'dist', 'build-report.json');
+
+    // Ensure dist directory exists
+    await fs.mkdir(path.dirname(reportPath), { recursive: true });
 
     const report = {
       buildDate: new Date().toISOString(),

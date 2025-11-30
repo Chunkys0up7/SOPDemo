@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Component Library - Reuse Metrics</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0e27;
+            color: #e0e6f0;
+            padding: 20px;
+        }
+
+        #container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #60a5fa;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #9ca3af;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        /* Controls */
+        #controls {
+            background: #131829;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: 1fr 200px 200px;
+            gap: 15px;
+            border: 1px solid #1e2439;
+        }
+
+        input[type="text"] {
+            padding: 12px;
+            background: #1a1f35;
+            border: 1px solid #2a3150;
+            border-radius: 8px;
+            color: #e0e6f0;
+            font-size: 14px;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #60a5fa;
+        }
+
+        select {
+            padding: 12px;
+            background: #1a1f35;
+            border: 1px solid #2a3150;
+            border-radius: 8px;
+            color: #e0e6f0;
+            font-size: 14px;
+        }
+
+        /* Stats */
+        #stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: #131829;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #1e2439;
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: #60a5fa;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #9ca3af;
+            font-size: 13px;
+        }
+
+        /* Component Sections */
+        .component-section {
+            margin-bottom: 30px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #1e2439;
+        }
+
+        .section-icon {
+            font-size: 24px;
+            margin-right: 12px;
+        }
+
+        .section-title {
+            color: #60a5fa;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .section-count {
+            margin-left: auto;
+            background: #1a1f35;
+            padding: 6px 16px;
+            border-radius: 16px;
+            font-size: 13px;
+            color: #9ca3af;
+        }
+
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 15px;
+        }
+
+        /* Component Card */
+        .component-card {
+            background: #131829;
+            border: 1px solid #1e2439;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .component-card:hover {
+            border-color: #60a5fa;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-right: 12px;
+        }
+
+        .card-icon.atom { background: #3b82f6; }
+        .card-icon.molecule { background: #8b5cf6; }
+        .card-icon.organism { background: #10b981; }
+        .card-icon.sop { background: #ef4444; }
+
+        .card-title-section {
+            flex: 1;
+        }
+
+        .card-id {
+            color: #9ca3af;
+            font-size: 12px;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 4px;
+        }
+
+        .card-title {
+            color: #e0e6f0;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .card-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 13px;
+            color: #9ca3af;
+            margin-bottom: 12px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .meta-item svg {
+            width: 14px;
+            height: 14px;
+            margin-right: 4px;
+        }
+
+        .reuse-metrics {
+            background: #1a1f35;
+            padding: 12px;
+            border-radius: 8px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .metric {
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #60a5fa;
+        }
+
+        .metric-label {
+            font-size: 11px;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .reuse-bar {
+            height: 4px;
+            background: #1a1f35;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .reuse-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #60a5fa, #8b5cf6);
+            border-radius: 2px;
+            transition: width 0.5s;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        .tag {
+            background: #1a1f35;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            color: #9ca3af;
+            border: 1px solid #2a3150;
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+        }
+
+        .btn-secondary {
+            background: #1a1f35;
+            color: #9ca3af;
+            border: 1px solid #2a3150;
+        }
+
+        .btn-secondary:hover {
+            background: #2a3150;
+            color: #e0e6f0;
+        }
+
+        /* Loading */
+        #loading {
+            text-align: center;
+            padding: 60px;
+            color: #9ca3af;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>📚 Component Library</h1>
+        <p class="subtitle">Browse reusable SOP components with usage metrics</p>
+
+        <!-- Controls -->
+        <div id="controls">
+            <input type="text" id="search" placeholder="Search by ID, title, or tags...">
+            <select id="filter-type">
+                <option value="all">All Types</option>
+                <option value="atom">Atoms</option>
+                <option value="molecule">Molecules</option>
+                <option value="organism">Organisms</option>
+                <option value="sop">SOPs</option>
+            </select>
+            <select id="sort-by">
+                <option value="reuse">Sort by: Reuse Count</option>
+                <option value="name">Sort by: Name</option>
+                <option value="department">Sort by: Department</option>
+                <option value="recent">Sort by: Recently Updated</option>
+            </select>
+        </div>
+
+        <!-- Stats -->
+        <div id="stats">
+            <div class="stat-card">
+                <div class="stat-value" id="stat-atoms">0</div>
+                <div class="stat-label">Atoms</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="stat-molecules">0</div>
+                <div class="stat-label">Molecules</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="stat-organisms">0</div>
+                <div class="stat-label">Organisms</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="stat-sops">0</div>
+                <div class="stat-label">SOPs</div>
+            </div>
+        </div>
+
+        <div id="loading">Loading components...</div>
+
+        <!-- Atoms -->
+        <div id="atoms-section" class="component-section" style="display:none">
+            <div class="section-header">
+                <span class="section-icon">⚛️</span>
+                <h2 class="section-title">Atoms</h2>
+                <span class="section-count" id="atoms-count">0 items</span>
+            </div>
+            <div id="atoms-grid" class="components-grid"></div>
+        </div>
+
+        <!-- Molecules -->
+        <div id="molecules-section" class="component-section" style="display:none">
+            <div class="section-header">
+                <span class="section-icon">🔹</span>
+                <h2 class="section-title">Molecules</h2>
+                <span class="section-count" id="molecules-count">0 items</span>
+            </div>
+            <div id="molecules-grid" class="components-grid"></div>
+        </div>
+
+        <!-- Organisms -->
+        <div id="organisms-section" class="component-section" style="display:none">
+            <div class="section-header">
+                <span class="section-icon">🔷</span>
+                <h2 class="section-title">Organisms</h2>
+                <span class="section-count" id="organisms-count">0 items</span>
+            </div>
+            <div id="organisms-grid" class="components-grid"></div>
+        </div>
+
+        <!-- SOPs -->
+        <div id="sops-section" class="component-section" style="display:none">
+            <div class="section-header">
+                <span class="section-icon">📄</span>
+                <h2 class="section-title">Standard Operating Procedures</h2>
+                <span class="section-count" id="sops-count">0 items</span>
+            </div>
+            <div id="sops-grid" class="components-grid"></div>
+        </div>
+    </div>
+
+    <script>
+        let graphData = null;
+        let components = [];
+
+        // Load graph data
+        fetch('../graph/sop-graph.json')
+            .then(res => res.json())
+            .then(data => {
+                graphData = data;
+                processComponents();
+                renderComponents();
+                document.getElementById('loading').style.display = 'none';
+            })
+            .catch(err => {
+                document.getElementById('loading').innerHTML = '❌ Failed to load data: ' + err.message;
+            });
+
+        function processComponents() {
+            const nodes = Object.values(graphData.nodes);
+
+            // Calculate reuse metrics
+            components = nodes.map(node => {
+                const usedIn = graphData.edges.filter(e => e.source === node.id).length;
+                const dependsOn = graphData.edges.filter(e => e.target === node.id).length;
+
+                return {
+                    ...node,
+                    reuseCount: usedIn,
+                    dependencyCount: dependsOn,
+                    composedOfCount: node.composedOf ? node.composedOf.length : 0
+                };
+            });
+
+            // Update stats
+            const stats = components.reduce((acc, c) => {
+                acc[c.type] = (acc[c.type] || 0) + 1;
+                return acc;
+            }, {});
+
+            document.getElementById('stat-atoms').textContent = stats.atom || 0;
+            document.getElementById('stat-molecules').textContent = stats.molecule || 0;
+            document.getElementById('stat-organisms').textContent = stats.organism || 0;
+            document.getElementById('stat-sops').textContent = stats.sop || 0;
+        }
+
+        function renderComponents() {
+            const types = ['atom', 'molecule', 'organism', 'sop'];
+
+            types.forEach(type => {
+                const items = components.filter(c => c.type === type);
+                const grid = document.getElementById(`${type}s-grid`);
+                const section = document.getElementById(`${type}s-section`);
+                const count = document.getElementById(`${type}s-count`);
+
+                if (items.length > 0) {
+                    section.style.display = 'block';
+                    count.textContent = `${items.length} items`;
+                    grid.innerHTML = items.map(comp => createCard(comp)).join('');
+                }
+            });
+
+            setupEventListeners();
+        }
+
+        function createCard(comp) {
+            const icons = {
+                atom: '⚛️',
+                molecule: '🔹',
+                organism: '🔷',
+                sop: '📄'
+            };
+
+            const maxReuse = Math.max(...components.map(c => c.reuseCount));
+            const reusePercent = maxReuse > 0 ? (comp.reuseCount / maxReuse) * 100 : 0;
+
+            return `
+                <div class="component-card" data-id="${comp.id}">
+                    <div class="card-header">
+                        <div class="card-icon ${comp.type}">${icons[comp.type]}</div>
+                        <div class="card-title-section">
+                            <div class="card-id">${comp.id}</div>
+                            <div class="card-title">${comp.title}</div>
+                        </div>
+                    </div>
+
+                    <div class="card-meta">
+                        <div class="meta-item">
+                            <span>📁 ${comp.department || 'N/A'}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>v${comp.version || '1.0.0'}</span>
+                        </div>
+                    </div>
+
+                    <div class="reuse-metrics">
+                        <div class="metric">
+                            <div class="metric-value">${comp.reuseCount}</div>
+                            <div class="metric-label">Used In</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">${comp.composedOfCount}</div>
+                            <div class="metric-label">Components</div>
+                        </div>
+                    </div>
+
+                    <div class="reuse-bar">
+                        <div class="reuse-bar-fill" style="width: ${reusePercent}%"></div>
+                    </div>
+
+                    <div class="tags">
+                        ${(comp.tags || []).slice(0, 3).map(tag =>
+                            `<span class="tag">${tag}</span>`
+                        ).join('')}
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn btn-primary" onclick="viewDetails('${comp.id}')">View Details</button>
+                        <button class="btn btn-secondary" onclick="showImpact('${comp.id}')">Impact</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function setupEventListeners() {
+            document.getElementById('search').addEventListener('input', filterComponents);
+            document.getElementById('filter-type').addEventListener('change', filterComponents);
+            document.getElementById('sort-by').addEventListener('change', sortComponents);
+        }
+
+        function filterComponents() {
+            const search = document.getElementById('search').value.toLowerCase();
+            const typeFilter = document.getElementById('filter-type').value;
+
+            document.querySelectorAll('.component-card').forEach(card => {
+                const id = card.dataset.id;
+                const comp = components.find(c => c.id === id);
+
+                const matchesSearch = !search ||
+                    id.toLowerCase().includes(search) ||
+                    comp.title.toLowerCase().includes(search) ||
+                    (comp.tags || []).some(t => t.toLowerCase().includes(search));
+
+                const matchesType = typeFilter === 'all' || comp.type === typeFilter;
+
+                card.style.display = (matchesSearch && matchesType) ? 'block' : 'none';
+            });
+        }
+
+        function sortComponents() {
+            const sortBy = document.getElementById('sort-by').value;
+
+            if (sortBy === 'reuse') {
+                components.sort((a, b) => b.reuseCount - a.reuseCount);
+            } else if (sortBy === 'name') {
+                components.sort((a, b) => a.id.localeCompare(b.id));
+            } else if (sortBy === 'department') {
+                components.sort((a, b) => (a.department || '').localeCompare(b.department || ''));
+            }
+
+            renderComponents();
+        }
+
+        function viewDetails(id) {
+            const comp = components.find(c => c.id === id);
+            alert(`Component: ${comp.id}\n\nTitle: ${comp.title}\nType: ${comp.type}\nDepartment: ${comp.department}\n\nReused in: ${comp.reuseCount} places\nComposed of: ${comp.composedOfCount} components`);
+        }
+
+        function showImpact(id) {
+            window.location.href = `impact-viewer.html?component=${id}`;
+        }
+    </script>
+</body>
+</html>
