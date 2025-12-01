@@ -727,11 +727,18 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log('✅ Graph data loaded');
+                    console.log('Nodes format:', Array.isArray(data.nodes) ? 'array' : 'object');
+                    console.log('Total nodes:', Array.isArray(data.nodes) ? data.nodes.length : Object.keys(data.nodes).length);
 
-                    // Handle both array and object formats for nodes
-                    if (data.nodes && !Array.isArray(data.nodes)) {
-                        console.log('Converting nodes from dict to array format');
-                        data.nodes = Object.values(data.nodes);
+                    // Ensure nodes is in object format for Cytoscape
+                    // (initializeGraph uses Object.values which needs object, not array)
+                    if (Array.isArray(data.nodes)) {
+                        console.log('Converting nodes from array to object format');
+                        const nodesObj = {};
+                        data.nodes.forEach(node => {
+                            nodesObj[node.id] = node;
+                        });
+                        data.nodes = nodesObj;
                     }
 
                     graphData = data;

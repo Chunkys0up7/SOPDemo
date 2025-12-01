@@ -22,6 +22,7 @@
         #container {
             display: flex;
             height: 100vh;
+            padding-top: 50px;
         }
 
         /* Sidebar */
@@ -151,6 +152,43 @@
 
         button.secondary:hover {
             background: #4b5563;
+        }
+
+        /* Top Navigation */
+        #top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: rgba(19, 24, 41, 0.95);
+            border-bottom: 1px solid #2a3150;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        #top-nav a {
+            color: #60a5fa;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.2s;
+        }
+
+        #top-nav a:hover {
+            color: #93c5fd;
+        }
+
+        #top-nav .title {
+            margin-left: auto;
+            color: #e0e6f0;
+            font-weight: 600;
         }
 
         /* Graph Canvas */
@@ -332,6 +370,17 @@
     </style>
 </head>
 <body>
+    <!-- Top Navigation -->
+    <div id="top-nav">
+        <a href="index.html">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+            </svg>
+            Back to Dashboard
+        </a>
+        <span class="title">Interactive Graph Viewer</span>
+    </div>
+
     <div id="container">
         <!-- Sidebar -->
         <div id="sidebar">
