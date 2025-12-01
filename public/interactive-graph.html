@@ -426,7 +426,6 @@
                         </label>
                         <label class="checkbox-label">
                             <input type="checkbox" class="type-filter" value="organism" checked>
-                            <input type="checkbox" class="type-filter" value="organism" checked>
                             <span class="type-indicator" style="background: #10b981"></span>
                             Organisms
                         </label>
@@ -482,65 +481,39 @@
         let simulation = null;
         let svg, g, link, node, zoom;
         let selectedNode = null;
+        let width, height;
 
-        const width = window.innerWidth - 320;
-        const height = window.innerHeight;
+        // Calculate SVG dimensions based on actual container
+        function calculateDimensions() {
+            const container = document.getElementById('graph-container');
+            width = container.clientWidth;
+            height = container.clientHeight;
+            return { width, height };
+        }
 
         // Initialize SVG
-        svg = d3.select('#graph-svg')
-            .attr('width', width)
-            .attr('height', height);
+        function initializeSVG() {
+            const dims = calculateDimensions();
+            svg = d3.select('#graph-svg')
+                .attr('width', dims.width)
+                .attr('height', dims.height);
 
-        g = svg.append('g');
+            g = svg.append('g');
 
-        // Setup zoom
-        zoom = d3.zoom()
-            .scaleExtent([0.1, 4])
-            .on('zoom', (event) => {
-                g.attr('transform', event.transform);
-            });
+            // Setup zoom
+            zoom = d3.zoom()
+                .scaleExtent([0.1, 4])
+                .on('zoom', (event) => {
+                    g.attr('transform', event.transform);
+                });
 
-        svg.call(zoom);
+            svg.call(zoom);
+        }
 
-        // Load data
-        fetch('../graph/sop-graph.json')
-            .then(res => res.json())
-            .then(data => {
-                graphData = data;
-                document.getElementById('loading').style.display = 'none';
-                initializeGraph();
-            })
-            .catch(err => {
-                document.getElementById('loading').innerHTML = '❌ Failed to load graph data: ' + err.message;
-            });
-
-        function initializeGraph() {
-            // Convert nodes object to array
-            const nodes = Object.values(graphData.nodes).map(d => ({...d}));
-            const edges = graphData.edges.map(d => ({...d}));
-
-            // Update stats
-            document.getElementById('stat-total').textContent = nodes.length;
-            document.getElementById('stat-visible').textContent = nodes.length;
-            document.getElementById('stat-edges').textContent = edges.length;
-
-            // Create force simulation
-            simulation = d3.forceSimulation(nodes)
-                .force('link', d3.forceLink(edges).id(d => d.id).distance(100))
-                .force('charge', d3.forceManyBody().strength(-300))
-                .force('center', d3.forceCenter(width / 2, height / 2))
-                .force('collision', d3.forceCollide().radius(30));
-
-            // Create links
-            link = g.append('g')
-                .selectAll('line')
-                .data(edges)
-                .join('line')
-                .attr('class', d => `link ${d.type} ${d.strength}`)
-                .attr('marker-end', 'url(#arrowhead)');
-
-            // Add arrowhead marker
-            svg.append('defs').append('marker')
+        // Add arrowhead marker (only once)
+        function addArrowMarker() {
+            const defs = svg.append('defs');
+            defs.append('marker')
                 .attr('id', 'arrowhead')
                 .attr('viewBox', '-0 -5 10 10')
                 .attr('refX', 25)
@@ -551,6 +524,88 @@
                 .append('path')
                 .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
                 .attr('fill', '#2a3150');
+        }
+
+        // Initialize SVG on page load
+        initializeSVG();
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            const dims = calculateDimensions();
+            svg.attr('width', dims.width).attr('height', dims.height);
+
+            // Update simulation center force if graph is already loaded
+            if (simulation) {
+                simulation.force('center', d3.forceCenter(dims.width / 2, dims.height / 2));
+            }
+        });
+
+        // Load data
+        fetch('../graph/sop-graph.json')
+            .then(res => {
+                if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+                return res.json();
+            })
+            .then(data => {
+                if (!data.nodes || !data.edges) {
+                    throw new Error('Invalid graph format: missing nodes or edges');
+                }
+                graphData = data;
+                document.getElementById('loading').style.display = 'none';
+                initializeGraph();
+            })
+            .catch(err => {
+                console.error('Graph loading error:', err);
+                const errorMsg = err.message || 'Unknown error';
+                document.getElementById('loading').innerHTML = `
+                    <div style="text-align: center;">
+                        <div>❌ Failed to load graph data</div>
+                        <div style="font-size: 12px; color: #9ca3af; margin-top: 10px;">${errorMsg}</div>
+                    </div>
+                `;
+            });
+
+        function initializeGraph() {
+            // Convert nodes object to array
+            const nodes = Object.values(graphData.nodes).map(d => ({...d}));
+            const edges = graphData.edges.map(d => ({...d}));
+
+            // Validate nodes have required properties
+            nodes.forEach((node, idx) => {
+                if (!node.id || !node.type) {
+                    console.warn(`Node ${idx} missing required properties:`, node);
+                }
+                // Ensure title has a fallback
+                if (!node.title) {
+                    node.title = node.id || `Node ${idx}`;
+                }
+            });
+
+            // Update stats
+            document.getElementById('stat-total').textContent = nodes.length;
+            document.getElementById('stat-visible').textContent = nodes.length;
+            document.getElementById('stat-edges').textContent = edges.length;
+
+            // Recalculate dimensions for simulation
+            const dims = calculateDimensions();
+
+            // Create force simulation
+            simulation = d3.forceSimulation(nodes)
+                .force('link', d3.forceLink(edges).id(d => d.id).distance(100))
+                .force('charge', d3.forceManyBody().strength(-300))
+                .force('center', d3.forceCenter(dims.width / 2, dims.height / 2))
+                .force('collision', d3.forceCollide().radius(30));
+
+            // Add arrowhead marker (only once)
+            addArrowMarker();
+
+            // Create links
+            link = g.append('g')
+                .selectAll('line')
+                .data(edges)
+                .join('line')
+                .attr('class', d => `link ${d.type} ${d.strength}`)
+                .attr('marker-end', 'url(#arrowhead)');
 
             // Create nodes
             const nodeGroups = g.append('g')
@@ -614,7 +669,13 @@
             let visibleCount = 0;
 
             node.style('display', function(d) {
-                const matchesSearch = !searchTerm || d.id.toLowerCase().includes(searchTerm) || d.title.toLowerCase().includes(searchTerm);
+                // Safe string handling with fallbacks
+                const id = (d.id || '').toLowerCase();
+                const title = (d.title || d.id || '').toLowerCase();
+
+                const matchesSearch = !searchTerm ||
+                                     id.includes(searchTerm) ||
+                                     title.includes(searchTerm);
                 const matchesType = activeTypes.includes(d.type);
                 const visible = matchesSearch && matchesType;
 
