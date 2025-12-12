@@ -102,33 +102,33 @@
                 </div>
 
                 <!-- AI Query Panel -->
-                <div class="inl-5665ce37">
-                    <div class="inl-dc6db445">
+                <div class="ai-query-panel">
+                    <div class="ai-query-panel-title">
                         🤖 AI-Powered Insights
                     </div>
-                    <div class="inl-355eeddb">
-                        <button class="control-btn inl-afc36e7e" onclick="runAIQuery('attention')" >
+                    <div class="ai-query-buttons">
+                        <button class="control-btn ai-query-btn" onclick="runAIQuery('attention')" >
                             📋 What Needs Attention?
                         </button>
-                        <button class="control-btn inl-afc36e7e" onclick="runAIQuery('similar')" >
+                        <button class="control-btn ai-query-btn" onclick="runAIQuery('similar')" >
                             🔍 Find Similar SOPs
                         </button>
-                        <button class="control-btn inl-afc36e7e" onclick="runAIQuery('compliance')" >
+                        <button class="control-btn ai-query-btn" onclick="runAIQuery('compliance')" >
                             ⚠️ Compliance Gaps
                         </button>
-                        <button class="control-btn inl-afc36e7e" onclick="runAIQuery('impact')" >
+                        <button class="control-btn ai-query-btn" onclick="runAIQuery('impact')" >
                             💥 Impact Analysis
                         </button>
                     </div>
                 </div>
 
                 <!-- AI Results Display -->
-                <div id="ai-results" class="inl-b3f95883">
-                    <div class="inl-58ce971b">
-                        <h3 class="inl-649e7776">AI Analysis</h3>
-                        <button onclick="closeAIResults()" class="inl-8c206c1e">&times;</button>
+                <div id="ai-results" class="ai-results-modal">
+                    <div class="ai-results-header">
+                        <h3 class="ai-results-title">AI Analysis</h3>
+                        <button onclick="closeAIResults()" class="ai-results-close">&times;</button>
                     </div>
-                    <div id="ai-results-content" class="inl-90e2b698"></div>
+                    <div id="ai-results-content" class="ai-results-content"></div>
                 </div>
 
                 <!-- Empty State -->
@@ -142,17 +142,17 @@
                     <div class="node-title" id="detail-title"></div>
                     <div class="node-meta" id="detail-meta"></div>
 
-                    <div class="section inl-f2892a2e" id="dependencies-section" >
+                    <div class="section section-hidden" id="dependencies-section" >
                         <div class="section-title">Dependencies</div>
                         <div class="dependency-list" id="dependencies-list"></div>
                     </div>
 
-                    <div class="section inl-f2892a2e" id="dependents-section" >
+                    <div class="section section-hidden" id="dependents-section" >
                         <div class="section-title">Dependent SOPs</div>
                         <div class="dependency-list" id="dependents-list"></div>
                     </div>
 
-                    <div class="section inl-f2892a2e" id="components-section" >
+                    <div class="section section-hidden" id="components-section" >
                         <div class="section-title">Components</div>
                         <div class="dependency-list" id="components-list"></div>
                     </div>
@@ -182,8 +182,8 @@
 
             // Show loading state
             graphContainer.innerHTML = `
-                <div class="inl-d69565a3">
-                    <div class="inl-d39bd7d1"></div>
+                <div class="loading-container">
+                    <div class="loading-spinner"></div>
                     <p>Loading graph visualization...</p>
                 </div>
             `;
@@ -220,11 +220,11 @@
                 .catch(error => {
                     console.error('❌ Error loading graph data:', error);
                     graphContainer.innerHTML = `
-                        <div class="inl-34cdfd34">
-                            <div class="inl-255a912b">⚠️</div>
-                            <h3 class="inl-e5e5f9a1">Failed to Load Graph</h3>
-                            <p class="inl-b75fad00">Unable to load graph data. Please try again.</p>
-                            <button onclick="location.reload()" class="inl-0d3a7063">
+                        <div class="error-container">
+                            <div class="error-icon">⚠️</div>
+                            <h3 class="error-title">Failed to Load Graph</h3>
+                            <p class="error-message">Unable to load graph data. Please try again.</p>
+                            <button onclick="location.reload()" class="error-retry-btn">
                                 Retry
                             </button>
                         </div>
@@ -663,27 +663,27 @@
             // Find draft SOPs
             const drafts = sops.filter(s => s.status === 'draft');
 
-            let html = '<div class="inl-51ca02c3">';
-            html += '<h4 class="inl-6334446d">📊 Overview</h4>';
+            let html = '<div class="ai-analysis-section">';
+            html += '<h4 class="ai-section-title">📊 Overview</h4>';
             html += `<p><strong>Total SOPs:</strong> ${sops.length}</p>`;
             html += `<p><strong>High Criticality:</strong> ${highCriticality.length}</p>`;
             html += `<p><strong>Draft Status:</strong> ${drafts.length}</p>`;
 
-            html += '<h4 class="inl-7d572ad1">⚠️ Needs Attention</h4>';
+            html += '<h4 class="ai-section-subtitle">⚠️ Needs Attention</h4>';
             if (needsReview.length > 0) {
-                html += '<p><strong>Due for Review:</strong></p><ul class="inl-d0a998b9">';
+                html += '<p><strong>Due for Review:</strong></p><ul class="ai-list">';
                 needsReview.forEach(sop => {
                     const lastReview = new Date(sop.lastReviewed);
                     html += `<li><strong>${sop.title}</strong><br/>`;
-                    html += `<span class="inl-ccdca83d">Owner: ${sop.owner} | Last: ${lastReview.toLocaleDateString()} | Freq: ${sop.reviewFrequency}</span></li>`;
+                    html += `<span class="ai-meta-text">Owner: ${sop.owner} | Last: ${lastReview.toLocaleDateString()} | Freq: ${sop.reviewFrequency}</span></li>`;
                 });
                 html += '</ul>';
             } else {
-                html += '<p class="inl-0cb99e9c">✓ All SOPs are up to date with reviews</p>';
+                html += '<p class="ai-success-text">✓ All SOPs are up to date with reviews</p>';
             }
 
             if (drafts.length > 0) {
-                html += '<p class="inl-9c9cee20"><strong>Draft SOPs needing approval:</strong></p><ul class="inl-d0a998b9">';
+                html += '<p class="ai-section-subtitle"><strong>Draft SOPs needing approval:</strong></p><ul class="ai-list">';
                 drafts.forEach(sop => {
                     html += `<li><strong>${sop.title}</strong> (${sop.owner})</li>`;
                 });
@@ -729,15 +729,15 @@
 
             similarities.sort((a, b) => b.score - a.score);
 
-            let html = '<div class="inl-51ca02c3">';
-            html += '<h4 class="inl-6334446d">🔍 Similar SOPs Detected</h4>';
+            let html = '<div class="ai-analysis-section">';
+            html += '<h4 class="ai-section-title">🔍 Similar SOPs Detected</h4>';
 
             if (similarities.length > 0) {
                 html += '<p>These SOPs share significant overlap and may benefit from consolidation:</p>';
-                html += '<ul class="inl-98c35876">';
+                html += '<ul class="ai-list">';
                 similarities.slice(0, 5).forEach(sim => {
-                    html += `<li class="inl-72d6c38e"><strong>${sim.sop1}</strong> ↔ <strong>${sim.sop2}</strong><br/>`;
-                    html += `<span class="inl-ccdca83d">Similarity: ${sim.score}% | `;
+                    html += `<li class="ai-list-item-highlighted"><strong>${sim.sop1}</strong> ↔ <strong>${sim.sop2}</strong><br/>`;
+                    html += `<span class="ai-meta-text">Similarity: ${sim.score}% | `;
                     if (sim.sharedFrameworks.length > 0) {
                         html += `Shared frameworks: ${sim.sharedFrameworks.length} | `;
                     }
@@ -747,11 +747,11 @@
                     html += '</span></li>';
                 });
                 html += '</ul>';
-                html += '<p class="inl-1dd85d4c">';
+                html += '<p class="ai-info-block">';
                 html += '💡 <strong>Recommendation:</strong> Review these pairs for potential consolidation to reduce maintenance burden and ensure consistency.';
                 html += '</p>';
             } else {
-                html += '<p class="inl-0cb99e9c">✓ No significant overlaps detected. SOPs appear well-differentiated.</p>';
+                html += '<p class="ai-success-text">✓ No significant overlaps detected. SOPs appear well-differentiated.</p>';
             }
 
             html += '</div>';
@@ -780,31 +780,31 @@
             const gaps = Object.values(coverage).filter(c => c.count < 2);
             const good = Object.values(coverage).filter(c => c.count >= 3);
 
-            let html = '<div class="inl-51ca02c3">';
-            html += '<h4 class="inl-6334446d">📋 Compliance Coverage Analysis</h4>';
+            let html = '<div class="ai-analysis-section">';
+            html += '<h4 class="ai-section-title">📋 Compliance Coverage Analysis</h4>';
 
             html += `<p><strong>Total Frameworks:</strong> ${requirements.length}</p>`;
             html += `<p><strong>Well Covered (3+ SOPs):</strong> ${good.length}</p>`;
             html += `<p><strong>Gaps (< 2 SOPs):</strong> ${gaps.length}</p>`;
 
             if (gaps.length > 0) {
-                html += '<h4 class="inl-ed5164e2">🔴 Critical Gaps</h4>';
-                html += '<ul class="inl-d0a998b9">';
+                html += '<h4 class="ai-section-subtitle">🔴 Critical Gaps</h4>';
+                html += '<ul class="ai-list">';
                 gaps.forEach(gap => {
                     const status = gap.count === 0 ? '❌ No coverage' : '⚠️ Minimal coverage';
                     html += `<li><strong>${gap.title}</strong> - ${status}<br/>`;
                     if (gap.count > 0) {
-                        html += `<span class="inl-ccdca83d">Implemented by: ${gap.implementers.join(', ')}</span>`;
+                        html += `<span class="ai-meta-text">Implemented by: ${gap.implementers.join(', ')}</span>`;
                     }
                     html += '</li>';
                 });
                 html += '</ul>';
 
-                html += '<p class="inl-c413a8eb">';
+                html += '<p class="ai-error-block">';
                 html += '⚠️ <strong>Action Required:</strong> These frameworks require additional SOP coverage to ensure regulatory compliance.';
                 html += '</p>';
             } else {
-                html += '<p class="inl-94a69854">✓ Excellent coverage! All frameworks are adequately documented.</p>';
+                html += '<p class="ai-success-block">✓ Excellent coverage! All frameworks are adequately documented.</p>';
             }
 
             html += '</div>';
@@ -833,16 +833,16 @@
 
             const highImpact = impacts.filter(i => i.impactScore >= 20);
 
-            let html = '<div class="inl-51ca02c3">';
-            html += '<h4 class="inl-6334446d">💥 Impact Analysis</h4>';
+            let html = '<div class="ai-analysis-section">';
+            html += '<h4 class="ai-section-title">💥 Impact Analysis</h4>';
             html += '<p>SOPs ranked by potential impact of changes:</p>';
 
-            html += '<h4 class="inl-7d572ad1">🔥 High Impact SOPs</h4>';
+            html += '<h4 class="ai-section-subtitle">🔥 High Impact SOPs</h4>';
             if (highImpact.length > 0) {
-                html += '<ul class="inl-d0a998b9">';
+                html += '<ul class="ai-list">';
                 highImpact.slice(0, 5).forEach(item => {
-                    html += `<li class="inl-2d98adf5"><strong>${item.title}</strong><br/>`;
-                    html += `<span class="inl-ccdca83d">`;
+                    html += `<li class="ai-list-item-highlighted"><strong>${item.title}</strong><br/>`;
+                    html += `<span class="ai-meta-text">`;
                     html += `Impact Score: ${item.impactScore} | `;
                     html += `Dependents: ${item.dependentCount} SOPs | `;
                     html += `Dependencies: ${item.dependencyCount} | `;
@@ -852,7 +852,7 @@
                 });
                 html += '</ul>';
 
-                html += '<p class="inl-1dd85d4c">';
+                html += '<p class="ai-warning-block">';
                 html += '⚠️ <strong>Warning:</strong> Changes to these SOPs will have cascading effects. ';
                 html += 'Notify dependent SOP owners and allow extra review time.';
                 html += '</p>';
@@ -898,8 +898,8 @@
                 }
 
                 // Update stats
-                const visibleNodes = cy.nodes('[ class="inl-56ab9741"]').length || cy.nodes().length;
-                const visibleEdges = cy.edges('[ class="inl-56ab9741"]').length || cy.edges().length;
+                const visibleNodes = cy.nodes(':visible').length || cy.nodes().length;
+                const visibleEdges = cy.edges(':visible').length || cy.edges().length;
                 document.getElementById('stat-nodes').textContent = visibleNodes;
                 document.getElementById('stat-edges').textContent = visibleEdges;
             });
