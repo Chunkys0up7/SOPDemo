@@ -15,12 +15,49 @@
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-    background: #f5f5f5;
-    color: #1a1a1a;
+    font-family: var(--ui-font-stack);
+    font-size: var(--ui-font-size-base);
+    background: var(--color-background);
+    color: var(--color-text-primary);
     line-height: 1.6;
     min-height: 100vh;
 }
+
+/* ============================================================================
+   ENFORCED OVERRIDES (use sparingly) - ensures pages using page-specific
+   styles or inline fonts still render with the design system.
+   These rules use !important to override local page styles where necessary.
+   ============================================================================ */
+
+html, body, #app, .container, .page {
+    font-family: var(--ui-font-stack) !important;
+    color: var(--color-text-primary) !important;
+    background: var(--color-background) !important;
+}
+
+/* Normalize headings across pages */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--color-text-primary) !important;
+    font-weight: 600 !important;
+    line-height: 1.25 !important;
+}
+
+/* Ensure links use primary color unless explicitly styled */
+a, a:visited {
+    color: var(--color-primary) !important;
+}
+
+/* Buttons: ensure brand primary is consistent */
+.btn, button, input[type="button"], input[type="submit"] {
+    font-family: var(--ui-font-stack) !important;
+}
+
+/* Images/logos should not be stretched by local rules */
+.logo, img.logo, .branding img {
+    max-height: 56px !important;
+    height: auto !important;
+}
+
 
 /* ============================================================================
    CSS VARIABLES (DESIGN TOKENS)
@@ -95,7 +132,11 @@ body {
     --z-sticky: 200;
     --z-modal: 1000;
     --z-tooltip: 2000;
+    /* UI Defaults (enforced) */
+    --ui-font-stack: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    --ui-font-size-base: 15px;
 }
+
 
 /* ============================================================================
    TYPOGRAPHY
