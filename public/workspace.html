@@ -81,11 +81,11 @@
                     <div class="quick-action-desc">Find SOPs by description</div>
                 </div>
 
-                <div class="deps-title" style="margin-top: 20px;">
+                <div class="deps-title inl-5fa693f3" >
                     <span class="tooltip">Dependencies<span class="tooltip-content">SOPs that this procedure requires or references. Changes to dependencies may affect this SOP's functionality.</span></span>
                 </div>
                 <div id="deps-list">
-                    <p style="font-size: 13px; color: #999;">Select an SOP to view dependencies</p>
+                    <p class="inl-0ac82358">Select an SOP to view dependencies</p>
                 </div>
             </div>
         </div>
@@ -322,7 +322,7 @@
             const depsEl = document.getElementById('deps-list');
 
             if (currentSOP.dependencies.length === 0) {
-                depsEl.innerHTML = '<p style="font-size: 13px; color: #999;">No dependencies</p>';
+                depsEl.innerHTML = '<p class="inl-0ac82358">No dependencies</p>';
                 return;
             }
 

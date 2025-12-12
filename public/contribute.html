@@ -1262,13 +1262,13 @@
     <!-- Main Content -->
     <div class="container">
         <!-- Simple Intro - Get to the point! -->
-        <p style="text-align: center; font-size: 16px; color: #666; margin-bottom: 40px;">
+        <p class="inl-a05fc3f7">
             Choose what you're creating. Each type has a unique, streamlined workflow.
-            <a href="../TEMPLATE_CONFIGURATION_GUIDE.md" style="color: #0052CC; margin-left: 10px;">📖 Learn more</a>
+            <a href="../TEMPLATE_CONFIGURATION_GUIDE.md" class="inl-9e2ebc37">📖 Learn more</a>
         </p>
 
         <!-- Template Selection -->
-        <h2 style="margin-bottom: 20px; text-align: center;">Choose Your Template</h2>
+        <h2 class="inl-90780f6a">Choose Your Template</h2>
         <div class="template-selection">
             <div class="template-card" onclick="selectTemplate('atom', event)" role="button" tabindex="0" aria-label="Select Atom template - single purpose component">
                 <div class="badge atom">🔵 Atom</div>
@@ -1300,12 +1300,12 @@
         </div>
 
         <!-- Two-Column Layout: Form + AI Assistant -->
-        <div class="form-layout" id="formLayout" style="display: none;">
+        <div class="form-layout inl-f2892a2e" id="formLayout" >
             <!-- Left Column: Form -->
             <div class="form-column">
                 <form id="contributionForm">
             <!-- Template Selection Banner -->
-            <div id="templateBanner" class="info-banner" style="margin-bottom: 30px;">
+            <div id="templateBanner" class="info-banner inl-dd7272cd" >
                 <h3 id="templateBannerTitle">📋 Template Selected</h3>
                 <p id="templateBannerDescription"></p>
                 <ul id="templateBannerSections"></ul>
@@ -1760,7 +1760,7 @@
                             </select>
                         </div>
 
-                        <div class="form-group" id="trainingProgramGroup" style="display: none;">
+                        <div class="form-group inl-f2892a2e" id="trainingProgramGroup" >
                             <label class="form-label" for="trainingProgram">Training Program</label>
                             <input type="text" id="trainingProgram" class="form-input" placeholder="e.g., IT Security Fundamentals">
                         </div>
@@ -1786,7 +1786,7 @@
                         </div>
                     </div>
 
-                    <div class="alert alert-warning" id="safetyCriticalWarning" style="display: none;">
+                    <div class="alert alert-warning inl-f2892a2e" id="safetyCriticalWarning" >
                         <strong>⚠️ Safety Critical Procedure</strong>
                         <p>This procedure requires enhanced review, approval workflow, and audit trail. Additional validation steps will be required before activation.</p>
                     </div>
@@ -2144,30 +2144,30 @@
             </div>
 
             <!-- Section 3.5: Hybrid Construction - Atom Library (Only for Molecules/Organisms/SOPs) -->
-            <div class="form-section" id="hybridConstructionSection" style="display: none;">
+            <div class="form-section inl-f2892a2e" id="hybridConstructionSection" >
                 <h2><span class="form-section-number">3.5</span> <span id="constructionSectionTitle">Build from Existing Components</span><span class="atoms-count-badge" id="selectedAtomsCount">0 selected</span></h2>
                 <p class="subtitle" id="constructionSectionSubtitle">Choose how to construct this procedure: use existing reusable components or write custom steps</p>
 
                 <!-- DEBUG ERROR MESSAGE - Should only appear if JavaScript fails -->
-                <div id="atomTemplateError" style="display: none; background: #ffebee; border-left: 4px solid #d32f2f; padding: 20px; margin-bottom: 20px; border-radius: 4px;">
-                    <h3 style="color: #d32f2f; margin: 0 0 10px 0;">⚠️ CONFIGURATION ERROR</h3>
-                    <p style="margin: 0; color: #333;">This section should be HIDDEN for Atom templates. If you're seeing this, the JavaScript failed to execute properly.</p>
-                    <p style="margin: 10px 0 0 0; font-size: 12px; color: #666;">Selected template: <strong id="errorTemplateType" style="color: #d32f2f;">unknown</strong></p>
-                    <p style="margin: 10px 0 0 0; font-size: 12px; color: #666;">Section display: <strong id="errorSectionDisplay" style="color: #d32f2f;">unknown</strong></p>
+                <div id="atomTemplateError" class="inl-e0c6f2ab">
+                    <h3 class="inl-d3d9b079">⚠️ CONFIGURATION ERROR</h3>
+                    <p class="inl-8bb31349">This section should be HIDDEN for Atom templates. If you're seeing this, the JavaScript failed to execute properly.</p>
+                    <p class="inl-2ea53100">Selected template: <strong id="errorTemplateType" class="inl-de850d5e">unknown</strong></p>
+                    <p class="inl-2ea53100">Section display: <strong id="errorSectionDisplay" class="inl-de850d5e">unknown</strong></p>
                 </div>
 
                 <!-- Construction Mode Selection - BUILD FROM ATOMS IS NOW PRIMARY! -->
-                <div style="background: #e3f2fd; border: 3px solid #2196F3; border-radius: 12px; padding: 25px; margin-bottom: 25px;">
-                    <h3 style="color: #1565C0; margin: 0 0 15px 0; font-size: 20px;">💡 How do you want to create this?</h3>
-                    <p style="color: #424242; margin-bottom: 20px; font-size: 15px;">Build from existing atoms (recommended) or write custom steps:</p>
+                <div class="inl-6460c017">
+                    <h3 class="inl-ac5d0ec4">💡 How do you want to create this?</h3>
+                    <p class="inl-6d57ef94">Build from existing atoms (recommended) or write custom steps:</p>
 
                     <div class="construction-mode-toggle">
                         <!-- PRIMARY OPTION: Build from Atoms (NOW DEFAULT & RECOMMENDED!) -->
-                        <div class="mode-option selected" id="modeAtomsOnly" onclick="return handleModeClick('atoms-only', event);" style="border: 3px solid #4CAF50; background: #f1f8f4;">
-                            <div class="mode-option-title" style="font-size: 18px; font-weight: 600;">
+                        <div class="mode-option selected inl-310dcff5" id="modeAtomsOnly" onclick="return handleModeClick('atoms-only', event);" >
+                            <div class="mode-option-title inl-fcd9fd07" >
                                 <input type="radio" id="radioAtomsOnly" name="constructionMode" value="atoms-only" checked> 📦 <span id="atomsOnlyTitle">Build from Atoms</span> ⭐
                             </div>
-                            <div class="mode-option-desc" id="atomsOnlyDesc" style="font-size: 15px; color: #2e7d32;"><strong>RECOMMENDED:</strong> Select and compose existing reusable atoms</div>
+                            <div class="mode-option-desc inl-23372a2d" id="atomsOnlyDesc" ><strong>RECOMMENDED:</strong> Select and compose existing reusable atoms</div>
                         </div>
 
                         <!-- Secondary Option: Hybrid Construction -->
@@ -2189,7 +2189,7 @@
                 </div>
 
                 <!-- Atom Library (shown when hybrid or atoms-only mode selected) -->
-                <div class="atom-library-container" id="atomLibraryContainer" style="display: none;">
+                <div class="atom-library-container inl-f2892a2e" id="atomLibraryContainer" >
                     <div class="atom-library-header">
                         <h3 id="libraryHeaderTitle">🔍 Component Library</h3>
                         <p id="libraryHeaderDesc">Browse and select existing components to include in your procedure.</p>
@@ -2230,9 +2230,9 @@
                 </div>
 
                 <!-- Selected Atoms Preview -->
-                <div class="selected-atoms-preview" id="selectedAtomsPreview" style="display: none;">
+                <div class="selected-atoms-preview inl-f2892a2e" id="selectedAtomsPreview" >
                     <h4>📋 Selected Atoms - Build Preview</h4>
-                    <p style="font-size: 13px; color: #666; margin-bottom: 15px;">
+                    <p class="inl-7172f4f0">
                         These atoms will be included in your procedure. During build, <code>{{"{{"}}include: atom-id{{"}}"}}</code> will expand to full content.
                     </p>
                     <div class="selected-atoms-list" id="selectedAtomsList">
@@ -2252,7 +2252,7 @@
 
                 <button type="button" class="btn-add-step" onclick="addStep()">+ Add Step</button>
 
-                <div class="help-text" style="margin-top: 20px;">
+                <div class="help-text inl-5fa693f3" >
                     <strong>💡 Best Practices for Steps:</strong>
                     <p>• Be specific and actionable ("Click 'Submit'" not "Submit the form")<br>
                     • Include decision logic (IF condition THEN action)<br>
@@ -2333,7 +2333,7 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
                         </div>
 
                         <!-- Related SOPs -->
-                        <div class="ai-suggestion" id="aiRelatedSOPsSuggestion" style="display: none;">
+                        <div class="ai-suggestion inl-f2892a2e" id="aiRelatedSOPsSuggestion" >
                             <div class="ai-suggestion-title">
                                 <span>🔗</span> Related SOPs Found
                             </div>
@@ -2342,7 +2342,7 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
                         </div>
 
                         <!-- Suggested Keywords -->
-                        <div class="ai-suggestion" id="aiKeywordsSuggestion" style="display: none;">
+                        <div class="ai-suggestion inl-f2892a2e" id="aiKeywordsSuggestion" >
                             <div class="ai-suggestion-title">
                                 <span>💡</span> Suggested Keywords
                             </div>
@@ -2354,7 +2354,7 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
                         </div>
 
                         <!-- Suggested Compliance -->
-                        <div class="ai-suggestion" id="aiComplianceSuggestion" style="display: none;">
+                        <div class="ai-suggestion inl-f2892a2e" id="aiComplianceSuggestion" >
                             <div class="ai-suggestion-title">
                                 <span>⚖️</span> Suggested Compliance
                             </div>
@@ -2366,7 +2366,7 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
                         </div>
 
                         <!-- Department Suggestion -->
-                        <div class="ai-suggestion" id="aiDepartmentSuggestion" style="display: none;">
+                        <div class="ai-suggestion inl-f2892a2e" id="aiDepartmentSuggestion" >
                             <div class="ai-suggestion-title">
                                 <span>🏢</span> Department Suggestion
                             </div>
@@ -2380,7 +2380,7 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
                                 <span>📝</span> Writing Tips
                             </div>
                             <div class="ai-suggestion-content">
-                                <ul style="margin-left: 16px; font-size: 12px; line-height: 1.8;">
+                                <ul class="inl-8553c5d0">
                                     <li>Be specific and actionable</li>
                                     <li>Use active voice</li>
                                     <li>Include decision logic (IF-THEN)</li>
@@ -2391,7 +2391,7 @@ Missing data | Form shows blank fields | Page didn't scroll | Scroll to bottom o
                         </div>
 
                         <!-- Improve Content Button -->
-                        <button class="ai-action-btn" onclick="improveWithAI()" style="margin-top: 20px;">
+                        <button class="ai-action-btn inl-5fa693f3" onclick="improveWithAI()" >
                             ✨ Improve Content with AI
                         </button>
                     </div>
@@ -2883,11 +2883,11 @@ Expected outcome: [What should be true after this step]"></textarea>
             if (similarSOPs.length > 0) {
                 const relatedContent = document.getElementById('aiRelatedSOPsContent');
                 relatedContent.innerHTML = `
-                    <p style="margin-bottom: 10px;">Found ${similarSOPs.length} similar SOP(s) that can help guide your writing:</p>
-                    <ul style="margin-left: 16px; font-size: 12px; line-height: 1.8;">
+                    <p class="inl-2d98adf5">Found ${similarSOPs.length} similar SOP(s) that can help guide your writing:</p>
+                    <ul class="inl-8553c5d0">
                         ${similarSOPs.map(sop => `
                             <li><strong>${sop.title}</strong><br>
-                                <span style="color: #666; font-size: 11px;">
+                                <span class="inl-b2d3dd4b">
                                     ${sop.department} | ${sop.complianceFrameworks?.length || 0} frameworks
                                 </span>
                             </li>
@@ -3560,7 +3560,7 @@ Expected outcome: [What should be true after this step]"></textarea>
                 return `
                     <div class="selected-atom-item">
                         <div>
-                            <div style="font-weight: 600; margin-bottom: 4px;">${atom ? atom.title : atomId}</div>
+                            <div class="inl-3c3c7784">${atom ? atom.title : atomId}</div>
                             <div class="selected-atom-code">{{"{{"}}include: ${atomId}{{"}}"}}</div>
                         </div>
                         <button class="selected-atom-remove" onclick="removeAtom('${atomId}')">Remove</button>
