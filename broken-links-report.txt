@@ -1,6 +1,0 @@
-SOP Demo - Broken Links Report
-================================================================================
-
-
-public/search.html
-  → ${sop.file_path} (target: /home/user/SOPDemo/public/${sop.file_path})
