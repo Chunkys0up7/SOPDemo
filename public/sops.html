@@ -391,6 +391,9 @@
         }
     <!-- Page-specific inline styles migrated to /public/assets/css/common.css -->
 <body>
+    <!-- Include Global Navigation -->
+    <div id="global-nav-container"></div>
+
     <!-- Header -->
     <!-- Hero -->
     <section class="hero">
@@ -620,6 +623,14 @@
             sopGrid.innerHTML = '';
             cardsArray.forEach(card => sopGrid.appendChild(card));
         });
+    </script>
+    <!-- Load Global Navigation -->
+    <script>
+        fetch('/public/components/global-nav.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('global-nav-container').innerHTML = html;
+            });
     </script>
 </body>
 </html>

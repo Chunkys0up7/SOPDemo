@@ -13,6 +13,9 @@
     <script src="/public/assets/js/navigation.js"></script>
 </head>
 <body>
+    <!-- Include Global Navigation -->
+    <div id="global-nav-container"></div>
+
     <!-- Navigation injected by navigation.js -->
     <!-- Header -->
     <!-- Page Title -->
@@ -169,5 +172,13 @@
 
     <!-- Onboarding / Getting Started Guide -->
     <script src="/public/assets/js/onboarding.js"></script>
+    <!-- Load Global Navigation -->
+    <script>
+        fetch('/public/components/global-nav.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('global-nav-container').innerHTML = html;
+            });
+    </script>
 </body>
 </html>

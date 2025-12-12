@@ -14,6 +14,9 @@
     <script src="/public/assets/js/navigation.js"></script>
 </head>
 <body>
+    <!-- Include Global Navigation -->
+    <div id="global-nav-container"></div>
+
     <!-- Header -->
     <!-- Page Header -->
     <div class="page-header">
@@ -266,6 +269,14 @@
         document.querySelectorAll('.section').forEach(section => {
             observer.observe(section);
         });
+    </script>
+    <!-- Load Global Navigation -->
+    <script>
+        fetch('/public/components/global-nav.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('global-nav-container').innerHTML = html;
+            });
     </script>
 </body>
 </html>

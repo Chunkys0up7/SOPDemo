@@ -644,5 +644,13 @@
             });
         });
     </script>
+    <!-- Load Global Navigation -->
+    <script>
+        fetch('/public/components/global-nav.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('global-nav-container').innerHTML = html;
+            });
+    </script>
 </body>
 </html>

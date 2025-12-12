@@ -1252,6 +1252,9 @@
 
     <!-- Page-specific inline styles migrated to /public/assets/css/common.css -->
 <body>
+    <!-- Include Global Navigation -->
+    <div id="global-nav-container"></div>
+
     <!-- Header -->
     <!-- Hero -->
     <section class="hero">
@@ -4088,6 +4091,15 @@ Expected outcome: [What should be true after this step]"></textarea>
             }
         });
 
+    </script>
+
+    <!-- Load Global Navigation -->
+    <script>
+        fetch('/public/components/global-nav.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('global-nav-container').innerHTML = html;
+            });
     </script>
 </body>
 </html>
