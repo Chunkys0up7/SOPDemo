@@ -15,7 +15,8 @@
     "dropdown",
     "onclick",
     "mouseenter",
-    "mouseleave"
+    "mouseleave",
+    "graphdb"
   ],
   "dictionaries": [
     "en_US",

@@ -121,7 +121,7 @@ export OPENAI_API_KEY=sk-...  # For embeddings
 
 ## When to Use Each
 
-### Use JSON When:
+### Use JSON Format
 - Building SOPs from components
 - Viewing/editing component library
 - Version control and change tracking
@@ -130,7 +130,7 @@ export OPENAI_API_KEY=sk-...  # For embeddings
 - Development and testing
 - No database infrastructure available
 
-### Use Neo4j When:
+### Use Neo4j Format
 - Semantic search across SOPs
 - AI/RAG assistant queries
 - Deep impact analysis (6+ levels)
