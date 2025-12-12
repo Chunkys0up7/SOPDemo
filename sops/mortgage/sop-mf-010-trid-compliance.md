@@ -24,6 +24,7 @@ tags:
   - loan-estimate
   - closing-disclosure
   - timing
+status: draft
 ---
 
 # TRID Compliance and Disclosure Timing

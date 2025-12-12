@@ -3,6 +3,7 @@ id: sop-mf-013
 type: sop
 version: 2.0.0
 title: Borrower Identity Verification Standards
+status: draft
 department: Mortgage Lending - Compliance
 audience: [Loan Officers, Processors, Closers, Compliance Officers]
 complexity: medium
@@ -22,7 +23,6 @@ tags:
   - fraud-prevention
   - KYC
   - CIP
----
 
 # Borrower Identity Verification Standards
 

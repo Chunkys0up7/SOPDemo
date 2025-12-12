@@ -23,6 +23,7 @@ tags:
   - underwriting
   - compliance
   - quality-control
+status: draft
 ---
 
 # Income Documentation and Verification Standards

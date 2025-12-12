@@ -23,6 +23,7 @@ tags:
   - property-valuation
   - underwriting
   - compliance
+ status: draft
 ---
 
 # Appraisal Review and Collateral Evaluation

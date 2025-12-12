@@ -3,6 +3,7 @@ id: sop-mf-012
 type: sop
 version: 1.5.0
 title: ACH Transfer Procedures for Mortgage Transactions
+status: draft
 department: Mortgage Lending - Closing & Funding
 audience: [Closers, Funding Specialists, Accounting, Compliance]
 complexity: medium
@@ -24,7 +25,6 @@ tags:
   - electronic-transfer
   - disbursement
   - compliance
----
 
 # ACH Transfer Procedures for Mortgage Transactions
 
