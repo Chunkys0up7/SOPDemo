@@ -15,7 +15,8 @@
       "Bash(npm run lint:md:*)",
       "Bash(node tools/validate-metadata.cjs:*)",
       "Bash(npm run check:links:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": []

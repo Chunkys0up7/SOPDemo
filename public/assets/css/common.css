@@ -1140,6 +1140,22 @@ a:hover {
 
 .inl-0c48ae96 { background: #ef4444; border: 2px solid #f87171; }
 
+/* Semantic class replacements for inl-* classes */
+.deps-placeholder { font-size: 13px; color: var(--color-text-tertiary); }
+
+.results-limit-notice { text-align: center; padding: 20px; color: var(--color-text-tertiary); }
+
+.search-result-title { font-weight: 600; color: var(--color-text-primary); margin-bottom: 4px; }
+
+.search-result-meta { font-size: 12px; color: var(--color-text-secondary); }
+
+.logo-icon { width: 32px; height: 32px; }
+
+.logo-wordmark { font-weight: 700; font-size: 18px; margin-left: 8px; }
+
+.logo-subtitle { font-weight: 400; font-size: 14px; color: var(--color-text-secondary); margin-left: 4px; }
+
+/* Legacy inl-* classes (to be deprecated) */
 .inl-a004b216 { text-align: center; padding: 20px; color: #999; }
 
 .inl-0ac82358 { font-size: 13px; color: #999; }
