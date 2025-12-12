@@ -228,7 +228,8 @@ This SOP is automatically assembled from modular components to ensure consistenc
         sopContent += `- **[${dep.target}](${dep.target}.md)**: ${targetNode.title}\n`;
         sopContent += `  - ${dep.description}\n`;
         if (dep.strength === 'strong') {
-          sopContent += `  - ⚠️ **Strong dependency** - ${dep.metadata.reason}\n`;
+          const reason = (dep.metadata && dep.metadata.reason) || 'Critical dependency';
+          sopContent += `  - ⚠️ **Strong dependency** - ${reason}\n`;
         }
       }
     }
