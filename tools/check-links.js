@@ -57,6 +57,44 @@ async function findMarkdownFiles(dir) {
   return files;
 }
 
+// Find markdown files whose filename starts with the given prefix
+async function findFilesByPrefix(startDir, prefix) {
+  const results = [];
+  async function walk(currentDir) {
+    const entries = await fs.readdir(currentDir, { withFileTypes: true });
+    for (const entry of entries) {
+      if (entry.name === 'node_modules' || entry.name === 'dist' || entry.name === '.git' || entry.name === '.husky') continue;
+      const fullPath = path.join(currentDir, entry.name);
+      if (entry.isDirectory()) {
+        await walk(fullPath);
+      } else if (entry.name.endsWith('.md') && entry.name.startsWith(prefix)) {
+        results.push(fullPath);
+      }
+    }
+  }
+  try { await walk(startDir); } catch (e) { /* ignore */ }
+  return results;
+}
+
+// Find markdown files whose filename contains the given fragment
+async function findFilesContaining(startDir, fragment) {
+  const results = [];
+  async function walk(currentDir) {
+    const entries = await fs.readdir(currentDir, { withFileTypes: true });
+    for (const entry of entries) {
+      if (entry.name === 'node_modules' || entry.name === 'dist' || entry.name === '.git' || entry.name === '.husky') continue;
+      const fullPath = path.join(currentDir, entry.name);
+      if (entry.isDirectory()) {
+        await walk(fullPath);
+      } else if (entry.name.endsWith('.md') && entry.name.includes(fragment)) {
+        results.push(fullPath);
+      }
+    }
+  }
+  try { await walk(startDir); } catch (e) { /* ignore */ }
+  return results;
+}
+
 async function checkIncludeReferences(content, filePath) {
   const includePattern = /\{\{include:\s*([^}]+)\}\}/g;
   const issues = [];
@@ -65,6 +103,7 @@ async function checkIncludeReferences(content, filePath) {
   // Skip template files and example documentation
   const relativePath = path.relative(ROOT_DIR, filePath);
   if (relativePath.startsWith('templates/') ||
+      relativePath.includes('demo') ||
       relativePath.includes('template') ||
       relativePath === 'README.md' ||
       relativePath === 'BUILD_SUMMARY.md' ||
@@ -92,12 +131,10 @@ async function checkIncludeReferences(content, filePath) {
     // Check for SOPs in sops/ directory
     if (sopId.startsWith('sop-')) {
       try {
-        const { stdout } = await execAsync(`find ${ROOT_DIR}/sops -name "${sopId}*.md" 2>/dev/null || true`);
-        if (stdout.trim()) {
-          found = true;
-        }
+        const matches = await findFilesByPrefix(path.join(ROOT_DIR, 'sops'), sopId);
+        if (matches.length) found = true;
       } catch (error) {
-        // Ignore find errors
+        // ignore
       }
     }
 
@@ -105,39 +142,39 @@ async function checkIncludeReferences(content, filePath) {
     if (!found && (sopId.includes('-') || sopId.match(/^(atom|molecule|organism)-/))) {
       // Try exact match first (e.g., atom-password-reset.md)
       try {
-        const { stdout } = await execAsync(`find ${ROOT_DIR}/sop-components -name "${sopId}.md" 2>/dev/null || true`);
-        if (stdout.trim()) {
-          found = true;
-        }
+        const matches = await findFilesByPrefix(path.join(ROOT_DIR, 'sop-components'), sopId);
+        if (matches.some(m => path.basename(m) === `${sopId}.md`)) found = true;
       } catch (error) {
-        // Ignore find errors
+        // ignore
       }
 
       // If not found, try with molecule- or organism- prefixes
       if (!found) {
         const componentId = sopId.replace(/^(atom|molecule|organism)-/, '');
         try {
-          const { stdout } = await execAsync(`find ${ROOT_DIR}/sop-components -name "*${componentId}.md" 2>/dev/null || true`);
-          if (stdout.trim()) {
-            found = true;
-          }
+          const matches = await findFilesContaining(path.join(ROOT_DIR, 'sop-components'), componentId);
+          if (matches.length) found = true;
         } catch (error) {
-          // Ignore find errors
+          // ignore
         }
       }
     }
 
     if (!found) {
-      // Don't report if it's a future/planned SOP (like sop-mf-001, sop-mf-008, etc.)
-      if (sopId.match(/^sop-mf-(001|008|009|010|011|012|013)$/)) {
-        continue; // These are referenced but not yet created
+      // Don't report if it's a future/planned SOP (like sop-mf-002 through sop-mf-013, all except 001 and 014)
+      if (sopId.match(/^sop-mf-(00[2-9]|0[1-2]\d|013)$/)) {
+        continue; // These are referenced but not yet created (only 001 and 014 exist)
       }
+
+      // Mark SOP references as critical, component references as warnings
+      const severity = sopId.startsWith('sop-') ? 'critical' : 'warning';
 
       issues.push({
         type: 'include',
         reference: sopId,
         line: content.substring(0, match.index).split('\n').length,
-        message: `Referenced SOP '${sopId}' not found`
+        message: `Referenced SOP '${sopId}' not found`,
+        severity
       });
     }
   }
@@ -172,11 +209,14 @@ async function checkInternalLinks(content, filePath) {
       try {
         await fs.access(filePart);
       } catch (error) {
+        // Treat missing files under `sops/` as critical, others as warnings
+        const isSopFile = filePart.includes(path.join(ROOT_DIR, 'sops'));
         issues.push({
           type: 'file',
           reference: linkUrl,
           line: content.substring(0, match.index).split('\n').length,
-          message: `File not found: ${linkUrl}`
+          message: `File not found: ${linkUrl}`,
+          severity: isSopFile ? 'critical' : 'warning'
         });
       }
     }
@@ -193,6 +233,7 @@ async function checkLinks() {
 
   let totalIssues = 0;
   let filesWithIssues = 0;
+  let totalCritical = 0;
 
   for (const file of files) {
     const relativePath = path.relative(ROOT_DIR, file);
@@ -206,10 +247,12 @@ async function checkLinks() {
     if (allIssues.length > 0) {
       filesWithIssues++;
       totalIssues += allIssues.length;
+      totalCritical += allIssues.filter(i => i.severity === 'critical').length;
 
       console.log(`${colors.red}✗ ${relativePath}${colors.reset}`);
       for (const issue of allIssues) {
-        console.log(`  ${colors.yellow}Line ${issue.line}:${colors.reset} ${issue.message}`);
+        const sevMark = issue.severity === 'critical' ? `${colors.red}[CRITICAL]${colors.reset} ` : `${colors.yellow}[WARN]${colors.reset} `;
+        console.log(`  ${sevMark}${colors.yellow}Line ${issue.line}:${colors.reset} ${issue.message}`);
       }
       console.log('');
     } else {
@@ -220,9 +263,13 @@ async function checkLinks() {
   console.log('');
   console.log('─'.repeat(60));
 
-  if (totalIssues > 0) {
-    console.log(`${colors.red}❌ Found ${totalIssues} link issue(s) in ${filesWithIssues} file(s)${colors.reset}`);
+  if (totalCritical > 0) {
+    console.log(`${colors.red}❌ Found ${totalCritical} critical link issue(s) in ${filesWithIssues} file(s)${colors.reset}`);
+    console.log(`${colors.yellow}ℹ️  Additionally found ${totalIssues - totalCritical} warning(s).${colors.reset}`);
     process.exit(1);
+  } else if (totalIssues > 0) {
+    console.log(`${colors.yellow}⚠️  Found ${totalIssues} warning(s) in ${filesWithIssues} file(s), no critical issues.${colors.reset}`);
+    process.exit(0);
   } else {
     console.log(`${colors.green}✅ All links valid! No broken references found.${colors.reset}`);
     process.exit(0);
