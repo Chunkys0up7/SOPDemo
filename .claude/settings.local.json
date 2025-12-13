@@ -16,7 +16,19 @@
       "Bash(node tools/validate-metadata.cjs:*)",
       "Bash(npm run check:links:*)",
       "Bash(grep:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(display: flex)",
+      "Bash(gap: 12px)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(taskkill:*)",
+      "Bash(dir:*)",
+      "Bash(for file in *.html)",
+      "Bash(do sed -i '/<script src=\"\".*navigation\\.js\"\"><\\/script>/d' \"$file\")",
+      "Bash(done)",
+      "Bash(do sed -i \"s|fetch(''/public/components/global-nav.html'')|fetch(''components/global-nav.html'')|g\" \"$file\")",
+      "Bash(for file in public/docs.html public/sops.html public/interactive-graph.html)",
+      "Bash(git stash:*)"
     ],
     "deny": [],
     "ask": []

@@ -1,0 +1,624 @@
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            color: #1a1a1a;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .logo-lockup {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+        }
+
+        .wordmark {
+            font-size: 24px;
+            font-weight: 600;
+            color: #0052CC;
+        }
+
+        .nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #0052CC;
+        }
+
+        .nav-link.active {
+            color: #0052CC;
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0052CC 0%, #003d99 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 18px;
+            font-weight: 400;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        /* Search Bar */
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 16px 50px 16px 20px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            opacity: 0.5;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        /* Filters */
+        .filters {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 20px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            border-color: #0052CC;
+            color: #0052CC;
+        }
+
+        .filter-btn.active {
+            background: #0052CC;
+            border-color: #0052CC;
+            color: white;
+        }
+
+        /* SOP Grid */
+        .sop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .sop-card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-left: 4px solid #0052CC;
+        }
+
+        .sop-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,82,204,0.15);
+        }
+
+        .sop-header {
+            margin-bottom: 15px;
+        }
+
+        .sop-id {
+            font-size: 12px;
+            font-weight: 600;
+            color: #0052CC;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .sop-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .sop-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .meta-icon {
+            width: 14px;
+            height: 14px;
+            opacity: 0.7;
+        }
+
+        .sop-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .sop-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            padding: 4px 10px;
+            background: #f0f4ff;
+            color: #0052CC;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .sop-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .version {
+            font-size: 12px;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .view-link {
+            font-size: 14px;
+            font-weight: 600;
+            color: #0052CC;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .view-link:hover {
+            gap: 10px;
+        }
+
+        /* Category Badge */
+        .category-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .category-mortgage {
+            background: #e6f2ff;
+            color: #0052CC;
+        }
+
+        .category-compliance {
+            background: #fff3e6;
+            color: #cc6600;
+        }
+
+        .category-operations {
+            background: #e6f7ed;
+            color: #1a7857;
+        }
+
+        .category-hr {
+            background: #f3e6ff;
+            color: #7700cc;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .empty-state img {
+            width: 120px;
+            height: 120px;
+            opacity: 0.3;
+            margin-bottom: 20px;
+        }
+
+        .empty-state h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .empty-state p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .result-count {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .sort-dropdown {
+            padding: 8px 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        .footer {
+            background: white;
+            color: white;
+            padding: 40px;
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .footer p {
+            font-size: 14px;
+            opacity: 0.7;
+        }
+    <!-- Page-specific inline styles migrated to /public/assets/css/common.css -->
+    <link rel="stylesheet" href="/public/assets/css/global-nav-component.css">
+<body>
+    <!-- Include Global Navigation -->
+    <div id="global-nav-container"></div>
+
+    <!-- Header -->
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Browse SOPs</h1>
+        <p>Search and explore all standard operating procedures across mortgage finance, compliance, operations, and HR.</p>
+        <div class="search-container">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search SOPs by title, ID, or keywords...">
+            <img src="icons/search.svg" alt="Search" class="search-icon">
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Filters -->
+        <div class="filters">
+            <div class="filter-row">
+                <div class="filter-label">Filter by Category:</div>
+                <div class="filter-group">
+                    <button class="filter-btn active" data-category="all">All</button>
+                    <button class="filter-btn" data-category="mortgage">Mortgage Finance</button>
+                    <button class="filter-btn" data-category="compliance">Compliance</button>
+                    <button class="filter-btn" data-category="operations">Operations</button>
+                    <button class="filter-btn" data-category="hr">Human Resources</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="result-count" id="resultCount">Showing 5 SOPs</div>
+            <select class="sort-dropdown" id="sortSelect">
+                <option value="recent">Most Recent</option>
+                <option value="title">Title A-Z</option>
+                <option value="category">Category</option>
+            </select>
+        </div>
+
+        <!-- SOP Grid -->
+        <div class="sop-grid" id="sopGrid">
+            <!-- IT SOPs -->
+            <div class="sop-card" data-category="it" onclick="window.location='../dist/sops/sop-it-001.md'">
+                <div class="sop-header">
+                    <div class="sop-id">SOP-IT-001</div>
+                    <div class="category-badge category-it">IT</div>
+                </div>
+                <h3 class="sop-title">IT Account Provisioning and Password Management</h3>
+                <div class="sop-meta">
+                    <div class="meta-item">
+                        <span>Version 2.1.0</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>Updated Nov 2024</span>
+                    </div>
+                </div>
+                <p class="sop-description">
+                    Complete procedures for account provisioning, password resets, and access management for IT systems. Includes Active Directory, email setup, and security protocols.
+                </p>
+                <div class="sop-tags">
+                    <span class="tag">IT</span>
+                    <span class="tag">Security</span>
+                    <span class="tag">Access Management</span>
+                </div>
+                <div class="sop-footer">
+                    <span class="version">v2.1.0</span>
+                    <a href="../dist/sops/sop-it-001.md" class="view-link">
+                        View SOP
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Demo SOPs (examples only - not yet built) -->
+            <!--
+            <div class="sop-card" data-category="mortgage">
+                <div class="sop-header">
+                    <div class="sop-id">SOP-MF-003</div>
+                    <div class="category-badge category-mortgage">Mortgage Finance</div>
+                </div>
+                <h3 class="sop-title">Conventional Loan Underwriting (Coming Soon)</h3>
+                <div class="sop-meta">
+                    <div class="meta-item">
+                        <span>Version 1.1.0</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>Example</span>
+                    </div>
+                </div>
+                <p class="sop-description">
+                    Standard procedures for underwriting conventional mortgage loans in compliance with Fannie Mae and Freddie Mac guidelines.
+                </p>
+                <div class="sop-tags">
+                    <span class="tag">Conventional</span>
+                    <span class="tag">Fannie Mae</span>
+                    <span class="tag">Freddie Mac</span>
+                </div>
+            </div>
+            -->
+
+            <!-- Additional demo SOPs commented out to prevent broken links -->
+            <!-- Uncomment and update paths when these SOPs are built -->
+            <!--
+            <div class="sop-card" data-category="mortgage">
+                <div class="sop-header">
+                    <div class="sop-id">SOP-MF-004</div>
+                    <div class="category-badge category-mortgage">Mortgage Finance</div>
+                </div>
+                <h3 class="sop-title">Clear to Close Process (Example)</h3>
+                <p class="sop-description">
+                    Final approval procedures and documentation requirements before issuing clear to close authorization for mortgage loans.
+                </p>
+            </div>
+
+            <div class="sop-card" data-category="compliance">
+                <div class="sop-header">
+                    <div class="sop-id">SOP-CP-001</div>
+                    <div class="category-badge category-compliance">Compliance</div>
+                </div>
+                <h3 class="sop-title">Anti-Money Laundering Procedures (Example)</h3>
+                <p class="sop-description">
+                    Comprehensive AML compliance procedures including customer due diligence, transaction monitoring, and suspicious activity reporting.
+                </p>
+            </div>
+
+            <div class="sop-card" data-category="hr">
+                <div class="sop-header">
+                    <div class="sop-id">SOP-HR-001</div>
+                    <div class="category-badge category-hr">Human Resources</div>
+                </div>
+                <h3 class="sop-title">Employee Onboarding Process (Example)</h3>
+                <p class="sop-description">
+                    Complete onboarding workflow including credential setup, system access provisioning, benefits enrollment, and compliance training.
+                </p>
+            </div>
+            -->
+        </div>
+
+        <!-- Empty State (hidden by default) -->
+        <div class="empty-state inl-f2892a2e" id="emptyState" >
+            <img src="icons/search.svg" alt="No results">
+            <h3>No SOPs Found</h3>
+            <p>Try adjusting your search or filter criteria</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Pursuit Bank. SOP Management System v1.0.0</p>
+        <p class="inl-54d32d80">Powered by semantic ontology, modular components, and intelligent governance</p>
+    </footer>
+
+    <script>
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const sopCards = document.querySelectorAll('.sop-card');
+        const searchInput = document.getElementById('searchInput');
+        const resultCount = document.getElementById('resultCount');
+        const sopGrid = document.getElementById('sopGrid');
+        const emptyState = document.getElementById('emptyState');
+
+        let currentCategory = 'all';
+        let searchTerm = '';
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                currentCategory = button.getAttribute('data-category');
+                filterSOPs();
+            });
+        });
+
+        searchInput.addEventListener('input', (e) => {
+            searchTerm = e.target.value.toLowerCase();
+            filterSOPs();
+        });
+
+        function filterSOPs() {
+            let visibleCount = 0;
+
+            sopCards.forEach(card => {
+                const category = card.getAttribute('data-category');
+                const text = card.textContent.toLowerCase();
+
+                const categoryMatch = currentCategory === 'all' || category === currentCategory;
+                const searchMatch = searchTerm === '' || text.includes(searchTerm);
+
+                if (categoryMatch && searchMatch) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            resultCount.textContent = `Showing ${visibleCount} SOP${visibleCount !== 1 ? 's' : ''}`;
+
+            if (visibleCount === 0) {
+                sopGrid.style.display = 'none';
+                emptyState.style.display = 'block';
+            } else {
+                sopGrid.style.display = 'grid';
+                emptyState.style.display = 'none';
+            }
+        }
+
+        // Sort functionality
+        const sortSelect = document.getElementById('sortSelect');
+        sortSelect.addEventListener('change', (e) => {
+            const sortBy = e.target.value;
+            const cardsArray = Array.from(sopCards);
+
+            cardsArray.sort((a, b) => {
+                if (sortBy === 'title') {
+                    const titleA = a.querySelector('.sop-title').textContent;
+                    const titleB = b.querySelector('.sop-title').textContent;
+                    return titleA.localeCompare(titleB);
+                } else if (sortBy === 'category') {
+                    const catA = a.getAttribute('data-category');
+                    const catB = b.getAttribute('data-category');
+                    return catA.localeCompare(catB);
+                }
+                return 0;
+            });
+
+            sopGrid.innerHTML = '';
+            cardsArray.forEach(card => sopGrid.appendChild(card));
+        });
+    </script>
+    <!-- Load Global Navigation -->
+    <script>
+        fetch('/public/components/global-nav.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('global-nav-container').innerHTML = html;
+            });
+    </script>
+</body>

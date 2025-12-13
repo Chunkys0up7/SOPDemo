@@ -625,7 +625,10 @@ async function handleStaticFile(req, res, pathname) {
 
   try {
     const realPath = await fs.realpath(filePath);
-    if (!realPath.startsWith(ROOT_DIR)) {
+    const normalizedRealPath = path.normalize(realPath).toLowerCase();
+    const normalizedRootDir = path.normalize(ROOT_DIR).toLowerCase();
+
+    if (!normalizedRealPath.startsWith(normalizedRootDir)) {
       res.writeHead(403);
       res.end('Forbidden');
       return;
