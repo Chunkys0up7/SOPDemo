@@ -367,11 +367,9 @@
             font-size: 18px;
             color: #60a5fa;
         }
-    <!-- Page-specific inline styles migrated to /public/assets/css/common.css -->
+    </style>
+</head>
 <body>
-    <!-- Include Global Navigation -->
-    <div id="global-nav-container"></div>
-
     <!-- Top Navigation -->
     <div id="top-nav">
         <a href="index.html">
@@ -712,14 +710,6 @@
                 .on('drag', dragged)
                 .on('end', dragended);
         }
-    </script>
-    <!-- Load Global Navigation -->
-    <script>
-        fetch('/public/components/global-nav.html')
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('global-nav-container').innerHTML = html;
-            });
     </script>
 </body>
 </html>

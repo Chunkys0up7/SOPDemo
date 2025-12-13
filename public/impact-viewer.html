@@ -8,15 +8,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/public/assets/css/common.css">
-    <link rel="stylesheet" href="/public/assets/css/global-nav-component.css">
     <link rel="stylesheet" href="/public/assets/css/impact-viewer-page.css">
 </head>
 <body>
-    <!-- Inline styles extracted to impact-viewer-page.css (306 lines) for better maintainability -->
-    <!-- Include Global Navigation -->
-    <div id="global-nav-container"></div>
-
     <!-- Top Navigation -->
     <div id="top-nav">
         <a href="index.html">
@@ -361,14 +355,6 @@
                 recList.appendChild(div);
             });
         }
-    </script>
-    <!-- Load Global Navigation -->
-    <script>
-        fetch('/public/components/global-nav.html')
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('global-nav-container').innerHTML = html;
-            });
     </script>
 </body>
 </html>

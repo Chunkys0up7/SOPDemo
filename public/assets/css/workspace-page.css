@@ -1,0 +1,818 @@
+/**
+ * Workspace Page - Pursuit Bank SOP Management
+ * 3-Panel Layout: SOP List | Process Builder | Dependencies/Quick Actions
+ * Uses design tokens from common.css
+ */
+
+/* ============================================================================
+   MAIN LAYOUT - 3-Panel Grid
+   ============================================================================ */
+
+.main-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr 300px;
+    height: calc(100vh - 80px); /* Adjust based on header height */
+    gap: 0;
+    background: var(--color-background);
+    overflow: hidden;
+}
+
+/* ============================================================================
+   LEFT PANEL - SOP LIST
+   ============================================================================ */
+
+.sop-panel {
+    background: var(--color-surface);
+    border-right: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+.sop-panel .panel-header {
+    padding: var(--spacing-xl);
+    border-bottom: 1px solid var(--color-border-light);
+    background: var(--color-surface);
+    flex-shrink: 0;
+}
+
+.sop-panel .panel-header h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-md);
+}
+
+.sop-panel .search-box {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    font-family: var(--ui-font-stack);
+    font-size: 14px;
+    transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+    background: white;
+}
+
+.sop-panel .search-box:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.1);
+}
+
+.sop-panel .search-box::placeholder {
+    color: var(--color-text-tertiary);
+}
+
+/* SOP List Container */
+.sop-list {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: var(--spacing-sm);
+}
+
+/* Custom Scrollbar for SOP List */
+.sop-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.sop-list::-webkit-scrollbar-track {
+    background: var(--color-border-light);
+}
+
+.sop-list::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 4px;
+}
+
+.sop-list::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-tertiary);
+}
+
+/* SOP List Items */
+.sop-item {
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin-bottom: var(--spacing-sm);
+    background: white;
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.sop-item:hover {
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+    transform: translateX(4px);
+    box-shadow: var(--shadow-sm);
+}
+
+.sop-item.active {
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+    box-shadow: var(--shadow-md);
+}
+
+.sop-item-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.4;
+}
+
+.sop-item.active .sop-item-title {
+    color: var(--color-primary);
+}
+
+.sop-item-meta {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+/* ============================================================================
+   CENTER PANEL - PROCESS BUILDER
+   ============================================================================ */
+
+.process-panel {
+    background: var(--color-background);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+.process-header {
+    background: var(--color-surface);
+    padding: var(--spacing-xl) var(--spacing-2xl);
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    box-shadow: var(--shadow-sm);
+}
+
+.process-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.process-actions {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.process-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: var(--spacing-2xl);
+}
+
+/* Custom Scrollbar for Process Content */
+.process-content::-webkit-scrollbar {
+    width: 10px;
+}
+
+.process-content::-webkit-scrollbar-track {
+    background: var(--color-border-light);
+}
+
+.process-content::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 5px;
+}
+
+.process-content::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-tertiary);
+}
+
+/* SOP Details Display */
+.sop-details {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.sop-header-section {
+    background: var(--color-surface);
+    padding: var(--spacing-2xl);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.sop-main-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.3;
+}
+
+.sop-metadata {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: 14px;
+}
+
+.meta-item strong {
+    color: var(--color-text-secondary);
+    font-weight: 500;
+}
+
+/* Status Badges */
+.badge-active {
+    background: var(--color-organism-bg);
+    color: var(--color-organism);
+}
+
+.badge-draft {
+    background: var(--color-warning);
+    color: white;
+}
+
+.badge-archived {
+    background: var(--color-border);
+    color: var(--color-text-secondary);
+}
+
+.badge-mortgage {
+    background: var(--color-atom-bg);
+    color: var(--color-atom);
+}
+
+.badge-compliance {
+    background: var(--color-molecule-bg);
+    color: var(--color-molecule);
+}
+
+.badge-hr {
+    background: var(--color-sop-bg);
+    color: var(--color-sop);
+}
+
+/* Section Styling */
+.section {
+    background: var(--color-surface);
+    padding: var(--spacing-2xl);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: var(--spacing-xl);
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 2px solid var(--color-border-light);
+}
+
+.section-content {
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+}
+
+/* Procedure Steps */
+.procedure-steps {
+    list-style: none;
+    counter-reset: step-counter;
+    padding-left: 0;
+}
+
+.procedure-steps li {
+    counter-increment: step-counter;
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+    background: var(--color-background);
+    border-left: 4px solid var(--color-primary);
+    border-radius: var(--radius-md);
+    position: relative;
+    padding-left: 60px;
+    color: var(--color-text-secondary);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.procedure-steps li::before {
+    content: counter(step-counter);
+    position: absolute;
+    left: var(--spacing-lg);
+    top: var(--spacing-lg);
+    width: 30px;
+    height: 30px;
+    background: var(--color-primary);
+    color: white;
+    border-radius: var(--radius-round);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.procedure-steps li:hover {
+    background: white;
+    box-shadow: var(--shadow-sm);
+}
+
+/* Component Grid */
+.component-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.component-card {
+    background: var(--color-background);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border-light);
+    transition: all var(--transition-normal);
+}
+
+.component-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.component-type {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--spacing-sm);
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+}
+
+.component-card .component-type {
+    background: var(--color-border-light);
+    color: var(--color-text-secondary);
+}
+
+.component-card:hover .component-type {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+}
+
+.component-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    line-height: 1.4;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 100px 40px;
+    color: var(--color-text-tertiary);
+}
+
+.empty-state-icon {
+    font-size: 72px;
+    margin-bottom: var(--spacing-2xl);
+    opacity: 0.4;
+}
+
+.empty-state-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-md);
+}
+
+.empty-state-text {
+    font-size: 15px;
+    color: var(--color-text-tertiary);
+    max-width: 400px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* ============================================================================
+   RIGHT PANEL - DEPENDENCIES & QUICK ACTIONS
+   ============================================================================ */
+
+.deps-panel {
+    background: var(--color-surface);
+    border-left: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+.deps-panel .panel-header {
+    padding: var(--spacing-xl);
+    border-bottom: 1px solid var(--color-border-light);
+    background: var(--color-surface);
+    flex-shrink: 0;
+}
+
+.deps-panel .panel-header h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 0;
+}
+
+.deps-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: var(--spacing-lg);
+}
+
+/* Custom Scrollbar for Dependencies Panel */
+.deps-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.deps-content::-webkit-scrollbar-track {
+    background: var(--color-border-light);
+}
+
+.deps-content::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 4px;
+}
+
+.deps-content::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-tertiary);
+}
+
+/* Quick Actions */
+.quick-action {
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border-light);
+    margin-bottom: var(--spacing-md);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.quick-action:hover {
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.quick-action-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.quick-action:hover .quick-action-title {
+    color: var(--color-primary);
+}
+
+.quick-action-desc {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+}
+
+/* Dependencies Section */
+.deps-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-top: var(--spacing-2xl);
+    margin-bottom: var(--spacing-md);
+    padding-top: var(--spacing-xl);
+    border-top: 1px solid var(--color-border-light);
+}
+
+#deps-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.dep-item {
+    background: white;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border-light);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.dep-item:hover {
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+    transform: translateX(-4px);
+    box-shadow: var(--shadow-sm);
+}
+
+.dep-item-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.4;
+}
+
+.dep-item:hover .dep-item-title {
+    color: var(--color-primary);
+}
+
+.dep-item-type {
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+/* ============================================================================
+   TOOLTIP COMPONENT
+   ============================================================================ */
+
+.tooltip {
+    position: relative;
+    cursor: help;
+    border-bottom: 1px dotted var(--color-text-tertiary);
+    display: inline-block;
+}
+
+.tooltip-content {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    z-index: var(--z-tooltip);
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-text-primary);
+    color: white;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-md);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    white-space: normal;
+    width: 250px;
+    box-shadow: var(--shadow-lg);
+    transition: opacity var(--transition-normal), visibility var(--transition-normal);
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.tooltip-content::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--color-text-primary) transparent transparent transparent;
+}
+
+.tooltip:hover .tooltip-content {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (max-width: 1400px) {
+    .main-layout {
+        grid-template-columns: 280px 1fr 280px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .main-layout {
+        grid-template-columns: 260px 1fr 260px;
+    }
+
+    .process-content {
+        padding: var(--spacing-xl);
+    }
+
+    .sop-header-section,
+    .section {
+        padding: var(--spacing-xl);
+    }
+}
+
+@media (max-width: 992px) {
+    .main-layout {
+        grid-template-columns: 1fr;
+        height: auto;
+        min-height: calc(100vh - 80px);
+    }
+
+    .sop-panel,
+    .deps-panel {
+        display: none;
+    }
+
+    .process-panel {
+        height: auto;
+        min-height: calc(100vh - 80px);
+    }
+
+    .process-content {
+        padding: var(--spacing-lg);
+    }
+
+    /* Mobile: Show panels as full-width stacked sections */
+    .main-layout.show-sop-panel .sop-panel {
+        display: flex;
+        height: auto;
+        max-height: 500px;
+    }
+
+    .main-layout.show-deps-panel .deps-panel {
+        display: flex;
+        height: auto;
+        max-height: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    .process-header {
+        padding: var(--spacing-lg);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+    }
+
+    .process-title {
+        font-size: 18px;
+    }
+
+    .process-actions {
+        width: 100%;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .process-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .sop-main-title {
+        font-size: 22px;
+    }
+
+    .sop-metadata {
+        grid-template-columns: 1fr;
+    }
+
+    .component-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .procedure-steps li {
+        padding-left: 50px;
+    }
+
+    .procedure-steps li::before {
+        width: 26px;
+        height: 26px;
+        font-size: 12px;
+        left: var(--spacing-md);
+        top: var(--spacing-md);
+    }
+
+    .empty-state {
+        padding: 60px 20px;
+    }
+
+    .empty-state-icon {
+        font-size: 56px;
+    }
+
+    .tooltip-content {
+        width: 200px;
+        font-size: 11px;
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+}
+
+@media (max-width: 480px) {
+    .process-content {
+        padding: var(--spacing-md);
+    }
+
+    .sop-header-section,
+    .section {
+        padding: var(--spacing-lg);
+    }
+
+    .empty-state-title {
+        font-size: 18px;
+    }
+
+    .empty-state-text {
+        font-size: 14px;
+    }
+}
+
+/* ============================================================================
+   PRINT STYLES
+   ============================================================================ */
+
+@media print {
+    .main-layout {
+        display: block;
+        height: auto;
+    }
+
+    .sop-panel,
+    .deps-panel,
+    .process-header {
+        display: none;
+    }
+
+    .process-panel {
+        height: auto;
+    }
+
+    .process-content {
+        overflow: visible;
+        padding: 0;
+    }
+
+    .sop-details {
+        max-width: 100%;
+    }
+
+    .section {
+        page-break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid var(--color-border);
+    }
+}
+
+/* ============================================================================
+   ACCESSIBILITY
+   ============================================================================ */
+
+/* Focus states for keyboard navigation */
+.sop-item:focus,
+.quick-action:focus,
+.dep-item:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .sop-item,
+    .quick-action,
+    .dep-item,
+    .component-card {
+        transition: none;
+        transform: none;
+    }
+
+    .tooltip-content {
+        transition: none;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .sop-item,
+    .quick-action,
+    .dep-item,
+    .component-card {
+        border-width: 2px;
+    }
+
+    .sop-item.active {
+        border-width: 3px;
+    }
+}
