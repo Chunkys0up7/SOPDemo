@@ -28,7 +28,8 @@
       "Bash(done)",
       "Bash(do sed -i \"s|fetch(''/public/components/global-nav.html'')|fetch(''components/global-nav.html'')|g\" \"$file\")",
       "Bash(for file in public/docs.html public/sops.html public/interactive-graph.html)",
-      "Bash(git stash:*)"
+      "Bash(git stash:*)",
+      "Bash(git push)"
     ],
     "deny": [],
     "ask": []
